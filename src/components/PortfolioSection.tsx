@@ -36,29 +36,17 @@ const PortfolioSection = () => {
     <section id="work" className="section-spacing px-8 md:px-12">
       <div className="max-w-6xl mx-auto">
         {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-          className="text-center mb-12"
-        >
+        <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">BRANDS</h2>
           <div className="w-12 h-1 bg-accent mx-auto rounded-full mb-6" />
           <p className="text-muted-foreground max-w-2xl mx-auto">
             Following are some of the major brands that I have worked with, for various projects
             that included but not only limited to marketing, promotion, and collaboration.
           </p>
-        </motion.div>
+        </div>
 
         {/* Category Filters */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          viewport={{ once: true }}
-          className="flex flex-wrap justify-center gap-2 mb-12"
-        >
+        <div className="flex flex-wrap justify-center gap-2 mb-12">
           {categories.map((category) => (
             <button
               key={category}
@@ -70,7 +58,7 @@ const PortfolioSection = () => {
               {category.toUpperCase()}
             </button>
           ))}
-        </motion.div>
+        </div>
 
         {/* Horizontal Slider */}
         <div className="relative">
@@ -96,13 +84,9 @@ const PortfolioSection = () => {
             className="flex gap-6 overflow-x-auto scrollbar-hide pb-4 -mx-4 px-4"
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
-            {filteredItems.map((item, index) => (
-              <motion.div
+            {filteredItems.map((item) => (
+              <div
                 key={item.id}
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
-                viewport={{ once: true }}
                 className="flex-shrink-0"
               >
                 <div
@@ -117,7 +101,7 @@ const PortfolioSection = () => {
                     </p>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>

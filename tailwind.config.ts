@@ -50,6 +50,30 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        navy: {
+          DEFAULT: "hsl(var(--navy-blue))",
+          foreground: "hsl(var(--navy-blue-foreground))",
+        },
+        maroon: {
+          DEFAULT: "hsl(var(--royal-maroon))",
+          foreground: "hsl(var(--royal-maroon-foreground))",
+        },
+        sage: {
+          DEFAULT: "hsl(var(--sage-green))",
+          foreground: "hsl(var(--sage-green-foreground))",
+        },
+        rose: {
+          DEFAULT: "hsl(var(--dusty-rose))",
+          foreground: "hsl(var(--dusty-rose-foreground))",
+        },
+        charcoal: {
+          DEFAULT: "hsl(var(--charcoal-grey))",
+          foreground: "hsl(var(--charcoal-grey-foreground))",
+        },
+        taupe: {
+          DEFAULT: "hsl(var(--taupe))",
+          foreground: "hsl(var(--taupe-foreground))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

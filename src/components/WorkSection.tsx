@@ -28,29 +28,19 @@ const WorkSection = () => {
     <section id="work" className="py-20 px-8 md:px-12 bg-secondary/30">
       <div className="max-w-6xl mx-auto">
         {/* Title */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-16"
-        >
+        <div className="text-center mb-16">
           <h2 className="text-2xl md:text-3xl font-bold tracking-wide text-foreground">HACKATHON & EVENT</h2>
           <div className="w-8 h-0.5 bg-accent mx-auto mt-3"></div>
           <p className="text-muted-foreground text-sm max-w-2xl mx-auto mt-6">
             Experiments in teamwork, time pressure, and turning ideas into something real.
           </p>
-        </motion.div>
+        </div>
 
         {/* Projects Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {hackathons.map((hackathon, index) => (
-            <motion.div
+          {hackathons.map((hackathon) => (
+            <div
               key={hackathon.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
               className="group cursor-pointer"
             >
               {/* Thumbnail */}
@@ -74,7 +64,7 @@ const WorkSection = () => {
                   {hackathon.name}
                 </h3>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

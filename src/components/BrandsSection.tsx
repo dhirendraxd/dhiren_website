@@ -15,37 +15,21 @@ const BrandsSection = () => {
     <section className="py-20 px-8 md:px-12">
       <div className="max-w-6xl mx-auto">
         {/* Title */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-8"
-        >
+        <div className="text-center mb-8">
           <h2 className="text-2xl md:text-3xl font-bold tracking-wide text-foreground">AFFILIATIONS</h2>
           <div className="w-8 h-0.5 bg-accent mx-auto mt-3"></div>
-        </motion.div>
+        </div>
 
         {/* Description */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-center text-muted-foreground text-sm max-w-3xl mx-auto mb-10"
-        >
+        <p className="text-center text-muted-foreground text-sm max-w-3xl mx-auto mb-10">
           A curated list of organizations and programs I've been associated with through formal roles, fellowships, mentorships, and sustained involvement.
-        </motion.p>
+        </p>
 
         {/* Brands Grid - Masonry style */}
         <div className="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
-          {affiliations.map((affiliation, index) => (
-            <motion.div
+          {affiliations.map((affiliation) => (
+            <div
               key={affiliation.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
               className="flex items-center justify-center p-8 rounded-lg bg-secondary/50 hover:bg-secondary transition-colors duration-300 min-h-[150px] md:min-h-[180px]"
             >
               <img
@@ -53,7 +37,7 @@ const BrandsSection = () => {
                 alt={affiliation.name}
                 className="max-w-full max-h-full object-contain"
               />
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

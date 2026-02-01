@@ -1,83 +1,190 @@
-import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Mail } from "lucide-react";
+import { FaLinkedinIn, FaInstagram, FaFacebookF, FaTwitter } from "react-icons/fa";
 
 const Footer = () => {
-  const socialLinks = [
-    { name: "Dribbble", href: "https://dribbble.com" },
-    { name: "Behance", href: "https://behance.net" },
-    { name: "Instagram", href: "https://instagram.com" },
-    { name: "LinkedIn", href: "https://linkedin.com" },
-  ];
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    message: "",
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // Sanitize inputs before processing
+    const sanitizedData = {
+      fullName: formData.fullName.trim().slice(0, 100),
+      email: formData.email.trim().toLowerCase().slice(0, 254),
+      message: formData.message.trim().slice(0, 1000),
+    };
+    
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(sanitizedData.email)) {
+      console.error('Invalid email format');
+      return;
+    }
+    
+    // Handle form submission with sanitized data
+    console.log("Form submitted:", sanitizedData);
+    // TODO: Implement actual form submission to backend
+  };
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   return (
-    <motion.footer
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
-      viewport={{ once: true }}
-      className="section-spacing px-8 md:px-12 border-t border-border"
-    >
+    <footer id="contact" className="py-20 px-8 md:px-12 bg-card">
       <div className="max-w-6xl mx-auto">
-        <div className="grid md:grid-cols-3 gap-12">
-          {/* Brand */}
-          <div className="space-y-4">
-            <p className="text-muted-foreground text-sm max-w-xs">
-              Creating beautiful digital experiences with passion and precision.
-            </p>
-          </div>
+        <div className="grid md:grid-cols-2 gap-12 items-start">
+          {/* Left Column - Header */}
+          <div className="space-y-6">
+            <div>
+              <p className="text-sm text-muted-foreground mb-2">Specialized in</p>
+              <h2 className="text-4xl md:text-5xl font-bold mb-4">
+                <span className="text-[#8B3A3A]">Digital</span> Marketing
+              </h2>
+              <p className="text-base text-muted-foreground">
+                Let's grow your brand with data-driven strategies and creative campaigns.
+              </p>
+            </div>
 
-          {/* Quick Links */}
-          <div className="space-y-4">
-            <h4 className="font-semibold text-sm tracking-wider">QUICK LINKS</h4>
-            <div className="flex flex-col gap-2">
-              <Link
-                to="/#work"
-                className="text-muted-foreground hover:text-foreground text-sm transition-colors duration-300"
-              >
-                Hackathon & Event
-              </Link>
-              <Link
-                to="/#about"
-                className="text-muted-foreground hover:text-foreground text-sm transition-colors duration-300"
-              >
-                About
-              </Link>
-              <Link
-                to="/contact"
-                className="text-muted-foreground hover:text-foreground text-sm transition-colors duration-300"
-              >
-                Contact
-              </Link>
+            <div className="py-6 border-t border-taupe/40">
+              <p className="text-xl md:text-2xl font-light">
+                Ready to scale your business and reach new audiences?
+              </p>
+            </div>
+
+            {/* Contact Info - Clean and Elegant */}
+            <div className="space-y-4">
+              <div>
+                <h4 className="text-xs font-semibold text-muted-foreground tracking-wide mb-2">REACH OUT</h4>
+                <div className="flex items-center gap-2 text-foreground">
+                  <Mail size={14} className="text-[#8B3A3A]" />
+                  <a href="mailto:dhirendraxd@gmail.com" className="text-sm hover:text-[#8B3A3A] transition-colors">
+                    dhirendraxd@gmail.com
+                  </a>
+                </div>
+              </div>
+
+              <div>
+                <h4 className="text-xs font-semibold text-muted-foreground tracking-wide mb-2">CONNECT</h4>
+                <div className="flex gap-3">
+                  <a 
+                    href="https://linkedin.com" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-foreground hover:text-[#8B3A3A] transition-colors"
+                    aria-label="LinkedIn"
+                  >
+                    <FaLinkedinIn size={24} />
+                  </a>
+                  <a 
+                    href="https://instagram.com" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-foreground hover:text-[#8B3A3A] transition-colors"
+                    aria-label="Instagram"
+                  >
+                    <FaInstagram size={24} />
+                  </a>
+                  <a 
+                    href="https://facebook.com" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-foreground hover:text-[#8B3A3A] transition-colors"
+                    aria-label="Facebook"
+                  >
+                    <FaFacebookF size={24} />
+                  </a>
+                  <a 
+                    href="https://twitter.com" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-foreground hover:text-[#8B3A3A] transition-colors"
+                    aria-label="Twitter"
+                  >
+                    <FaTwitter size={24} />
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* Social Links */}
-          <div className="space-y-4">
-            <h4 className="font-semibold text-sm tracking-wider">CONNECT</h4>
-            <div className="flex flex-wrap gap-4">
-              {socialLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-foreground text-sm transition-colors duration-300"
-                >
-                  {link.name}
-                </a>
-              ))}
+          {/* Right Column - Contact Form */}
+          <div className="space-y-6">
+            <div>
+              <p className="text-xs text-muted-foreground mb-1 tracking-wide">Step 1 of 1</p>
+              <h3 className="text-3xl font-bold mb-2">Contact Me</h3>
+              <p className="text-sm text-muted-foreground">
+                Share your project details and I'll respond quickly.
+              </p>
             </div>
-          </div>
-        </div>
 
-        {/* Copyright */}
-        <div className="mt-16 pt-8 border-t border-border text-center">
-          <p className="text-muted-foreground text-sm">
-            © {new Date().getFullYear()} Alex Designer. All rights reserved.
-          </p>
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div>
+                <label htmlFor="fullName" className="block text-sm font-medium mb-2">
+                  Full Name
+                </label>
+                <input
+                  id="fullName"
+                  type="text"
+                  name="fullName"
+                  value={formData.fullName}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-0 py-3 bg-transparent border-0 border-b border-taupe/40 text-foreground placeholder:text-muted-foreground/50 focus:border-[#8B3A3A] focus:ring-0 outline-none transition-colors duration-300"
+                  placeholder="Your name"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium mb-2">
+                  Email
+                </label>
+                <input
+                  id="email"
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-0 py-3 bg-transparent border-0 border-b border-taupe/40 text-foreground placeholder:text-muted-foreground/50 focus:border-[#8B3A3A] focus:ring-0 outline-none transition-colors duration-300"
+                  placeholder="you@email.com"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="message" className="block text-sm font-medium mb-2">
+                  Message
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                  rows={5}
+                  className="w-full px-0 py-3 bg-transparent border-0 border-b border-taupe/40 text-foreground placeholder:text-muted-foreground/50 focus:border-[#8B3A3A] focus:ring-0 outline-none transition-colors duration-300 resize-none"
+                  placeholder="Tell me about your project"
+                />
+              </div>
+
+              <button
+                type="submit"
+                className="w-full px-6 py-3 bg-[#556B2F] text-white font-medium hover:bg-[#8B3A3A] transition-colors duration-300"
+              >
+                Submit
+              </button>
+            </form>
+          </div>
         </div>
       </div>
-    </motion.footer>
+    </footer>
   );
 };
 
