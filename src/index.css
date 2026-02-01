@@ -1,0 +1,175 @@
+@import "@fontsource/manrope/400.css";
+@import "@fontsource/manrope/500.css";
+@import "@fontsource/manrope/600.css";
+@import "@fontsource/manrope/700.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Soft off-white background - eye-friendly, warm tone */
+    --background: 40 25% 97%;
+    --foreground: 25 20% 15%;
+
+    /* Card - slightly warmer with subtle contrast */
+    --card: 45 30% 95%;
+    --card-foreground: 25 20% 15%;
+
+    --popover: 45 30% 96%;
+    --popover-foreground: 25 20% 15%;
+
+    /* Primary - warm charcoal */
+    --primary: 25 20% 15%;
+    --primary-foreground: 45 30% 95%;
+
+    /* Secondary - soft warm gray for sections */
+    --secondary: 45 20% 92%;
+    --secondary-foreground: 25 20% 15%;
+
+    /* Muted - soft warm tones, easier on the eyes */
+    --muted: 45 15% 88%;
+    --muted-foreground: 30 10% 50%;
+
+    /* Accent - softer blue, less harsh */
+    --accent: 210 70% 52%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 45 15% 88%;
+    --input: 45 20% 90%;
+    --ring: 210 70% 52%;
+
+    --radius: 1rem;
+
+    /* Soft shadows for depth without harshness */
+    --shadow-card: 0 2px 8px rgba(25, 20, 15, 0.05);
+    --shadow-hover: 0 4px 12px rgba(25, 20, 15, 0.08);
+    --shadow-sm: 0 1px 3px rgba(25, 20, 15, 0.03);
+  }
+
+  .dark {
+    --background: 0 0% 8%;
+    --foreground: 0 0% 95%;
+    --card: 0 0% 12%;
+    --card-foreground: 0 0% 95%;
+    --popover: 0 0% 12%;
+    --popover-foreground: 0 0% 95%;
+    --primary: 0 0% 95%;
+    --primary-foreground: 0 0% 10%;
+    --secondary: 0 0% 18%;
+    --secondary-foreground: 0 0% 95%;
+    --muted: 0 0% 18%;
+    --muted-foreground: 0 0% 60%;
+    --accent: 220 80% 55%;
+    --accent-foreground: 0 0% 100%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 220 80% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: "Manrope", sans-serif;
+  }
+}
+
+@layer components {
+  /* Floating card container */
+  .floating-card {
+    @apply bg-card rounded-2xl;
+    box-shadow: var(--shadow-card);
+  }
+
+  /* Filter chip styles */
+  .filter-chip {
+    @apply px-4 py-2 text-sm font-medium rounded-full transition-all duration-300;
+    @apply text-muted-foreground hover:text-foreground;
+  }
+
+  .filter-chip-active {
+    @apply text-accent font-semibold;
+  }
+
+  /* Smooth link underline animation */
+  .link-underline {
+    @apply relative;
+  }
+
+  .link-underline::after {
+    content: "";
+    @apply absolute bottom-0 left-0 w-full h-px bg-foreground;
+    @apply scale-x-0 origin-right transition-transform duration-300;
+  }
+
+  .link-underline:hover::after {
+    @apply scale-x-100 origin-left;
+  }
+
+  /* Social icon hover */
+  .social-icon {
+    @apply w-8 h-8 flex items-center justify-center rounded-full;
+    @apply text-muted-foreground hover:text-foreground transition-colors duration-300;
+  }
+
+  /* Portfolio item card */
+  .portfolio-item {
+    @apply relative overflow-hidden rounded-xl transition-all duration-500;
+    @apply hover:shadow-lg cursor-pointer;
+  }
+
+  /* Section spacing */
+  .section-spacing {
+    @apply py-20 md:py-32;
+  }
+}
+
+@layer utilities {
+  .animate-fade-up {
+    animation: fadeUp 0.6s ease-out forwards;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  /* Stagger animation delays */
+  .stagger-1 { animation-delay: 0.1s; }
+  .stagger-2 { animation-delay: 0.2s; }
+  .stagger-3 { animation-delay: 0.3s; }
+  .stagger-4 { animation-delay: 0.4s; }
+  .stagger-5 { animation-delay: 0.5s; }
+}
