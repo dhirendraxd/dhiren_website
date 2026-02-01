@@ -34,7 +34,7 @@ const Footer = () => {
                 to="/#work"
                 className="text-muted-foreground hover:text-foreground text-sm transition-colors duration-300"
               >
-                Work
+                Hackathon & Event
               </Link>
               <Link
                 to="/#about"

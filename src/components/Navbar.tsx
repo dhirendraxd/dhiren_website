@@ -4,7 +4,7 @@ import { Moon, Facebook, Twitter, Instagram, Dribbble } from "lucide-react";
 
 const Navbar = () => {
   const navLinks = [
-    { name: "Work", href: "/#work" },
+    { name: "Hackathon & Event", href: "/#work" },
     { name: "About", href: "/#about" },
     { name: "Contact", href: "/contact" },
   ];
