@@ -3,26 +3,26 @@ import ismailIllustration from "@/assets/ismail-illustration.png";
 
 const HeroSection = () => {
   return (
-    <section className="h-[calc(100vh-80px)] flex items-center px-8 md:px-12">
-      <div className="w-full max-w-6xl mx-auto">
-        <div className="grid md:grid-cols-2 gap-8 items-center">
+    <section className="h-[calc(100vh-80px)] flex items-start px-8 md:px-12 lg:px-16 pt-2 md:pt-6">
+      <div className="w-full max-w-7xl mx-auto -mt-4 md:-mt-6">
+        <div className="grid md:grid-cols-2 gap-12 lg:gap-20 xl:gap-24 items-center">
           {/* Text Content */}
-          <div className="space-y-2">
+          <div className="space-y-4 lg:space-y-6">
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight tracking-tight text-foreground"
+              className="text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-bold leading-tight tracking-tight text-foreground whitespace-nowrap"
             >
-              HI - I'M ISMAIL
+              HI - I'M DHIREN
             </motion.h1>
             <motion.h2
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight tracking-tight text-muted-foreground"
+              className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight tracking-tight text-muted-foreground"
             >
-              I'M DOING DESIGN
+              I'm Into Digital Marketing
             </motion.h2>
           </div>
 
@@ -31,15 +31,15 @@ const HeroSection = () => {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7, delay: 0.3 }}
-            className="relative flex justify-center"
+            className="relative flex justify-center -mt-8 md:mt-0"
           >
             <div className="relative flex flex-col items-center">
               <img 
                 src={ismailIllustration} 
-                alt="Ismail illustration" 
-                className="w-56 md:w-72 lg:w-80 h-auto"
+                alt="Dhiren illustration" 
+                className="w-64 md:w-80 lg:w-96 xl:w-full xl:max-w-xl h-auto"
               />
-              <p className="text-sm text-muted-foreground italic font-light mt-3" style={{ fontFamily: 'cursive' }}>
+              <p className="text-base md:text-lg text-muted-foreground italic font-light mt-4" style={{ fontFamily: 'cursive' }}>
                 This is me!
               </p>
             </div>

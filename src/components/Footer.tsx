@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   const socialLinks = [
-    { name: "Dribbble", href: "#" },
-    { name: "Behance", href: "#" },
-    { name: "Instagram", href: "#" },
-    { name: "LinkedIn", href: "#" },
+    { name: "Dribbble", href: "https://dribbble.com" },
+    { name: "Behance", href: "https://behance.net" },
+    { name: "Instagram", href: "https://instagram.com" },
+    { name: "LinkedIn", href: "https://linkedin.com" },
   ];
 
   return (
@@ -59,6 +59,8 @@ const Footer = () => {
                 <a
                   key={link.name}
                   href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-muted-foreground hover:text-foreground text-sm transition-colors duration-300"
                 >
                   {link.name}

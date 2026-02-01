@@ -1,6 +1,6 @@
-# Ismail - Designer Portfolio
+# Dhiren - Digital Marketing Portfolio
 
-A modern, minimalist portfolio website for Ismail, a creative designer specializing in branding, UI/UX design, and graphic design.
+A modern, minimalist portfolio website for Dhiren, a digital marketing specialist creating innovative digital solutions.
 
 ## 🚀 Quick Start
 
