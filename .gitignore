@@ -33,3 +33,14 @@ yarn-debug.log*
 # Cache
 .eslintcache
 .stylelintcache
+
+# Documentation - exclude all .md files except README.md
+*.md
+!README.md
+
+# Security and internal documentation
+SECURITY.md
+SECURITY_POLICY.md
+
+# Deployment files (if not needed in git)
+public/_headers
