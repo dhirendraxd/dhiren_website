@@ -10,8 +10,24 @@ const ContactForm = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
-    console.log("Form submitted:", formData);
+    
+    // Sanitize inputs before processing
+    const sanitizedData = {
+      name: formData.name.trim().slice(0, 100),
+      email: formData.email.trim().toLowerCase().slice(0, 254),
+      message: formData.message.trim().slice(0, 1000),
+    };
+    
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(sanitizedData.email)) {
+      console.error('Invalid email format');
+      return;
+    }
+    
+    // Handle form submission with sanitized data
+    console.log("Form submitted:", sanitizedData);
+    // TODO: Implement actual form submission to backend
   };
 
   const handleChange = (
