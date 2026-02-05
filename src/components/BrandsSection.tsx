@@ -6,37 +6,50 @@ const BrandsSection = () => {
   const affiliations = [
     { 
       id: 1, 
-      name: "AWS Cloud Club Nepal", 
-      image: new URL("@/assets/affiliation/aws_cloud_club_at_tu_logo.jpeg", import.meta.url).href,
-      role: "College Representative",
-      description: "Organizing sessions on AWS and cloud tools. Promoting community-focused learning and cloud skill adoption."
+      name: "All in Foundation", 
+      image: new URL("@/assets/affiliation/all_in_foundation_aif_logo.jpeg", import.meta.url).href,
+      role: "Fellow",
+      date: "Feb 2025 - Present",
+      description: "Selected as fellow to work on social impact initiatives and community development programs."
     },
     { 
       id: 2, 
-      name: "NetMission.Asia", 
-      image: new URL("@/assets/affiliation/netmission.jpeg", import.meta.url).href,
-      role: "Ambassador",
-      description: "2026 cohort participant in online training, webinars, and projects focused on Internet governance and digital rights advocacy."
+      name: "AWS Cloud Club Nepal", 
+      image: new URL("@/assets/affiliation/aws_cloud_club_at_tu_logo.jpeg", import.meta.url).href,
+      role: "College Representative",
+      date: "Mar 2025 - Present",
+      description: "Organizing sessions on AWS and cloud tools. Promoting community-focused learning and cloud skill adoption."
     },
     { 
       id: 3, 
-      name: "Rotaract Club of Kirtipur", 
-      image: new URL("@/assets/affiliation/rac .jpg", import.meta.url).href,
-      role: "Member",
-      description: "Supporting civic, tech-forward, and sustainability initiatives. Involved in planning youth and community programs."
+      name: "NetMission.Asia", 
+      image: new URL("@/assets/affiliation/netmission.jpeg", import.meta.url).href,
+      role: "Ambassador",
+      date: "Dec 2025 - Present",
+      description: "2026 cohort participant in online training, webinars, and projects focused on Internet governance and digital rights advocacy."
     },
     { 
       id: 4, 
-      name: "Ctrl Bits", 
-      image: new URL("@/assets/affiliation/new logo fark blue grad in white.png", import.meta.url).href,
-      role: "Digital Marketer",
-      description: "Writing optimized blogs and managing analytics & content strategy. Leading digital marketing for internal and client web apps."
+      name: "Rotaract Club of Kirtipur", 
+      image: new URL("@/assets/affiliation/rac .jpg", import.meta.url).href,
+      role: "Member",
+      date: "Jun 2025 - Present",
+      description: "Supporting civic, tech-forward, and sustainability initiatives. Involved in planning youth and community programs."
     },
     { 
       id: 5, 
+      name: "Ctrl Bits", 
+      image: new URL("@/assets/affiliation/new logo fark blue grad in white.png", import.meta.url).href,
+      role: "Digital Marketer",
+      date: "May 2025 - Present",
+      description: "Writing optimized blogs and managing analytics & content strategy. Leading digital marketing for internal and client web apps."
+    },
+    { 
+      id: 6, 
       name: "Sustainability Solutions", 
       image: new URL("@/assets/affiliation/sustainabilitysolutionsnepal_logo.jpeg", import.meta.url).href,
       role: "Sustainability Mentee",
+      date: "Aug 2025 - Present",
       description: "Design Thinking and Sustainable Business Model development through structured mentorship program."
     },
   ];

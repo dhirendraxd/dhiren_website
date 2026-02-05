@@ -1,55 +1,62 @@
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const Affiliations = () => {
+  const navigate = useNavigate();
   const affiliations = [
     {
       id: 1,
       name: "All in Foundation",
       image: new URL("@/assets/affiliation/all_in_foundation_aif_logo.jpeg", import.meta.url).href,
-      role: "Community Partner",
-      description: "Collaborated on social impact initiatives and community development programs.",
+      role: "Fellow",
+      date: "Feb 2025 - Present",
+      description: "Selected as fellow to work on social impact initiatives and community development programs.",
+      link: "https://allfoundation.org"
     },
     {
       id: 2,
-      name: "Aspire Leaders Program",
-      image: new URL("@/assets/affiliation/aspire_leaders_program_logo.jpeg", import.meta.url).href,
-      role: "Participant & Mentor",
-      description: "Developed leadership skills and mentored emerging talent in the ecosystem.",
+      name: "AWS Cloud Club Nepal",
+      image: new URL("@/assets/affiliation/aws_cloud_club_at_tu_logo.jpeg", import.meta.url).href,
+      role: "College Representative",
+      date: "Mar 2025 - Present",
+      description: "Organizing sessions on AWS and cloud tools. Promoting community-focused learning and cloud skill adoption.",
+      link: "https://aws.amazon.com"
     },
     {
       id: 3,
-      name: "CtrlBits",
-      image: new URL("@/assets/affiliation/new logo fark blue grad in white.png", import.meta.url).href,
-      role: "Tech Advisor",
-      description: "Guided digital transformation and marketing strategy initiatives.",
+      name: "NetMission.Asia",
+      image: new URL("@/assets/affiliation/netmission.jpeg", import.meta.url).href,
+      role: "Ambassador",
+      date: "Dec 2025 - Present",
+      description: "2026 cohort participant in online training, webinars, and projects focused on Internet governance and digital rights advocacy.",
+      link: "https://netmission.asia"
     },
     {
       id: 4,
-      name: "AWS Cloud Club at TU",
-      image: new URL("@/assets/affiliation/aws_cloud_club_at_tu_logo.jpeg", import.meta.url).href,
-      role: "Club Lead",
-      description: "Founded and led cloud computing community with 200+ members.",
+      name: "Rotaract Club of Kirtipur",
+      image: new URL("@/assets/affiliation/rac .jpg", import.meta.url).href,
+      role: "Member",
+      date: "Jun 2025 - Present",
+      description: "Supporting civic, tech-forward, and sustainability initiatives. Involved in planning youth and community programs.",
+      link: "https://rotary.org"
     },
     {
       id: 5,
-      name: "NetMission",
-      image: new URL("@/assets/affiliation/netmission.jpeg", import.meta.url).href,
-      role: "Strategic Partner",
-      description: "Supported digital literacy and internet accessibility campaigns.",
+      name: "Ctrl Bits",
+      image: new URL("@/assets/affiliation/new logo fark blue grad in white.png", import.meta.url).href,
+      role: "Digital Marketer",
+      date: "May 2025 - Present",
+      description: "Writing optimized blogs and managing analytics & content strategy. Leading digital marketing for internal and client web apps.",
+      link: "https://ctrlbits.com"
     },
     {
       id: 6,
-      name: "RAC",
-      image: new URL("@/assets/affiliation/rac .jpg", import.meta.url).href,
-      role: "Growth Consultant",
-      description: "Implemented data-driven marketing strategies and growth initiatives.",
-    },
-    {
-      id: 7,
-      name: "Sustainability Solutions Nepal",
+      name: "Sustainability Solutions",
       image: new URL("@/assets/affiliation/sustainabilitysolutionsnepal_logo.jpeg", import.meta.url).href,
-      role: "Digital Lead",
-      description: "Drove digital campaigns for environmental sustainability projects.",
+      role: "Sustainability Mentee",
+      date: "Aug 2025 - Present",
+      description: "Design Thinking and Sustainable Business Model development through structured mentorship program.",
+      link: "https://sustainabilitysolutions.org"
     },
   ];
 
@@ -78,9 +85,10 @@ const Affiliations = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
         >
           {affiliations.map((affiliation, index) => (
-            <motion.div
+            <motion.button
               key={affiliation.id}
-              className="rounded-2xl border border-border/30 bg-card/50 p-6 space-y-4 hover:border-border/60 hover:bg-card/70 transition-all duration-300"
+              onClick={() => navigate(`/affiliations/${affiliation.id}`)}
+              className="rounded-2xl border border-border/30 bg-card/50 p-6 space-y-4 hover:border-border/60 hover:bg-card/70 transition-all duration-300 cursor-pointer block w-full text-left"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: index * 0.05 }}
@@ -93,11 +101,12 @@ const Affiliations = () => {
                 />
               </div>
               <div className="space-y-2">
+                <p className="text-xs text-green-700 font-semibold uppercase tracking-wide">{affiliation.date}</p>
                 <h3 className="text-lg font-semibold text-foreground">{affiliation.name}</h3>
-                <p className="text-sm font-medium text-green-700">{affiliation.role}</p>
+                <p className="text-xs text-red-900 font-semibold uppercase tracking-wide mb-2">{affiliation.role}</p>
                 <p className="text-sm text-muted-foreground leading-relaxed">{affiliation.description}</p>
               </div>
-            </motion.div>
+            </motion.button>
           ))}
         </motion.div>
       </div>
