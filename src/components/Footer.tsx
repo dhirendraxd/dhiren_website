@@ -116,7 +116,7 @@ const Footer = () => {
           </div>
 
           {/* Right Column - Contact Form */}
-          <div className="space-y-6 font-chillax">
+          <div className="space-y-6 font-rajdhani">
             <div>
               <p className="text-xs text-muted-foreground mb-1 tracking-wide">Step 1 of 1</p>
               <h3 className="text-3xl font-bold mb-2">Contact Me</h3>

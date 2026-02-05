@@ -25,7 +25,7 @@ const AboutSection = () => {
   ];
 
   return (
-    <section id="about" className="py-20 px-8 md:px-12 bg-secondary/30">
+    <section id="about" className="py-20 px-8 md:px-12 bg-card">
       <div className="max-w-6xl mx-auto">
         {/* Top Section - Skills Intro with Tools */}
         <div className="grid md:grid-cols-2 gap-12 items-center">
