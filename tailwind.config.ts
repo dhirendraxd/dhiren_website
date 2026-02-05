@@ -15,6 +15,7 @@ export default {
     extend: {
       fontFamily: {
         sans: ["Manrope", "sans-serif"],
+        nekst: ["Nekst", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",

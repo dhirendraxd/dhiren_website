@@ -14,7 +14,11 @@ const HeroSection = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-bold leading-tight tracking-tight text-foreground whitespace-nowrap"
             >
-              HI - I'M DHIREN
+              <span className="font-nekst">HI </span>
+              <span className="font-sans">- </span>
+              <span className="font-nekst">I</span>
+              <span className="font-sans">'</span>
+              <span className="font-nekst">M DHIREN</span>
             </motion.h1>
             <motion.h2
               initial={{ opacity: 0, y: 30 }}
@@ -22,7 +26,9 @@ const HeroSection = () => {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight tracking-tight text-muted-foreground"
             >
-              I'm Into Digital Marketing
+              <span className="font-nekst">I</span>
+              <span className="font-sans">'</span>
+              <span className="font-nekst">m Into Digital Marketing</span>
             </motion.h2>
           </div>
 
