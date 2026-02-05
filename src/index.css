@@ -12,6 +12,22 @@
 }
 
 @font-face {
+  font-family: 'Chillax';
+  src: url('/fonts/Chillax_Complete/Fonts/WEB/fonts/Chillax-Variable.woff2') format('woff2');
+  font-weight: 200 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Rajdhani';
+  src: url('/fonts/Rajdhani_Complete/Fonts/WEB/fonts/Rajdhani-Variable.woff2') format('woff2');
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
   font-family: 'Nekst';
   src: url('/fonts/Fontspring-DEMO-nekst-light.otf') format('opentype');
   font-weight: 300;
