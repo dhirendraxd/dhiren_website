@@ -4,31 +4,31 @@ const Hackathon = () => {
   const hackathons = [
     {
       id: 1,
-      name: "Event 1",
+      name: "Mitra Smart",
       image: new URL("@/assets/hackathon&evets/1736784796315.jpeg", import.meta.url).href,
-      credit: "@samanthakey",
-      description: "A showcase of creativity and innovation where ideas come to life.",
+      credit: "100x Nepal Hackathon 2025",
+      description: "Government document validation and smart form-filling application. AI-powered document checks with context-aware form-filling hints to simplify government processes.",
     },
     {
       id: 2,
-      name: "KEC Lite 2081",
+      name: "Edu Connect Global",
       image: new URL("@/assets/hackathon&evets/kec_lite_2081-thumbnail-1000x525.png", import.meta.url).href,
-      credit: "@yvonneleon",
-      description: "A celebration of innovation and teamwork in Nepal's tech ecosystem.",
+      credit: "KIST HackFest 2025 - 3rd Place",
+      description: "AI-powered university recommendation platform that matches students with best-fit universities based on verified data, interests, and academic profiles.",
     },
     {
       id: 3,
-      name: "Event 3",
+      name: "DevBus",
       image: new URL("@/assets/hackathon&evets/logo.png", import.meta.url).href,
-      credit: "@event",
-      description: "Experiments in collaboration and pushing creative boundaries.",
+      credit: "CodeYatra 2025",
+      description: "AI job assessment tool for SME hiring. Built a platform using AI and skill-based assessments with prompt-based technology to match talent with opportunities.",
     },
     {
       id: 4,
-      name: "SXC Sandbox",
+      name: "Volunteer Recruitment Platform",
       image: new URL("@/assets/hackathon&evets/SXC SANDBOX Logo.jpg", import.meta.url).href,
-      credit: "@sxcsandbox",
-      description: "Building meaningful connections through innovation and creativity.",
+      credit: "KEC Hack-a-LITE 2024",
+      description: "Platform helping NGOs recruit volunteers efficiently. Features include event posting, volunteer matching, and stipend disbursement system. Built with HTML, CSS, JavaScript and hosted on Vercel.",
     },
   ];
 

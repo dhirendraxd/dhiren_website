@@ -5,27 +5,27 @@ const WorkSection = () => {
   const hackathons = [
     {
       id: 1,
-      name: "Event 1",
+      name: "Mitra Smart",
       image: new URL("@/assets/hackathon&evets/1736784796315.jpeg", import.meta.url).href,
-      credit: "@samanthakey"
+      credit: "100x Nepal Hackathon 2025"
     },
     {
       id: 2,
-      name: "KEC Lite 2081",
+      name: "Edu Connect Global",
       image: new URL("@/assets/hackathon&evets/kec_lite_2081-thumbnail-1000x525.png", import.meta.url).href,
-      credit: "@yvonneleon"
+      credit: "KIST HackFest 2025 - 3rd Place"
     },
     {
       id: 3,
-      name: "Event 3",
+      name: "DevBus",
       image: new URL("@/assets/hackathon&evets/logo.png", import.meta.url).href,
-      credit: "@event"
+      credit: "CodeYatra 2025"
     },
     {
       id: 4,
-      name: "SXC Sandbox",
+      name: "Volunteer Recruitment Platform",
       image: new URL("@/assets/hackathon&evets/SXC SANDBOX Logo.jpg", import.meta.url).href,
-      credit: "@sxcsandbox"
+      credit: "KEC Hack-a-LITE 2024"
     },
   ];
 

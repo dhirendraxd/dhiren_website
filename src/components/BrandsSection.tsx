@@ -6,52 +6,38 @@ const BrandsSection = () => {
   const affiliations = [
     { 
       id: 1, 
-      name: "All in Foundation", 
-      image: new URL("@/assets/affiliation/all_in_foundation_aif_logo.jpeg", import.meta.url).href,
-      role: "Community Partner",
-      description: "Collaborated on social impact initiatives and community development programs."
+      name: "AWS Cloud Club Nepal", 
+      image: new URL("@/assets/affiliation/aws_cloud_club_at_tu_logo.jpeg", import.meta.url).href,
+      role: "College Representative",
+      description: "Organizing sessions on AWS and cloud tools. Promoting community-focused learning and cloud skill adoption."
     },
     { 
       id: 2, 
-      name: "Aspire Leaders Program", 
-      image: new URL("@/assets/affiliation/aspire_leaders_program_logo.jpeg", import.meta.url).href,
-      role: "Participant & Mentor",
-      description: "Developed leadership skills and mentored emerging talent in the ecosystem."
+      name: "NetMission.Asia", 
+      image: new URL("@/assets/affiliation/netmission.jpeg", import.meta.url).href,
+      role: "Ambassador",
+      description: "2026 cohort participant in online training, webinars, and projects focused on Internet governance and digital rights advocacy."
     },
     { 
       id: 3, 
-      name: "CtrlBits", 
-      image: new URL("@/assets/affiliation/new logo fark blue grad in white.png", import.meta.url).href,
-      role: "Tech Advisor",
-      description: "Guided digital transformation and marketing strategy initiatives."
+      name: "Rotaract Club of Kirtipur", 
+      image: new URL("@/assets/affiliation/rac .jpg", import.meta.url).href,
+      role: "Member",
+      description: "Supporting civic, tech-forward, and sustainability initiatives. Involved in planning youth and community programs."
     },
     { 
       id: 4, 
-      name: "AWS Cloud Club at TU", 
-      image: new URL("@/assets/affiliation/aws_cloud_club_at_tu_logo.jpeg", import.meta.url).href,
-      role: "Club Lead",
-      description: "Founded and led cloud computing community with 200+ members."
+      name: "Ctrl Bits", 
+      image: new URL("@/assets/affiliation/new logo fark blue grad in white.png", import.meta.url).href,
+      role: "Digital Marketer",
+      description: "Writing optimized blogs and managing analytics & content strategy. Leading digital marketing for internal and client web apps."
     },
     { 
       id: 5, 
-      name: "NetMission", 
-      image: new URL("@/assets/affiliation/netmission.jpeg", import.meta.url).href,
-      role: "Strategic Partner",
-      description: "Supported digital literacy and internet accessibility campaigns."
-    },
-    { 
-      id: 6, 
-      name: "RAC", 
-      image: new URL("@/assets/affiliation/rac .jpg", import.meta.url).href,
-      role: "Growth Consultant",
-      description: "Implemented data-driven marketing strategies and growth initiatives."
-    },
-    { 
-      id: 7, 
-      name: "Sustainability Solutions Nepal", 
+      name: "Sustainability Solutions", 
       image: new URL("@/assets/affiliation/sustainabilitysolutionsnepal_logo.jpeg", import.meta.url).href,
-      role: "Digital Lead",
-      description: "Drove digital campaigns for environmental sustainability projects."
+      role: "Sustainability Mentee",
+      description: "Design Thinking and Sustainable Business Model development through structured mentorship program."
     },
   ];
 
