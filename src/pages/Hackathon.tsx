@@ -57,7 +57,7 @@ const Hackathon = () => {
         </motion.div>
 
         <motion.div
-          className="grid md:grid-cols-2 gap-8"
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.2 }}
@@ -66,26 +66,22 @@ const Hackathon = () => {
             <motion.button
               key={hackathon.id}
               onClick={() => navigate(`/hackathon/${hackathon.id}`)}
-              className="rounded-lg overflow-hidden space-y-4 border border-border/30 hover:border-border/60 transition-all duration-300 cursor-pointer w-full text-left bg-card"
+              className="rounded-2xl border border-border/30 bg-card/50 p-6 space-y-4 hover:border-border/60 hover:bg-card/70 transition-all duration-300 cursor-pointer block w-full text-left"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: index * 0.1 }}
+              transition={{ duration: 0.4, delay: index * 0.05 }}
             >
-              <div className="relative aspect-video overflow-hidden">
+              <div className="flex items-center justify-center h-40 rounded-xl bg-background/50 overflow-hidden">
                 <img
                   src={hackathon.image}
                   alt={hackathon.name}
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                  className="max-h-40 max-w-full object-contain hover:scale-105 transition-transform duration-300"
                 />
-                <div className="absolute bottom-3 left-3 bg-black/50 text-white text-xs px-2 py-1">
-                  {hackathon.credit}
-                </div>
-                <div className="absolute top-3 right-3 bg-green-700 text-white text-xs px-3 py-1 rounded-full font-semibold">
-                  {hackathon.date}
-                </div>
               </div>
-              <div className="space-y-2 p-4">
+              <div className="space-y-2">
+                <p className="text-xs text-green-700 font-semibold uppercase tracking-wide">{hackathon.date}</p>
                 <h3 className="text-lg font-semibold text-foreground">{hackathon.name}</h3>
+                <p className="text-xs text-red-900 font-semibold uppercase tracking-wide mb-2">{hackathon.credit}</p>
                 <p className="text-sm text-muted-foreground leading-relaxed">{hackathon.description}</p>
               </div>
             </motion.button>
