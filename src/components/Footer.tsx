@@ -1,9 +1,14 @@
 import { useState } from "react";
-import { AtSign, Navigation } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import { AtSign, Navigation, Send } from "lucide-react";
 import { FaLinkedinIn, FaInstagram, FaGithub } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
+import { useToast } from "@/hooks/use-toast";
 
 const Footer = () => {
+  const { toast } = useToast();
+  const [isSendAnimating, setIsSendAnimating] = useState(false);
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -15,6 +20,10 @@ const Footer = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
+    if (isSendAnimating) {
+      return;
+    }
+
     const sanitizedData = {
       name: formData.name.trim().slice(0, 100),
       email: formData.email.trim().toLowerCase().slice(0, 254),
@@ -25,11 +34,16 @@ const Footer = () => {
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(sanitizedData.email)) {
-      console.error('Invalid email format');
+      toast({
+        variant: "destructive",
+        title: "Invalid email address",
+        description: "Please enter a valid email and try again.",
+      });
       return;
     }
 
     console.log("Form submitted:", sanitizedData);
+    setIsSendAnimating(true);
   };
 
   const handleChange = (
@@ -167,12 +181,57 @@ const Footer = () => {
               </div>
 
               <div className="flex justify-end pt-2">
-                <button
-                  type="submit"
-                  className="inline-flex items-center justify-center px-6 py-2 rounded-md bg-foreground text-background text-sm font-medium hover:opacity-90 transition-opacity"
-                >
-                  Send
-                </button>
+                <div className="relative h-9 w-[96px] overflow-visible">
+                  <AnimatePresence mode="wait">
+                    {isSendAnimating ? (
+                      <motion.div
+                        key="send-plane"
+                        initial={{ x: 0, y: 0, rotate: 0, opacity: 1, scale: 1 }}
+                        animate={{
+                          x: [0, 16, 0, -16, 0, 320],
+                          y: [0, -14, -28, -14, 0, -190],
+                          rotate: [0, 90, 180, 270, 360, 402],
+                          opacity: [1, 1, 1, 1, 1, 0],
+                          scale: [1, 1.02, 1.03, 1.02, 1, 0.8],
+                        }}
+                        transition={{
+                          duration: 0.92,
+                          times: [0, 0.18, 0.36, 0.54, 0.72, 1],
+                          ease: "easeIn",
+                        }}
+                        onAnimationComplete={() => {
+                          setIsSendAnimating(false);
+                          setFormData({
+                            name: "",
+                            email: "",
+                            organization: "",
+                            projectType: "",
+                            message: "",
+                          });
+                          toast({
+                            title: "Message sent",
+                            description: "Thanks for reaching out. I will get back to you within 24 hours.",
+                          });
+                        }}
+                        className="absolute inset-0 inline-flex items-center justify-center text-foreground pointer-events-none"
+                      >
+                        <Send size={18} />
+                      </motion.div>
+                    ) : (
+                      <motion.button
+                        key="send-button"
+                        type="submit"
+                        initial={{ opacity: 1, y: 0 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -2 }}
+                        transition={{ duration: 0.22 }}
+                        className="absolute inset-0 inline-flex items-center justify-center rounded-md bg-foreground text-background text-sm font-medium hover:opacity-90 transition-opacity"
+                      >
+                        Send
+                      </motion.button>
+                    )}
+                  </AnimatePresence>
+                </div>
               </div>
             </form>
           </div>

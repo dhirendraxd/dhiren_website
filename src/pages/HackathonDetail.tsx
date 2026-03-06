@@ -1,6 +1,9 @@
 import { motion } from "framer-motion";
 import { useParams, useNavigate } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
+import Navbar from "@/components/Navbar";
+import BackToTop from "@/components/BackToTop";
+import ScrollProgressBar from "@/components/ScrollProgressBar";
 
 const HackathonDetail = () => {
   const { id } = useParams();
@@ -109,23 +112,30 @@ const HackathonDetail = () => {
 
   if (!hackathon) {
     return (
-      <section className="py-20 px-8 md:px-12 bg-card min-h-screen">
-        <div className="max-w-4xl mx-auto">
-          <button
-            onClick={() => navigate("/hackathon")}
-            className="flex items-center gap-2 text-green-700 hover:text-green-600 mb-8"
-          >
-            <ChevronLeft size={20} />
-            Back to Hackathons & Events
-          </button>
-          <p className="text-muted-foreground">Project not found.</p>
-        </div>
-      </section>
+      <div className="min-h-screen bg-card">
+        <ScrollProgressBar />
+        <Navbar />
+        <section className="pt-28 pb-20 px-8 md:px-12">
+          <div className="max-w-4xl mx-auto">
+            <button
+              onClick={() => navigate("/hackathon")}
+              className="flex items-center gap-2 text-green-700 hover:text-green-600 mb-8"
+            >
+              <ChevronLeft size={20} />
+              Back to Hackathons & Events
+            </button>
+            <p className="text-muted-foreground">Project not found.</p>
+          </div>
+        </section>
+      </div>
     );
   }
 
   return (
-    <section className="py-20 px-8 md:px-12 bg-card min-h-screen">
+    <div className="min-h-screen bg-card">
+      <ScrollProgressBar />
+      <Navbar />
+      <section className="pt-28 pb-20 px-8 md:px-12">
       <div className="max-w-4xl mx-auto">
         {/* Breadcrumb Navigation */}
         <motion.div
@@ -288,7 +298,9 @@ const HackathonDetail = () => {
           </div>
         </motion.div>
       </div>
-    </section>
+      </section>
+      <BackToTop />
+    </div>
   );
 };
 

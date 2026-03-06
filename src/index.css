@@ -163,11 +163,58 @@
 
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 80px;
   }
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
     font-family: "Manrope", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Custom text selection */
+  ::selection {
+    background-color: hsl(var(--foreground) / 0.12);
+    color: hsl(var(--foreground));
+  }
+
+  /* Focus visible ring - clean and consistent */
+  :focus-visible {
+    outline: 2px solid hsl(var(--foreground) / 0.6);
+    outline-offset: 3px;
+    border-radius: 3px;
+  }
+
+  /* Prevent image drag */
+  img {
+    -webkit-user-drag: none;
+    user-select: none;
+  }
+
+  /* Smooth transitions on interactive elements */
+  a, button {
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Custom thin scrollbar */
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 99px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground) / 0.5);
   }
 
   /* Remove autofill background colors */

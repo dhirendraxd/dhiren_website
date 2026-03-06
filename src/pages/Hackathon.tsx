@@ -1,5 +1,8 @@
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import Navbar from "@/components/Navbar";
+import BackToTop from "@/components/BackToTop";
+import ScrollProgressBar from "@/components/ScrollProgressBar";
 
 const Hackathon = () => {
   const navigate = useNavigate();
@@ -39,56 +42,63 @@ const Hackathon = () => {
   ];
 
   return (
-    <section className="py-20 px-8 md:px-12 bg-card min-h-screen">
-      <div className="max-w-6xl mx-auto">
-        <motion.div
-          className="space-y-4 mb-16"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <p className="text-xs uppercase tracking-widest font-semibold text-green-700">From Our Community</p>
-          <h1 className="text-4xl md:text-5xl font-semibold tracking-tight text-foreground">
-            Hackathons & Events
-          </h1>
-          <p className="text-lg text-muted-foreground max-w-2xl">
-            Hackathons, events, and collaborations where I explore technology, digital innovation, and problem-solving through teamwork.
-          </p>
-        </motion.div>
+    <div className="min-h-screen bg-card">
+      <ScrollProgressBar />
+      <Navbar />
+      <section className="pt-28 pb-20 px-8 md:px-12">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            className="space-y-4 mb-16"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <p className="text-xs uppercase tracking-widest font-semibold text-green-700">From Our Community</p>
+            <h1 className="text-4xl md:text-5xl font-semibold tracking-tight text-foreground">
+              Hackathons & Events
+            </h1>
+            <p className="text-lg text-muted-foreground max-w-2xl">
+              Hackathons, events, and collaborations where I explore technology, digital innovation, and problem-solving through teamwork.
+            </p>
+          </motion.div>
 
-        <motion.div
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        >
-          {hackathons.map((hackathon, index) => (
-            <motion.button
-              key={hackathon.id}
-              onClick={() => navigate(`/hackathon/${hackathon.id}`)}
-              className="rounded-2xl border border-border/30 bg-card/50 p-6 space-y-4 hover:border-border/60 hover:bg-card/70 transition-all duration-300 cursor-pointer block w-full text-left"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: index * 0.05 }}
-            >
-              <div className="flex items-center justify-center h-40 rounded-xl bg-background/50 overflow-hidden">
-                <img
-                  src={hackathon.image}
-                  alt={hackathon.name}
-                  className="max-h-40 max-w-full object-contain hover:scale-105 transition-transform duration-300"
-                />
-              </div>
-              <div className="space-y-2">
-                <p className="text-xs text-green-700 font-semibold uppercase tracking-wide">{hackathon.date}</p>
-                <h3 className="text-lg font-semibold text-foreground">{hackathon.name}</h3>
-                <p className="text-xs text-red-900 font-semibold uppercase tracking-wide mb-2">{hackathon.credit}</p>
-                <p className="text-sm text-muted-foreground leading-relaxed">{hackathon.description}</p>
-              </div>
-            </motion.button>
-          ))}
-        </motion.div>
-      </div>
-    </section>
+          <motion.div
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            {hackathons.map((hackathon, index) => (
+              <motion.button
+                key={hackathon.id}
+                onClick={() => navigate(`/hackathon/${hackathon.id}`)}
+                className="rounded-2xl border border-border/30 bg-card/50 p-6 space-y-4 hover:border-border/60 hover:bg-card/70 transition-all duration-300 cursor-pointer block w-full text-left"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: index * 0.05 }}
+                whileHover={{ y: -4, boxShadow: "var(--shadow-hover)" }}
+                whileTap={{ scale: 0.99 }}
+              >
+                <div className="flex items-center justify-center h-40 rounded-xl bg-background/50 overflow-hidden">
+                  <img
+                    src={hackathon.image}
+                    alt={hackathon.name}
+                    className="max-h-40 max-w-full object-contain"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <p className="text-xs text-green-700 font-semibold uppercase tracking-wide">{hackathon.date}</p>
+                  <h3 className="text-lg font-semibold text-foreground">{hackathon.name}</h3>
+                  <p className="text-xs text-red-900 font-semibold uppercase tracking-wide mb-2">{hackathon.credit}</p>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{hackathon.description}</p>
+                </div>
+              </motion.button>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+      <BackToTop />
+    </div>
   );
 };
 

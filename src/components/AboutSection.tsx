@@ -94,7 +94,7 @@ const AboutSection = () => {
 
             <button
               type="button"
-              className="inline-flex items-center justify-center rounded-full px-8 py-3 text-xs font-semibold uppercase tracking-wider border border-foreground text-foreground hover:bg-foreground hover:text-background transition-colors"
+              className="inline-flex items-center justify-center rounded-full px-8 py-3 text-xs font-semibold uppercase tracking-wider border border-foreground text-foreground hover:bg-foreground hover:text-background transition-colors duration-200"
             >
               All Services
             </button>
@@ -108,15 +108,16 @@ const AboutSection = () => {
               return (
                 <motion.div
                   key={area.title}
-                  className={`border min-h-[260px] p-7 flex flex-col justify-between ${
+                  className={`group border min-h-[260px] p-7 flex flex-col justify-between cursor-pointer transition-shadow duration-300 ${
                     isHighlighted
                       ? "bg-foreground border-foreground text-background"
-                      : "bg-card border-border text-foreground"
+                      : "bg-card border-border text-foreground hover:shadow-hover"
                   }`}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: index * 0.1 }}
                   viewport={{ once: true }}
+                  whileHover={{ y: -3 }}
                 >
                   <div className="space-y-5">
                     <Icon
@@ -132,7 +133,10 @@ const AboutSection = () => {
 
                   <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider">
                     <span>Read More</span>
-                    <ArrowRight size={14} />
+                    <ArrowRight
+                      size={14}
+                      className="transition-transform duration-200 group-hover:translate-x-1"
+                    />
                   </div>
                 </motion.div>
               );
@@ -161,15 +165,16 @@ const AboutSection = () => {
               return (
                 <motion.div
                   key={item.title}
-                  className={`border px-6 py-6 md:px-8 md:py-7 flex flex-col md:flex-row md:items-center md:justify-between gap-4 ${
+                  className={`border px-6 py-6 md:px-8 md:py-7 flex flex-col md:flex-row md:items-center md:justify-between gap-4 cursor-default transition-shadow duration-200 ${
                     isHighlighted
                       ? "bg-foreground border-foreground text-background"
-                      : "bg-card border-border text-foreground"
+                      : "bg-card border-border text-foreground hover:shadow-hover"
                   }`}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: index * 0.08 }}
                   viewport={{ once: true }}
+                  whileHover={{ y: isHighlighted ? 0 : -2 }}
                 >
                   <div className="flex items-start gap-4">
                     <span
@@ -250,19 +255,24 @@ const AboutSection = () => {
 
                     <a
                       href={project.href}
-                      className="mt-10 inline-flex items-center gap-2 text-lg font-medium text-foreground"
+                      className="mt-10 inline-flex items-center gap-2 text-lg font-medium text-foreground group/link"
                     >
                       See Details
-                      <ArrowUpRight size={18} />
+                      <ArrowUpRight
+                        size={18}
+                        className="transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5"
+                      />
                     </a>
                     <div className="h-px w-28 bg-border mt-2.5" />
                   </div>
 
-                  <div className={isReverse ? "order-1 lg:order-2" : "order-1 lg:order-1"}>
-                    <img
+                  <div className={`overflow-hidden ${isReverse ? "order-1 lg:order-2" : "order-1 lg:order-1"}`}>
+                    <motion.img
                       src={project.image}
                       alt={project.title}
                       className="w-full h-[250px] md:h-[320px] object-cover border border-border/60"
+                      whileHover={{ scale: 1.03 }}
+                      transition={{ duration: 0.4, ease: "easeOut" }}
                     />
                   </div>
                 </motion.article>
