@@ -83,7 +83,7 @@ const WorkSection = () => {
             <div className="space-y-6">
               <p className="text-xs text-green-700 font-semibold tracking-widest uppercase">Showcase</p>
               <p className="text-xl text-muted-foreground leading-relaxed max-w-lg">
-                A collection of hackathons, events, and community gatherings where ideas transform into reality through teamwork and innovation.
+                Hackathons, events, and collaborations where I explore technology, digital innovation, and problem-solving through teamwork.
               </p>
             </div>
 

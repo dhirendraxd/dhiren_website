@@ -52,7 +52,7 @@ const Hackathon = () => {
             Hackathons & Events
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl">
-            A collection of hackathons, events, and community gatherings where ideas transform into reality through teamwork and innovation.
+            Hackathons, events, and collaborations where I explore technology, digital innovation, and problem-solving through teamwork.
           </p>
         </motion.div>
 

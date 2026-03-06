@@ -8,11 +8,11 @@ const AffiliationDetail = () => {
 
   const affiliations: Record<string, any> = {
     "1": {
-      name: "All in Foundation",
+      name: "ALL In Foundation (AIF)",
       image: new URL("@/assets/affiliation/all_in_foundation_aif_logo.jpeg", import.meta.url).href,
       role: "Fellow",
-      date: "Feb 2025 - Present",
-      description: "Selected as fellow to work on social impact initiatives and community development programs.",
+      date: "Feb 2026 - Present · 2 mos",
+      description: "Selected as a fellow to contribute to social impact initiatives, community-driven programs, and collaborative learning.",
       link: "https://allfoundation.org",
       details: {
         about: "All in Foundation is a non-profit organization dedicated to creating social impact through education, technology, and community development. As a Fellow, I work on identifying and scaling sustainable solutions for underserved communities.",
@@ -30,7 +30,7 @@ const AffiliationDetail = () => {
       name: "AWS Cloud Club Nepal",
       image: new URL("@/assets/affiliation/aws_cloud_club_at_tu_logo.jpeg", import.meta.url).href,
       role: "College Representative",
-      date: "Mar 2025 - Present",
+      date: "Mar 2025 - Present · 1 yr 1 mo",
       description: "Organizing sessions on AWS and cloud tools. Promoting community-focused learning and cloud skill adoption.",
       link: "https://aws.amazon.com",
       details: {
@@ -48,8 +48,8 @@ const AffiliationDetail = () => {
     "3": {
       name: "NetMission.Asia",
       image: new URL("@/assets/affiliation/netmission.jpeg", import.meta.url).href,
-      role: "Ambassador",
-      date: "Dec 2025 - Present",
+      role: "NetMission Ambassador",
+      date: "Dec 2025 - Mar 2026 · 4 mos",
       description: "2026 cohort participant in online training, webinars, and projects focused on Internet governance and digital rights advocacy.",
       link: "https://netmission.asia",
       details: {
@@ -84,10 +84,10 @@ const AffiliationDetail = () => {
       }
     },
     "5": {
-      name: "Ctrl Bits",
+      name: "CtrlBits",
       image: new URL("@/assets/affiliation/new logo fark blue grad in white.png", import.meta.url).href,
       role: "Digital Marketer",
-      date: "May 2025 - Present",
+      date: "Apr 2025 - Present · 1 yr",
       description: "Writing optimized blogs and managing analytics & content strategy. Leading digital marketing for internal and client web apps.",
       link: "https://ctrlbits.com",
       details: {
@@ -107,7 +107,7 @@ const AffiliationDetail = () => {
       name: "Sustainability Solutions",
       image: new URL("@/assets/affiliation/sustainabilitysolutionsnepal_logo.jpeg", import.meta.url).href,
       role: "Sustainability Mentee",
-      date: "Aug 2025 - Present",
+      date: "Aug 2025 - Dec 2025 · 5 mos",
       description: "Design Thinking and Sustainable Business Model development through structured mentorship program.",
       link: "https://sustainabilitysolutions.org",
       details: {
