@@ -72,7 +72,7 @@ const AboutSection = () => {
 
   return (
     <section id="about" className="py-24 px-8 md:px-12 bg-card">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-[84rem] mx-auto">
         <div className="space-y-10">
           <motion.div
             className="grid xl:grid-cols-[1.1fr_1fr_auto] gap-6 xl:gap-8 items-start"

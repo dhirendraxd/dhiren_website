@@ -40,7 +40,7 @@ const Footer = () => {
 
   return (
     <footer id="contact" className="py-16 px-8 md:px-12 bg-card font-sans">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-[76rem] mx-auto">
         <div className="grid lg:grid-cols-[1fr_1.2fr] gap-10 items-start">
           <div className="rounded-2xl bg-muted/35 p-8 space-y-8">
             <div className="space-y-4">
@@ -186,7 +186,7 @@ const Footer = () => {
             <div className="flex items-center justify-center gap-5">
               <a href="/#about" className="hover:text-foreground transition-colors">What I Work On</a>
               <a href="/#projects" className="hover:text-foreground transition-colors">Projects</a>
-              <a href="/#contact" className="hover:text-foreground transition-colors">Contact</a>
+              <a href="/contact" className="hover:text-foreground transition-colors">Contact</a>
             </div>
 
             <div className="flex items-center justify-center md:justify-self-end gap-3 text-foreground/65">

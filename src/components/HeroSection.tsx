@@ -4,7 +4,7 @@ import ismailIllustration from "@/assets/ismail-illustration.png";
 const HeroSection = () => {
   return (
     <section className="h-[calc(100vh-80px)] flex items-start px-8 md:px-12 lg:px-16 pt-2 md:pt-6">
-      <div className="w-full max-w-7xl mx-auto -mt-4 md:-mt-6">
+      <div className="w-full max-w-[84rem] mx-auto -mt-4 md:-mt-6">
         <div className="grid md:grid-cols-2 gap-12 lg:gap-20 xl:gap-24 items-center">
           {/* Text Content */}
           <div className="space-y-4 lg:space-y-6">
