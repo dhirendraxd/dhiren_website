@@ -71,7 +71,7 @@ const AboutSection = () => {
   ];
 
   return (
-    <section id="about" className="py-24 px-8 md:px-12 bg-card">
+    <section id="about" className="py-24 px-8 md:px-12 bg-card font-rajdhani">
       <div className="max-w-[84rem] mx-auto">
         <div className="space-y-10">
           <motion.div
@@ -148,10 +148,9 @@ const AboutSection = () => {
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
           >
-            <div className="h-3 w-3 rounded-full bg-foreground/70 shadow-md" />
-            <h3 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground">Digital Marketing Experiments</h3>
+            <h3 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground">Relevant Experience</h3>
             <p className="text-sm text-muted-foreground max-w-2xl leading-relaxed">
-              Hands-on digital marketing work and growth-focused initiatives across SEO, content, campaigns, and performance analysis.
+              Hands-on experience across SEO, content, campaign execution, and performance analytics to improve reach, engagement, and conversions.
             </p>
           </motion.div>
 
@@ -207,7 +206,7 @@ const AboutSection = () => {
           </div>
         </div>
 
-        <div id="projects" className="mt-28 space-y-14 font-rajdhani">
+        <div id="projects" className="mt-28 space-y-14">
           <motion.div
             className="relative flex flex-col items-center text-center space-y-4"
             initial={{ opacity: 0, y: -20 }}
@@ -221,10 +220,9 @@ const AboutSection = () => {
               ))}
             </div>
 
-            <div className="h-3 w-3 rounded-full bg-foreground/70 shadow-md" />
-            <h3 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground uppercase">Case Study</h3>
+            <h3 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground uppercase">Projects</h3>
             <p className="text-xs text-muted-foreground max-w-xl leading-relaxed">
-              Selected tech and non-tech projects with a clean focus on outcomes and execution.
+              Selected tech and non-tech projects focused on outcomes, execution, and measurable impact.
             </p>
           </motion.div>
 

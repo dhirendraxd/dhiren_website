@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { MapPin, Mail } from "lucide-react";
+import { AtSign, Navigation } from "lucide-react";
 import { FaLinkedinIn, FaInstagram, FaGithub } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 
@@ -44,37 +44,36 @@ const Footer = () => {
         <div className="grid lg:grid-cols-[1fr_1.2fr] gap-10 items-start">
           <div className="rounded-2xl bg-muted/35 p-8 space-y-8">
             <div className="space-y-4">
-              <div className="flex items-center gap-2">
-                <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-foreground text-background text-xs font-semibold">
-                  D
-                </span>
-                <p className="text-sm font-semibold text-foreground">Dhiren Portfolio</p>
-              </div>
+              <p className="text-base font-semibold tracking-tight text-foreground">Dhirendra</p>
               <p className="text-sm text-foreground/80 max-w-xs">
-                Digital marketing, content strategy, and collaborative tech projects.
+                Performance marketing and digital growth strategy for meaningful products.
               </p>
             </div>
 
-            <div className="space-y-6 text-sm">
-              <div className="space-y-2">
+            <div className="space-y-5 text-sm">
+              <div className="space-y-1.5">
                 <div className="flex items-center gap-2 text-foreground font-medium">
-                  <Mail size={14} />
+                  <span className="inline-flex h-7 w-7 items-center justify-center rounded-md border border-border/70 bg-background text-muted-foreground">
+                    <AtSign size={13} strokeWidth={1.8} />
+                  </span>
                   <span>Email me</span>
                 </div>
                 <a
                   href="mailto:dhirendraxd@gmail.com"
-                  className="text-muted-foreground leading-relaxed hover:text-foreground transition-colors"
+                  className="block pl-9 text-muted-foreground leading-relaxed hover:text-foreground transition-colors"
                 >
                   dhirendraxd@gmail.com
                 </a>
               </div>
 
-              <div className="space-y-2">
+              <div className="space-y-1.5">
                 <div className="flex items-center gap-2 text-foreground font-medium">
-                  <MapPin size={14} />
+                  <span className="inline-flex h-7 w-7 items-center justify-center rounded-md border border-border/70 bg-background text-muted-foreground">
+                    <Navigation size={13} strokeWidth={1.8} />
+                  </span>
                   <span>Based in</span>
                 </div>
-                <p className="text-muted-foreground leading-relaxed">
+                <p className="pl-9 text-muted-foreground leading-relaxed">
                   Kathmandu, Nepal
                   <br />
                   Open to remote &amp; hybrid collaboration
@@ -186,7 +185,7 @@ const Footer = () => {
             <div className="flex items-center justify-center gap-5">
               <a href="/#about" className="hover:text-foreground transition-colors">What I Work On</a>
               <a href="/#projects" className="hover:text-foreground transition-colors">Projects</a>
-              <a href="/contact" className="hover:text-foreground transition-colors">Contact</a>
+              <a href="/#contact" className="hover:text-foreground transition-colors">Contact</a>
             </div>
 
             <div className="flex items-center justify-center md:justify-self-end gap-3 text-foreground/65">

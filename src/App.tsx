@@ -9,7 +9,6 @@ import Affiliations from "./pages/Affiliations";
 import AffiliationDetail from "./pages/AffiliationDetail";
 import Hackathon from "./pages/Hackathon";
 import HackathonDetail from "./pages/HackathonDetail";
-import Contact from "./pages/Contact";
 
 const queryClient = new QueryClient();
 
@@ -25,7 +24,6 @@ const App = () => (
           <Route path="/affiliations/:id" element={<AffiliationDetail />} />
           <Route path="/hackathon" element={<Hackathon />} />
           <Route path="/hackathon/:id" element={<HackathonDetail />} />
-          <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
