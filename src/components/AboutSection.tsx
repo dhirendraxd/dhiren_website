@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight, ArrowUpRight, Megaphone, PencilLine, Code2, Users } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const AboutSection = () => {
   const workAreas = [
@@ -71,7 +72,7 @@ const AboutSection = () => {
   ];
 
   return (
-    <section id="about" className="py-24 px-8 md:px-12 bg-card font-rajdhani">
+    <section id="about" className="scroll-mt-24 py-24 px-8 md:px-12 bg-card font-rajdhani">
       <div className="max-w-[84rem] mx-auto">
         <div className="space-y-10">
           <motion.div
@@ -92,12 +93,12 @@ const AboutSection = () => {
               Focused on digital marketing, storytelling, collaborative tech projects, and community-driven initiatives that turn ideas into practical results.
             </p>
 
-            <button
-              type="button"
-              className="inline-flex items-center justify-center rounded-full px-8 py-3 text-xs font-semibold uppercase tracking-wider border border-foreground text-foreground hover:bg-foreground hover:text-background transition-colors duration-200"
+            <Link
+              to="/services"
+              className="inline-flex items-center justify-center rounded-none px-8 py-3 text-xs font-semibold uppercase tracking-wider border border-foreground text-foreground transition-colors duration-300 hover:bg-[#7A3A30] hover:border-[#7A3A30] hover:text-[#FFF5F0]"
             >
               All Services
-            </button>
+            </Link>
           </motion.div>
 
           <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-4">
@@ -108,35 +109,39 @@ const AboutSection = () => {
               return (
                 <motion.div
                   key={area.title}
-                  className={`group border min-h-[260px] p-7 flex flex-col justify-between cursor-pointer transition-shadow duration-300 ${
+                  className={`border min-h-[260px] p-7 flex flex-col justify-between ${
                     isHighlighted
-                      ? "bg-foreground border-foreground text-background"
-                      : "bg-card border-border text-foreground hover:shadow-hover"
+                      ? "bg-[#7A3A30] border-[#7A3A30] text-[#FFF5F0]"
+                      : "bg-card border-border text-foreground"
                   }`}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  whileHover={{ y: -3 }}
                 >
                   <div className="space-y-5">
                     <Icon
                       size={24}
-                      className={isHighlighted ? "text-background" : "text-foreground"}
+                      className={isHighlighted ? "text-[#FFF5F0]" : "text-foreground"}
                       strokeWidth={1.75}
                     />
                     <h3 className="text-2xl font-semibold tracking-tight leading-tight">{area.title}</h3>
-                    <p className={`text-sm leading-relaxed ${isHighlighted ? "text-background/80" : "text-muted-foreground"}`}>
+                    <p className={`text-sm leading-relaxed ${isHighlighted ? "text-[#F4D8CF]" : "text-muted-foreground"}`}>
                       {area.description}
                     </p>
                   </div>
 
-                  <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider">
-                    <span>Read More</span>
-                    <ArrowRight
-                      size={14}
-                      className="transition-transform duration-200 group-hover:translate-x-1"
-                    />
+                  <div
+                    className={`group inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider transition-colors duration-300 ${
+                      isHighlighted
+                        ? "text-[#FFF5F0] hover:text-[#FDE8DD]"
+                        : "text-foreground/80 hover:text-[#7A3A30]"
+                    }`}
+                  >
+                    <span className="relative inline-block after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-current after:transition-all after:duration-300 group-hover:after:w-full">
+                      Read More
+                    </span>
+                    <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-0.5" />
                   </div>
                 </motion.div>
               );
@@ -165,16 +170,15 @@ const AboutSection = () => {
               return (
                 <motion.div
                   key={item.title}
-                  className={`border px-6 py-6 md:px-8 md:py-7 flex flex-col md:flex-row md:items-center md:justify-between gap-4 cursor-default transition-shadow duration-200 ${
+                  className={`border px-6 py-6 md:px-8 md:py-7 flex flex-col md:flex-row md:items-center md:justify-between gap-4 ${
                     isHighlighted
                       ? "bg-foreground border-foreground text-background"
-                      : "bg-card border-border text-foreground hover:shadow-hover"
+                      : "bg-card border-border text-foreground"
                   }`}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: index * 0.08 }}
                   viewport={{ once: true }}
-                  whileHover={{ y: isHighlighted ? 0 : -2 }}
                 >
                   <div className="flex items-start gap-4">
                     <span
@@ -245,7 +249,7 @@ const AboutSection = () => {
                   viewport={{ once: true }}
                 >
                   <div className={isReverse ? "order-2 lg:order-1" : "order-2 lg:order-2"}>
-                    <span className="inline-flex items-center rounded-full bg-foreground text-background px-4 py-1 text-[11px] font-semibold uppercase tracking-wider">
+                    <span className="inline-flex items-center rounded-none bg-foreground text-background px-4 py-1 text-[11px] font-semibold uppercase tracking-wider">
                       {project.type}
                     </span>
 
@@ -255,12 +259,14 @@ const AboutSection = () => {
 
                     <a
                       href={project.href}
-                      className="mt-10 inline-flex items-center gap-2 text-lg font-medium text-foreground group/link"
+                      className="group mt-10 inline-flex items-center gap-2 text-lg font-medium text-foreground/90 transition-colors duration-300 hover:text-[#7A3A30]"
                     >
-                      See Details
+                      <span className="relative inline-block tracking-wide after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-[#7A3A30] after:transition-all after:duration-300 group-hover:after:w-full">
+                        See Details
+                      </span>
                       <ArrowUpRight
                         size={18}
-                        className="transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5"
+                        className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                       />
                     </a>
                     <div className="h-px w-28 bg-border mt-2.5" />

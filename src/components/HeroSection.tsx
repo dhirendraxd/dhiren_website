@@ -45,25 +45,6 @@ const HeroSection = () => {
               <span className="font-nekst">m Into Digital Marketing</span>
             </motion.h2>
 
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.48 }}
-              className="flex items-center gap-4 pt-2"
-            >
-              <a
-                href="/#contact"
-                className="inline-flex items-center justify-center rounded-full px-7 py-3 text-xs font-semibold uppercase tracking-wider bg-foreground text-background hover:opacity-85 transition-opacity"
-              >
-                Get in touch
-              </a>
-              <a
-                href="/#about"
-                className="text-xs font-semibold uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors"
-              >
-                See my work ↓
-              </a>
-            </motion.div>
           </div>
 
           {/* Sketch Illustration */}

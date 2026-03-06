@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
@@ -9,50 +9,59 @@ const navLinks = [
 ];
 
 const Navbar = () => {
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [isBarVisible, setIsBarVisible] = useState(true);
+  const [isBarVisible, setIsBarVisible] = useState(false);
+  const lastScrollYRef = useRef(0);
 
   useEffect(() => {
-    let lastScrollY = window.scrollY;
+    lastScrollYRef.current = window.scrollY;
 
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
       if (mobileOpen) {
         setIsBarVisible(true);
-        lastScrollY = currentScrollY;
+        lastScrollYRef.current = currentScrollY;
         return;
       }
 
-      if (currentScrollY <= 48) {
+      if (!isHomePage) {
         setIsBarVisible(true);
-      } else if (currentScrollY > lastScrollY + 4) {
-        setIsBarVisible(false);
-      } else if (currentScrollY < lastScrollY - 4) {
-        setIsBarVisible(true);
+        lastScrollYRef.current = currentScrollY;
+        return;
       }
 
-      lastScrollY = currentScrollY;
+      const aboutSection = document.getElementById("about");
+      const aboutRevealPoint = aboutSection ? Math.max(0, aboutSection.offsetTop - 72) : 0;
+      const isScrollingUp = currentScrollY < lastScrollYRef.current;
+
+      // Show only when user scrolls upward and has crossed above the services section.
+      setIsBarVisible(isScrollingUp && currentScrollY <= aboutRevealPoint);
+      lastScrollYRef.current = currentScrollY;
     };
 
+    handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [mobileOpen]);
+  }, [isHomePage, mobileOpen]);
 
   // Close mobile menu on nav click
   const handleNavClick = () => setMobileOpen(false);
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 bg-transparent border-b border-transparent transition-transform duration-300 ${
-        isBarVisible || mobileOpen ? "translate-y-0" : "-translate-y-full"
+      className={`fixed top-0 left-0 right-0 z-50 bg-transparent border-b border-transparent transition-all duration-500 ease-out ${
+        isBarVisible || mobileOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
       }`}
     >
       <div className="max-w-[84rem] mx-auto px-8 md:px-12">
         <div className="flex items-center justify-between h-16">
           {/* Logo / Name */}
           <Link
-            to="/"
+            to="/#home"
+            onClick={handleNavClick}
             className="font-nekst text-lg font-semibold text-foreground tracking-tight hover:opacity-75 transition-opacity"
           >
             Dhiren

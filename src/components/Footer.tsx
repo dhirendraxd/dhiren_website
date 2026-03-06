@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { AtSign, Navigation, Send } from "lucide-react";
+import { AtSign, MapPin, Send } from "lucide-react";
 import { FaLinkedinIn, FaInstagram, FaGithub } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { useToast } from "@/hooks/use-toast";
@@ -53,28 +53,28 @@ const Footer = () => {
   };
 
   return (
-    <footer id="contact" className="py-16 px-8 md:px-12 bg-card font-sans">
+    <footer id="contact" className="scroll-mt-24 py-16 px-8 md:px-12 bg-card font-sans">
       <div className="max-w-[76rem] mx-auto">
         <div className="grid lg:grid-cols-[1fr_1.2fr] gap-10 items-start">
           <div className="rounded-2xl bg-muted/35 p-8 space-y-8">
             <div className="space-y-4">
-              <p className="text-base font-semibold tracking-tight text-foreground">Dhirendra</p>
+              <p className="text-base font-semibold tracking-tight text-foreground">Dhirendra Singh Dhami</p>
               <p className="text-sm text-foreground/80 max-w-xs">
-                Performance marketing and digital growth strategy for meaningful products.
+                Have a brand to grow? Let us build your next high-performing campaign together.
               </p>
             </div>
 
             <div className="space-y-5 text-sm">
               <div className="space-y-1.5">
                 <div className="flex items-center gap-2 text-foreground font-medium">
-                  <span className="inline-flex h-7 w-7 items-center justify-center rounded-md border border-border/70 bg-background text-muted-foreground">
+                  <span className="inline-flex h-7 w-7 items-center justify-center text-muted-foreground">
                     <AtSign size={13} strokeWidth={1.8} />
                   </span>
                   <span>Email me</span>
                 </div>
                 <a
                   href="mailto:dhirendraxd@gmail.com"
-                  className="block pl-9 text-muted-foreground leading-relaxed hover:text-foreground transition-colors"
+                  className="block pl-9 text-muted-foreground leading-relaxed hover:text-[#7A3A30] transition-colors duration-200"
                 >
                   dhirendraxd@gmail.com
                 </a>
@@ -82,16 +82,55 @@ const Footer = () => {
 
               <div className="space-y-1.5">
                 <div className="flex items-center gap-2 text-foreground font-medium">
-                  <span className="inline-flex h-7 w-7 items-center justify-center rounded-md border border-border/70 bg-background text-muted-foreground">
-                    <Navigation size={13} strokeWidth={1.8} />
+                  <span className="inline-flex h-7 w-7 items-center justify-center text-muted-foreground">
+                    <MapPin size={13} strokeWidth={1.8} />
                   </span>
                   <span>Based in</span>
                 </div>
                 <p className="pl-9 text-muted-foreground leading-relaxed">
                   Kathmandu, Nepal
-                  <br />
-                  Open to remote &amp; hybrid collaboration
                 </p>
+              </div>
+
+              <div className="space-y-1.5">
+                <div className="pl-9 pt-2 flex items-center gap-4 w-fit border-t border-border/50">
+                  <a
+                    href="https://linkedin.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="LinkedIn"
+                    className="inline-flex items-center justify-center p-1 leading-none text-[#0A66C2] transition-all duration-200 hover:opacity-80 hover:-translate-y-0.5"
+                  >
+                    <FaLinkedinIn size={30} />
+                  </a>
+                  <a
+                    href="https://x.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="X"
+                    className="inline-flex items-center justify-center p-1 leading-none text-[#111111] transition-all duration-200 hover:opacity-80 hover:-translate-y-0.5"
+                  >
+                    <FaXTwitter size={30} />
+                  </a>
+                  <a
+                    href="https://instagram.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Instagram"
+                    className="inline-flex items-center justify-center p-1 leading-none text-[#E4405F] transition-all duration-200 hover:opacity-80 hover:-translate-y-0.5"
+                  >
+                    <FaInstagram size={30} />
+                  </a>
+                  <a
+                    href="https://github.com/dhirendraxd"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="GitHub"
+                    className="inline-flex items-center justify-center p-1 leading-none text-[#181717] transition-all duration-200 hover:opacity-80 hover:-translate-y-0.5"
+                  >
+                    <FaGithub size={30} />
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -225,9 +264,13 @@ const Footer = () => {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -2 }}
                         transition={{ duration: 0.22 }}
-                        className="absolute inset-0 inline-flex items-center justify-center rounded-md bg-foreground text-background text-sm font-medium hover:opacity-90 transition-opacity"
+                        className="group absolute inset-0 inline-flex items-center justify-center rounded-none border border-foreground bg-foreground text-background text-sm font-medium transition-colors duration-300 hover:bg-[#7A3A30] hover:border-[#7A3A30] hover:text-[#FFF5F0]"
                       >
-                        Send
+                        <span>Send</span>
+                        <Send
+                          size={14}
+                          className="ml-0 w-0 opacity-0 transition-all duration-300 group-hover:ml-1 group-hover:w-[14px] group-hover:opacity-100"
+                        />
                       </motion.button>
                     )}
                   </AnimatePresence>
@@ -238,29 +281,14 @@ const Footer = () => {
         </div>
 
         <div className="mt-10 pt-6 border-t border-border/70">
-          <div className="grid gap-4 md:grid-cols-[1fr_auto_1fr] items-center text-xs text-muted-foreground">
-            <p className="text-center md:text-left">©2026 Dhiren - All rights reserved</p>
+          <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between text-xs text-muted-foreground">
+            <p className="text-center md:text-left">© 2026 Dhiren. All rights reserved.</p>
 
-            <div className="flex items-center justify-center gap-5">
-              <a href="/#about" className="hover:text-foreground transition-colors">What I Work On</a>
-              <a href="/#projects" className="hover:text-foreground transition-colors">Projects</a>
-              <a href="/#contact" className="hover:text-foreground transition-colors">Contact</a>
-            </div>
-
-            <div className="flex items-center justify-center md:justify-self-end gap-3 text-foreground/65">
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="hover:text-foreground transition-colors">
-                <FaLinkedinIn size={14} />
-              </a>
-              <a href="https://x.com" target="_blank" rel="noopener noreferrer" aria-label="X" className="hover:text-foreground transition-colors">
-                <FaXTwitter size={14} />
-              </a>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-foreground transition-colors">
-                <FaInstagram size={14} />
-              </a>
-              <a href="https://github.com/dhirendraxd" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="hover:text-foreground transition-colors">
-                <FaGithub size={14} />
-              </a>
-            </div>
+            <nav className="flex items-center justify-center gap-5" aria-label="Footer quick links">
+              <a href="/#about" className="hover:text-[#7A3A30] hover:underline underline-offset-4 decoration-2 decoration-[#7A3A30] transition-colors duration-200">What I Work On</a>
+              <a href="/#projects" className="hover:text-[#7A3A30] hover:underline underline-offset-4 decoration-2 decoration-[#7A3A30] transition-colors duration-200">Projects</a>
+              <a href="/#contact" className="hover:text-[#7A3A30] hover:underline underline-offset-4 decoration-2 decoration-[#7A3A30] transition-colors duration-200">Contact</a>
+            </nav>
           </div>
         </div>
       </div>
