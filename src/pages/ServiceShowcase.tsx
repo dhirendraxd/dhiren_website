@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, ArrowUpRight, Github, Instagram, Linkedin, Mail, MapPin, Sparkles } from "lucide-react";
+import { ArrowUpRight, Sparkles } from "lucide-react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
-import Navbar from "@/components/Navbar";
 
 type ServiceSlug = "digital-marketing" | "advocacy-community" | "tech-projects";
 
@@ -22,16 +21,11 @@ type ShowcaseCard = {
   external?: boolean;
 };
 
-type ShowcaseSkill = {
-  title: string;
-  description: string;
-};
-
 type ShowcasePageConfig = {
   badge: string;
   heroTitle: string;
   heroSummary: string;
-  skills?: ShowcaseSkill[];
+  skillHighlights?: string[];
   featured: ShowcaseCard[];
   statsLabel: string;
   statsTitle: string;
@@ -40,11 +34,6 @@ type ShowcasePageConfig = {
   stats: ShowcaseMetric[];
   filters: string[];
   projects: ShowcaseCard[];
-  ctaTitle: string;
-  ctaSummary: string;
-  ctaImage: string;
-  ctaHref: string;
-  ctaLabel: string;
 };
 
 const imageAssets = {
@@ -62,36 +51,17 @@ const imageAssets = {
 
 const serviceShowcases: Record<ServiceSlug, ShowcasePageConfig> = {
   "digital-marketing": {
-    badge: "Digital Marketing Showcase",
+    badge: "",
     heroTitle: "Crafting Campaigns, Building Measurable Growth",
     heroSummary:
-      "This page showcases marketing work across SEO, content strategy, outreach, and performance tracking. Each project here reflects how messaging, distribution, and analytics come together to improve reach, engagement, and conversions.",
-    skills: [
-      {
-        title: "SEO & SEM",
-        description:
-          "Understanding keyword research, on-page, and off-page SEO to improve website visibility.",
-      },
-      {
-        title: "Data Analysis",
-        description:
-          "Interpreting data from Google Analytics and other platforms to understand user behavior and campaign performance.",
-      },
-      {
-        title: "Content Marketing",
-        description:
-          "Creating, managing, and distributing valuable content (blogs, videos, infographics) to engage audiences.",
-      },
-      {
-        title: "Social Media Management",
-        description:
-          "Expertise in platforms like LinkedIn, Instagram, TikTok, and Facebook to grow brand presence.",
-      },
-      {
-        title: "PPC Advertising",
-        description:
-          "Managing paid campaigns on Google Ads and social media to drive traffic and conversions.",
-      },
+      "A focused view of my full-stack digital marketing work across SEO, PPC, social media, content, design, and email automation. Each project highlights measurable gains in reach, engagement, and conversions.",
+    skillHighlights: [
+      "Search Engine Optimization (SEO)",
+      "Pay-Per-Click (PPC) & SEM",
+      "Social Media Marketing",
+      "Email Marketing & Automation",
+      "Graphic Design",
+      "Content Creation & Strategy",
     ],
     featured: [
       {
@@ -129,15 +99,14 @@ const serviceShowcases: Record<ServiceSlug, ShowcasePageConfig> = {
       },
     ],
     statsLabel: "Statistics",
-    statsTitle: "Marketing Impact in Numbers",
-    statsSummary:
-      "A snapshot of active marketing work focused on structured content execution, campaign consistency, and measurable outcomes.",
-    statsImage: imageAssets.eduConnect,
+    statsTitle: "Digital Marketing Impact in Numbers",
+    statsSummary: "",
+    statsImage: imageAssets.ctrlBits,
     stats: [
-      { label: "Content Campaigns", value: "20+" },
-      { label: "SEO Pieces Optimized", value: "60+" },
-      { label: "Average Growth Lift", value: "40%" },
-      { label: "Partner Teams", value: "10+" },
+      { label: "SEO Projects", value: "20+" },
+      { label: "Paid Media Campaigns", value: "15+" },
+      { label: "Content Assets Published", value: "60+" },
+      { label: "Email Automation Flows", value: "10+" },
     ],
     filters: ["SEO", "Content", "Campaigns", "Analytics"],
     projects: [
@@ -182,43 +151,21 @@ const serviceShowcases: Record<ServiceSlug, ShowcasePageConfig> = {
         href: "/affiliations/4",
         category: "Campaigns",
       },
-      {
-        title: "Sustainability Content Hub",
-        description: "Awareness content clusters around sustainable business and social innovation.",
-        image: imageAssets.sustainabilitySolutions,
-        date: "02 Sep 2025",
-        href: "/affiliations/6",
-        category: "Content",
-      },
-      {
-        title: "Product Launch Messaging",
-        description: "Landing copy and teaser content to support launch flow for a tech platform.",
-        image: imageAssets.devBus,
-        date: "10 May 2025",
-        href: "/hackathon/3",
-        category: "Content",
-      },
-      {
-        title: "Campaign A/B Structure",
-        description: "Test matrix for call-to-action and audience segment messaging improvements.",
-        image: imageAssets.mitraSmart,
-        date: "15 Jun 2025",
-        href: "/hackathon/1",
-        category: "Analytics",
-      },
     ],
-    ctaTitle: "Let us build your next growth story together",
-    ctaSummary:
-      "From SEO and content planning to campaign execution and analytics, I can help shape a marketing system that consistently compounds results.",
-    ctaImage: imageAssets.ctrlBits,
-    ctaHref: "/#contact",
-    ctaLabel: "Start a Marketing Project",
   },
   "advocacy-community": {
-    badge: "Advocacy and Community Showcase",
+    badge: "",
     heroTitle: "Community Programs with Real-World Social Impact",
     heroSummary:
       "This space highlights advocacy and community initiatives where collaboration, youth leadership, and digital rights engagement drive meaningful outcomes. The focus is on people, participation, and sustained community value.",
+    skillHighlights: [
+      "Community Program Design",
+      "Digital Rights Advocacy",
+      "Youth Leadership & Mobilization",
+      "Volunteer Coordination",
+      "Partnership & Stakeholder Engagement",
+      "Sustainability Initiative Planning",
+    ],
     featured: [
       {
         title: "ALL In Foundation Fellowship",
@@ -255,8 +202,7 @@ const serviceShowcases: Record<ServiceSlug, ShowcasePageConfig> = {
     ],
     statsLabel: "Statistics",
     statsTitle: "Advocacy and Community Work in Numbers",
-    statsSummary:
-      "These figures represent hands-on participation in fellowships, advocacy cohorts, and community-led initiatives across different networks.",
+    statsSummary: "",
     statsImage: imageAssets.netMission,
     stats: [
       { label: "Programs and Cohorts", value: "6+" },
@@ -331,18 +277,20 @@ const serviceShowcases: Record<ServiceSlug, ShowcasePageConfig> = {
         category: "Sustainability",
       },
     ],
-    ctaTitle: "Scale your advocacy or community initiative with structure",
-    ctaSummary:
-      "I can help shape outreach, partnerships, and execution plans for purpose-driven programs that need strong community participation.",
-    ctaImage: imageAssets.rotaract,
-    ctaHref: "/#contact",
-    ctaLabel: "Collaborate on Community Work",
   },
   "tech-projects": {
-    badge: "Hackathons and Builds Showcase",
+    badge: "",
     heroTitle: "Hackathons and Builds",
     heroSummary:
       "A focused view of the technical side of hackathons: coding core features, integrating APIs, debugging issues, and shipping functional prototypes under tight timelines.",
+    skillHighlights: [
+      "Rapid Prototyping & MVP Delivery",
+      "AI Integration & Workflow Design",
+      "Web Platform Development",
+      "API Integration",
+      "Debugging & Performance Tuning",
+      "Hackathon Execution",
+    ],
     featured: [
       {
         title: "Mitra Smart",
@@ -379,8 +327,7 @@ const serviceShowcases: Record<ServiceSlug, ShowcasePageConfig> = {
     ],
     statsLabel: "Statistics",
     statsTitle: "Technical Delivery in Numbers",
-    statsSummary:
-      "A quick overview of hackathon participation, prototype output, and technical execution focus across project cycles.",
+    statsSummary: "",
     statsImage: imageAssets.mitraSmart,
     stats: [
       { label: "Hackathon Builds", value: "12+" },
@@ -455,12 +402,6 @@ const serviceShowcases: Record<ServiceSlug, ShowcasePageConfig> = {
         category: "Hackathon",
       },
     ],
-    ctaTitle: "Need a fast-moving team for your next technical build",
-    ctaSummary:
-      "From early prototyping to hackathon-grade MVPs, I can help shape and ship practical technical solutions quickly.",
-    ctaImage: imageAssets.eduConnect,
-    ctaHref: "/#contact",
-    ctaLabel: "Launch a Tech Project",
   },
 };
 
@@ -487,13 +428,10 @@ const ServiceShowcase = () => {
     activeFilter === "All"
       ? showcase.projects
       : showcase.projects.filter((project) => project.category === activeFilter);
-  const digitalMarketingSkills = resolvedSlug === "digital-marketing" ? showcase.skills ?? [] : [];
-  const shouldShowSkillList = digitalMarketingSkills.length > 0;
 
   return (
     <div className="min-h-screen bg-card">
       <ScrollProgressBar />
-      <Navbar />
 
       <motion.main
         className="mx-auto max-w-[84rem] bg-card"
@@ -501,168 +439,110 @@ const ServiceShowcase = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.45, ease: "easeOut" }}
       >
-        <section className="px-8 pb-14 pt-28 md:px-12 font-rajdhani">
-          <div className="grid gap-8 lg:grid-cols-[1.08fr_0.92fr] lg:items-end">
+        <section className="px-4 pb-12 pt-10 font-rajdhani sm:px-6 sm:pt-12 md:px-12 md:pt-14">
+          <nav
+            aria-label="Breadcrumb"
+            className="mb-5 flex flex-wrap items-center justify-start gap-1.5 text-[10px] font-semibold uppercase leading-relaxed tracking-[0.1em] text-[#6e635b] sm:mb-6 sm:gap-2 sm:text-[11px] sm:tracking-[0.14em]"
+          >
+            <Link to="/" className="hover:text-foreground transition-colors">
+              Home
+            </Link>
+            <span>/</span>
+            <a href="/#about" className="hover:text-foreground transition-colors">
+              What I Work On
+            </a>
+            <span>/</span>
+            <a href="/#contact" className="hover:text-foreground transition-colors">
+              Contact
+            </a>
+            {showcase.badge && (
+              <>
+                <span>/</span>
+                <span className="text-[#7A3A30] font-semibold">{showcase.badge}</span>
+              </>
+            )}
+          </nav>
+
+          <div className="grid gap-6 sm:gap-8 xl:grid-cols-[1.08fr_0.92fr] xl:items-end">
             <div className="space-y-4">
-              <p className="text-xs uppercase tracking-widest font-semibold text-[#7A3A30]">{showcase.badge}</p>
-              <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground leading-tight max-w-4xl">
+              {showcase.badge && (
+                <p className="text-xs uppercase tracking-widest font-semibold text-[#7A3A30]">{showcase.badge}</p>
+              )}
+              <h1 className="max-w-4xl text-3xl font-bold leading-tight tracking-tight text-foreground sm:text-4xl md:text-5xl">
                 {showcase.heroTitle}
               </h1>
             </div>
 
-            <div className="space-y-4 lg:text-right lg:justify-self-end">
-              <nav
-                aria-label="Breadcrumb"
-                className="flex flex-wrap items-center gap-2 text-[11px] uppercase tracking-[0.14em] text-muted-foreground lg:justify-end"
-              >
-                <Link to="/" className="hover:text-foreground transition-colors">
-                  Home
-                </Link>
-                <span>/</span>
-                <a href="/#about" className="hover:text-foreground transition-colors">
-                  What I Work On
-                </a>
-                <span>/</span>
-                <a href="/#contact" className="hover:text-foreground transition-colors">
-                  Contact
-                </a>
-                <span>/</span>
-                <span className="text-[#7A3A30] font-semibold">{showcase.badge}</span>
-              </nav>
-
-              <p className="max-w-2xl text-sm md:text-base leading-relaxed text-muted-foreground lg:ml-auto">
+            <div className="space-y-4">
+              <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
                 {showcase.heroSummary}
               </p>
             </div>
           </div>
 
-          <div className="mt-10 space-y-5">
-            <div>
-              <p className="text-xs uppercase tracking-widest font-semibold text-[#7A3A30]">
-                {shouldShowSkillList ? "Digital Marketing Skills" : "Featured Highlights"}
-              </p>
-            </div>
+          <div className="mt-8 space-y-5 sm:mt-10">
 
-            {shouldShowSkillList ? (
-              <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-                {digitalMarketingSkills.map((skill, index) => (
-                  <motion.article
-                    key={skill.title}
-                    className="border border-border bg-card px-6 py-6 transition-colors duration-300 hover:border-[#7A3A30]/50"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.35, delay: 0.06 * index }}
-                  >
-                    <h2 className="text-2xl font-semibold tracking-tight leading-tight text-foreground">
-                      {skill.title}
-                    </h2>
-                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{skill.description}</p>
-                  </motion.article>
-                ))}
-              </div>
-            ) : (
-              <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
-                {showcase.featured.map((project, index) => (
-                  <motion.article
-                    key={project.title}
-                    className="border border-border bg-card transition-colors duration-300 hover:border-[#7A3A30]/50"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.35, delay: 0.06 * index }}
-                  >
-                    <div className="h-[215px] overflow-hidden border-b border-border bg-muted/30">
-                      <img
-                        src={project.image}
-                        alt={project.title}
-                        className="h-full w-full object-cover transition-transform duration-500 hover:scale-[1.04]"
-                      />
-                    </div>
-                    <div className="space-y-2.5 p-4">
-                      <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[#7A3A30]">{project.category}</p>
-                      <h2 className="text-2xl font-semibold tracking-tight leading-tight text-foreground">
-                        {project.title}
-                      </h2>
-                      <p className="text-sm leading-relaxed text-muted-foreground">{project.description}</p>
-
-                      <div className="flex items-center justify-between pt-1">
-                        <p className="inline-flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-[0.16em] text-muted-foreground">
-                          <Sparkles size={12} />
-                          {project.date}
-                        </p>
-
-                        {project.external ? (
-                          <a
-                            href={project.href}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-foreground transition-colors hover:text-[#7A3A30]"
-                          >
-                            View
-                            <ArrowUpRight size={13} />
-                          </a>
-                        ) : (
-                          <Link
-                            to={project.href}
-                            className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-foreground transition-colors hover:text-[#7A3A30]"
-                          >
-                            View
-                            <ArrowUpRight size={13} />
-                          </Link>
-                        )}
-                      </div>
-                    </div>
-                  </motion.article>
-                ))}
-              </div>
-            )}
-          </div>
-        </section>
-
-        <section id="statistics" className="border-t border-[#dbd0c6] px-8 py-14 md:px-12">
-          <div className="grid gap-10 lg:grid-cols-[1.08fr_0.92fr] lg:items-center">
-            <motion.div
-              className="border border-[#ddd2c8] bg-[#ede2d6] p-3"
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.45 }}
+            <div
+              id="statistics"
+              className="mt-4 grid gap-8 sm:mt-6 sm:gap-10 xl:grid-cols-[1.08fr_0.92fr] xl:items-center"
             >
-              <img src={showcase.statsImage} alt={showcase.statsTitle} className="h-[300px] w-full object-cover md:h-[470px]" />
-            </motion.div>
+              <motion.div
+                className="border border-[#ddd2c8] bg-[#ede2d6] p-3"
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.45 }}
+              >
+                <img src={showcase.statsImage} alt={showcase.statsTitle} className="h-[220px] w-full object-cover sm:h-[300px] md:h-[470px]" />
+              </motion.div>
 
-            <motion.div
-              className="space-y-7"
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.45 }}
-            >
-              <div className="flex items-center gap-3 text-sm text-[#8c7b70]">
-                <span className="inline-block h-px w-12 bg-[#ccbbae]" />
-                <span className="font-rajdhani text-lg font-medium tracking-wide">{showcase.statsLabel}</span>
-              </div>
+              <motion.div
+                className="min-w-0 space-y-5 sm:space-y-7"
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.45 }}
+              >
+                <h3 className="font-nekst text-[2rem] font-semibold leading-tight tracking-tight text-[#1f1815] sm:text-[2.3rem] md:text-[3.35rem]">
+                  {showcase.statsTitle}
+                </h3>
 
-              <h3 className="font-nekst text-[2.5rem] font-semibold leading-tight tracking-tight text-[#1f1815] md:text-[3.35rem]">
-                {showcase.statsTitle}
-              </h3>
+                {showcase.statsSummary && (
+                  <p className="text-sm leading-relaxed text-[#5f5550] md:text-base">{showcase.statsSummary}</p>
+                )}
 
-              <p className="text-sm leading-relaxed text-[#5f5550] md:text-base">{showcase.statsSummary}</p>
-
-              <div className="grid gap-x-7 gap-y-7 pt-2 sm:grid-cols-2">
-                {showcase.stats.map((metric) => (
-                  <div key={metric.label} className="space-y-2 border-t border-[#dccfc5] pt-4">
-                    <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#6e635b]">{metric.label}</p>
-                    <p className="font-nekst text-5xl font-semibold leading-none text-[#211915]">{metric.value}</p>
+                {showcase.skillHighlights && showcase.skillHighlights.length > 0 && (
+                  <div className="space-y-4 border-t border-[#dccfc5] pt-5">
+                    <p className="text-sm font-bold uppercase tracking-[0.12em] text-[#4f443d]">Core Skills</p>
+                    <div className="flex flex-wrap gap-2.5">
+                      {showcase.skillHighlights.map((skill) => (
+                        <span
+                          key={skill}
+                          className="inline-flex max-w-full break-words border border-[#d8cbc0] bg-[#f7f2eb] px-3 py-1.5 text-xs font-semibold leading-snug tracking-[0.03em] text-[#3f352f] md:text-sm"
+                        >
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                ))}
-              </div>
-            </motion.div>
+                )}
+
+                <div className="grid gap-x-7 gap-y-7 pt-2 sm:grid-cols-2">
+                  {showcase.stats.map((metric) => (
+                    <div key={metric.label} className="space-y-2 border-t border-[#dccfc5] pt-4">
+                      <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-[#6e635b] sm:text-[11px] sm:tracking-[0.14em]">{metric.label}</p>
+                      <p className="font-sans tabular-nums text-3xl font-semibold leading-none text-[#211915] sm:text-4xl md:text-5xl">{metric.value}</p>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            </div>
           </div>
         </section>
 
-        <section id="projects" className="border-t border-[#dbd0c6] px-8 py-14 md:px-12">
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-            <h3 className="font-nekst text-4xl font-semibold tracking-tight text-[#221a16] md:text-[3.1rem]">Projects</h3>
+        <section id="projects" className="border-t border-[#dbd0c6] px-4 py-12 sm:px-6 sm:py-14 md:px-12">
+          <div className="flex flex-col gap-6 xl:flex-row xl:items-end xl:justify-between">
+            <h3 className="font-nekst text-3xl font-semibold tracking-tight text-[#221a16] sm:text-4xl md:text-[3.1rem]">Projects</h3>
 
             <div className="flex flex-wrap gap-2">
               {projectFilters.map((filter) => {
@@ -701,7 +581,7 @@ const ServiceShowcase = () => {
                 </div>
                 <div className="space-y-2.5 p-4">
                   <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#7A3A30]">{project.category}</p>
-                  <h4 className="font-nekst text-[1.68rem] font-semibold leading-tight tracking-tight text-[#211915]">{project.title}</h4>
+                  <h4 className="font-nekst text-[1.35rem] font-semibold leading-tight tracking-tight text-[#211915] sm:text-[1.68rem]">{project.title}</h4>
                   <p className="text-sm leading-relaxed text-[#60564f]">{project.description}</p>
 
                   <div className="flex items-center justify-between pt-1">
@@ -735,123 +615,6 @@ const ServiceShowcase = () => {
             ))}
           </div>
         </section>
-
-        <section className="border-t border-[#dbd0c6]">
-          <div className="relative h-[305px] overflow-hidden md:h-[345px]">
-            <img src={showcase.ctaImage} alt={showcase.ctaTitle} className="h-full w-full object-cover" />
-            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(20,14,11,0.24)_0%,rgba(20,14,11,0.64)_100%)]" />
-
-            <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
-              <h4 className="max-w-4xl font-nekst text-[2.35rem] font-semibold leading-tight tracking-tight text-[#f7f2eb] md:text-[3.35rem]">
-                {showcase.ctaTitle}
-              </h4>
-              <p className="mt-4 max-w-2xl text-sm leading-relaxed text-[#f5ece5] md:text-base">{showcase.ctaSummary}</p>
-
-              <div className="mt-8 flex flex-col items-center gap-2">
-                <Link
-                  to={showcase.ctaHref}
-                  className="inline-flex h-11 w-11 items-center justify-center border border-[#ddcbb9] bg-[#ddcbb9] text-[#2f241d] transition-colors hover:border-[#7A3A30] hover:bg-[#7A3A30] hover:text-[#f7f2eb]"
-                >
-                  <ArrowRight size={16} />
-                </Link>
-                <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#f7efe7]">{showcase.ctaLabel}</span>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <footer id="contact" className="border-t border-[#dbd0c6] bg-card px-8 py-12 md:px-12">
-          <div className="grid gap-10 lg:grid-cols-[1.15fr_0.7fr_1fr]">
-            <div className="space-y-4">
-              <p className="font-nekst text-2xl font-semibold tracking-tight text-[#1f1815]">Dhiren Portfolio</p>
-              <p className="max-w-md text-sm leading-relaxed text-[#5e544d]">
-                A curated showcase of marketing, community, and technical projects designed to turn ideas into practical outcomes.
-              </p>
-
-              <div className="pt-1 flex items-center gap-3">
-                <a
-                  href="https://www.linkedin.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex h-9 w-9 items-center justify-center border border-[#d7c9bd] text-[#5f544e] transition-colors hover:border-[#7A3A30] hover:text-[#7A3A30]"
-                  aria-label="LinkedIn"
-                >
-                  <Linkedin size={15} />
-                </a>
-                <a
-                  href="https://www.instagram.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex h-9 w-9 items-center justify-center border border-[#d7c9bd] text-[#5f544e] transition-colors hover:border-[#7A3A30] hover:text-[#7A3A30]"
-                  aria-label="Instagram"
-                >
-                  <Instagram size={15} />
-                </a>
-                <a
-                  href="https://github.com/dhirendraxd"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex h-9 w-9 items-center justify-center border border-[#d7c9bd] text-[#5f544e] transition-colors hover:border-[#7A3A30] hover:text-[#7A3A30]"
-                  aria-label="GitHub"
-                >
-                  <Github size={15} />
-                </a>
-              </div>
-            </div>
-
-            <div className="space-y-3">
-              <p className="font-nekst text-xl font-semibold text-[#1f1815]">Quick Links</p>
-              <div className="flex flex-col gap-2 text-sm text-[#5e544d]">
-                <Link to="/" className="transition-colors hover:text-[#7A3A30]">
-                  Home Page
-                </Link>
-                <a href="#projects" className="transition-colors hover:text-[#7A3A30]">
-                  Projects
-                </a>
-                <Link to="/services" className="transition-colors hover:text-[#7A3A30]">
-                  Services
-                </Link>
-                <a href="#contact" className="transition-colors hover:text-[#7A3A30]">
-                  Contact
-                </a>
-              </div>
-            </div>
-
-            <div className="space-y-5">
-              <p className="font-nekst text-xl font-semibold text-[#1f1815]">Contact Us</p>
-              <div className="space-y-2 text-sm text-[#5e544d]">
-                <p className="inline-flex items-center gap-2">
-                  <MapPin size={14} />
-                  Kathmandu, Nepal
-                </p>
-                <a href="mailto:dhirendraxd@gmail.com" className="inline-flex items-center gap-2 transition-colors hover:text-[#7A3A30]">
-                  <Mail size={14} />
-                  dhirendraxd@gmail.com
-                </a>
-              </div>
-
-              <div className="flex w-full border border-[#d8cbc0] bg-[#f7f2eb]">
-                <input
-                  type="email"
-                  placeholder="Email"
-                  className="h-11 w-full bg-transparent px-3 text-sm text-[#2b221e] placeholder:text-[#8b7b70] focus:outline-none"
-                />
-                <button
-                  type="button"
-                  className="inline-flex h-11 w-11 items-center justify-center border-l border-[#d8cbc0] text-[#5e544d] transition-colors hover:bg-[#7A3A30] hover:text-[#f7f2eb]"
-                  aria-label="Submit email"
-                >
-                  <ArrowRight size={16} />
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-10 flex flex-col gap-4 border-t border-[#d8cbc0] pt-6 text-xs uppercase tracking-[0.14em] text-[#72675f] md:flex-row md:items-center md:justify-between">
-            <p>Dhiren Portfolio all rights reserved</p>
-            <p>Designed by Dhiren · 2026</p>
-          </div>
-        </footer>
       </motion.main>
     </div>
   );
