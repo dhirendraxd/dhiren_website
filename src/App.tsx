@@ -10,7 +10,7 @@ import Affiliations from "./pages/Affiliations";
 import AffiliationDetail from "./pages/AffiliationDetail";
 import Hackathon from "./pages/Hackathon";
 import HackathonDetail from "./pages/HackathonDetail";
-import Services from "./pages/Services";
+import ServiceShowcase from "./pages/ServiceShowcase";
 
 const queryClient = new QueryClient();
 
@@ -44,7 +44,8 @@ const AnimatedRoutes = () => {
           <Route path="/affiliations/:id" element={<AffiliationDetail />} />
           <Route path="/hackathon" element={<Hackathon />} />
           <Route path="/hackathon/:id" element={<HackathonDetail />} />
-          <Route path="/services" element={<Services />} />
+          <Route path="/services" element={<ServiceShowcase />} />
+          <Route path="/services/:slug" element={<ServiceShowcase />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </motion.div>

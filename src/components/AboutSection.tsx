@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, ArrowUpRight, Megaphone, PencilLine, Code2, Users } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Megaphone, Code2, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const AboutSection = () => {
@@ -8,21 +8,19 @@ const AboutSection = () => {
       title: "Digital Marketing",
       description: "SEO, content strategy, and data-driven campaigns to help brands grow online.",
       icon: Megaphone,
+      href: "/services/digital-marketing",
     },
     {
-      title: "Content & Storytelling",
-      description: "Creating blogs, narratives, and digital content that connect ideas with audiences.",
-      icon: PencilLine,
-    },
-    {
-      title: "Tech & Web Projects",
-      description: "Collaborating on digital platforms, MVPs, and experiments with startups and teams.",
-      icon: Code2,
-    },
-    {
-      title: "Community & Sustainability",
-      description: "Actively involved in fellowships, community programs, and sustainability initiatives that create collaborative social impact.",
+      title: "Advocacy & Community Projects",
+      description: "Advocacy and community-centered initiatives focused on awareness, collaboration, and social impact.",
       icon: Users,
+      href: "/services/advocacy-community",
+    },
+    {
+      title: "Hackathons & Builds",
+      description: "Technical hackathon work in short: coding core features, integrating APIs, debugging flows, and shipping prototypes.",
+      icon: Code2,
+      href: "/services/tech-projects",
     },
   ];
 
@@ -61,7 +59,7 @@ const AboutSection = () => {
     },
     {
       id: 2,
-      type: "Non-Tech Project",
+      type: "Community Project",
       title: "Community fellowship initiatives for collaborative social impact.",
       image: new URL("@/assets/affiliation/all_in_foundation_aif_logo.jpeg", import.meta.url).href,
       href: "/affiliations/1",
@@ -94,7 +92,7 @@ const AboutSection = () => {
             </div>
 
             <p className="text-sm text-muted-foreground leading-relaxed max-w-md">
-              Focused on digital marketing, storytelling, collaborative tech projects, and community-driven initiatives that turn ideas into practical results.
+              Focused on three core areas: digital marketing, advocacy and community projects, and hackathons and builds.
             </p>
 
             <Link
@@ -105,7 +103,7 @@ const AboutSection = () => {
             </Link>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-4">
+          <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
             {workAreas.map((area, index) => {
               const Icon = area.icon;
               const isHighlighted = index === 0;
@@ -135,7 +133,8 @@ const AboutSection = () => {
                     </p>
                   </div>
 
-                  <div
+                  <Link
+                    to={area.href}
                     className={`group inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider transition-colors duration-300 ${
                       isHighlighted
                         ? "text-[#FFF5F0] hover:text-[#FDE8DD]"
@@ -146,7 +145,7 @@ const AboutSection = () => {
                       Read More
                     </span>
                     <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-0.5" />
-                  </div>
+                  </Link>
                 </motion.div>
               );
             })}
@@ -247,7 +246,7 @@ const AboutSection = () => {
 
             <h3 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground uppercase">Projects</h3>
             <p className="text-xs text-muted-foreground max-w-xl leading-relaxed">
-              Selected tech and non-tech projects focused on outcomes, execution, and measurable impact.
+              Selected tech and community projects focused on outcomes, execution, and measurable impact.
             </p>
           </motion.div>
 
