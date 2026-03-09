@@ -5,7 +5,6 @@ import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
 import Footer from "@/components/Footer";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
-import BackToTop from "@/components/BackToTop";
 
 const Index = () => {
   const location = useLocation();
@@ -35,7 +34,6 @@ const Index = () => {
       <HeroSection />
       <AboutSection />
       <Footer />
-      <BackToTop />
     </div>
   );
 };

@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
-import BackToTop from "@/components/BackToTop";
 
 const services = [
   {
@@ -96,8 +95,6 @@ const Services = () => {
           </div>
         </div>
       </section>
-
-      <BackToTop />
     </div>
   );
 };

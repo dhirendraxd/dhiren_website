@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { useParams, useNavigate } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
 import Navbar from "@/components/Navbar";
-import BackToTop from "@/components/BackToTop";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
 
 const AffiliationDetail = () => {
@@ -16,7 +15,7 @@ const AffiliationDetail = () => {
       role: "Fellow",
       date: "Feb 2026 - Present · 2 mos",
       description: "Selected as a fellow to contribute to social impact initiatives, community-driven programs, and collaborative learning.",
-      link: "https://allfoundation.org",
+      link: "https://www.facebook.com/allinfoundationnp/",
       details: {
         about: "All in Foundation is a non-profit organization dedicated to creating social impact through education, technology, and community development. As a Fellow, I work on identifying and scaling sustainable solutions for underserved communities.",
         responsibilities: [
@@ -92,7 +91,7 @@ const AffiliationDetail = () => {
       role: "Digital Marketer",
       date: "Apr 2025 - Present · 1 yr",
       description: "Writing optimized blogs and managing analytics & content strategy. Leading digital marketing for internal and client web apps.",
-      link: "https://ctrlbits.com",
+      link: "https://www.ctrlbits.com/",
       details: {
         about: "Ctrl Bits is a digital marketing and web development agency. As Digital Marketer, I lead content strategy, SEO optimization, and analytics-driven marketing campaigns for internal and client projects.",
         responsibilities: [
@@ -112,7 +111,7 @@ const AffiliationDetail = () => {
       role: "Sustainability Mentee",
       date: "Aug 2025 - Dec 2025 · 5 mos",
       description: "Design Thinking and Sustainable Business Model development through structured mentorship program.",
-      link: "https://sustainabilitysolutions.org",
+      link: "https://sustainability.com.np/",
       details: {
         about: "Sustainability Solutions provides mentorship and training in sustainable business practices and design thinking. As a mentee, I develop sustainable business models and innovative solutions for environmental challenges.",
         responsibilities: [
@@ -295,7 +294,6 @@ const AffiliationDetail = () => {
         </motion.div>
       </div>
       </section>
-      <BackToTop />
     </div>
   );
 };

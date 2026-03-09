@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
-import BackToTop from "@/components/BackToTop";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
 
 const Hackathon = () => {
@@ -97,7 +96,6 @@ const Hackathon = () => {
           </motion.div>
         </div>
       </section>
-      <BackToTop />
     </div>
   );
 };

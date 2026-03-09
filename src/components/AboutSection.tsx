@@ -29,21 +29,25 @@ const AboutSection = () => {
   const experiments = [
     {
       title: "Digital Marketer",
-      subtitle: "CtrlBits · Full-time",
+      company: "CtrlBits",
+      suffix: " · Full-time",
       dateRange: "Apr 2025 - Present",
       duration: "1 yr",
+      link: "https://www.ctrlbits.com/",
     },
     {
       title: "Fellow",
-      subtitle: "ALL In Foundation (AIF)",
+      company: "ALL In Foundation (AIF)",
       dateRange: "Feb 2026 - Present",
       duration: "2 mos",
+      link: "https://www.facebook.com/allinfoundationnp/",
     },
     {
       title: "Sustainability Mentee",
-      subtitle: "Sustainability Solutions",
+      company: "Sustainability Solutions",
       dateRange: "Aug 2025 - Dec 2025",
       duration: "5 mos",
+      link: "https://sustainability.com.np/",
     },
   ];
 
@@ -191,9 +195,21 @@ const AboutSection = () => {
 
                     <div className="space-y-1">
                       <h4 className="text-xl font-semibold tracking-tight">{item.title}</h4>
-                      <p className={`text-sm leading-relaxed ${isHighlighted ? "text-background/80" : "text-muted-foreground"}`}>
-                        {item.subtitle}
-                      </p>
+                      <a
+                        href={item.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`text-sm leading-relaxed underline underline-offset-4 decoration-transparent transition-colors hover:decoration-current ${
+                          isHighlighted ? "text-background/80 hover:text-background" : "text-muted-foreground hover:text-[#7A3A30]"
+                        }`}
+                      >
+                        {item.company}
+                      </a>
+                      {item.suffix ? (
+                        <span className={`text-sm leading-relaxed ${isHighlighted ? "text-background/80" : "text-muted-foreground"}`}>
+                          {item.suffix}
+                        </span>
+                      ) : null}
                     </div>
                   </div>
 

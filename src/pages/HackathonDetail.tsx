@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { useParams, useNavigate } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
 import Navbar from "@/components/Navbar";
-import BackToTop from "@/components/BackToTop";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
 
 const HackathonDetail = () => {
@@ -299,7 +298,6 @@ const HackathonDetail = () => {
         </motion.div>
       </div>
       </section>
-      <BackToTop />
     </div>
   );
 };

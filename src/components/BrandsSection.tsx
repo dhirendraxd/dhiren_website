@@ -10,7 +10,8 @@ const BrandsSection = () => {
       image: new URL("@/assets/affiliation/all_in_foundation_aif_logo.jpeg", import.meta.url).href,
       role: "Fellow",
       date: "Feb 2026 - Present · 2 mos",
-      description: "Selected as a fellow to contribute to social impact initiatives, community-driven programs, and collaborative learning."
+      description: "Selected as a fellow to contribute to social impact initiatives, community-driven programs, and collaborative learning.",
+      link: "https://www.facebook.com/allinfoundationnp/"
     },
     { 
       id: 2, 
@@ -18,7 +19,8 @@ const BrandsSection = () => {
       image: new URL("@/assets/affiliation/aws_cloud_club_at_tu_logo.jpeg", import.meta.url).href,
       role: "College Representative",
       date: "Mar 2025 - Present · 1 yr 1 mo",
-      description: "Organizing sessions on AWS and cloud tools. Promoting community-focused learning and cloud skill adoption."
+      description: "Organizing sessions on AWS and cloud tools. Promoting community-focused learning and cloud skill adoption.",
+      link: "https://aws.amazon.com/"
     },
     { 
       id: 3, 
@@ -26,7 +28,8 @@ const BrandsSection = () => {
       image: new URL("@/assets/affiliation/netmission.jpeg", import.meta.url).href,
       role: "NetMission Ambassador",
       date: "Dec 2025 - Mar 2026 · 4 mos",
-      description: "2026 cohort participant in online training, webinars, and projects focused on Internet governance and digital rights advocacy."
+      description: "2026 cohort participant in online training, webinars, and projects focused on Internet governance and digital rights advocacy.",
+      link: "https://netmission.asia/"
     },
     { 
       id: 4, 
@@ -34,7 +37,8 @@ const BrandsSection = () => {
       image: new URL("@/assets/affiliation/rac .jpg", import.meta.url).href,
       role: "Member",
       date: "Jun 2025 - Present",
-      description: "Supporting civic, tech-forward, and sustainability initiatives. Involved in planning youth and community programs."
+      description: "Supporting civic, tech-forward, and sustainability initiatives. Involved in planning youth and community programs.",
+      link: "https://www.rotary.org/"
     },
     { 
       id: 5, 
@@ -42,7 +46,8 @@ const BrandsSection = () => {
       image: new URL("@/assets/affiliation/new logo fark blue grad in white.png", import.meta.url).href,
       role: "Digital Marketer",
       date: "Apr 2025 - Present · 1 yr",
-      description: "Writing optimized blogs and managing analytics & content strategy. Leading digital marketing for internal and client web apps."
+      description: "Writing optimized blogs and managing analytics & content strategy. Leading digital marketing for internal and client web apps.",
+      link: "https://www.ctrlbits.com/"
     },
     { 
       id: 6, 
@@ -50,7 +55,8 @@ const BrandsSection = () => {
       image: new URL("@/assets/affiliation/sustainabilitysolutionsnepal_logo.jpeg", import.meta.url).href,
       role: "Sustainability Mentee",
       date: "Aug 2025 - Dec 2025 · 5 mos",
-      description: "Design Thinking and Sustainable Business Model development through structured mentorship program."
+      description: "Design Thinking and Sustainable Business Model development through structured mentorship program.",
+      link: "https://sustainability.com.np/"
     },
   ];
 
@@ -157,6 +163,14 @@ const BrandsSection = () => {
                   <h3 className="text-xl font-semibold text-foreground">{currentAffiliation.name}</h3>
                   <p className="text-sm font-medium text-green-700">{currentAffiliation.role}</p>
                   <p className="text-sm text-muted-foreground leading-relaxed">{currentAffiliation.description}</p>
+                  <a
+                    href={currentAffiliation.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex text-sm font-rajdhani font-semibold text-foreground underline underline-offset-4 decoration-transparent transition-colors hover:text-[#7A3A30] hover:decoration-[#7A3A30]"
+                  >
+                    Visit organization website
+                  </a>
                 </div>
               </motion.div>
 

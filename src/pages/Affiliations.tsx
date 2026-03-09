@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
-import BackToTop from "@/components/BackToTop";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
 
 const Affiliations = () => {
@@ -14,7 +13,7 @@ const Affiliations = () => {
       role: "Fellow",
       date: "Feb 2026 - Present · 2 mos",
       description: "Selected as a fellow to contribute to social impact initiatives, community-driven programs, and collaborative learning.",
-      link: "https://allfoundation.org"
+      link: "https://www.facebook.com/allinfoundationnp/"
     },
     {
       id: 2,
@@ -50,7 +49,7 @@ const Affiliations = () => {
       role: "Digital Marketer",
       date: "Apr 2025 - Present · 1 yr",
       description: "Writing optimized blogs and managing analytics & content strategy. Leading digital marketing for internal and client web apps.",
-      link: "https://ctrlbits.com"
+      link: "https://www.ctrlbits.com/"
     },
     {
       id: 6,
@@ -59,7 +58,7 @@ const Affiliations = () => {
       role: "Sustainability Mentee",
       date: "Aug 2025 - Dec 2025 · 5 mos",
       description: "Design Thinking and Sustainable Business Model development through structured mentorship program.",
-      link: "https://sustainabilitysolutions.org"
+      link: "https://sustainability.com.np/"
     },
   ];
 
@@ -119,7 +118,6 @@ const Affiliations = () => {
           </motion.div>
         </div>
       </section>
-      <BackToTop />
     </div>
   );
 };
