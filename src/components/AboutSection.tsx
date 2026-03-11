@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight, ArrowUpRight, Megaphone, Code2, Users } from "lucide-react";
 import { Link } from "react-router-dom";
+import { getRelevantExperiences } from "@/data/affiliations";
 
 const AboutSection = () => {
   const workAreas = [
@@ -24,30 +25,7 @@ const AboutSection = () => {
     },
   ];
 
-  const experiments = [
-    {
-      title: "Digital Marketer",
-      company: "CtrlBits",
-      suffix: " · Full-time",
-      dateRange: "Apr 2025 - Present",
-      duration: "1 yr",
-      link: "https://www.ctrlbits.com/",
-    },
-    {
-      title: "Fellow",
-      company: "ALL In Foundation (AIF)",
-      dateRange: "Feb 2026 - Present",
-      duration: "2 mos",
-      link: "https://www.facebook.com/allinfoundationnp/",
-    },
-    {
-      title: "Sustainability Mentee",
-      company: "Sustainability Solutions",
-      dateRange: "Aug 2025 - Dec 2025",
-      duration: "5 mos",
-      link: "https://sustainability.com.np/",
-    },
-  ];
+  const experiments = getRelevantExperiences();
 
   const projects = [
     {
@@ -55,21 +33,21 @@ const AboutSection = () => {
       type: "Tech Project",
       title: "AI-assisted web solution for public document workflows.",
       image: new URL("@/assets/hackathon&evets/1736784796315.jpeg", import.meta.url).href,
-      href: "/hackathon/1",
+      href: "/services/tech-projects",
     },
     {
       id: 2,
       type: "Community Project",
       title: "Community fellowship initiatives for collaborative social impact.",
       image: new URL("@/assets/affiliation/all_in_foundation_aif_logo.jpeg", import.meta.url).href,
-      href: "/affiliations/1",
+      href: "/services/advocacy-community",
     },
     {
       id: 3,
       type: "Tech Project",
       title: "Volunteer platform design for NGOs and youth programs.",
       image: new URL("@/assets/hackathon&evets/SXC SANDBOX Logo.jpg", import.meta.url).href,
-      href: "/hackathon/4",
+      href: "/services/tech-projects",
     },
   ];
 
@@ -272,18 +250,18 @@ const AboutSection = () => {
                       {project.title}
                     </h4>
 
-                    <a
-                      href={project.href}
+                    <Link
+                      to={project.href}
                       className="group mt-10 inline-flex items-center gap-2 text-lg font-medium text-foreground/90 transition-colors duration-300 hover:text-[#7A3A30]"
                     >
                       <span className="relative inline-block tracking-wide after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-[#7A3A30] after:transition-all after:duration-300 group-hover:after:w-full">
-                        See Details
+                        Explore Work
                       </span>
                       <ArrowUpRight
                         size={18}
                         className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                       />
-                    </a>
+                    </Link>
                     <div className="h-px w-28 bg-border mt-2.5" />
                   </div>
 

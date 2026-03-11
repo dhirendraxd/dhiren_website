@@ -16,7 +16,7 @@ type ShowcaseCard = {
   description: string;
   image: string;
   date: string;
-  href: string;
+  href?: string;
   category: string;
   external?: boolean;
 };
@@ -47,6 +47,37 @@ const imageAssets = {
   ctrlBits: new URL("@/assets/affiliation/new logo fark blue grad in white.png", import.meta.url).href,
   rotaract: new URL("@/assets/affiliation/rac .jpg", import.meta.url).href,
   sustainabilitySolutions: new URL("@/assets/affiliation/sustainabilitysolutionsnepal_logo.jpeg", import.meta.url).href,
+};
+
+const legacyOrganizationLinks: Record<string, string> = {
+  "/affiliations/1": "https://www.facebook.com/allinfoundationnp/",
+  "/affiliations/2": "https://aws.amazon.com",
+  "/affiliations/3": "https://netmission.asia",
+  "/affiliations/4": "https://rotary.org",
+  "/affiliations/5": "https://www.ctrlbits.com/",
+  "/affiliations/6": "https://sustainability.com.np/",
+};
+
+const getCardAction = (card: ShowcaseCard) => {
+  if (!card.href) {
+    return null;
+  }
+
+  if (card.href in legacyOrganizationLinks) {
+    return {
+      href: legacyOrganizationLinks[card.href],
+      external: true,
+    };
+  }
+
+  if (card.href.startsWith("/hackathon")) {
+    return null;
+  }
+
+  return {
+    href: card.href,
+    external: Boolean(card.external),
+  };
 };
 
 const serviceShowcases: Record<ServiceSlug, ShowcasePageConfig> = {
@@ -590,25 +621,37 @@ const ServiceShowcase = () => {
                       {project.date}
                     </p>
 
-                    {project.external ? (
-                      <a
-                        href={project.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#2e2520] transition-colors hover:text-[#7A3A30]"
-                      >
-                        Open
-                        <ArrowUpRight size={13} />
-                      </a>
-                    ) : (
-                      <Link
-                        to={project.href}
-                        className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#2e2520] transition-colors hover:text-[#7A3A30]"
-                      >
-                        Open
-                        <ArrowUpRight size={13} />
-                      </Link>
-                    )}
+                    {(() => {
+                      const action = getCardAction(project);
+
+                      if (!action) {
+                        return <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#8a7c71]">Selected Work</span>;
+                      }
+
+                      if (action.external) {
+                        return (
+                          <a
+                            href={action.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#2e2520] transition-colors hover:text-[#7A3A30]"
+                          >
+                            Open
+                            <ArrowUpRight size={13} />
+                          </a>
+                        );
+                      }
+
+                      return (
+                        <Link
+                          to={action.href}
+                          className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#2e2520] transition-colors hover:text-[#7A3A30]"
+                        >
+                          Open
+                          <ArrowUpRight size={13} />
+                        </Link>
+                      );
+                    })()}
                   </div>
                 </div>
               </motion.article>
