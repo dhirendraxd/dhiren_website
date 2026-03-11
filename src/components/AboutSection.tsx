@@ -7,7 +7,7 @@ const AboutSection = () => {
   const workAreas = [
     {
       title: "Digital Marketing",
-      description: "SEO, content strategy, and data-driven campaigns to help brands grow online.",
+      description: "SEO, PPC, content marketing, and visual design to scale your reach and drive growth.",
       icon: Megaphone,
       href: "/services/digital-marketing",
     },
@@ -56,29 +56,23 @@ const AboutSection = () => {
       <div className="max-w-[84rem] mx-auto">
         <div className="space-y-10">
           <motion.div
-            className="grid xl:grid-cols-[1.1fr_1fr_auto] gap-6 xl:gap-8 items-start"
+            className="space-y-3"
             initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
           >
-            <div className="space-y-3">
-              <p className="text-xs uppercase tracking-widest font-semibold text-muted-foreground">My Services</p>
+            <p className="text-xs uppercase tracking-widest font-semibold text-muted-foreground">My Services</p>
+
+            <div className="grid md:grid-cols-[1.1fr_1fr] gap-6 md:gap-8 items-start">
               <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground leading-tight max-w-md">
                 What I Work On
               </h2>
+
+              <p className="text-sm text-muted-foreground leading-relaxed max-w-md">
+                Focused on three core areas: digital marketing, advocacy and community projects, and hackathons and builds.
+              </p>
             </div>
-
-            <p className="text-sm text-muted-foreground leading-relaxed max-w-md">
-              Focused on three core areas: digital marketing, advocacy and community projects, and hackathons and builds.
-            </p>
-
-            <Link
-              to="/services"
-              className="inline-flex items-center justify-center rounded-none px-8 py-3 text-xs font-semibold uppercase tracking-wider border border-foreground text-foreground transition-colors duration-300 hover:bg-[#7A3A30] hover:border-[#7A3A30] hover:text-[#FFF5F0]"
-            >
-              All Services
-            </Link>
           </motion.div>
 
           <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
@@ -210,27 +204,29 @@ const AboutSection = () => {
 
         <div id="projects" className="mt-28 space-y-14">
           <motion.div
-            className="relative flex flex-col items-center text-center space-y-4"
+            className="space-y-3"
             initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
           >
-            <div className="hidden md:grid grid-cols-5 gap-1 absolute left-0 top-2">
-              {Array.from({ length: 25 }).map((_, index) => (
-                <span key={index} className="h-1 w-1 rounded-full bg-foreground/30" />
-              ))}
-            </div>
+            <p className="text-xs uppercase tracking-widest font-semibold text-muted-foreground">Selected Projects</p>
 
-            <h3 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground uppercase">Projects</h3>
-            <p className="text-xs text-muted-foreground max-w-xl leading-relaxed">
-              Selected tech and community projects focused on outcomes, execution, and measurable impact.
-            </p>
+            <div className="grid md:grid-cols-[1.1fr_1fr] gap-6 md:gap-8 items-start">
+              <h3 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground leading-tight max-w-md">
+                Projects
+              </h3>
+
+              <p className="text-sm text-muted-foreground leading-relaxed max-w-md">
+                Selected tech and community projects focused on outcomes, execution, and measurable impact.
+              </p>
+            </div>
           </motion.div>
 
           <div className="space-y-14">
             {projects.map((project, index) => {
               const isReverse = index % 2 === 1;
+              const isLastProject = index === projects.length - 1;
 
               return (
                 <motion.article
@@ -250,18 +246,28 @@ const AboutSection = () => {
                       {project.title}
                     </h4>
 
-                    <Link
-                      to={project.href}
-                      className="group mt-10 inline-flex items-center gap-2 text-lg font-medium text-foreground/90 transition-colors duration-300 hover:text-[#7A3A30]"
-                    >
-                      <span className="relative inline-block tracking-wide after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-[#7A3A30] after:transition-all after:duration-300 group-hover:after:w-full">
-                        Explore Work
-                      </span>
-                      <ArrowUpRight
-                        size={18}
-                        className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                      />
-                    </Link>
+                    <div className="mt-10 flex items-center justify-between">
+                      <Link
+                        to={project.href}
+                        className="group inline-flex items-center gap-2 text-lg font-medium text-foreground/90 transition-colors duration-300 hover:text-[#7A3A30]"
+                      >
+                        <span className="relative inline-block tracking-wide after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-[#7A3A30] after:transition-all after:duration-300 group-hover:after:w-full">
+                          Explore Work
+                        </span>
+                        <ArrowUpRight
+                          size={18}
+                          className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                        />
+                      </Link>
+                      {isLastProject && (
+                        <Link
+                          to="/services/tech-projects#projects"
+                          className="inline-flex items-center justify-center rounded-none px-6 py-2.5 text-xs font-semibold uppercase tracking-wider border border-foreground text-foreground transition-colors duration-300 hover:bg-[#7A3A30] hover:border-[#7A3A30] hover:text-[#FFF5F0]"
+                        >
+                          View All
+                        </Link>
+                      )}
+                    </div>
                     <div className="h-px w-28 bg-border mt-2.5" />
                   </div>
 
