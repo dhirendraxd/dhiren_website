@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import ismailIllustration from "@/assets/ismail-illustration.png";
+import untitledDesignImage from "@/assets/Untitled design.png";
 
 const HeroSection = () => {
   const [showScrollIndicator, setShowScrollIndicator] = useState(true);
@@ -42,7 +42,8 @@ const HeroSection = () => {
             >
               <span className="font-nekst">I</span>
               <span className="font-sans">'</span>
-              <span className="font-nekst">m Into Digital Marketing</span>
+              <span className="font-nekst">m Into </span>
+              <span className="font-nekst text-[#7A3A30]">Digital Marketing</span>
             </motion.h2>
 
           </div>
@@ -52,13 +53,13 @@ const HeroSection = () => {
             initial={{ opacity: 0, scale: 0.93 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.75, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="relative flex justify-center -mt-8 md:mt-0"
+            className="relative flex justify-center -mt-16 md:-mt-8"
           >
             <div className="relative flex flex-col items-center">
               <img
-                src={ismailIllustration}
+                src={untitledDesignImage}
                 alt="Dhiren illustration"
-                className="w-64 md:w-80 lg:w-96 xl:w-full xl:max-w-xl h-auto"
+                className="w-[40rem] md:w-[54rem] lg:w-[74rem] xl:w-[96rem] h-auto"
               />
               <p
                 className="text-base md:text-lg text-muted-foreground italic font-light mt-4"
