@@ -418,7 +418,7 @@ const ServiceShowcase = () => {
   }, [resolvedSlug]);
 
   if (!resolvedSlug) {
-    return <Navigate to="/services" replace />;
+    return <Navigate to="/services/digital-marketing" replace />;
   }
 
   const showcase = serviceShowcases[resolvedSlug];
