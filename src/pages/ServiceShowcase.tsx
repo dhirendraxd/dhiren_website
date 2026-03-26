@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { ArrowUpRight, Sparkles } from "lucide-react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
+import { getProjectSlugByTitle } from "@/data/projectDetails";
 
 type ServiceSlug = "digital-marketing" | "advocacy-community" | "tech-projects";
 
@@ -59,6 +60,14 @@ const legacyOrganizationLinks: Record<string, string> = {
 };
 
 const getCardAction = (card: ShowcaseCard) => {
+  const projectSlug = getProjectSlugByTitle(card.title);
+  if (projectSlug) {
+    return {
+      href: `/projects/${projectSlug}`,
+      external: false,
+    };
+  }
+
   if (!card.href) {
     return null;
   }

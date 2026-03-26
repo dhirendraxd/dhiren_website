@@ -33,21 +33,21 @@ const AboutSection = () => {
       type: "Tech Project",
       title: "AI-assisted web solution for public document workflows.",
       image: new URL("@/assets/hackathon&evets/1736784796315.jpeg", import.meta.url).href,
-      href: "/services/tech-projects",
+      href: "/projects/government-workflow-assistant",
     },
     {
       id: 2,
       type: "Community Project",
       title: "Community fellowship initiatives for collaborative social impact.",
       image: new URL("@/assets/affiliation/all_in_foundation_aif_logo.jpeg", import.meta.url).href,
-      href: "/services/advocacy-community",
+      href: "/projects/fellowship-community-labs",
     },
     {
       id: 3,
       type: "Tech Project",
       title: "Volunteer platform design for NGOs and youth programs.",
       image: new URL("@/assets/hackathon&evets/SXC SANDBOX Logo.jpg", import.meta.url).href,
-      href: "/services/tech-projects",
+      href: "/projects/ngo-volunteer-management",
     },
   ];
 

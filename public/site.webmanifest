@@ -1,0 +1,26 @@
+{
+  "name": "Dhirendra Singh Dhami Portfolio",
+  "short_name": "Dhirendra",
+  "description": "Portfolio of Dhirendra Singh Dhami: digital marketing, SEO, and youth advocacy.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f7f2eb",
+  "theme_color": "#f7f2eb",
+  "lang": "en",
+  "categories": ["portfolio", "marketing", "education"],
+  "icons": [
+    {
+      "src": "/favicon_cropped_processed_by_imagy.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon_cropped_processed_by_imagy.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
