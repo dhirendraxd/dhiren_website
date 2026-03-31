@@ -13,6 +13,71 @@ export type ProjectDetail = {
   sourceHref?: string;
 };
 
+const createAbstractIllustration = (
+  title: string,
+  subtitle: string,
+  palette: { bgStart: string; bgEnd: string; accentA: string; accentB: string; text: string },
+) => {
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="${title}">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="${palette.bgStart}" />
+      <stop offset="100%" stop-color="${palette.bgEnd}" />
+    </linearGradient>
+    <linearGradient id="wave" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="${palette.accentA}" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="${palette.accentB}" stop-opacity="0.85" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)" />
+  <circle cx="150" cy="110" r="120" fill="${palette.accentA}" fill-opacity="0.25" />
+  <circle cx="1060" cy="520" r="170" fill="${palette.accentB}" fill-opacity="0.2" />
+  <path d="M0,440 C220,360 420,510 650,440 C860,375 980,310 1200,355 L1200,630 L0,630 Z" fill="url(#wave)" />
+  <path d="M0,305 C210,235 400,350 620,290 C830,235 980,160 1200,205" stroke="${palette.accentA}" stroke-opacity="0.45" stroke-width="8" fill="none" />
+  <path d="M0,360 C180,300 370,390 590,345 C830,295 1000,235 1200,275" stroke="${palette.accentB}" stroke-opacity="0.5" stroke-width="6" fill="none" />
+  <text x="74" y="510" font-family="Rajdhani, Arial, sans-serif" font-size="56" font-weight="700" fill="${palette.text}">${title}</text>
+  <text x="74" y="558" font-family="Rajdhani, Arial, sans-serif" font-size="26" font-weight="600" fill="${palette.text}" fill-opacity="0.9">${subtitle}</text>
+</svg>`;
+
+  return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
+};
+
+const selectedProjectIllustrations = {
+  governmentWorkflowAssistant: createAbstractIllustration(
+    "Government Workflow Assistant",
+    "Civic AI and guided form automation",
+    {
+      bgStart: "#e9d5ff",
+      bgEnd: "#c4b5fd",
+      accentA: "#6d28d9",
+      accentB: "#4c1d95",
+      text: "#2e1065",
+    },
+  ),
+  fellowshipCommunityLabs: createAbstractIllustration(
+    "Fellowship Community Labs",
+    "Collaborative social innovation sessions",
+    {
+      bgStart: "#d1fae5",
+      bgEnd: "#99f6e4",
+      accentA: "#0f766e",
+      accentB: "#134e4a",
+      text: "#042f2e",
+    },
+  ),
+  ngoVolunteerManagement: createAbstractIllustration(
+    "NGO Volunteer Management",
+    "Event, matching, and operations platform",
+    {
+      bgStart: "#fee2e2",
+      bgEnd: "#fecaca",
+      accentA: "#be123c",
+      accentB: "#881337",
+      text: "#4c0519",
+    },
+  ),
+};
+
 const images = {
   mitraSmart: new URL("@/assets/hackathon&evets/1736784796315.jpeg", import.meta.url).href,
   eduConnect: new URL("@/assets/hackathon&evets/kec_lite_2081-thumbnail-1000x525.png", import.meta.url).href,
@@ -78,7 +143,7 @@ export const projectDetails: ProjectDetail[] = [
       "Documented lab workflow for reuse in later cycles."
     ],
     tags: ["Fellowship", "Facilitation", "Social Impact"],
-    image: images.allInFoundation,
+    image: selectedProjectIllustrations.fellowshipCommunityLabs,
     sourceHref: "https://www.facebook.com/allinfoundationnp/"
   },
   {
@@ -201,7 +266,7 @@ export const projectDetails: ProjectDetail[] = [
       "Clear architecture for future integration."
     ],
     tags: ["Civic Tech", "AI", "Workflow Automation"],
-    image: images.mitraSmart
+    image: selectedProjectIllustrations.governmentWorkflowAssistant
   },
   {
     slug: "university-fit-engine",
@@ -252,7 +317,7 @@ export const projectDetails: ProjectDetail[] = [
       "Clear path for phased product expansion."
     ],
     tags: ["Web Platform", "NGO", "Volunteer Ops"],
-    image: images.volunteerPlatform
+    image: selectedProjectIllustrations.ngoVolunteerManagement
   },
   {
     slug: "cloud-community-toolkit",

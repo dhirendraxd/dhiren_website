@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { Link, Navigate, useParams } from "react-router-dom";
+import Navbar from "@/components/Navbar";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
 import { getProjectBySlug } from "@/data/projectDetails";
 
@@ -31,12 +32,6 @@ const upsertCanonical = (href: string) => {
   }
 
   canonical.setAttribute("href", href);
-};
-
-const serviceLabelMap = {
-  "digital-marketing": "Digital Marketing",
-  "advocacy-community": "Advocacy & Community",
-  "tech-projects": "Tech Projects",
 };
 
 const ProjectDetail = () => {
@@ -110,26 +105,15 @@ const ProjectDetail = () => {
   }, [project]);
 
   if (!project) {
-    return <Navigate to="/services/tech-projects" replace />;
+    return <Navigate to="/tech-projects" replace />;
   }
 
   return (
     <div className="min-h-screen bg-card">
       <ScrollProgressBar />
+      <Navbar />
 
-      <main className="mx-auto max-w-[84rem] px-4 pb-16 pt-10 font-rajdhani sm:px-6 md:px-12 md:pt-14">
-        <nav
-          aria-label="Breadcrumb"
-          className="mb-6 flex flex-wrap items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-[#6e635b]"
-        >
-          <Link to="/" className="hover:text-foreground transition-colors">Home</Link>
-          <span>/</span>
-          <Link to={`/services/${project.serviceSlug}`} className="hover:text-foreground transition-colors">
-            {serviceLabelMap[project.serviceSlug]}
-          </Link>
-          <span>/</span>
-          <span className="text-[#7A3A30]">{project.title}</span>
-        </nav>
+      <main className="mx-auto max-w-[84rem] px-4 pb-16 pt-24 font-rajdhani sm:px-6 sm:pt-28 md:px-12 md:pt-32">
 
         <section className="grid gap-8 xl:grid-cols-[1.05fr_0.95fr] xl:items-start">
           <div className="space-y-5">
@@ -152,7 +136,14 @@ const ProjectDetail = () => {
           </div>
 
           <div className="overflow-hidden border border-[#ddd2c8] bg-[#ede2d6] p-2">
-            <img src={project.image} alt={project.title} className="h-[260px] w-full object-cover sm:h-[340px] md:h-[420px]" />
+            <img
+              src={project.image}
+              alt={project.title}
+              loading="eager"
+              fetchPriority="high"
+              decoding="async"
+              className="h-[260px] w-full object-cover sm:h-[340px] md:h-[420px]"
+            />
           </div>
         </section>
 
@@ -179,7 +170,7 @@ const ProjectDetail = () => {
 
         <section className="mt-10 flex flex-wrap items-center gap-3">
           <Link
-            to={`/services/${project.serviceSlug}`}
+            to={`/${project.serviceSlug}`}
             className="inline-flex items-center justify-center border border-[#1f1815] px-5 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-[#1f1815] transition-colors hover:bg-[#7A3A30] hover:border-[#7A3A30] hover:text-[#f7f2eb]"
           >
             Back to Service Projects

@@ -9,19 +9,19 @@ const AboutSection = () => {
       title: "Digital Marketing",
       description: "SEO, PPC, content marketing, and visual design to scale your reach and drive growth.",
       icon: Megaphone,
-      href: "/services/digital-marketing",
+      href: "/digital-marketing",
     },
     {
       title: "Advocacy & Community Projects",
       description: "Advocacy and community-centered initiatives focused on awareness, collaboration, and social impact.",
       icon: Users,
-      href: "/services/advocacy-community",
+      href: "/advocacy-community",
     },
     {
       title: "Hackathons & Builds",
       description: "Technical hackathon work in short: coding core features, integrating APIs, debugging flows, and shipping prototypes.",
       icon: Code2,
-      href: "/services/tech-projects",
+      href: "/tech-projects",
     },
   ];
 
@@ -226,7 +226,6 @@ const AboutSection = () => {
           <div className="space-y-14">
             {projects.map((project, index) => {
               const isReverse = index % 2 === 1;
-              const isLastProject = index === projects.length - 1;
 
               return (
                 <motion.article
@@ -259,14 +258,6 @@ const AboutSection = () => {
                           className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                         />
                       </Link>
-                      {isLastProject && (
-                        <Link
-                          to="/services/tech-projects#projects"
-                          className="inline-flex items-center justify-center rounded-none px-6 py-2.5 text-xs font-semibold uppercase tracking-wider border border-foreground text-foreground transition-colors duration-300 hover:bg-[#7A3A30] hover:border-[#7A3A30] hover:text-[#FFF5F0]"
-                        >
-                          View All
-                        </Link>
-                      )}
                     </div>
                     <div className="h-px w-28 bg-border mt-2.5" />
                   </div>
@@ -275,6 +266,8 @@ const AboutSection = () => {
                     <motion.img
                       src={project.image}
                       alt={project.title}
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-[250px] md:h-[320px] object-cover border border-border/60"
                       whileHover={{ scale: 1.03 }}
                       transition={{ duration: 0.4, ease: "easeOut" }}

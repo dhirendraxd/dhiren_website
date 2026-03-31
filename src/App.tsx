@@ -1,13 +1,15 @@
+import { lazy, Suspense } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useLocation, useParams } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import Index from "./pages/Index";
-import NotFound from "./pages/NotFound";
-import ServiceShowcase from "./pages/ServiceShowcase";
-import ProjectDetail from "./pages/ProjectDetail";
+
+const Index = lazy(() => import("./pages/Index"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+const ServiceShowcase = lazy(() => import("./pages/ServiceShowcase"));
+const ProjectDetail = lazy(() => import("./pages/ProjectDetail"));
 
 const queryClient = new QueryClient();
 
@@ -22,28 +24,45 @@ const pageTransition = {
   ease: "easeInOut",
 };
 
+const RouteFallback = () => <div className="min-h-screen bg-background" aria-hidden="true" />;
+
+const LegacyServiceRedirect = () => {
+  const { slug } = useParams<{ slug?: string }>();
+
+  if (!slug) {
+    return <Navigate to="/digital-marketing" replace />;
+  }
+
+  return <Navigate to={`/${slug}`} replace />;
+};
+
 const AnimatedRoutes = () => {
   const location = useLocation();
 
   return (
-    <AnimatePresence mode="wait" initial={false}>
-      <motion.div
-        key={location.pathname}
-        variants={pageVariants}
-        initial="initial"
-        animate="animate"
-        exit="exit"
-        transition={pageTransition}
-      >
-        <Routes location={location}>
-          <Route path="/" element={<Index />} />
-          <Route path="/services" element={<Navigate to="/services/digital-marketing" replace />} />
-          <Route path="/services/:slug" element={<ServiceShowcase />} />
-          <Route path="/projects/:slug" element={<ProjectDetail />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </motion.div>
-    </AnimatePresence>
+    <Suspense fallback={<RouteFallback />}>
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.div
+          key={location.pathname}
+          variants={pageVariants}
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          transition={pageTransition}
+        >
+          <Routes location={location}>
+            <Route path="/" element={<Index />} />
+            <Route path="/digital-marketing" element={<ServiceShowcase forcedSlug="digital-marketing" />} />
+            <Route path="/advocacy-community" element={<ServiceShowcase forcedSlug="advocacy-community" />} />
+            <Route path="/tech-projects" element={<ServiceShowcase forcedSlug="tech-projects" />} />
+            <Route path="/services" element={<Navigate to="/digital-marketing" replace />} />
+            <Route path="/services/:slug" element={<LegacyServiceRedirect />} />
+            <Route path="/projects/:slug" element={<ProjectDetail />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </motion.div>
+      </AnimatePresence>
+    </Suspense>
   );
 };
 

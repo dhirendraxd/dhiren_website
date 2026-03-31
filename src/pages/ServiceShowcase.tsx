@@ -2,10 +2,15 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Sparkles } from "lucide-react";
 import { Link, Navigate, useParams } from "react-router-dom";
+import Navbar from "@/components/Navbar";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
 import { getProjectSlugByTitle } from "@/data/projectDetails";
 
 type ServiceSlug = "digital-marketing" | "advocacy-community" | "tech-projects";
+
+type ServiceShowcaseProps = {
+  forcedSlug?: ServiceSlug;
+};
 
 type ShowcaseMetric = {
   label: string;
@@ -35,6 +40,71 @@ type ShowcasePageConfig = {
   stats: ShowcaseMetric[];
   filters: string[];
   projects: ShowcaseCard[];
+};
+
+const createAbstractIllustration = (
+  title: string,
+  subtitle: string,
+  palette: { bgStart: string; bgEnd: string; accentA: string; accentB: string; text: string },
+) => {
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="${title}">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="${palette.bgStart}" />
+      <stop offset="100%" stop-color="${palette.bgEnd}" />
+    </linearGradient>
+    <linearGradient id="wave" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="${palette.accentA}" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="${palette.accentB}" stop-opacity="0.85" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)" />
+  <circle cx="150" cy="110" r="120" fill="${palette.accentA}" fill-opacity="0.25" />
+  <circle cx="1060" cy="520" r="170" fill="${palette.accentB}" fill-opacity="0.2" />
+  <path d="M0,440 C220,360 420,510 650,440 C860,375 980,310 1200,355 L1200,630 L0,630 Z" fill="url(#wave)" />
+  <path d="M0,305 C210,235 400,350 620,290 C830,235 980,160 1200,205" stroke="${palette.accentA}" stroke-opacity="0.45" stroke-width="8" fill="none" />
+  <path d="M0,360 C180,300 370,390 590,345 C830,295 1000,235 1200,275" stroke="${palette.accentB}" stroke-opacity="0.5" stroke-width="6" fill="none" />
+  <text x="74" y="510" font-family="Rajdhani, Arial, sans-serif" font-size="56" font-weight="700" fill="${palette.text}">${title}</text>
+  <text x="74" y="558" font-family="Rajdhani, Arial, sans-serif" font-size="26" font-weight="600" fill="${palette.text}" fill-opacity="0.9">${subtitle}</text>
+</svg>`;
+
+  return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
+};
+
+const selectedProjectIllustrations = {
+  governmentWorkflowAssistant: createAbstractIllustration(
+    "Government Workflow Assistant",
+    "Civic AI and guided form automation",
+    {
+      bgStart: "#e9d5ff",
+      bgEnd: "#c4b5fd",
+      accentA: "#6d28d9",
+      accentB: "#4c1d95",
+      text: "#2e1065",
+    },
+  ),
+  fellowshipCommunityLabs: createAbstractIllustration(
+    "Fellowship Community Labs",
+    "Collaborative social innovation sessions",
+    {
+      bgStart: "#d1fae5",
+      bgEnd: "#99f6e4",
+      accentA: "#0f766e",
+      accentB: "#134e4a",
+      text: "#042f2e",
+    },
+  ),
+  ngoVolunteerManagement: createAbstractIllustration(
+    "NGO Volunteer Management",
+    "Event, matching, and operations platform",
+    {
+      bgStart: "#fee2e2",
+      bgEnd: "#fecaca",
+      accentA: "#be123c",
+      accentB: "#881337",
+      text: "#4c0519",
+    },
+  ),
 };
 
 const imageAssets = {
@@ -231,7 +301,7 @@ const serviceShowcases: Record<ServiceSlug, ShowcasePageConfig> = {
       {
         title: "Fellowship Community Labs",
         description: "Facilitated collaboration tracks for social problem framing and solution ideation.",
-        image: imageAssets.allInFoundation,
+        image: selectedProjectIllustrations.fellowshipCommunityLabs,
         date: "14 Mar 2026",
         href: "/affiliations/1",
         category: "Community",
@@ -348,7 +418,7 @@ const serviceShowcases: Record<ServiceSlug, ShowcasePageConfig> = {
       {
         title: "Government Workflow Assistant",
         description: "AI check-flow for documents and context-aware public form completion support.",
-        image: imageAssets.mitraSmart,
+        image: selectedProjectIllustrations.governmentWorkflowAssistant,
         date: "13 Jan 2025",
         href: "/hackathon/1",
         category: "Civic Tech",
@@ -372,7 +442,7 @@ const serviceShowcases: Record<ServiceSlug, ShowcasePageConfig> = {
       {
         title: "NGO Volunteer Management",
         description: "Event publishing and volunteer matching system with stipend processing support.",
-        image: imageAssets.volunteerPlatform,
+        image: selectedProjectIllustrations.ngoVolunteerManagement,
         date: "04 Oct 2024",
         href: "/hackathon/4",
         category: "Web Platform",
@@ -416,18 +486,19 @@ const serviceShowcases: Record<ServiceSlug, ShowcasePageConfig> = {
 const isServiceSlug = (value: string): value is ServiceSlug => value in serviceShowcases;
 const defaultServiceSlug: ServiceSlug = "digital-marketing";
 
-const ServiceShowcase = () => {
+const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
   const { slug } = useParams<{ slug: string }>();
   const [activeFilter, setActiveFilter] = useState("All");
 
-  const resolvedSlug = !slug ? defaultServiceSlug : isServiceSlug(slug) ? slug : null;
+  const routeSlug = forcedSlug ?? slug;
+  const resolvedSlug = !routeSlug ? defaultServiceSlug : isServiceSlug(routeSlug) ? routeSlug : null;
 
   useEffect(() => {
     setActiveFilter("All");
   }, [resolvedSlug]);
 
   if (!resolvedSlug) {
-    return <Navigate to="/services/digital-marketing" replace />;
+    return <Navigate to="/digital-marketing" replace />;
   }
 
   const showcase = serviceShowcases[resolvedSlug];
@@ -440,6 +511,7 @@ const ServiceShowcase = () => {
   return (
     <div className="min-h-screen bg-card">
       <ScrollProgressBar />
+      <Navbar />
 
       <motion.main
         className="mx-auto max-w-[84rem] bg-card"
@@ -447,29 +519,7 @@ const ServiceShowcase = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.45, ease: "easeOut" }}
       >
-        <section className="px-4 pb-12 pt-10 font-rajdhani sm:px-6 sm:pt-12 md:px-12 md:pt-14">
-          <nav
-            aria-label="Breadcrumb"
-            className="mb-5 flex flex-wrap items-center justify-start gap-1.5 text-[10px] font-semibold uppercase leading-relaxed tracking-[0.1em] text-[#6e635b] sm:mb-6 sm:gap-2 sm:text-[11px] sm:tracking-[0.14em]"
-          >
-            <Link to="/" className="hover:text-foreground transition-colors">
-              Home
-            </Link>
-            <span>/</span>
-            <a href="/#about" className="hover:text-foreground transition-colors">
-              What I Work On
-            </a>
-            <span>/</span>
-            <a href="/#contact" className="hover:text-foreground transition-colors">
-              Contact
-            </a>
-            {showcase.badge && (
-              <>
-                <span>/</span>
-                <span className="text-[#7A3A30] font-semibold">{showcase.badge}</span>
-              </>
-            )}
-          </nav>
+        <section className="px-4 pb-12 pt-24 font-rajdhani sm:px-6 sm:pt-28 md:px-12 md:pt-32">
 
           <div className="grid gap-6 sm:gap-8 xl:grid-cols-[1.08fr_0.92fr] xl:items-end">
             <div className="space-y-4">
@@ -501,7 +551,14 @@ const ServiceShowcase = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.45 }}
               >
-                <img src={showcase.statsImage} alt={showcase.statsTitle} className="h-[220px] w-full object-cover sm:h-[300px] md:h-[470px]" />
+                <img
+                  src={showcase.statsImage}
+                  alt={showcase.statsTitle}
+                  loading="eager"
+                  fetchPriority="high"
+                  decoding="async"
+                  className="h-[220px] w-full object-cover sm:h-[300px] md:h-[470px]"
+                />
               </motion.div>
 
               <motion.div
@@ -585,7 +642,13 @@ const ServiceShowcase = () => {
                 transition={{ duration: 0.3, delay: index * 0.04 }}
               >
                 <div className="h-[176px] overflow-hidden border-b border-[#e4d9cf] bg-[#eee4d8]">
-                  <img src={project.image} alt={project.title} className="h-full w-full object-cover transition-transform duration-500 hover:scale-[1.04]" />
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    loading="lazy"
+                    decoding="async"
+                    className="h-full w-full object-cover transition-transform duration-500 hover:scale-[1.04]"
+                  />
                 </div>
                 <div className="space-y-2.5 p-4">
                   <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#7A3A30]">{project.category}</p>

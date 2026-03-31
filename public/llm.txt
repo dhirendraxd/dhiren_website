@@ -22,9 +22,9 @@ Dhirendra Singh Dhami is a digital marketer and youth advocate working on measur
 
 ## Canonical URLs
 - Home: https://dhirendrasinghdhami.com.np/
-- Services: https://dhirendrasinghdhami.com.np/services/digital-marketing
-- Services: https://dhirendrasinghdhami.com.np/services/advocacy-community
-- Services: https://dhirendrasinghdhami.com.np/services/tech-projects
+- Digital Marketing: https://dhirendrasinghdhami.com.np/digital-marketing
+- Advocacy & Community: https://dhirendrasinghdhami.com.np/advocacy-community
+- Tech Projects: https://dhirendrasinghdhami.com.np/tech-projects
 
 ## Attribution and Use
 - Please attribute profile information to Dhirendra Singh Dhami.

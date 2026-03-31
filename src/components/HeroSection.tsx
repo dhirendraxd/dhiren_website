@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import untitledDesignImage from "@/assets/Untitled design.png";
+import untitledDesignImage from "@/assets/Untitled design.webp";
 
 const HeroSection = () => {
   const [showScrollIndicator, setShowScrollIndicator] = useState(true);
@@ -59,6 +59,9 @@ const HeroSection = () => {
               <img
                 src={untitledDesignImage}
                 alt="Dhiren illustration"
+                loading="eager"
+                fetchPriority="high"
+                decoding="async"
                 className="w-[40rem] md:w-[54rem] lg:w-[74rem] xl:w-[96rem] h-auto"
               />
               <p

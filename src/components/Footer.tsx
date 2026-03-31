@@ -4,10 +4,12 @@ import { AtSign, MapPin, Send } from "lucide-react";
 import { FaLinkedinIn, FaInstagram, FaGithub } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { useToast } from "@/hooks/use-toast";
+import emailjs from "@emailjs/browser";
 
 const Footer = () => {
   const { toast } = useToast();
   const [isSendAnimating, setIsSendAnimating] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -17,10 +19,10 @@ const Footer = () => {
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (isSendAnimating) {
+    if (isSendAnimating || isSubmitting) {
       return;
     }
 
@@ -42,8 +44,51 @@ const Footer = () => {
       return;
     }
 
-    console.log("Form submitted:", sanitizedData);
-    setIsSendAnimating(true);
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+    if (!serviceId || !templateId || !publicKey) {
+      toast({
+        variant: "destructive",
+        title: "Contact form unavailable",
+        description: "Email service is not configured correctly. Please try again later.",
+      });
+      return;
+    }
+
+    try {
+      setIsSubmitting(true);
+
+      await emailjs.send(
+        serviceId,
+        templateId,
+        {
+          name: sanitizedData.name,
+          from_name: sanitizedData.name,
+          email: sanitizedData.email,
+          from_email: sanitizedData.email,
+          reply_to: sanitizedData.email,
+          organization: sanitizedData.organization,
+          project_type: sanitizedData.projectType,
+          message: sanitizedData.message,
+          submitted_at: new Date().toISOString(),
+        },
+        {
+          publicKey,
+        }
+      );
+
+      setIsSendAnimating(true);
+    } catch {
+      toast({
+        variant: "destructive",
+        title: "Could not send message",
+        description: "There was a problem sending your message. Please try again.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (
@@ -260,13 +305,14 @@ const Footer = () => {
                       <motion.button
                         key="send-button"
                         type="submit"
+                        disabled={isSubmitting}
                         initial={{ opacity: 1, y: 0 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -2 }}
                         transition={{ duration: 0.22 }}
-                        className="group absolute inset-0 inline-flex items-center justify-center rounded-none border border-foreground bg-foreground text-background text-sm font-medium transition-colors duration-300 hover:bg-[#7A3A30] hover:border-[#7A3A30] hover:text-[#FFF5F0]"
+                        className="group absolute inset-0 inline-flex items-center justify-center rounded-none border border-foreground bg-foreground text-background text-sm font-medium transition-colors duration-300 hover:bg-[#7A3A30] hover:border-[#7A3A30] hover:text-[#FFF5F0] disabled:cursor-not-allowed disabled:opacity-75"
                       >
-                        <span>Send</span>
+                        <span>{isSubmitting ? "Sending" : "Send"}</span>
                         <Send
                           size={14}
                           className="ml-0 w-0 opacity-0 transition-all duration-300 group-hover:ml-1 group-hover:w-[14px] group-hover:opacity-100"
