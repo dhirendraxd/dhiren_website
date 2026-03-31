@@ -289,15 +289,14 @@ const AboutSection = () => {
           viewport={{ once: true }}
         >
           <div className="flex items-start justify-center gap-6">
-            <div className="max-w-4xl mx-auto text-center">
-              <p className="text-xs uppercase tracking-widest font-semibold text-muted-foreground underline underline-offset-4">Client Feedback</p>
-              <h3 className="mt-4 text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05] text-foreground max-w-4xl mx-auto">
+            <div className="max-w-4xl mx-auto">
+              <h3 className="mt-4 py-4 md:py-6 text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05] text-foreground max-w-4xl mx-auto text-center">
                 If it involves people, ideas, or the internet—I’m probably already doing it.
               </h3>
 
-              <div className="mt-10">
-                <p className="text-2xl font-semibold tracking-tight text-foreground">Connect with me:</p>
-                <div className="mt-3 flex items-center justify-center gap-4">
+              <div className="mt-10 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+                <p className="text-2xl font-semibold tracking-tight text-foreground">Connect with me</p>
+                <div className="flex items-center justify-start gap-4 md:justify-end">
                   <a
                     href="https://linkedin.com"
                     target="_blank"
