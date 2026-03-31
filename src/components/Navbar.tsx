@@ -28,7 +28,9 @@ const Navbar = () => {
       }
 
       if (!isHomePage) {
-        setIsBarVisible(true);
+        const isScrollingUp = currentScrollY < lastScrollYRef.current;
+        const isNearTop = currentScrollY < 32;
+        setIsBarVisible(isScrollingUp || isNearTop);
         lastScrollYRef.current = currentScrollY;
         return;
       }

@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight, ArrowUpRight, Megaphone, Code2, Users } from "lucide-react";
+import { FaLinkedinIn, FaInstagram, FaGithub } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { getRelevantExperiences } from "@/data/affiliations";
 
@@ -278,6 +280,66 @@ const AboutSection = () => {
             })}
           </div>
         </div>
+
+        <motion.div
+          className="mt-24 px-1 py-2"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.45 }}
+          viewport={{ once: true }}
+        >
+          <div className="flex items-start justify-center gap-6">
+            <div className="max-w-4xl mx-auto text-center">
+              <p className="text-xs uppercase tracking-widest font-semibold text-muted-foreground underline underline-offset-4">Client Feedback</p>
+              <h3 className="mt-4 text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05] text-foreground max-w-4xl mx-auto">
+                If it involves people, ideas, or the internet—I’m probably already doing it.
+              </h3>
+
+              <div className="mt-10">
+                <p className="text-2xl font-semibold tracking-tight text-foreground">Connect with me:</p>
+                <div className="mt-3 flex items-center justify-center gap-4">
+                  <a
+                    href="https://linkedin.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="LinkedIn"
+                    className="inline-flex items-center justify-center p-1 leading-none text-[#0A66C2] transition-all duration-200 hover:opacity-80 hover:-translate-y-0.5"
+                  >
+                    <FaLinkedinIn size={26} />
+                  </a>
+                  <a
+                    href="https://x.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="X"
+                    className="inline-flex items-center justify-center p-1 leading-none text-[#111111] transition-all duration-200 hover:opacity-80 hover:-translate-y-0.5"
+                  >
+                    <FaXTwitter size={26} />
+                  </a>
+                  <a
+                    href="https://instagram.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Instagram"
+                    className="inline-flex items-center justify-center p-1 leading-none text-[#E4405F] transition-all duration-200 hover:opacity-80 hover:-translate-y-0.5"
+                  >
+                    <FaInstagram size={26} />
+                  </a>
+                  <a
+                    href="https://github.com/dhirendraxd"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="GitHub"
+                    className="inline-flex items-center justify-center p-1 leading-none text-[#181717] transition-all duration-200 hover:opacity-80 hover:-translate-y-0.5"
+                  >
+                    <FaGithub size={26} />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </motion.div>
       </div>
     </section>
   );
