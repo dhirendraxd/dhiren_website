@@ -265,15 +265,43 @@ const AboutSection = () => {
                   </div>
 
                   <div className={`overflow-hidden ${isReverse ? "order-1 lg:order-2" : "order-1 lg:order-1"}`}>
-                    <motion.img
-                      src={project.image}
-                      alt={project.title}
-                      loading="lazy"
-                      decoding="async"
-                      className="w-full h-[250px] md:h-[320px] object-cover border border-border/60"
-                      whileHover={{ scale: 1.03 }}
-                      transition={{ duration: 0.4, ease: "easeOut" }}
-                    />
+                    {project.id === 3 ? (
+                      <motion.div
+                        className="relative w-full h-[250px] md:h-[320px] border border-border/60 bg-gradient-to-br from-slate-100 via-sky-50 to-emerald-50"
+                        whileHover={{ scale: 1.03 }}
+                        transition={{ duration: 0.4, ease: "easeOut" }}
+                      >
+                        <div className="absolute inset-0 opacity-70 [background-image:radial-gradient(circle_at_1px_1px,rgba(15,23,42,0.12)_1px,transparent_0)] [background-size:20px_20px]" />
+                        <div className="absolute left-6 top-8 h-20 w-20 rounded-full bg-emerald-300/40 blur-xl" />
+                        <div className="absolute right-10 top-14 h-16 w-16 rounded-full bg-sky-300/40 blur-lg" />
+                        <div className="absolute left-1/2 top-1/2 w-[78%] -translate-x-1/2 -translate-y-1/2 rounded-xl border border-emerald-200/80 bg-white/90 p-5 shadow-sm">
+                          <div className="flex items-center gap-3">
+                            <div className="inline-flex h-11 w-11 items-center justify-center rounded-lg bg-emerald-100 text-emerald-700">
+                              <Users size={20} />
+                            </div>
+                            <div className="space-y-1">
+                              <div className="h-2.5 w-32 rounded bg-slate-300/80" />
+                              <div className="h-2 w-24 rounded bg-slate-200" />
+                            </div>
+                          </div>
+                          <div className="mt-4 grid grid-cols-3 gap-2">
+                            <div className="h-7 rounded-md bg-emerald-100" />
+                            <div className="h-7 rounded-md bg-sky-100" />
+                            <div className="h-7 rounded-md bg-amber-100" />
+                          </div>
+                        </div>
+                      </motion.div>
+                    ) : (
+                      <motion.img
+                        src={project.image}
+                        alt={project.title}
+                        loading="lazy"
+                        decoding="async"
+                        className="w-full h-[250px] md:h-[320px] object-cover border border-border/60"
+                        whileHover={{ scale: 1.03 }}
+                        transition={{ duration: 0.4, ease: "easeOut" }}
+                      />
+                    )}
                   </div>
                 </motion.article>
               );
@@ -291,10 +319,10 @@ const AboutSection = () => {
           <div className="flex items-start justify-center gap-6">
             <div className="max-w-4xl mx-auto">
               <h3 className="mt-4 py-4 md:py-6 text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05] text-foreground max-w-4xl mx-auto text-center">
-                If it involves people, ideas, or the internet—I’m probably already doing it.
+                "If it involves people, ideas, or the internet—I’m probably already doing it"
               </h3>
 
-              <div className="mt-10 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+              <div className="mt-5 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
                 <p className="text-2xl font-semibold tracking-tight text-foreground">Connect with me</p>
                 <div className="flex items-center justify-start gap-4 md:justify-end">
                   <a
@@ -302,36 +330,52 @@ const AboutSection = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="LinkedIn"
-                    className="inline-flex items-center justify-center p-1 leading-none text-[#0A66C2] transition-all duration-200 hover:opacity-80 hover:-translate-y-0.5"
+                    title="LinkedIn"
+                    className="group relative inline-flex items-center justify-center p-1 leading-none text-[#0A66C2] transition-all duration-200 hover:opacity-80 hover:-translate-y-0.5"
                   >
                     <FaLinkedinIn size={26} />
+                    <span className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 rounded bg-foreground px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-background opacity-0 transition-opacity duration-150 group-hover:opacity-100">
+                      LinkedIn
+                    </span>
                   </a>
                   <a
                     href="https://x.com"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="X"
-                    className="inline-flex items-center justify-center p-1 leading-none text-[#111111] transition-all duration-200 hover:opacity-80 hover:-translate-y-0.5"
+                    title="X"
+                    className="group relative inline-flex items-center justify-center p-1 leading-none text-[#111111] transition-all duration-200 hover:opacity-80 hover:-translate-y-0.5"
                   >
                     <FaXTwitter size={26} />
+                    <span className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 rounded bg-foreground px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-background opacity-0 transition-opacity duration-150 group-hover:opacity-100">
+                      X
+                    </span>
                   </a>
                   <a
                     href="https://instagram.com"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Instagram"
-                    className="inline-flex items-center justify-center p-1 leading-none text-[#E4405F] transition-all duration-200 hover:opacity-80 hover:-translate-y-0.5"
+                    title="Instagram"
+                    className="group relative inline-flex items-center justify-center p-1 leading-none text-[#E4405F] transition-all duration-200 hover:opacity-80 hover:-translate-y-0.5"
                   >
                     <FaInstagram size={26} />
+                    <span className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 rounded bg-foreground px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-background opacity-0 transition-opacity duration-150 group-hover:opacity-100">
+                      Insta
+                    </span>
                   </a>
                   <a
                     href="https://github.com/dhirendraxd"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="GitHub"
-                    className="inline-flex items-center justify-center p-1 leading-none text-[#181717] transition-all duration-200 hover:opacity-80 hover:-translate-y-0.5"
+                    title="GitHub"
+                    className="group relative inline-flex items-center justify-center p-1 leading-none text-[#181717] transition-all duration-200 hover:opacity-80 hover:-translate-y-0.5"
                   >
                     <FaGithub size={26} />
+                    <span className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 rounded bg-foreground px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-background opacity-0 transition-opacity duration-150 group-hover:opacity-100">
+                      GitHub
+                    </span>
                   </a>
                 </div>
               </div>

@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { AtSign, MapPin, Send } from "lucide-react";
-import { FaLinkedinIn, FaInstagram, FaGithub } from "react-icons/fa";
-import { FaXTwitter } from "react-icons/fa6";
 import { useToast } from "@/hooks/use-toast";
 import emailjs from "@emailjs/browser";
 
@@ -14,8 +12,6 @@ const Footer = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    organization: "",
-    projectType: "",
     message: "",
   });
 
@@ -29,8 +25,6 @@ const Footer = () => {
     const sanitizedData = {
       name: formData.name.trim().slice(0, 100),
       email: formData.email.trim().toLowerCase().slice(0, 254),
-      organization: formData.organization.trim().slice(0, 100),
-      projectType: formData.projectType.trim().slice(0, 80),
       message: formData.message.trim().slice(0, 1000),
     };
 
@@ -69,8 +63,6 @@ const Footer = () => {
           email: sanitizedData.email,
           from_email: sanitizedData.email,
           reply_to: sanitizedData.email,
-          organization: sanitizedData.organization,
-          project_type: sanitizedData.projectType,
           message: sanitizedData.message,
           submitted_at: new Date().toISOString(),
         },
@@ -101,14 +93,7 @@ const Footer = () => {
     <footer id="contact" className="scroll-mt-24 py-16 px-8 md:px-12 bg-card font-sans">
       <div className="max-w-[76rem] mx-auto">
         <div className="grid lg:grid-cols-[1fr_1.2fr] gap-10 items-start">
-          <div className="rounded-2xl bg-muted/35 p-8 space-y-8">
-            <div className="space-y-4">
-              <p className="text-base font-semibold tracking-tight text-foreground">Dhirendra Singh Dhami</p>
-              <p className="text-sm text-foreground/80 max-w-xs">
-                Have a brand to grow? Let us build your next high-performing campaign together.
-              </p>
-            </div>
-
+          <div className="space-y-8 pt-2">
             <div className="space-y-5 text-sm">
               <div className="space-y-1.5">
                 <div className="flex items-center gap-2 text-foreground font-medium">
@@ -136,53 +121,10 @@ const Footer = () => {
                   Kathmandu, Nepal
                 </p>
               </div>
-
-              <div className="space-y-1.5">
-                <div className="pl-9 pt-2 flex items-center gap-4 w-fit border-t border-border/50">
-                  <a
-                    href="https://linkedin.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="LinkedIn"
-                    className="inline-flex items-center justify-center p-1 leading-none text-[#0A66C2] transition-all duration-200 hover:opacity-80 hover:-translate-y-0.5"
-                  >
-                    <FaLinkedinIn size={30} />
-                  </a>
-                  <a
-                    href="https://x.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="X"
-                    className="inline-flex items-center justify-center p-1 leading-none text-[#111111] transition-all duration-200 hover:opacity-80 hover:-translate-y-0.5"
-                  >
-                    <FaXTwitter size={30} />
-                  </a>
-                  <a
-                    href="https://instagram.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Instagram"
-                    className="inline-flex items-center justify-center p-1 leading-none text-[#E4405F] transition-all duration-200 hover:opacity-80 hover:-translate-y-0.5"
-                  >
-                    <FaInstagram size={30} />
-                  </a>
-                  <a
-                    href="https://github.com/dhirendraxd"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="GitHub"
-                    className="inline-flex items-center justify-center p-1 leading-none text-[#181717] transition-all duration-200 hover:opacity-80 hover:-translate-y-0.5"
-                  >
-                    <FaGithub size={30} />
-                  </a>
-                </div>
-              </div>
             </div>
           </div>
 
-          <div className="space-y-8">
-            <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-foreground">Get in touch.</h2>
-
+          <div>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid sm:grid-cols-2 gap-x-10 gap-y-6">
                 <div className="space-y-2">
@@ -217,35 +159,6 @@ const Footer = () => {
                   />
                 </div>
 
-                <div className="space-y-2">
-                  <label htmlFor="organization" className="text-xs font-medium text-muted-foreground">
-                    Organization / Brand
-                  </label>
-                  <input
-                    id="organization"
-                    type="text"
-                    name="organization"
-                    value={formData.organization}
-                    onChange={handleChange}
-                    className="w-full bg-transparent border-0 border-b border-border px-0 py-2 text-sm text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:border-foreground"
-                    placeholder="Team or brand name"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label htmlFor="projectType" className="text-xs font-medium text-muted-foreground">
-                    Project type
-                  </label>
-                  <input
-                    id="projectType"
-                    type="text"
-                    name="projectType"
-                    value={formData.projectType}
-                    onChange={handleChange}
-                    className="w-full bg-transparent border-0 border-b border-border px-0 py-2 text-sm text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:border-foreground"
-                    placeholder="SEO, content, web, collaboration"
-                  />
-                </div>
               </div>
 
               <div className="space-y-2">
@@ -288,8 +201,6 @@ const Footer = () => {
                           setFormData({
                             name: "",
                             email: "",
-                            organization: "",
-                            projectType: "",
                             message: "",
                           });
                           toast({

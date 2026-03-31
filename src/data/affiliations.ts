@@ -20,16 +20,6 @@ export interface RelevantExperience {
 
 const experiences: ExperienceConfig[] = [
   {
-    order: 2,
-    title: "Fellow",
-    company: "ALL In Foundation (AIF)",
-    link: "https://www.facebook.com/allinfoundationnp/",
-    dateConfig: {
-      start: "2026-02",
-      autoEndAfterMonths: 6,
-    },
-  },
-  {
     order: 1,
     title: "Digital Marketer",
     company: "CtrlBits",
@@ -40,7 +30,27 @@ const experiences: ExperienceConfig[] = [
     suffix: " · Full-time",
   },
   {
+    order: 2,
+    title: "Co-host",
+    company: "Lovelac Talk",
+    link: "https://linktr.ee/lovelacetalk",
+    dateConfig: {
+      start: "2026-02",
+    },
+    suffix: "",
+  },
+  {
     order: 3,
+    title: "Fellow",
+    company: "ALL In Foundation (AIF)",
+    link: "https://www.facebook.com/allinfoundationnp/",
+    dateConfig: {
+      start: "2026-02",
+      autoEndAfterMonths: 6,
+    },
+  },
+  {
+    order: 4,
     title: "Sustainability Mentee",
     company: "Sustainability Solutions",
     link: "https://sustainability.com.np/",
