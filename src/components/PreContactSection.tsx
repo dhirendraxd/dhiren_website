@@ -37,10 +37,10 @@ const PreContactSection = () => {
               >
                 <Icon className="h-7 w-7 text-foreground/80" strokeWidth={1.6} />
                 <div className="space-y-1">
-                  <p className="text-5xl font-semibold tracking-tight text-foreground leading-none">
+                  <p className="text-4xl font-semibold tracking-tight text-foreground leading-none">
                     {item.value}
                   </p>
-                  <p className="text-base text-muted-foreground">{item.label}</p>
+                  <p className="text-sm text-muted-foreground">{item.label}</p>
                 </div>
               </div>
             );
@@ -49,11 +49,10 @@ const PreContactSection = () => {
 
         <div className="text-center space-y-3 md:space-y-4">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold leading-tight tracking-tight text-foreground">
-            <span>Say Hi!</span>{" "}
-            <span className="block md:inline">and tell me about your idea</span>
+            Say Hi! Tell me about your idea.
           </h2>
           <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto font-sans">
-            Have a nice work? Reach out and let&apos;s chat.
+            Have a project in mind? Reach out and let&apos;s chat.
           </p>
         </div>
       </div>

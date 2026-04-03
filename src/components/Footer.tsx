@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { AtSign, MapPin, Send } from "lucide-react";
+import { Send } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import emailjs from "@emailjs/browser";
 
@@ -90,46 +90,20 @@ const Footer = () => {
   };
 
   return (
-    <footer id="contact" className="scroll-mt-24 py-16 px-8 md:px-12 bg-card font-sans">
-      <div className="max-w-[76rem] mx-auto">
-        <div className="grid lg:grid-cols-[1fr_1.2fr] gap-10 items-start">
-          <div className="space-y-8 pt-2">
-            <div className="space-y-5 text-sm">
-              <div className="space-y-1.5">
-                <div className="flex items-center gap-2 text-foreground font-medium">
-                  <span className="inline-flex h-7 w-7 items-center justify-center text-muted-foreground">
-                    <AtSign size={13} strokeWidth={1.8} />
-                  </span>
-                  <span>Email me</span>
-                </div>
-                <a
-                  href="mailto:dhirendraxd@gmail.com"
-                  className="block pl-9 text-muted-foreground leading-relaxed hover:text-[#7A3A30] transition-colors duration-200"
-                >
-                  dhirendraxd@gmail.com
-                </a>
+    <footer id="contact" className="scroll-mt-24 bg-card px-4 py-18 font-sans sm:px-8 md:px-12">
+      <div className="mx-auto max-w-[76rem]">
+        <div>
+          <form onSubmit={handleSubmit} className="relative mx-auto max-w-[64rem] space-y-7">
+              <div className="absolute -right-1 -top-1 hidden h-12 w-12 grid-cols-6 grid-rows-6 gap-[2px] opacity-35 sm:grid">
+                {Array.from({ length: 36 }).map((_, i) => (
+                  <span key={i} className="h-1 w-1 rounded-full bg-foreground/80" />
+                ))}
               </div>
 
-              <div className="space-y-1.5">
-                <div className="flex items-center gap-2 text-foreground font-medium">
-                  <span className="inline-flex h-7 w-7 items-center justify-center text-muted-foreground">
-                    <MapPin size={13} strokeWidth={1.8} />
-                  </span>
-                  <span>Based in</span>
-                </div>
-                <p className="pl-9 text-muted-foreground leading-relaxed">
-                  Kathmandu, Nepal
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid sm:grid-cols-2 gap-x-10 gap-y-6">
+              <div className="grid gap-5 sm:grid-cols-2">
                 <div className="space-y-2">
-                  <label htmlFor="name" className="text-xs font-medium text-muted-foreground">
-                    Your name <span className="text-foreground">*</span>
+                  <label htmlFor="name" className="text-sm font-semibold text-foreground">
+                    Name.<span className="text-foreground">*</span>
                   </label>
                   <input
                     id="name"
@@ -138,14 +112,14 @@ const Footer = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full bg-transparent border-0 border-b border-border px-0 py-2 text-sm text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:border-foreground"
-                    placeholder="Enter name"
+                    className="w-full border-b border-border bg-transparent px-0 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/70 transition-colors duration-200 focus:border-foreground focus:outline-none"
+                    placeholder="Hello..."
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <label htmlFor="email" className="text-xs font-medium text-muted-foreground">
-                    Your email <span className="text-foreground">*</span>
+                  <label htmlFor="email" className="text-sm font-semibold text-foreground">
+                    Email.<span className="text-foreground">*</span>
                   </label>
                   <input
                     id="email"
@@ -154,15 +128,14 @@ const Footer = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full bg-transparent border-0 border-b border-border px-0 py-2 text-sm text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:border-foreground"
-                    placeholder="Enter email"
+                    className="w-full border-b border-border bg-transparent px-0 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/70 transition-colors duration-200 focus:border-foreground focus:outline-none"
+                    placeholder="Where can I reply"
                   />
                 </div>
-
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="message" className="text-xs font-medium text-muted-foreground">
+                <label htmlFor="message" className="text-sm font-semibold text-foreground">
                   Message
                 </label>
                 <textarea
@@ -171,14 +144,14 @@ const Footer = () => {
                   value={formData.message}
                   onChange={handleChange}
                   required
-                  rows={2}
-                  className="w-full bg-transparent border-0 border-b border-border px-0 py-2 text-sm text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:border-foreground resize-none"
-                  placeholder="Share your goals, timeline, and what support you need."
+                  rows={5}
+                  className="min-h-[140px] w-full border-b border-border bg-transparent px-0 py-2.5 text-sm leading-relaxed text-foreground placeholder:text-muted-foreground/70 transition-colors duration-200 focus:border-foreground focus:outline-none resize-none"
+                  placeholder="Share your project or idea in short"
                 />
               </div>
 
-              <div className="flex justify-end pt-2">
-                <div className="relative h-9 w-[96px] overflow-visible">
+              <div className="flex flex-col items-end gap-2 pt-1">
+                <div className="relative h-10 w-[112px] overflow-visible">
                   <AnimatePresence mode="wait">
                     {isSendAnimating ? (
                       <motion.div
@@ -221,9 +194,9 @@ const Footer = () => {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -2 }}
                         transition={{ duration: 0.22 }}
-                        className="group absolute inset-0 inline-flex items-center justify-center rounded-none border border-foreground bg-foreground text-background text-sm font-medium transition-colors duration-300 hover:bg-[#7A3A30] hover:border-[#7A3A30] hover:text-[#FFF5F0] disabled:cursor-not-allowed disabled:opacity-75"
+                        className="group absolute inset-0 inline-flex items-center justify-center rounded-none border border-foreground bg-[#f7f4ee] text-foreground text-sm font-medium transition-colors duration-300 hover:bg-[#7A3A30] hover:text-white disabled:cursor-not-allowed disabled:opacity-75"
                       >
-                        <span>{isSubmitting ? "Sending" : "Send"}</span>
+                        <span>{isSubmitting ? "Sending" : "Send Me"}</span>
                         <Send
                           size={14}
                           className="ml-0 w-0 opacity-0 transition-all duration-300 group-hover:ml-1 group-hover:w-[14px] group-hover:opacity-100"
@@ -233,15 +206,17 @@ const Footer = () => {
                   </AnimatePresence>
                 </div>
               </div>
-            </form>
-          </div>
+          </form>
         </div>
 
-        <div className="mt-10 pt-6 border-t border-border/70">
+        <div className="mt-6 border-t border-border/70 pt-4 pb-4 md:pb-5">
           <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between text-xs text-muted-foreground">
             <p className="text-center md:text-left">© 2026 Dhiren. All rights reserved.</p>
 
-            <nav className="flex items-center justify-center gap-5" aria-label="Footer quick links">
+            <nav
+              className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 sm:gap-x-5"
+              aria-label="Footer quick links"
+            >
               <a href="/#about" className="hover:text-[#7A3A30] hover:underline underline-offset-4 decoration-2 decoration-[#7A3A30] transition-colors duration-200">What I Work On</a>
               <a href="/#projects" className="hover:text-[#7A3A30] hover:underline underline-offset-4 decoration-2 decoration-[#7A3A30] transition-colors duration-200">Projects</a>
               <a href="/#contact" className="hover:text-[#7A3A30] hover:underline underline-offset-4 decoration-2 decoration-[#7A3A30] transition-colors duration-200">Contact</a>

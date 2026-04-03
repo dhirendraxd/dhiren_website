@@ -318,13 +318,13 @@ const AboutSection = () => {
         >
           <div className="flex items-start justify-center gap-6">
             <div className="max-w-4xl mx-auto">
-              <h3 className="mt-4 py-4 md:py-6 text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05] text-foreground max-w-4xl mx-auto text-center">
+              <h3 className="mt-4 py-4 md:py-6 text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.05] text-foreground max-w-4xl mx-auto text-center">
                 "If it involves people, ideas, or the internet—I’m probably already doing it"
               </h3>
 
-              <div className="mt-5 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-                <p className="text-2xl font-semibold tracking-tight text-foreground">Connect with me</p>
-                <div className="flex items-center justify-start gap-4 md:justify-end">
+              <div className="mt-12 flex flex-col gap-5 md:flex-row md:items-center md:justify-between md:gap-8">
+                <p className="text-xl font-semibold tracking-tight text-foreground">Connect with me</p>
+                <div className="flex items-center justify-start gap-5 md:justify-end">
                   <a
                     href="https://linkedin.com"
                     target="_blank"
