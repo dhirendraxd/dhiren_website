@@ -150,13 +150,13 @@ const Footer = () => {
                   value={formData.message}
                   onChange={handleChange}
                   required
-                  rows={3}
-                  className="min-h-[92px] w-full border-b border-border bg-transparent px-0 py-2.5 text-sm leading-relaxed text-foreground placeholder:text-muted-foreground/70 transition-colors duration-200 focus:border-foreground focus:outline-none resize-none"
+                  rows={2}
+                  className="min-h-[72px] w-full border-b border-border bg-transparent px-0 py-2.5 text-sm leading-snug text-foreground placeholder:text-muted-foreground/70 transition-colors duration-200 focus:border-foreground focus:outline-none resize-none"
                   placeholder="Share your project or idea in short"
                 />
               </div>
 
-              <div className="flex flex-col items-end gap-2 pt-1">
+              <div className="flex flex-col items-end gap-1 pt-0">
                 <div className="relative h-10 w-[112px] overflow-visible">
                   <AnimatePresence mode="wait">
                     {isSendAnimating ? (
