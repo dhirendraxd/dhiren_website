@@ -73,8 +73,8 @@ const ConnectSection = () => {
                 </div>
               </div>
 
-              <h3 className="mt-10 py-4 md:py-6 text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.05] text-foreground max-w-4xl mx-auto text-center">
-                "If it involves people, ideas, or the internet-I&apos;m probably already doing it"
+              <h3 className="mt-10 py-4 md:py-6 text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight leading-relaxed text-foreground max-w-4xl mx-auto text-center font-sans">
+                "Half curiosity, half 'why not'—that's most of what I do."
               </h3>
               <div className="mx-auto mt-2 h-px w-[80%] bg-border/70" aria-hidden="true" />
             </div>

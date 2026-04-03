@@ -94,9 +94,6 @@ const Footer = () => {
       <div className="mx-auto max-w-[76rem]">
         <div>
           <div className="mx-auto mb-8 max-w-[64rem] text-center space-y-3 md:space-y-4">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold leading-tight tracking-tight text-foreground font-rajdhani">
-              Say Hi! Tell me about your idea.
-            </h2>
             <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
               Have a project in mind? Reach out and let&apos;s chat.
             </p>
@@ -153,8 +150,8 @@ const Footer = () => {
                   value={formData.message}
                   onChange={handleChange}
                   required
-                  rows={5}
-                  className="min-h-[140px] w-full border-b border-border bg-transparent px-0 py-2.5 text-sm leading-relaxed text-foreground placeholder:text-muted-foreground/70 transition-colors duration-200 focus:border-foreground focus:outline-none resize-none"
+                  rows={3}
+                  className="min-h-[92px] w-full border-b border-border bg-transparent px-0 py-2.5 text-sm leading-relaxed text-foreground placeholder:text-muted-foreground/70 transition-colors duration-200 focus:border-foreground focus:outline-none resize-none"
                   placeholder="Share your project or idea in short"
                 />
               </div>
@@ -219,17 +216,8 @@ const Footer = () => {
         </div>
 
         <div className="mt-6 border-t border-border/70 pt-4 pb-4 md:pb-5">
-          <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between text-xs text-muted-foreground">
-            <p className="text-center md:text-left">© 2026 Dhiren. All rights reserved.</p>
-
-            <nav
-              className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 sm:gap-x-5"
-              aria-label="Footer quick links"
-            >
-              <a href="/#about" className="hover:text-[#7A3A30] hover:underline underline-offset-4 decoration-2 decoration-[#7A3A30] transition-colors duration-200">What I Work On</a>
-              <a href="/#projects" className="hover:text-[#7A3A30] hover:underline underline-offset-4 decoration-2 decoration-[#7A3A30] transition-colors duration-200">Projects</a>
-              <a href="/#contact" className="hover:text-[#7A3A30] hover:underline underline-offset-4 decoration-2 decoration-[#7A3A30] transition-colors duration-200">Contact</a>
-            </nav>
+          <div className="flex flex-col gap-3 text-center text-xs text-muted-foreground">
+            <p>© 2026 Dhiren. Crafting ideas into reality, one keystroke at a time. ✨</p>
           </div>
         </div>
       </div>
