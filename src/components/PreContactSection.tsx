@@ -25,7 +25,7 @@ const stats = [
 const PreContactSection = () => {
   return (
     <section className="pt-4 pb-14 px-8 md:px-12 bg-card font-rajdhani">
-      <div className="max-w-[84rem] mx-auto space-y-16">
+      <div className="max-w-[84rem] mx-auto">
         <div className="grid sm:grid-cols-3 border border-border/60 rounded-sm overflow-hidden bg-card">
           {stats.map((item) => {
             const Icon = item.icon;
@@ -45,15 +45,6 @@ const PreContactSection = () => {
               </div>
             );
           })}
-        </div>
-
-        <div className="text-center space-y-3 md:space-y-4">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold leading-tight tracking-tight text-foreground">
-            Say Hi! Tell me about your idea.
-          </h2>
-          <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto font-sans">
-            Have a project in mind? Reach out and let&apos;s chat.
-          </p>
         </div>
       </div>
     </section>

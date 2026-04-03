@@ -93,6 +93,15 @@ const Footer = () => {
     <footer id="contact" className="scroll-mt-24 bg-card px-4 py-18 font-sans sm:px-8 md:px-12">
       <div className="mx-auto max-w-[76rem]">
         <div>
+          <div className="mx-auto mb-8 max-w-[64rem] text-center space-y-3 md:space-y-4">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold leading-tight tracking-tight text-foreground font-rajdhani">
+              Say Hi! Tell me about your idea.
+            </h2>
+            <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
+              Have a project in mind? Reach out and let&apos;s chat.
+            </p>
+          </div>
+
           <form onSubmit={handleSubmit} className="relative mx-auto max-w-[64rem] space-y-7">
               <div className="absolute -right-1 -top-1 hidden h-12 w-12 grid-cols-6 grid-rows-6 gap-[2px] opacity-35 sm:grid">
                 {Array.from({ length: 36 }).map((_, i) => (

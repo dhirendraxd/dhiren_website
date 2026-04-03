@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
 import PreContactSection from "@/components/PreContactSection";
+import ConnectSection from "@/components/ConnectSection";
 import Footer from "@/components/Footer";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
 
@@ -35,6 +36,7 @@ const Index = () => {
       <HeroSection />
       <AboutSection />
       <PreContactSection />
+      <ConnectSection />
       <Footer />
     </div>
   );

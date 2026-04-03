@@ -1,7 +1,5 @@
 import { motion } from "framer-motion";
 import { ArrowRight, ArrowUpRight, Megaphone, Code2, Users } from "lucide-react";
-import { FaLinkedinIn, FaInstagram, FaGithub } from "react-icons/fa";
-import { FaXTwitter } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { getRelevantExperiences } from "@/data/affiliations";
 
@@ -54,7 +52,7 @@ const AboutSection = () => {
   ];
 
   return (
-    <section id="about" className="scroll-mt-24 py-24 px-8 md:px-12 bg-card font-rajdhani">
+    <section id="about" className="scroll-mt-24 pt-24 pb-10 md:pb-12 px-8 md:px-12 bg-card font-rajdhani">
       <div className="max-w-[84rem] mx-auto">
         <div className="space-y-10">
           <motion.div
@@ -309,80 +307,6 @@ const AboutSection = () => {
           </div>
         </div>
 
-        <motion.div
-          className="mt-24 px-1 py-2"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.45 }}
-          viewport={{ once: true }}
-        >
-          <div className="flex items-start justify-center gap-6">
-            <div className="max-w-4xl mx-auto">
-              <h3 className="mt-4 py-4 md:py-6 text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.05] text-foreground max-w-4xl mx-auto text-center">
-                "If it involves people, ideas, or the internet—I’m probably already doing it"
-              </h3>
-
-              <div className="mt-12 flex flex-col gap-5 md:flex-row md:items-center md:justify-between md:gap-8">
-                <p className="text-xl font-semibold tracking-tight text-foreground">Connect with me</p>
-                <div className="flex items-center justify-start gap-5 md:justify-end">
-                  <a
-                    href="https://linkedin.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="LinkedIn"
-                    title="LinkedIn"
-                    className="group relative inline-flex items-center justify-center p-1 leading-none text-[#0A66C2] transition-all duration-200 hover:opacity-80 hover:-translate-y-0.5"
-                  >
-                    <FaLinkedinIn size={26} />
-                    <span className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 rounded bg-foreground px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-background opacity-0 transition-opacity duration-150 group-hover:opacity-100">
-                      LinkedIn
-                    </span>
-                  </a>
-                  <a
-                    href="https://x.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="X"
-                    title="X"
-                    className="group relative inline-flex items-center justify-center p-1 leading-none text-[#111111] transition-all duration-200 hover:opacity-80 hover:-translate-y-0.5"
-                  >
-                    <FaXTwitter size={26} />
-                    <span className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 rounded bg-foreground px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-background opacity-0 transition-opacity duration-150 group-hover:opacity-100">
-                      X
-                    </span>
-                  </a>
-                  <a
-                    href="https://instagram.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Instagram"
-                    title="Instagram"
-                    className="group relative inline-flex items-center justify-center p-1 leading-none text-[#E4405F] transition-all duration-200 hover:opacity-80 hover:-translate-y-0.5"
-                  >
-                    <FaInstagram size={26} />
-                    <span className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 rounded bg-foreground px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-background opacity-0 transition-opacity duration-150 group-hover:opacity-100">
-                      Insta
-                    </span>
-                  </a>
-                  <a
-                    href="https://github.com/dhirendraxd"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="GitHub"
-                    title="GitHub"
-                    className="group relative inline-flex items-center justify-center p-1 leading-none text-[#181717] transition-all duration-200 hover:opacity-80 hover:-translate-y-0.5"
-                  >
-                    <FaGithub size={26} />
-                    <span className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 rounded bg-foreground px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-background opacity-0 transition-opacity duration-150 group-hover:opacity-100">
-                      GitHub
-                    </span>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </motion.div>
       </div>
     </section>
   );
