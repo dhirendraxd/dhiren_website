@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, ArrowUpRight, Megaphone, Code2, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 import { getRelevantExperiences } from "@/data/affiliations";
+import { issueHiveThumbnail } from "@/data/projectDetails";
 
 const AboutSection = () => {
   const workAreas = [
@@ -31,9 +32,9 @@ const AboutSection = () => {
     {
       id: 1,
       type: "Tech Project",
-      title: "AI-assisted web solution for public document workflows.",
-      image: new URL("@/assets/hackathon&evets/1736784796315.jpeg", import.meta.url).href,
-      href: "/projects/government-workflow-assistant",
+      title: "Issue Hive - Awarded 3rd Prize at KIST Fair 2082",
+      image: issueHiveThumbnail,
+      href: "/projects/issue-hive-awarded-3rd-prize-at-kist-fair-2082",
     },
     {
       id: 2,

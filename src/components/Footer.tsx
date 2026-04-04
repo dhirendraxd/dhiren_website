@@ -217,7 +217,7 @@ const Footer = () => {
 
         <div className="mt-6 border-t border-border/70 pt-4 pb-4 md:pb-5">
           <div className="flex flex-col gap-3 text-center text-xs text-muted-foreground">
-            <p>© 2026 Dhiren. Crafting ideas into reality, one keystroke at a time. ✨</p>
+            <p>"The rest I'll figure out mid-fall." </p>
           </div>
         </div>
       </div>

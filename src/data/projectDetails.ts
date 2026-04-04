@@ -43,15 +43,15 @@ const createAbstractIllustration = (
 };
 
 const selectedProjectIllustrations = {
-  governmentWorkflowAssistant: createAbstractIllustration(
-    "Government Workflow Assistant",
-    "Civic AI and guided form automation",
+  issueHive: createAbstractIllustration(
+    "IssueHive",
+    "Issue reporting for campus voices",
     {
-      bgStart: "#e9d5ff",
-      bgEnd: "#c4b5fd",
-      accentA: "#6d28d9",
-      accentB: "#4c1d95",
-      text: "#2e1065",
+      bgStart: "#fee2e2",
+      bgEnd: "#fecaca",
+      accentA: "#7A3A30",
+      accentB: "#991b1b",
+      text: "#4c0519",
     },
   ),
   fellowshipCommunityLabs: createAbstractIllustration(
@@ -77,6 +77,8 @@ const selectedProjectIllustrations = {
     },
   ),
 };
+
+export const issueHiveThumbnail = new URL("@/assets/issue hive .webp", import.meta.url).href;
 
 const images = {
   mitraSmart: new URL("@/assets/hackathon&evets/1736784796315.jpeg", import.meta.url).href,
@@ -252,21 +254,21 @@ export const projectDetails: ProjectDetail[] = [
     image: images.eduConnect
   },
   {
-    slug: "government-workflow-assistant",
-    title: "Government Workflow Assistant",
+    slug: "issue-hive-awarded-3rd-prize-at-kist-fair-2082",
+    title: "Issue Hive - Awarded 3rd Prize at KIST Fair 2082",
     serviceSlug: "tech-projects",
-    category: "Civic Tech",
-    date: "13 Jan 2025",
-    summary: "AI-assisted workflow concept for document checks and context-aware guidance during public form completion.",
-    challenge: "Public-facing workflows were slow due to repeated document and form errors.",
-    approach: "Built an assistant flow to validate document requirements early and guide users step-by-step through submission stages.",
+    category: "Campus Innovation",
+    date: "Feb 2026",
+    summary: "College-focused platform that enables students to submit, support, and track campus-related issues simply and transparently.",
+    challenge: "Campus concerns were easy to raise informally but difficult to track, prioritize, and resolve in a visible way.",
+    approach: "Designed a minimal student-first reporting flow with community moderation, issue visibility, and simple status tracking.",
     outcomes: [
-      "Reduced common user errors in early prototypes.",
-      "Faster completion path for first-time users.",
-      "Clear architecture for future integration."
+      "Won 3rd Prize at KIST Fair 2082.",
+      "Created a clearer path for students to raise and follow campus issues.",
+      "Established a lightweight model for transparent community moderation."
     ],
-    tags: ["Civic Tech", "AI", "Workflow Automation"],
-    image: selectedProjectIllustrations.governmentWorkflowAssistant
+    tags: ["Campus Innovation", "Community", "Student Platform"],
+    image: issueHiveThumbnail
   },
   {
     slug: "university-fit-engine",

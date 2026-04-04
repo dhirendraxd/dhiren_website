@@ -4,7 +4,7 @@ import { ArrowUpRight, Sparkles } from "lucide-react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
-import { getProjectSlugByTitle } from "@/data/projectDetails";
+import { getProjectSlugByTitle, issueHiveThumbnail } from "@/data/projectDetails";
 
 type ServiceSlug = "digital-marketing" | "advocacy-community" | "tech-projects";
 
@@ -72,15 +72,15 @@ const createAbstractIllustration = (
 };
 
 const selectedProjectIllustrations = {
-  governmentWorkflowAssistant: createAbstractIllustration(
-    "Government Workflow Assistant",
-    "Civic AI and guided form automation",
+  issueHive: createAbstractIllustration(
+    "IssueHive",
+    "Issue reporting for campus voices",
     {
-      bgStart: "#e9d5ff",
-      bgEnd: "#c4b5fd",
-      accentA: "#6d28d9",
-      accentB: "#4c1d95",
-      text: "#2e1065",
+      bgStart: "#fee2e2",
+      bgEnd: "#fecaca",
+      accentA: "#7A3A30",
+      accentB: "#991b1b",
+      text: "#4c0519",
     },
   ),
   fellowshipCommunityLabs: createAbstractIllustration(
@@ -416,12 +416,12 @@ const serviceShowcases: Record<ServiceSlug, ShowcasePageConfig> = {
     filters: ["Hackathon", "Web Platform", "AI", "Civic Tech"],
     projects: [
       {
-        title: "Government Workflow Assistant",
-        description: "AI check-flow for documents and context-aware public form completion support.",
-        image: selectedProjectIllustrations.governmentWorkflowAssistant,
-        date: "13 Jan 2025",
+        title: "Issue Hive - Awarded 3rd Prize at KIST Fair 2082",
+        description: "College-focused platform for students to submit, support, and track campus issues transparently.",
+        image: issueHiveThumbnail,
+        date: "Feb 2026",
         href: "/hackathon/1",
-        category: "Civic Tech",
+        category: "Campus Innovation",
       },
       {
         title: "University Fit Engine",
