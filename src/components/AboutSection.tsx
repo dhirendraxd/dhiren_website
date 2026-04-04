@@ -40,7 +40,7 @@ const AboutSection = () => {
       id: 3,
       type: "Tech Project",
       title: "Volunteer platform design for NGOs and youth programs.",
-      image: new URL("@/assets/hackathon&evets/SXC SANDBOX Logo.jpg", import.meta.url).href,
+      image: new URL("@/assets/hackathon-events/logo.png", import.meta.url).href,
       href: "/projects/ngo-volunteer-management",
     },
     {

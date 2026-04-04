@@ -108,11 +108,11 @@ const selectedProjectIllustrations = {
 };
 
 const imageAssets = {
-  mitraSmart: new URL("@/assets/hackathon&evets/1736784796315.jpeg", import.meta.url).href,
+  mitraSmart: new URL("@/assets/hackathon-events/1736784796315.jpeg", import.meta.url).href,
   civicTech: new URL("@/assets/civic tech.webp", import.meta.url).href,
-  eduConnect: new URL("@/assets/hackathon&evets/kec_lite_2081-thumbnail-1000x525.png", import.meta.url).href,
-  devBus: new URL("@/assets/hackathon&evets/logo.png", import.meta.url).href,
-  volunteerPlatform: new URL("@/assets/hackathon&evets/SXC SANDBOX Logo.jpg", import.meta.url).href,
+  eduConnect: new URL("@/assets/hackathon-events/kec_lite_2081-thumbnail-1000x525.png", import.meta.url).href,
+  devBus: new URL("@/assets/hackathon-events/logo.png", import.meta.url).href,
+  volunteerPlatform: new URL("@/assets/hackathon-events/logo.png", import.meta.url).href,
   allInFoundation: new URL("@/assets/affiliation/all_in_foundation_aif_logo.jpeg", import.meta.url).href,
   awsCloudClub: new URL("@/assets/affiliation/aws_cloud_club_at_tu_logo.jpeg", import.meta.url).href,
   netMission: new URL("@/assets/affiliation/netmission.jpeg", import.meta.url).href,
