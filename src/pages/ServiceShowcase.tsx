@@ -159,6 +159,38 @@ const getCardAction = (card: ShowcaseCard) => {
   };
 };
 
+const ProjectImage = ({ card }: { card: ShowcaseCard }) => {
+  const action = getCardAction(card);
+
+  const image = (
+    <img
+      src={card.image}
+      alt={card.title}
+      loading="lazy"
+      decoding="async"
+      className="aspect-[16/10] h-auto w-full object-cover sm:aspect-[4/3]"
+    />
+  );
+
+  if (!action) {
+    return image;
+  }
+
+  if (action.external) {
+    return (
+      <a href={action.href} target="_blank" rel="noopener noreferrer" className="block" aria-label={card.title}>
+        {image}
+      </a>
+    );
+  }
+
+  return (
+    <Link to={action.href} className="block" aria-label={card.title}>
+      {image}
+    </Link>
+  );
+};
+
 const serviceShowcases: Record<ServiceSlug, ShowcasePageConfig> = {
   "digital-marketing": {
     badge: "",
@@ -641,14 +673,8 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.3, delay: index * 0.04 }}
               >
-                <div className="h-[176px] overflow-hidden border-b border-[#e4d9cf] bg-[#eee4d8]">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    loading="lazy"
-                    decoding="async"
-                    className="h-full w-full object-cover transition-transform duration-500 hover:scale-[1.04]"
-                  />
+                <div className="overflow-hidden border-b border-[#e4d9cf] bg-[#eee4d8]">
+                  <ProjectImage card={project} />
                 </div>
                 <div className="space-y-2.5 p-4">
                   <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#7A3A30]">{project.category}</p>

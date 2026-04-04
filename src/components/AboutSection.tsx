@@ -265,11 +265,12 @@ const AboutSection = () => {
 
                   <div className={`overflow-hidden ${isReverse ? "order-1 lg:order-2" : "order-1 lg:order-1"}`}>
                     {project.id === 3 ? (
-                      <motion.div
-                        className="relative w-full h-[250px] md:h-[320px] border border-border/60 bg-gradient-to-br from-slate-100 via-sky-50 to-emerald-50"
-                        whileHover={{ scale: 1.03 }}
-                        transition={{ duration: 0.4, ease: "easeOut" }}
+                      <Link
+                        to={project.href}
+                        aria-label={project.title}
+                        className="block"
                       >
+                        <div className="relative aspect-[16/10] w-full border border-border/60 bg-gradient-to-br from-slate-100 via-sky-50 to-emerald-50 sm:aspect-[4/3]">
                         <div className="absolute inset-0 opacity-70 [background-image:radial-gradient(circle_at_1px_1px,rgba(15,23,42,0.12)_1px,transparent_0)] [background-size:20px_20px]" />
                         <div className="absolute left-6 top-8 h-20 w-20 rounded-full bg-emerald-300/40 blur-xl" />
                         <div className="absolute right-10 top-14 h-16 w-16 rounded-full bg-sky-300/40 blur-lg" />
@@ -289,17 +290,18 @@ const AboutSection = () => {
                             <div className="h-7 rounded-md bg-amber-100" />
                           </div>
                         </div>
-                      </motion.div>
+                        </div>
+                      </Link>
                     ) : (
-                      <motion.img
-                        src={project.image}
-                        alt={project.title}
-                        loading="lazy"
-                        decoding="async"
-                        className="w-full h-[250px] md:h-[320px] object-cover border border-border/60"
-                        whileHover={{ scale: 1.03 }}
-                        transition={{ duration: 0.4, ease: "easeOut" }}
-                      />
+                      <Link to={project.href} aria-label={project.title} className="block">
+                        <img
+                          src={project.image}
+                          alt={project.title}
+                          loading="lazy"
+                          decoding="async"
+                          className="aspect-[16/10] w-full border border-border/60 object-cover sm:aspect-[4/3]"
+                        />
+                      </Link>
                     )}
                   </div>
                 </motion.article>
