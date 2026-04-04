@@ -296,7 +296,7 @@ const AboutSection = () => {
                       <Link to={project.href} aria-label={project.title} className="mx-auto block w-full max-w-[34rem]">
                         <img
                           src={project.image}
-                          alt={project.title}
+                          alt={`${project.title} project thumbnail`}
                           loading="lazy"
                           decoding="async"
                           className="aspect-[16/10] w-full object-cover"

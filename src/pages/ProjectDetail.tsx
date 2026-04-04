@@ -49,19 +49,30 @@ const ProjectDetail = () => {
     const previousOgTitle = getMetaTag('meta[property="og:title"]')?.getAttribute("content") || "";
     const previousOgDescription = getMetaTag('meta[property="og:description"]')?.getAttribute("content") || "";
     const previousOgUrl = getMetaTag('meta[property="og:url"]')?.getAttribute("content") || "";
+    const previousOgImage = getMetaTag('meta[property="og:image"]')?.getAttribute("content") || "";
+    const previousOgImageAlt = getMetaTag('meta[property="og:image:alt"]')?.getAttribute("content") || "";
     const previousTwitterTitle = getMetaTag('meta[name="twitter:title"]')?.getAttribute("content") || "";
     const previousTwitterDescription = getMetaTag('meta[name="twitter:description"]')?.getAttribute("content") || "";
+    const previousTwitterImage = getMetaTag('meta[name="twitter:image"]')?.getAttribute("content") || "";
+    const previousTwitterImageAlt = getMetaTag('meta[name="twitter:image:alt"]')?.getAttribute("content") || "";
     const previousCanonical = getCanonical()?.getAttribute("href") || "";
 
     const pageTitle = `${project.title} | Project Case Study | Dhirendra Singh Dhami`;
     document.title = pageTitle;
 
     upsertMetaTag('meta[name="description"]', { name: "description", content: project.summary });
+    upsertMetaTag('meta[property="og:type"]', { property: "og:type", content: "article" });
+    upsertMetaTag('meta[property="og:site_name"]', { property: "og:site_name", content: "Dhirendra Singh Dhami Portfolio" });
     upsertMetaTag('meta[property="og:title"]', { property: "og:title", content: pageTitle });
     upsertMetaTag('meta[property="og:description"]', { property: "og:description", content: project.summary });
     upsertMetaTag('meta[property="og:url"]', { property: "og:url", content: projectUrl });
+    upsertMetaTag('meta[property="og:image"]', { property: "og:image", content: project.image });
+    upsertMetaTag('meta[property="og:image:alt"]', { property: "og:image:alt", content: `${project.title} project preview image` });
     upsertMetaTag('meta[name="twitter:title"]', { name: "twitter:title", content: pageTitle });
     upsertMetaTag('meta[name="twitter:description"]', { name: "twitter:description", content: project.summary });
+    upsertMetaTag('meta[name="twitter:card"]', { name: "twitter:card", content: "summary_large_image" });
+    upsertMetaTag('meta[name="twitter:image"]', { name: "twitter:image", content: project.image });
+    upsertMetaTag('meta[name="twitter:image:alt"]', { name: "twitter:image:alt", content: `${project.title} project preview image` });
     upsertCanonical(projectUrl);
 
     const jsonLdId = "project-jsonld";
@@ -97,8 +108,12 @@ const ProjectDetail = () => {
       upsertMetaTag('meta[property="og:title"]', { property: "og:title", content: previousOgTitle });
       upsertMetaTag('meta[property="og:description"]', { property: "og:description", content: previousOgDescription });
       upsertMetaTag('meta[property="og:url"]', { property: "og:url", content: previousOgUrl });
+      upsertMetaTag('meta[property="og:image"]', { property: "og:image", content: previousOgImage });
+      upsertMetaTag('meta[property="og:image:alt"]', { property: "og:image:alt", content: previousOgImageAlt });
       upsertMetaTag('meta[name="twitter:title"]', { name: "twitter:title", content: previousTwitterTitle });
       upsertMetaTag('meta[name="twitter:description"]', { name: "twitter:description", content: previousTwitterDescription });
+      upsertMetaTag('meta[name="twitter:image"]', { name: "twitter:image", content: previousTwitterImage });
+      upsertMetaTag('meta[name="twitter:image:alt"]', { name: "twitter:image:alt", content: previousTwitterImageAlt });
       upsertCanonical(previousCanonical || BASE_URL);
       document.getElementById(jsonLdId)?.remove();
     };
@@ -138,7 +153,7 @@ const ProjectDetail = () => {
           <div className="overflow-hidden border border-[#ddd2c8] bg-[#ede2d6] p-2">
             <img
               src={project.image}
-              alt={project.title}
+              alt={`${project.title} project preview image`}
               loading="eager"
               fetchPriority="high"
               decoding="async"

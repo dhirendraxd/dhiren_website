@@ -1,5 +1,6 @@
 import heroImage from "@/assets/Untitled design.webp";
 import Navbar from "@/components/Navbar";
+import Seo from "@/components/Seo";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
 import { Link } from "react-router-dom";
 
@@ -58,6 +59,14 @@ const values = [
 const About = () => {
   return (
     <main className="min-h-screen bg-card text-foreground">
+      <Seo
+        title="About Dhiren | Digital Marketing, UI/UX, and Community Projects"
+        description="Learn more about Dhiren's background in digital marketing, product design, community advocacy, and hackathon projects like Issue Hive."
+        canonicalPath="/about"
+        image={heroImage}
+        imageAlt="Portrait illustration of Dhiren for the About page"
+        type="profile"
+      />
       <ScrollProgressBar />
       <Navbar />
 
@@ -66,9 +75,10 @@ const About = () => {
           <div className="mx-auto w-full max-w-[460px] md:mx-0">
             <img
               src={heroImage}
-              alt="Profile"
+              alt="Portrait illustration of Dhiren for the About page"
               className="h-auto w-full object-contain"
               loading="eager"
+              fetchPriority="high"
               decoding="async"
             />
           </div>

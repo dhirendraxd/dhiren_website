@@ -1,9 +1,16 @@
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
+import Seo from "@/components/Seo";
 
 const NotFound = () => {
   return (
     <div className="min-h-screen bg-background">
+      <Seo
+        title="Page Not Found | Dhirendra Singh Dhami"
+        description="This page does not exist on Dhirendra Singh Dhami's portfolio website."
+        canonicalPath="/404"
+        noIndex
+      />
       <Navbar />
       <div className="flex items-center justify-center px-6 pb-10 pt-24 sm:pt-28 md:pt-32">
         <div className="w-full max-w-3xl space-y-8 text-center">

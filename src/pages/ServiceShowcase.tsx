@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { ArrowUpRight, Sparkles } from "lucide-react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import Navbar from "@/components/Navbar";
+import Seo from "@/components/Seo";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
 import { getProjectSlugByTitle, issueHiveThumbnail } from "@/data/projectDetails";
 
@@ -166,7 +167,7 @@ const ProjectImage = ({ card }: { card: ShowcaseCard }) => {
   const image = (
     <img
       src={card.image}
-      alt={card.title}
+      alt={`${card.title} project thumbnail`}
       loading="lazy"
       decoding="async"
       className="aspect-[16/10] h-auto w-full object-cover"
@@ -535,6 +536,8 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
   }
 
   const showcase = serviceShowcases[resolvedSlug];
+  const pageTitle = `${showcase.heroTitle} | Dhirendra Singh Dhami`;
+  const pageDescription = showcase.heroSummary;
   const projectFilters = ["All", ...showcase.filters];
   const visibleProjects =
     activeFilter === "All"
@@ -543,6 +546,13 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
 
   return (
     <div className="min-h-screen bg-card">
+      <Seo
+        title={pageTitle}
+        description={pageDescription}
+        canonicalPath={`/${resolvedSlug}`}
+        image={showcase.statsImage}
+        imageAlt={`${showcase.statsTitle} visual summary`}
+      />
       <ScrollProgressBar />
       <Navbar />
 
@@ -586,7 +596,7 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
               >
                 <img
                   src={showcase.statsImage}
-                  alt={showcase.statsTitle}
+                  alt={`${showcase.statsTitle} visual summary`}
                   loading="eager"
                   fetchPriority="high"
                   decoding="async"

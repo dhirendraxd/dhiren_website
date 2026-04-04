@@ -58,7 +58,7 @@ const HeroSection = () => {
             <div className="relative flex flex-col items-center">
               <img
                 src={untitledDesignImage}
-                alt="Dhiren illustration"
+                alt="Portrait illustration of Dhiren on the homepage"
                 loading="eager"
                 fetchPriority="high"
                 decoding="async"
