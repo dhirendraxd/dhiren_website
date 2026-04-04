@@ -30,17 +30,10 @@ const AboutSection = () => {
 
   const projects = [
     {
-      id: 1,
-      type: "Tech Project",
-      title: "Issue Hive - Awarded 3rd Prize at KIST Fair 2082",
-      image: issueHiveThumbnail,
-      href: "/projects/issue-hive-awarded-3rd-prize-at-kist-fair-2082",
-    },
-    {
       id: 2,
       type: "Community Project",
       title: "Community fellowship initiatives for collaborative social impact.",
-      image: new URL("@/assets/affiliation/all_in_foundation_aif_logo.jpeg", import.meta.url).href,
+      image: new URL("@/assets/civic tech.webp", import.meta.url).href,
       href: "/projects/fellowship-community-labs",
     },
     {
@@ -49,6 +42,13 @@ const AboutSection = () => {
       title: "Volunteer platform design for NGOs and youth programs.",
       image: new URL("@/assets/hackathon&evets/SXC SANDBOX Logo.jpg", import.meta.url).href,
       href: "/projects/ngo-volunteer-management",
+    },
+    {
+      id: 1,
+      type: "Tech Project",
+      title: "Issue Hive - Awarded 3rd Prize at KIST Fair 2082",
+      image: issueHiveThumbnail,
+      href: "/projects/issue-hive-awarded-3rd-prize-at-kist-fair-2082",
     },
   ];
 
@@ -268,9 +268,9 @@ const AboutSection = () => {
                       <Link
                         to={project.href}
                         aria-label={project.title}
-                        className="block"
+                        className="mx-auto block w-full max-w-[34rem]"
                       >
-                        <div className="relative aspect-[16/10] w-full border border-border/60 bg-gradient-to-br from-slate-100 via-sky-50 to-emerald-50 sm:aspect-[4/3]">
+                        <div className="relative aspect-[16/10] w-full bg-gradient-to-br from-slate-100 via-sky-50 to-emerald-50">
                         <div className="absolute inset-0 opacity-70 [background-image:radial-gradient(circle_at_1px_1px,rgba(15,23,42,0.12)_1px,transparent_0)] [background-size:20px_20px]" />
                         <div className="absolute left-6 top-8 h-20 w-20 rounded-full bg-emerald-300/40 blur-xl" />
                         <div className="absolute right-10 top-14 h-16 w-16 rounded-full bg-sky-300/40 blur-lg" />
@@ -293,13 +293,13 @@ const AboutSection = () => {
                         </div>
                       </Link>
                     ) : (
-                      <Link to={project.href} aria-label={project.title} className="block">
+                      <Link to={project.href} aria-label={project.title} className="mx-auto block w-full max-w-[34rem]">
                         <img
                           src={project.image}
                           alt={project.title}
                           loading="lazy"
                           decoding="async"
-                          className="aspect-[16/10] w-full border border-border/60 object-cover sm:aspect-[4/3]"
+                          className="aspect-[16/10] w-full object-cover"
                         />
                       </Link>
                     )}

@@ -109,6 +109,7 @@ const selectedProjectIllustrations = {
 
 const imageAssets = {
   mitraSmart: new URL("@/assets/hackathon&evets/1736784796315.jpeg", import.meta.url).href,
+  civicTech: new URL("@/assets/civic tech.webp", import.meta.url).href,
   eduConnect: new URL("@/assets/hackathon&evets/kec_lite_2081-thumbnail-1000x525.png", import.meta.url).href,
   devBus: new URL("@/assets/hackathon&evets/logo.png", import.meta.url).href,
   volunteerPlatform: new URL("@/assets/hackathon&evets/SXC SANDBOX Logo.jpg", import.meta.url).href,
@@ -168,7 +169,7 @@ const ProjectImage = ({ card }: { card: ShowcaseCard }) => {
       alt={card.title}
       loading="lazy"
       decoding="async"
-      className="aspect-[16/10] h-auto w-full object-cover sm:aspect-[4/3]"
+      className="aspect-[16/10] h-auto w-full object-cover"
     />
   );
 
@@ -448,17 +449,9 @@ const serviceShowcases: Record<ServiceSlug, ShowcasePageConfig> = {
     filters: ["Hackathon", "Web Platform", "AI", "Civic Tech"],
     projects: [
       {
-        title: "Issue Hive - Awarded 3rd Prize at KIST Fair 2082",
-        description: "College-focused platform for students to submit, support, and track campus issues transparently.",
-        image: issueHiveThumbnail,
-        date: "Feb 2026",
-        href: "/hackathon/1",
-        category: "Campus Innovation",
-      },
-      {
         title: "University Fit Engine",
         description: "Recommendation logic and student profile matching for admission discovery.",
-        image: imageAssets.eduConnect,
+        image: imageAssets.civicTech,
         date: "20 Feb 2025",
         href: "/hackathon/2",
         category: "AI",
@@ -470,6 +463,14 @@ const serviceShowcases: Record<ServiceSlug, ShowcasePageConfig> = {
         date: "16 Apr 2025",
         href: "/hackathon/3",
         category: "AI",
+      },
+      {
+        title: "Issue Hive - Awarded 3rd Prize at KIST Fair 2082",
+        description: "College-focused platform for students to submit, support, and track campus issues transparently.",
+        image: issueHiveThumbnail,
+        date: "Feb 2026",
+        href: "/hackathon/1",
+        category: "Campus Innovation",
       },
       {
         title: "NGO Volunteer Management",
@@ -667,13 +668,13 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
             {visibleProjects.map((project, index) => (
               <motion.article
                 key={`${project.title}-${activeFilter}`}
-                className="border border-[#ddd2c8] bg-[#faf5ef] transition-shadow duration-300 hover:shadow-[0_8px_20px_rgba(39,29,23,0.12)]"
+                className="bg-[#faf5ef] transition-shadow duration-300 hover:shadow-[0_8px_20px_rgba(39,29,23,0.12)]"
                 initial={{ opacity: 0, y: 14 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.3, delay: index * 0.04 }}
               >
-                <div className="overflow-hidden border-b border-[#e4d9cf] bg-[#eee4d8]">
+                <div className="overflow-hidden">
                   <ProjectImage card={project} />
                 </div>
                 <div className="space-y-2.5 p-4">
