@@ -60,9 +60,10 @@ const ConnectSection = () => {
               </div>
 
               <h3 className="mt-10 py-4 md:py-6 text-2xl md:text-3xl lg:text-4xl font-normal tracking-tight leading-[1.8] text-foreground max-w-3xl mx-auto text-center font-sans">
-                <span className="block">Half curiosity, half</span>
+                <span className="block text-muted-foreground">Half curiosity, half</span>
                 <span className="mt-3 block">
-                  <span className="text-[#6b1f1a] text-3xl md:text-4xl lg:text-5xl">"why not"</span>— that's most of what I do.
+                  <span className="text-[#6b1f1a] text-3xl md:text-4xl lg:text-5xl">"why not"</span>
+                  <span className="text-muted-foreground">— that's most of what I do.</span>
                 </span>
               </h3>
               <div className="mx-auto mt-2 h-px w-[80%] bg-border/70" aria-hidden="true" />
