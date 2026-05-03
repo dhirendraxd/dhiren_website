@@ -43,7 +43,8 @@ const HeroSection = () => {
               <span className="font-nekst">I</span>
               <span className="font-sans">'</span>
               <span className="font-nekst">m Into </span>
-              <span className="font-nekst text-[#7A3A30]">Digital Marketing</span>
+              <span className="font-nekst text-muted-foreground">Digital </span>
+              <span className="font-nekst text-[#7A3A30]">Marketing</span>
             </motion.h2>
 
           </div>

@@ -26,7 +26,7 @@ const PreContactSection = () => {
   return (
     <section className="pt-4 pb-14 px-8 md:px-12 bg-card font-rajdhani">
       <div className="max-w-[84rem] mx-auto">
-        <div className="grid sm:grid-cols-3 border border-border/60 rounded-sm overflow-hidden bg-card">
+        <div className="grid sm:grid-cols-3 border border-border/60 rounded-none overflow-hidden bg-card">
           {stats.map((item) => {
             const Icon = item.icon;
 

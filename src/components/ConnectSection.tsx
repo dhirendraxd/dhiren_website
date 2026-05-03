@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { FaLinkedinIn, FaInstagram, FaGithub } from "react-icons/fa";
-import { FaXTwitter } from "react-icons/fa6";
 
 const ConnectSection = () => {
   return (
@@ -14,10 +13,10 @@ const ConnectSection = () => {
           viewport={{ once: true }}
         >
           <div className="flex items-start justify-center gap-6">
-            <div className="max-w-4xl mx-auto">
-              <div className="mt-4 flex flex-col gap-5 md:flex-row md:items-center md:justify-between md:gap-8">
+            <div className="w-full max-w-4xl">
+              <div className="mt-4 flex w-full flex-col gap-5 md:flex-row md:items-center md:justify-between md:gap-0">
                 <p className="text-xl font-semibold tracking-tight text-foreground">Connect with me</p>
-                <div className="flex items-center justify-start gap-5 md:justify-end">
+                <div className="flex items-center justify-start gap-6 md:justify-end md:gap-8">
                   <a
                     href="https://linkedin.com"
                     target="_blank"
@@ -29,19 +28,6 @@ const ConnectSection = () => {
                     <FaLinkedinIn size={26} />
                     <span className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 rounded bg-foreground px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-background opacity-0 transition-opacity duration-150 group-hover:opacity-100">
                       LinkedIn
-                    </span>
-                  </a>
-                  <a
-                    href="https://x.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="X"
-                    title="X"
-                    className="group relative inline-flex items-center justify-center p-1 leading-none text-[#111111] transition-all duration-200 hover:opacity-80 hover:-translate-y-0.5"
-                  >
-                    <FaXTwitter size={26} />
-                    <span className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 rounded bg-foreground px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-background opacity-0 transition-opacity duration-150 group-hover:opacity-100">
-                      X
                     </span>
                   </a>
                   <a
@@ -73,10 +59,10 @@ const ConnectSection = () => {
                 </div>
               </div>
 
-              <h3 className="mt-10 py-4 md:py-6 text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight leading-[1.8] text-foreground max-w-3xl mx-auto text-center font-sans">
+              <h3 className="mt-10 py-4 md:py-6 text-2xl md:text-3xl lg:text-4xl font-normal tracking-tight leading-[1.8] text-foreground max-w-3xl mx-auto text-center font-sans">
                 <span className="block">Half curiosity, half</span>
                 <span className="mt-3 block">
-                  <span className="text-[#6b1f1a]">"why not"</span>— that's most of what I do.
+                  <span className="text-[#6b1f1a] text-3xl md:text-4xl lg:text-5xl">"why not"</span>— that's most of what I do.
                 </span>
               </h3>
               <div className="mx-auto mt-2 h-px w-[80%] bg-border/70" aria-hidden="true" />
