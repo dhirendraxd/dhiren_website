@@ -80,8 +80,9 @@ const Navbar = () => {
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-8" role="navigation" aria-label="Main navigation">
-            {navLinks.map((link) => 
-              link.name === "Contact" ? (
+            {navLinks.map((link) => {
+              if (link.name === "Contact" && !isHomePage) return null;
+              return link.name === "Contact" ? (
                 <button
                   key={link.name}
                   onClick={scrollToContact}
@@ -97,8 +98,8 @@ const Navbar = () => {
                 >
                   {link.name}
                 </Link>
-              )
-            )}
+              );
+            })}
           </nav>
 
           {/* Mobile Hamburger */}
@@ -150,8 +151,9 @@ const Navbar = () => {
             aria-label="Mobile navigation"
           >
             <div className="px-8 py-4 flex flex-col gap-1">
-              {navLinks.map((link) =>
-                link.name === "Contact" ? (
+              {navLinks.map((link) => {
+                if (link.name === "Contact" && !isHomePage) return null;
+                return link.name === "Contact" ? (
                   <button
                     key={link.name}
                     onClick={scrollToContact}
@@ -168,8 +170,8 @@ const Navbar = () => {
                   >
                     {link.name}
                   </Link>
-                )
-              )}
+                );
+              })}
             </div>
           </motion.nav>
         )}
