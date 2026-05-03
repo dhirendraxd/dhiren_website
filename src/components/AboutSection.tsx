@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, ArrowUpRight, Megaphone, Code2, Users } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -5,6 +6,7 @@ import { getRelevantExperiences } from "@/data/affiliations";
 import { issueHiveThumbnail } from "@/data/projectDetails";
 
 const AboutSection = () => {
+  const [showAllExperiences, setShowAllExperiences] = useState(false);
   const workAreas = [
     {
       title: "Digital Marketing",
@@ -40,7 +42,7 @@ const AboutSection = () => {
       id: 3,
       type: "Tech Project",
       title: "Volunteer platform design for NGOs and youth programs.",
-      image: new URL("@/assets/hackathon-events/logo.png", import.meta.url).href,
+      image: new URL("@/assets/2nd new .webp", import.meta.url).href,
       href: "/projects/ngo-volunteer-management",
     },
     {
@@ -140,7 +142,7 @@ const AboutSection = () => {
           </motion.div>
 
           <div className="space-y-4">
-            {experiments.map((item, index) => {
+            {experiments.slice(0, showAllExperiences ? experiments.length : 3).map((item, index) => {
               const isHighlighted = index === 0;
 
               return (
@@ -200,6 +202,26 @@ const AboutSection = () => {
                 </motion.div>
               );
             })}
+            
+            {!showAllExperiences && experiments.length > 3 && (
+              <motion.div
+                className="flex justify-center pt-4"
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: 0.3 }}
+                viewport={{ once: true }}
+              >
+                <button
+                  onClick={() => setShowAllExperiences(true)}
+                  className="group inline-flex items-center gap-2 text-xs font-medium text-muted-foreground hover:text-[#7A3A30] transition-colors duration-300"
+                >
+                  <span className="relative inline-block after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-[#7A3A30] after:transition-all after:duration-300 group-hover:after:w-full">
+                    View More
+                  </span>
+                  <ArrowRight size={12} className="transition-transform duration-300 group-hover:translate-x-0.5" />
+                </button>
+              </motion.div>
+            )}
           </div>
         </div>
 
@@ -264,45 +286,15 @@ const AboutSection = () => {
                   </div>
 
                   <div className={`overflow-hidden ${isReverse ? "order-1 lg:order-2" : "order-1 lg:order-1"}`}>
-                    {project.id === 3 ? (
-                      <Link
-                        to={project.href}
-                        aria-label={project.title}
-                        className="mx-auto block w-full max-w-[34rem]"
-                      >
-                        <div className="relative aspect-[16/10] w-full bg-gradient-to-br from-slate-100 via-sky-50 to-emerald-50">
-                        <div className="absolute inset-0 opacity-70 [background-image:radial-gradient(circle_at_1px_1px,rgba(15,23,42,0.12)_1px,transparent_0)] [background-size:20px_20px]" />
-                        <div className="absolute left-6 top-8 h-20 w-20 rounded-full bg-emerald-300/40 blur-xl" />
-                        <div className="absolute right-10 top-14 h-16 w-16 rounded-full bg-sky-300/40 blur-lg" />
-                        <div className="absolute left-1/2 top-1/2 w-[78%] -translate-x-1/2 -translate-y-1/2 rounded-xl border border-emerald-200/80 bg-white/90 p-5 shadow-sm">
-                          <div className="flex items-center gap-3">
-                            <div className="inline-flex h-11 w-11 items-center justify-center rounded-lg bg-emerald-100 text-emerald-700">
-                              <Users size={20} />
-                            </div>
-                            <div className="space-y-1">
-                              <div className="h-2.5 w-32 rounded bg-slate-300/80" />
-                              <div className="h-2 w-24 rounded bg-slate-200" />
-                            </div>
-                          </div>
-                          <div className="mt-4 grid grid-cols-3 gap-2">
-                            <div className="h-7 rounded-md bg-emerald-100" />
-                            <div className="h-7 rounded-md bg-sky-100" />
-                            <div className="h-7 rounded-md bg-amber-100" />
-                          </div>
-                        </div>
-                        </div>
-                      </Link>
-                    ) : (
-                      <Link to={project.href} aria-label={project.title} className="mx-auto block w-full max-w-[34rem]">
-                        <img
-                          src={project.image}
-                          alt={`${project.title} project thumbnail`}
-                          loading="lazy"
-                          decoding="async"
-                          className="aspect-[16/10] w-full object-cover"
-                        />
-                      </Link>
-                    )}
+                    <Link to={project.href} aria-label={project.title} className="mx-auto block w-full max-w-[34rem]">
+                      <img
+                        src={project.image}
+                        alt={`${project.title} project thumbnail`}
+                        loading="lazy"
+                        decoding="async"
+                        className={`aspect-[16/10] w-full ${project.id === 3 ? "object-contain" : "object-cover"}`}
+                      />
+                    </Link>
                   </div>
                 </motion.article>
               );

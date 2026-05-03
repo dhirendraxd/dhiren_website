@@ -84,7 +84,7 @@ const images = {
   mitraSmart: new URL("@/assets/hackathon-events/1736784796315.jpeg", import.meta.url).href,
   eduConnect: new URL("@/assets/hackathon-events/kec_lite_2081-thumbnail-1000x525.png", import.meta.url).href,
   devBus: new URL("@/assets/hackathon-events/logo.png", import.meta.url).href,
-  volunteerPlatform: new URL("@/assets/hackathon-events/logo.png", import.meta.url).href,
+  volunteerPlatform: new URL("@/assets/2nd new .webp", import.meta.url).href,
   allInFoundation: new URL("@/assets/affiliation/all_in_foundation_aif_logo.jpeg", import.meta.url).href,
   awsCloudClub: new URL("@/assets/affiliation/aws_cloud_club_at_tu_logo.jpeg", import.meta.url).href,
   netMission: new URL("@/assets/affiliation/netmission.jpeg", import.meta.url).href,
@@ -319,7 +319,7 @@ export const projectDetails: ProjectDetail[] = [
       "Clear path for phased product expansion."
     ],
     tags: ["Web Platform", "NGO", "Volunteer Ops"],
-    image: selectedProjectIllustrations.ngoVolunteerManagement
+    image: images.volunteerPlatform
   },
   {
     slug: "cloud-community-toolkit",
