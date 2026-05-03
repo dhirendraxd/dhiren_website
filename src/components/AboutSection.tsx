@@ -292,6 +292,9 @@ const AboutSection = () => {
                         alt={`${project.title} project thumbnail`}
                         loading="lazy"
                         decoding="async"
+                        width={544}
+                        height={340}
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 544px"
                         className={`aspect-[16/10] w-full ${project.id === 3 ? "object-contain" : "object-cover"}`}
                       />
                     </Link>

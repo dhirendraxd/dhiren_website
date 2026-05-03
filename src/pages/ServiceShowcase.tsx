@@ -170,6 +170,9 @@ const ProjectImage = ({ card }: { card: ShowcaseCard }) => {
       alt={`${card.title} project thumbnail`}
       loading="lazy"
       decoding="async"
+      width={400}
+      height={250}
+      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
       className="aspect-[16/10] h-auto w-full object-cover"
     />
   );
@@ -600,6 +603,9 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
                   loading="eager"
                   fetchPriority="high"
                   decoding="async"
+                  width={1200}
+                  height={630}
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 900px"
                   className="h-[220px] w-full object-cover sm:h-[300px] md:h-[470px]"
                 />
               </motion.div>

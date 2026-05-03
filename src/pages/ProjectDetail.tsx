@@ -157,6 +157,9 @@ const ProjectDetail = () => {
               loading="eager"
               fetchPriority="high"
               decoding="async"
+              width={1200}
+              height={630}
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 900px"
               className="h-[260px] w-full object-cover sm:h-[340px] md:h-[420px]"
             />
           </div>
