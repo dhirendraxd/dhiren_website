@@ -5,7 +5,7 @@ import { Menu, X } from "lucide-react";
 
 const navLinks = [
   { name: "What I Work On", href: "/#about" },
-  { name: "Contact", href: "/#contact" },
+  { name: "Contact", href: null },
 ];
 
 const Navbar = () => {
@@ -52,6 +52,15 @@ const Navbar = () => {
   // Close mobile menu on nav click
   const handleNavClick = () => setMobileOpen(false);
 
+  // Scroll to contact section without adding fragment to URL
+  const scrollToContact = () => {
+    const contactSection = document.getElementById("contact");
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: "smooth" });
+    }
+    handleNavClick();
+  };
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 bg-transparent border-b border-transparent transition-all duration-500 ease-out ${
@@ -62,7 +71,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo / Name */}
           <Link
-            to="/#home"
+            to="/"
             onClick={handleNavClick}
             className="font-nekst text-lg font-semibold text-foreground tracking-tight hover:opacity-75 transition-opacity"
           >
@@ -71,15 +80,25 @@ const Navbar = () => {
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-8" role="navigation" aria-label="Main navigation">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                to={link.href}
-                className="text-sm font-medium text-foreground/70"
-              >
-                {link.name}
-              </Link>
-            ))}
+            {navLinks.map((link) => 
+              link.name === "Contact" ? (
+                <button
+                  key={link.name}
+                  onClick={scrollToContact}
+                  className="text-sm font-medium text-foreground/70 hover:text-foreground transition-colors"
+                >
+                  {link.name}
+                </button>
+              ) : (
+                <Link
+                  key={link.name}
+                  to={link.href}
+                  className="text-sm font-medium text-foreground/70 hover:text-foreground transition-colors"
+                >
+                  {link.name}
+                </Link>
+              )
+            )}
           </nav>
 
           {/* Mobile Hamburger */}
@@ -131,16 +150,26 @@ const Navbar = () => {
             aria-label="Mobile navigation"
           >
             <div className="px-8 py-4 flex flex-col gap-1">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  to={link.href}
-                  onClick={handleNavClick}
-                  className="block py-2.5 text-sm font-medium text-foreground/75"
-                >
-                  {link.name}
-                </Link>
-              ))}
+              {navLinks.map((link) =>
+                link.name === "Contact" ? (
+                  <button
+                    key={link.name}
+                    onClick={scrollToContact}
+                    className="block py-2.5 text-sm font-medium text-foreground/75 text-left hover:text-foreground transition-colors"
+                  >
+                    {link.name}
+                  </button>
+                ) : (
+                  <Link
+                    key={link.name}
+                    to={link.href}
+                    onClick={handleNavClick}
+                    className="block py-2.5 text-sm font-medium text-foreground/75 hover:text-foreground transition-colors"
+                  >
+                    {link.name}
+                  </Link>
+                )
+              )}
             </div>
           </motion.nav>
         )}

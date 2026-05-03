@@ -37,7 +37,7 @@ const PreContactSection = () => {
               >
                 <Icon className="h-7 w-7 text-foreground/80" strokeWidth={1.6} />
                 <div className="space-y-1">
-                  <p className="text-4xl font-semibold tracking-tight text-foreground leading-none">
+                  <p className={`text-4xl font-semibold tracking-tight leading-none ${item.value === "1085" ? "text-[#7A3A30]" : "text-foreground"}`}>
                     {item.value}
                   </p>
                   <p className="text-sm text-muted-foreground">{item.label}</p>
