@@ -10,7 +10,6 @@ const Index = lazy(() => import("./pages/Index"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const ServiceShowcase = lazy(() => import("./pages/ServiceShowcase"));
 const ProjectDetail = lazy(() => import("./pages/ProjectDetail"));
-const About = lazy(() => import("./pages/About"));
 
 const queryClient = new QueryClient();
 
@@ -61,7 +60,6 @@ const AnimatedRoutes = () => {
             <Route path="/services" element={<Navigate to="/digital-marketing" replace />} />
             <Route path="/services/:slug" element={<LegacyServiceRedirect />} />
             <Route path="/projects/:slug" element={<ProjectDetail />} />
-            <Route path="/about" element={<About />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </motion.main>
