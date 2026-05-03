@@ -71,7 +71,7 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden md:flex items-center gap-8" role="navigation" aria-label="Main navigation">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
@@ -88,6 +88,8 @@ const Navbar = () => {
             onClick={() => setMobileOpen((o) => !o)}
             className="md:hidden flex items-center justify-center h-9 w-9 rounded-md text-foreground hover:bg-muted transition-colors"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-nav"
           >
             <AnimatePresence mode="wait" initial={false}>
               {mobileOpen ? (
@@ -120,11 +122,14 @@ const Navbar = () => {
       <AnimatePresence>
         {mobileOpen && (
           <motion.nav
+            id="mobile-nav"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25, ease: "easeInOut" }}
             className="md:hidden overflow-hidden bg-card/95 backdrop-blur-md border-b border-border/50"
+            role="navigation"
+            aria-label="Mobile navigation"
           >
             <div className="px-8 py-4 flex flex-col gap-1">
               {navLinks.map((link) => (

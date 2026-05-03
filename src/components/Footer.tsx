@@ -90,10 +90,10 @@ const Footer = () => {
   };
 
   return (
-    <footer id="contact" className="scroll-mt-24 bg-card px-4 py-18 font-sans sm:px-8 md:px-12">
+    <footer id="contact" className="scroll-mt-24 bg-card px-4 py-18 font-sans sm:px-8 md:px-12" role="contentinfo">
       <div className="mx-auto max-w-[76rem]">
         <div>
-          <form onSubmit={handleSubmit} className="relative mx-auto max-w-[64rem] space-y-7">
+          <form onSubmit={handleSubmit} className="relative mx-auto max-w-[64rem] space-y-7" aria-label="Contact form">
               <div className="absolute -right-1 -top-1 hidden h-12 w-12 grid-cols-6 grid-rows-6 gap-[2px] opacity-35 sm:grid">
                 {Array.from({ length: 36 }).map((_, i) => (
                   <span key={i} className="h-1 w-1 rounded-full bg-foreground/80" />
@@ -103,7 +103,7 @@ const Footer = () => {
               <div className="grid gap-5 sm:grid-cols-2">
                 <div className="space-y-2">
                   <label htmlFor="name" className="text-sm font-semibold text-foreground">
-                    Name.<span className="text-foreground">*</span>
+                    Name.<span className="text-foreground" aria-label="required">*</span>
                   </label>
                   <input
                     id="name"
@@ -112,6 +112,7 @@ const Footer = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
+                    aria-required="true"
                     className="w-full border-b border-border bg-transparent px-0 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/70 transition-colors duration-200 focus:border-foreground focus:outline-none"
                     placeholder="Hello..."
                   />
@@ -119,7 +120,7 @@ const Footer = () => {
 
                 <div className="space-y-2">
                   <label htmlFor="email" className="text-sm font-semibold text-foreground">
-                    Email.<span className="text-foreground">*</span>
+                    Email.<span className="text-foreground" aria-label="required">*</span>
                   </label>
                   <input
                     id="email"
@@ -128,6 +129,7 @@ const Footer = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
+                    aria-required="true"
                     className="w-full border-b border-border bg-transparent px-0 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/70 transition-colors duration-200 focus:border-foreground focus:outline-none"
                     placeholder="Where can I reply"
                   />
@@ -144,6 +146,7 @@ const Footer = () => {
                   value={formData.message}
                   onChange={handleChange}
                   required
+                  aria-required="true"
                   rows={2}
                   className="min-h-[72px] w-full border-b border-border bg-transparent px-0 py-2.5 text-sm leading-snug text-foreground placeholder:text-muted-foreground/70 transition-colors duration-200 focus:border-foreground focus:outline-none resize-none"
                   placeholder="Share your project or idea in short"

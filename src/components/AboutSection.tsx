@@ -55,7 +55,7 @@ const AboutSection = () => {
   ];
 
   return (
-    <section id="about" className="scroll-mt-24 pt-24 pb-10 md:pb-12 px-8 md:px-12 bg-card font-rajdhani">
+    <section id="about" className="scroll-mt-24 pt-24 pb-10 md:pb-12 px-8 md:px-12 bg-card font-rajdhani" role="region" aria-label="About section">
       <div className="max-w-[84rem] mx-auto">
         <div className="space-y-10">
           <motion.div

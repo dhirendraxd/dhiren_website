@@ -17,7 +17,7 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section className="relative h-screen pt-16 flex items-center px-8 md:px-12 lg:px-16">
+    <section className="relative h-screen pt-16 flex items-center px-8 md:px-12 lg:px-16" role="banner" aria-label="Hero section">
       <div className="w-full max-w-[84rem] mx-auto">
         <div className="grid md:grid-cols-2 gap-12 lg:gap-20 xl:gap-24 items-center">
           {/* Text Content */}

@@ -22,12 +22,11 @@ const experiences: ExperienceConfig[] = [
   {
     order: 1,
     title: "Digital Marketer",
-    company: "CtrlBits",
+    company: "Ctrl Bits",
     link: "https://www.ctrlbits.com/",
     dateConfig: {
       start: "2025-04",
     },
-    suffix: " · Full-time",
   },
   {
     order: 2,

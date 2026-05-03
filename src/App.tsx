@@ -43,7 +43,9 @@ const AnimatedRoutes = () => {
   return (
     <Suspense fallback={<RouteFallback />}>
       <AnimatePresence mode="wait" initial={false}>
-        <motion.div
+        <motion.main
+          id="main-content"
+          role="main"
           key={location.pathname}
           variants={pageVariants}
           initial="initial"
@@ -62,7 +64,7 @@ const AnimatedRoutes = () => {
             <Route path="/about" element={<About />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
-        </motion.div>
+        </motion.main>
       </AnimatePresence>
     </Suspense>
   );

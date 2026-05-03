@@ -16,7 +16,7 @@ const ConnectSection = () => {
             <div className="w-full max-w-4xl">
               <div className="mt-4 flex w-full flex-col gap-5 md:flex-row md:items-center md:justify-between md:gap-0">
                 <p className="text-xl font-semibold tracking-tight text-foreground">Connect with me</p>
-                <div className="flex items-center justify-start gap-6 md:justify-end md:gap-8">
+                <nav className="flex items-center justify-start gap-6 md:justify-end md:gap-8" role="navigation" aria-label="Social links">
                   <a
                     href="https://linkedin.com"
                     target="_blank"
@@ -56,7 +56,7 @@ const ConnectSection = () => {
                       GitHub
                     </span>
                   </a>
-                </div>
+                </nav>
               </div>
 
               <h3 className="mt-10 py-4 md:py-6 text-2xl md:text-3xl lg:text-4xl font-normal tracking-tight leading-[1.8] text-foreground max-w-3xl mx-auto text-center font-sans">
