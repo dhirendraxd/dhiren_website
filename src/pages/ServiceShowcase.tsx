@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import { ArrowUpRight, Sparkles } from "lucide-react";
 import { FaGithub, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import { Link, Navigate, useParams } from "react-router-dom";
-import Navbar from "@/components/Navbar";
 import Seo from "@/components/Seo";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
 import { getProjectSlugByTitle, issueHiveThumbnail } from "@/data/projectDetails";
@@ -558,211 +557,49 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
         imageAlt={`${showcase.statsTitle} visual summary`}
       />
       <ScrollProgressBar />
-      <Navbar />
 
       <motion.main
-        className="mx-auto max-w-[84rem] bg-card"
+        className="mx-auto max-w-[84rem] h-screen overflow-hidden bg-card"
         initial={{ opacity: 0, y: 18 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.45, ease: "easeOut" }}
       >
-        <section className="px-4 pb-12 pt-24 font-rajdhani sm:px-6 sm:pt-28 md:px-12 md:pt-32">
+        <section className="h-full px-4 pb-6 pt-6 font-rajdhani sm:px-6 sm:pt-8 md:px-12 md:pt-10 overflow-hidden flex flex-col">
+          <button
+            onClick={() => window.history.back()}
+            className="group inline-flex items-center gap-1 text-sm font-semibold uppercase tracking-[0.2em] text-[#3f3932] transition-colors hover:text-[#7A3A30]"
+          >
+            <span aria-hidden="true" className="flex leading-none transition-transform duration-300 group-hover:-translate-x-1">&larr;</span>
+            <span className="leading-none border-b border-transparent transition-colors group-hover:border-[#7A3A30]">Back</span>
+          </button>
 
-          <div className="grid gap-6 sm:gap-8 xl:grid-cols-[1.08fr_0.92fr] xl:items-end">
-            <div className="space-y-4">
-              {showcase.badge && (
-                <p className="text-xs uppercase tracking-widest font-semibold text-[#7A3A30]">{showcase.badge}</p>
-              )}
-              <h1 className="max-w-4xl text-3xl font-bold leading-tight tracking-tight text-foreground sm:text-4xl md:text-5xl">
-                {showcase.heroTitle}
-              </h1>
-            </div>
-
-            <div className="space-y-4">
-              <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-                {showcase.heroSummary}
-              </p>
-            </div>
-          </div>
-
-          <div className="mt-8 space-y-5 sm:mt-10">
-
-            <div
-              id="statistics"
-              className="mt-4 grid gap-8 sm:mt-6 sm:gap-10 xl:grid-cols-[1.08fr_0.92fr] xl:items-center"
-            >
-              <motion.div
-                className="border border-[#ddd2c8] bg-[#ede2d6] p-3"
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.45 }}
-              >
-                <img
-                  src={showcase.statsImage}
-                  alt={`${showcase.statsTitle} visual summary`}
-                  loading="eager"
-                  fetchPriority="high"
-                  decoding="async"
-                  width={1200}
-                  height={630}
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 900px"
-                  className="h-[220px] w-full object-cover sm:h-[300px] md:h-[470px]"
-                />
-              </motion.div>
-
-              <motion.div
-                className="min-w-0 space-y-5 sm:space-y-7"
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.45 }}
-              >
-                <h3 className="font-nekst text-[2rem] font-semibold leading-tight tracking-tight text-[#1f1815] sm:text-[2.3rem] md:text-[3.35rem]">
-                  {showcase.statsTitle}
-                </h3>
-
-                {showcase.statsSummary && (
-                  <p className="text-sm leading-relaxed text-[#5f5550] md:text-base">{showcase.statsSummary}</p>
-                )}
-
-                {showcase.skillHighlights && showcase.skillHighlights.length > 0 && (
-                  <div className="space-y-4 border-t border-[#dccfc5] pt-5">
-                    <p className="text-sm font-bold uppercase tracking-[0.12em] text-[#4f443d]">Core Skills</p>
-                    <div className="flex flex-wrap gap-2.5">
-                      {showcase.skillHighlights.map((skill) => (
-                        <span
-                          key={skill}
-                          className="inline-flex max-w-full break-words border border-[#d8cbc0] bg-[#f7f2eb] px-3 py-1.5 text-xs font-semibold leading-snug tracking-[0.03em] text-[#3f352f] md:text-sm"
-                        >
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                <div className="grid gap-x-7 gap-y-7 pt-2 sm:grid-cols-2">
-                  {showcase.stats.map((metric) => (
-                    <div key={metric.label} className="space-y-2 border-t border-[#dccfc5] pt-4">
-                      <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-[#6e635b] sm:text-[11px] sm:tracking-[0.14em]">{metric.label}</p>
-                      <p className="font-sans tabular-nums text-3xl font-semibold leading-none text-[#211915] sm:text-4xl md:text-5xl">{metric.value}</p>
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
-            </div>
-          </div>
-        </section>
-
-        <section id="projects" className="border-t border-[#dbd0c6] px-4 py-12 sm:px-6 sm:py-14 md:px-12">
-          <div className="flex flex-col gap-6 xl:flex-row xl:items-end xl:justify-between">
-            <h3 className="font-nekst text-3xl font-semibold tracking-tight text-[#221a16] sm:text-4xl md:text-[3.1rem]">Projects</h3>
-
-            <div className="flex flex-wrap gap-2">
-              {projectFilters.map((filter) => {
-                const active = activeFilter === filter;
-
+          <div className="flex flex-col items-center justify-center flex-1">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-rajdhani font-bold text-center leading-tight tracking-tight">
+              {showcase.heroTitle.split(' ').map((word, i) => {
+                const isKeyword = word.toLowerCase().includes('marketing') || word.toLowerCase().includes('growth') || word.toLowerCase().includes('creation') || word.toLowerCase().includes('advocacy');
                 return (
-                  <button
-                    key={filter}
-                    type="button"
-                    onClick={() => setActiveFilter(filter)}
-                    className={`border px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] transition-colors md:text-xs ${
-                      active
-                        ? "border-[#7A3A30] bg-[#7A3A30] text-[#f7f2eb]"
-                        : "border-[#d9cdc2] bg-transparent text-[#5d544d] hover:border-[#7A3A30] hover:text-[#7A3A30]"
-                    }`}
-                  >
-                    {filter}
-                  </button>
+                  <span key={i} className={isKeyword ? 'text-[#7A3A30]' : 'text-[#3f3932]'}>
+                    {word}
+                    {i < showcase.heroTitle.split(' ').length - 1 && ' '}
+                  </span>
                 );
               })}
-            </div>
+            </h1>
+            <p className="mt-4 text-center text-sm sm:text-base text-[#5a5550] max-w-[36rem] leading-relaxed">
+              {showcase.heroSummary}
+            </p>
           </div>
 
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
-            {visibleProjects.map((project, index) => (
-              <motion.article
-                key={`${project.title}-${activeFilter}`}
-                className="bg-[#faf5ef] transition-shadow duration-300 hover:shadow-[0_8px_20px_rgba(39,29,23,0.12)]"
-                initial={{ opacity: 0, y: 14 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.3, delay: index * 0.04 }}
-              >
-                <div className="overflow-hidden">
-                  <ProjectImage card={project} />
-                </div>
-                <div className="space-y-2.5 p-4">
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#7A3A30]">{project.category}</p>
-                  <h4 className="font-nekst text-[1.35rem] font-semibold leading-tight tracking-tight text-[#211915] sm:text-[1.68rem]">{project.title}</h4>
-                  <p className="text-sm leading-relaxed text-[#60564f]">{project.description}</p>
-
-                  <div className="flex items-center justify-between pt-1">
-                    <p className="inline-flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-[0.16em] text-[#8a7c71]">
-                      <Sparkles size={12} />
-                      {project.date}
-                    </p>
-
-                    {(() => {
-                      const action = getCardAction(project);
-
-                      if (!action) {
-                        return <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#8a7c71]">Selected Work</span>;
-                      }
-
-                      if (action.external) {
-                        return (
-                          <a
-                            href={action.href}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#2e2520] transition-colors hover:text-[#7A3A30]"
-                          >
-                            Open
-                            <ArrowUpRight size={13} />
-                          </a>
-                        );
-                      }
-
-                      return (
-                        <Link
-                          to={action.href}
-                          className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#2e2520] transition-colors hover:text-[#7A3A30]"
-                        >
-                          Open
-                          <ArrowUpRight size={13} />
-                        </Link>
-                      );
-                    })()}
-                  </div>
-                </div>
-              </motion.article>
-            ))}
-          </div>
-
-          <section className="mt-16 px-4 py-12 font-rajdhani sm:px-6 md:px-12">
-            <div className="relative flex h-[calc(100vh-8rem)] flex-col items-center justify-end gap-6">
+          <section className="mt-auto px-4 py-6 font-rajdhani sm:px-6 md:px-12 flex-shrink-0">
+            <div className="relative flex flex-col items-center justify-end gap-6">
               <div className="grid w-full max-w-[34rem] grid-cols-3 gap-3 sm:gap-4">
-                {showcase.featured.slice(0, 3).map((item) => (
-                  <button
-                    key={item.title}
-                    type="button"
-                    className="group overflow-hidden border border-[#7b7366]/50 text-left transition-colors hover:border-[#12110f]"
-                    aria-label={`Show ${item.title}`}
+                {showcase.skillHighlights?.slice(0, 6).map((skill, index) => (
+                  <div
+                    key={skill}
+                    className="flex items-center justify-center border border-[#7b7366]/50 bg-[#f5f1eb] p-4 text-center transition-colors hover:border-[#12110f] hover:bg-[#ede2d6]"
                   >
-                    <img
-                      src={item.image}
-                      alt={`${item.title} thumbnail`}
-                      loading="lazy"
-                      decoding="async"
-                      width={320}
-                      height={180}
-                      sizes="(max-width: 640px) 30vw, 180px"
-                      className="h-28 w-full object-cover transition-transform duration-300 group-hover:scale-105 sm:h-32"
-                    />
-                  </button>
+                    <span className="text-xs font-semibold uppercase tracking-[0.1em] text-[#3f3932] leading-tight">{skill}</span>
+                  </div>
                 ))}
               </div>
 
