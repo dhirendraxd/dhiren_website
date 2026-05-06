@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Sparkles } from "lucide-react";
+import { FaGithub, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import { Link, Navigate, useParams } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Seo from "@/components/Seo";
@@ -740,6 +741,80 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
               </motion.article>
             ))}
           </div>
+
+          <section className="mt-16 px-4 py-12 font-rajdhani sm:px-6 md:px-12">
+            <div className="relative flex h-[calc(100vh-8rem)] flex-col items-center justify-end gap-6">
+              <div className="grid w-full max-w-[34rem] grid-cols-3 gap-3 sm:gap-4">
+                {showcase.featured.slice(0, 3).map((item) => (
+                  <button
+                    key={item.title}
+                    type="button"
+                    className="group overflow-hidden border border-[#7b7366]/50 text-left transition-colors hover:border-[#12110f]"
+                    aria-label={`Show ${item.title}`}
+                  >
+                    <img
+                      src={item.image}
+                      alt={`${item.title} thumbnail`}
+                      loading="lazy"
+                      decoding="async"
+                      width={320}
+                      height={180}
+                      sizes="(max-width: 640px) 30vw, 180px"
+                      className="h-28 w-full object-cover transition-transform duration-300 group-hover:scale-105 sm:h-32"
+                    />
+                  </button>
+                ))}
+              </div>
+
+              <div className="w-full max-w-[24rem]">
+                <div className="h-px w-full bg-[#8b8377]/80" />
+              </div>
+
+              <div className="flex flex-col items-center pb-0">
+                <div className="flex items-center gap-3">
+                  <a
+                    href="https://github.com/dhirendraxd"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="GitHub"
+                    title="GitHub"
+                    className="group relative inline-flex h-9 w-9 items-center justify-center p-1 leading-none text-[#181717] transition-all duration-200 hover:-translate-y-0.5 hover:opacity-80"
+                  >
+                    <FaGithub size={24} />
+                    <span className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 rounded bg-foreground px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-background opacity-0 transition-opacity duration-150 group-hover:opacity-100">
+                      GitHub
+                    </span>
+                  </a>
+                  <a
+                    href="https://instagram.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Instagram"
+                    title="Instagram"
+                    className="group relative inline-flex h-9 w-9 items-center justify-center p-1 leading-none text-[#E4405F] transition-all duration-200 hover:-translate-y-0.5 hover:opacity-80"
+                  >
+                    <FaInstagram size={24} />
+                    <span className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 rounded bg-foreground px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-background opacity-0 transition-opacity duration-150 group-hover:opacity-100">
+                      Insta
+                    </span>
+                  </a>
+                  <a
+                    href="https://linkedin.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="LinkedIn"
+                    title="LinkedIn"
+                    className="group relative inline-flex h-9 w-9 items-center justify-center p-1 leading-none text-[#0A66C2] transition-all duration-200 hover:-translate-y-0.5 hover:opacity-80"
+                  >
+                    <FaLinkedinIn size={24} />
+                    <span className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 rounded bg-foreground px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-background opacity-0 transition-opacity duration-150 group-hover:opacity-100">
+                      LinkedIn
+                    </span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </section>
         </section>
       </motion.main>
     </div>

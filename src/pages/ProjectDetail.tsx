@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
-import { Link, Navigate, useParams } from "react-router-dom";
+import { FaGithub, FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
 import { getProjectBySlug } from "@/data/projectDetails";
 
@@ -35,6 +36,7 @@ const upsertCanonical = (href: string) => {
 const ProjectDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const project = slug ? getProjectBySlug(slug) : undefined;
+  const navigate = useNavigate();
   const [activeSlide, setActiveSlide] = useState(0);
 
   const gallery = useMemo(() => {
@@ -150,24 +152,21 @@ const ProjectDetail = () => {
     return <Navigate to="/tech-projects" replace />;
   }
 
-  const currentPanel = gallery[activeSlide] ?? gallery[0];
-
   return (
-    <div className="min-h-screen bg-[#e7e3da]">
+    <div className="h-screen overflow-hidden bg-[#e7e3da]">
       <ScrollProgressBar />
-      <main className="mx-auto max-w-[78rem] px-4 pb-20 pt-10 font-rajdhani sm:px-7 md:px-12 md:pt-12">
-        <section>
-          <Link
-            to={`/${project.serviceSlug}`}
-            className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-[0.52em] text-[#15130f] transition-colors hover:text-[#1DA1F2]"
+      <main className="mx-auto h-full max-w-[78rem] overflow-hidden px-4 pb-0 pt-10 font-rajdhani sm:px-7 md:px-12 md:pt-12">
+        <section className="h-full">
+          <button
+            onClick={() => navigate(-1)}
+            className="group inline-flex items-center gap-1 border-b border-transparent pb-1 text-sm font-semibold uppercase tracking-[0.2em] text-[#3f3932] transition-colors hover:border-[#7A3A30] hover:text-[#7A3A30]"
           >
-            <span aria-hidden="true">&lt;</span>
-            <span aria-hidden="true">-</span>
-            <span>Back</span>
-          </Link>
+            <span aria-hidden="true" className="flex leading-none transition-transform duration-300 group-hover:-translate-x-1">&larr;</span>
+            <span className="leading-none">Back</span>
+          </button>
 
-          <div className="relative mt-6 min-h-[82vh] border border-transparent bg-[#e7e3da]">
-            <div className="pointer-events-none absolute inset-x-0 top-[18%] mx-auto w-full max-w-[42rem] px-4">
+          <div className="relative mt-6 h-[calc(100%-2.5rem)] border border-transparent bg-[#e7e3da]">
+            <div className="pointer-events-none absolute inset-x-0 top-[14%] mx-auto w-full max-w-[42rem] px-4">
               <div className="mx-auto overflow-hidden border border-[#cfb859]/35 bg-[#d8d2c6]/35 p-1">
                 <img
                   src={project.image}
@@ -183,58 +182,82 @@ const ProjectDetail = () => {
               </div>
             </div>
 
-            <div className="absolute inset-x-0 bottom-0 mx-auto w-full max-w-[34rem] px-2 sm:px-0">
+            <div className="absolute inset-x-0 bottom-6 mx-auto w-full max-w-[34rem] px-2 sm:bottom-7 sm:px-0">
               <div className="grid grid-cols-3 gap-3 sm:gap-4">
               {gallery.map((panel, index) => (
                 <button
                   key={panel.key}
                   type="button"
                   onClick={() => setActiveSlide(index)}
-                  className={`group border border-[#c49300] bg-[#f5b400] p-2 text-left transition-colors ${
-                    activeSlide === index ? "border-[#12110f]" : "border-[#c49300] hover:border-[#12110f]"
+                  className={`group overflow-hidden border text-left transition-colors ${
+                    activeSlide === index ? "border-[#12110f]" : "border-[#7b7366]/50 hover:border-[#12110f]"
                   }`}
                   aria-label={`Show ${panel.label} visual`}
                 >
-                  <div className="overflow-hidden border border-[#2e2a21]">
-                    <img
-                      src={project.image}
-                      alt={`${panel.label} thumbnail for ${project.title}`}
-                      loading="lazy"
-                      decoding="async"
-                      width={320}
-                      height={180}
-                      sizes="(max-width: 640px) 30vw, 180px"
-                      className="h-14 w-full object-cover transition-transform duration-300 group-hover:scale-105 sm:h-20"
-                    />
-                  </div>
-                  <p className="mt-2 text-center text-[10px] font-bold uppercase tracking-[0.35em] text-[#12110f] sm:text-xs">Image</p>
+                  <img
+                    src={project.image}
+                    alt={`${panel.label} thumbnail for ${project.title}`}
+                    loading="lazy"
+                    decoding="async"
+                    width={320}
+                    height={180}
+                    sizes="(max-width: 640px) 30vw, 180px"
+                    className="h-28 w-full object-cover transition-transform duration-300 group-hover:scale-105 sm:h-32"
+                  />
                 </button>
               ))}
               </div>
 
-              <div className="mx-auto mt-8 flex max-w-[22rem] flex-col items-center pb-2">
-                <div className="h-[4px] w-full bg-[#13110d]" />
-                <div className="mt-4 flex items-center gap-3">
-                {gallery.map((panel, index) => (
-                  <button
-                    key={`${panel.key}-dot`}
-                    type="button"
-                    onClick={() => setActiveSlide(index)}
-                    className={`h-6 w-6 border border-[#c49300] bg-[#f5b400] transition-colors hover:border-[#12110f] ${
-                      activeSlide === index ? "border-[#12110f]" : "border-[#c49300]"
-                    }`}
-                    aria-label={`Go to ${panel.label}`}
-                  />
-                ))}
+              <div className="mx-auto my-4 w-full max-w-[24rem]">
+                <div className="h-px w-full bg-[#8b8377]/80" />
+              </div>
+
+              <div className="mx-auto mt-0 flex max-w-[24rem] flex-col items-center pb-0">
+                <div className="flex items-center gap-3">
+                  <a
+                    href="https://github.com/dhirendraxd"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="GitHub"
+                    title="GitHub"
+                    className="group relative inline-flex h-9 w-9 items-center justify-center p-1 leading-none text-[#181717] transition-all duration-200 hover:-translate-y-0.5 hover:opacity-80"
+                  >
+                    <FaGithub size={24} />
+                    <span className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 rounded bg-foreground px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-background opacity-0 transition-opacity duration-150 group-hover:opacity-100">
+                      GitHub
+                    </span>
+                  </a>
+                  <a
+                    href="https://instagram.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Instagram"
+                    title="Instagram"
+                    className="group relative inline-flex h-9 w-9 items-center justify-center p-1 leading-none text-[#E4405F] transition-all duration-200 hover:-translate-y-0.5 hover:opacity-80"
+                  >
+                    <FaInstagram size={24} />
+                    <span className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 rounded bg-foreground px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-background opacity-0 transition-opacity duration-150 group-hover:opacity-100">
+                      Insta
+                    </span>
+                  </a>
+                  <a
+                    href="https://linkedin.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="LinkedIn"
+                    title="LinkedIn"
+                    className="group relative inline-flex h-9 w-9 items-center justify-center p-1 leading-none text-[#0A66C2] transition-all duration-200 hover:-translate-y-0.5 hover:opacity-80"
+                  >
+                    <FaLinkedinIn size={24} />
+                    <span className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 rounded bg-foreground px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-background opacity-0 transition-opacity duration-150 group-hover:opacity-100">
+                      LinkedIn
+                    </span>
+                  </a>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="mx-auto mt-4 max-w-[34rem] px-1 text-center">
-            <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#7A3A30]">{currentPanel?.label}</p>
-            <p className="mt-2 text-sm leading-relaxed text-[#3f3932]">{currentPanel?.caption}</p>
-          </div>
         </section>
 
       </main>
