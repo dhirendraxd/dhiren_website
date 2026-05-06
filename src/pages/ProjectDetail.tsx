@@ -1,7 +1,5 @@
-import { useEffect } from "react";
-import { ArrowUpRight } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
-import Navbar from "@/components/Navbar";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
 import { getProjectBySlug } from "@/data/projectDetails";
 
@@ -37,6 +35,31 @@ const upsertCanonical = (href: string) => {
 const ProjectDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const project = slug ? getProjectBySlug(slug) : undefined;
+  const [activeSlide, setActiveSlide] = useState(0);
+
+  const gallery = useMemo(() => {
+    if (!project) {
+      return [];
+    }
+
+    return [
+      {
+        key: "overview",
+        label: "Overview",
+        caption: project.summary,
+      },
+      {
+        key: "challenge",
+        label: "Challenge",
+        caption: project.challenge,
+      },
+      {
+        key: "approach",
+        label: "Approach",
+        caption: project.approach,
+      },
+    ];
+  }, [project]);
 
   useEffect(() => {
     if (!project) {
@@ -119,93 +142,101 @@ const ProjectDetail = () => {
     };
   }, [project]);
 
+  useEffect(() => {
+    setActiveSlide(0);
+  }, [project?.slug]);
+
   if (!project) {
     return <Navigate to="/tech-projects" replace />;
   }
 
+  const currentPanel = gallery[activeSlide] ?? gallery[0];
+
   return (
-    <div className="min-h-screen bg-card">
+    <div className="min-h-screen bg-[#e7e3da]">
       <ScrollProgressBar />
-      <Navbar />
-
-      <main className="mx-auto max-w-[84rem] px-4 pb-16 pt-24 font-rajdhani sm:px-6 sm:pt-28 md:px-12 md:pt-32">
-
-        <section className="grid gap-8 xl:grid-cols-[1.05fr_0.95fr] xl:items-start">
-          <div className="space-y-5">
-            <p className="text-xs uppercase tracking-[0.14em] font-semibold text-[#7A3A30]">{project.category}</p>
-            <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl md:text-5xl">{project.title}</h1>
-            <p className="max-w-3xl text-base leading-relaxed text-muted-foreground">{project.summary}</p>
-
-            <div className="flex flex-wrap items-center gap-2 pt-2">
-              {project.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="inline-flex border border-[#d8cbc0] bg-[#f7f2eb] px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.06em] text-[#3f352f]"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-
-            <p className="pt-2 text-sm font-semibold uppercase tracking-[0.12em] text-[#6e635b]">Project Date: {project.date}</p>
-          </div>
-
-          <div className="overflow-hidden border border-[#ddd2c8] bg-[#ede2d6] p-2">
-            <img
-              src={project.image}
-              alt={`${project.title} project preview image`}
-              loading="eager"
-              fetchPriority="high"
-              decoding="async"
-              width={1200}
-              height={630}
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 900px"
-              className="h-[260px] w-full object-cover sm:h-[340px] md:h-[420px]"
-            />
-          </div>
-        </section>
-
-        <section className="mt-12 grid gap-6 md:grid-cols-2">
-          <article className="border border-[#ddd2c8] bg-[#faf5ef] p-6">
-            <h2 className="font-nekst text-2xl font-semibold tracking-tight text-[#1f1815]">Challenge</h2>
-            <p className="mt-3 text-sm leading-relaxed text-[#60564f]">{project.challenge}</p>
-          </article>
-
-          <article className="border border-[#ddd2c8] bg-[#faf5ef] p-6">
-            <h2 className="font-nekst text-2xl font-semibold tracking-tight text-[#1f1815]">Approach</h2>
-            <p className="mt-3 text-sm leading-relaxed text-[#60564f]">{project.approach}</p>
-          </article>
-        </section>
-
-        <section className="mt-8 border border-[#ddd2c8] bg-[#faf5ef] p-6">
-          <h2 className="font-nekst text-2xl font-semibold tracking-tight text-[#1f1815]">Project Outcomes</h2>
-          <ul className="mt-4 space-y-2">
-            {project.outcomes.map((outcome) => (
-              <li key={outcome} className="text-sm leading-relaxed text-[#60564f]">- {outcome}</li>
-            ))}
-          </ul>
-        </section>
-
-        <section className="mt-10 flex flex-wrap items-center gap-3">
+      <main className="mx-auto max-w-[78rem] px-4 pb-20 pt-10 font-rajdhani sm:px-7 md:px-12 md:pt-12">
+        <section>
           <Link
             to={`/${project.serviceSlug}`}
-            className="inline-flex items-center justify-center border border-[#1f1815] px-5 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-[#1f1815] transition-colors hover:bg-[#7A3A30] hover:border-[#7A3A30] hover:text-[#f7f2eb]"
+            className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-[0.52em] text-[#15130f] transition-colors hover:text-[#1DA1F2]"
           >
-            Back to Service Projects
+            <span aria-hidden="true">&lt;</span>
+            <span aria-hidden="true">-</span>
+            <span>Back</span>
           </Link>
 
-          {project.sourceHref && (
-            <a
-              href={project.sourceHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 border border-[#7A3A30] bg-[#7A3A30] px-5 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-[#f7f2eb] transition-opacity hover:opacity-90"
-            >
-              Visit Related Source
-              <ArrowUpRight size={13} />
-            </a>
-          )}
+          <div className="relative mt-6 min-h-[82vh] border border-transparent bg-[#e7e3da]">
+            <div className="pointer-events-none absolute inset-x-0 top-[18%] mx-auto w-full max-w-[42rem] px-4">
+              <div className="mx-auto overflow-hidden border border-[#cfb859]/35 bg-[#d8d2c6]/35 p-1">
+                <img
+                  src={project.image}
+                  alt={`${project.title} project preview image`}
+                  loading="eager"
+                  fetchPriority="high"
+                  decoding="async"
+                  width={1200}
+                  height={630}
+                  sizes="(max-width: 768px) 90vw, 640px"
+                  className="h-[170px] w-full object-cover opacity-25 saturate-50 sm:h-[220px]"
+                />
+              </div>
+            </div>
+
+            <div className="absolute inset-x-0 bottom-0 mx-auto w-full max-w-[34rem] px-2 sm:px-0">
+              <div className="grid grid-cols-3 gap-3 sm:gap-4">
+              {gallery.map((panel, index) => (
+                <button
+                  key={panel.key}
+                  type="button"
+                  onClick={() => setActiveSlide(index)}
+                  className={`group border border-[#c49300] bg-[#f5b400] p-2 text-left transition-colors ${
+                    activeSlide === index ? "border-[#12110f]" : "border-[#c49300] hover:border-[#12110f]"
+                  }`}
+                  aria-label={`Show ${panel.label} visual`}
+                >
+                  <div className="overflow-hidden border border-[#2e2a21]">
+                    <img
+                      src={project.image}
+                      alt={`${panel.label} thumbnail for ${project.title}`}
+                      loading="lazy"
+                      decoding="async"
+                      width={320}
+                      height={180}
+                      sizes="(max-width: 640px) 30vw, 180px"
+                      className="h-14 w-full object-cover transition-transform duration-300 group-hover:scale-105 sm:h-20"
+                    />
+                  </div>
+                  <p className="mt-2 text-center text-[10px] font-bold uppercase tracking-[0.35em] text-[#12110f] sm:text-xs">Image</p>
+                </button>
+              ))}
+              </div>
+
+              <div className="mx-auto mt-8 flex max-w-[22rem] flex-col items-center pb-2">
+                <div className="h-[4px] w-full bg-[#13110d]" />
+                <div className="mt-4 flex items-center gap-3">
+                {gallery.map((panel, index) => (
+                  <button
+                    key={`${panel.key}-dot`}
+                    type="button"
+                    onClick={() => setActiveSlide(index)}
+                    className={`h-6 w-6 border border-[#c49300] bg-[#f5b400] transition-colors hover:border-[#12110f] ${
+                      activeSlide === index ? "border-[#12110f]" : "border-[#c49300]"
+                    }`}
+                    aria-label={`Go to ${panel.label}`}
+                  />
+                ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="mx-auto mt-4 max-w-[34rem] px-1 text-center">
+            <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#7A3A30]">{currentPanel?.label}</p>
+            <p className="mt-2 text-sm leading-relaxed text-[#3f3932]">{currentPanel?.caption}</p>
+          </div>
         </section>
+
       </main>
     </div>
   );
