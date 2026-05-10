@@ -43,8 +43,20 @@ const ProjectDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const project = slug ? getProjectBySlug(slug) : undefined;
   const navigate = useNavigate();
-  const [activeSlide, setActiveSlide] = useState(0);
   const heroThumbnail = project ? homepageProjectThumbnails[project.slug] || project.image : "";
+  const [selectedPanelIndex, setSelectedPanelIndex] = useState(0);
+
+  const introTitle = project
+    ? `${project.title}: from strategy to execution.`
+    : "";
+
+  const introSupport = project
+    ? `In this ${project.category.toLowerCase()} project, the focus was on practical delivery, clear ownership, and measurable outcomes.`
+    : "";
+
+  const rightSideIntro = project
+    ? `Project breakdown for ${project.title}`
+    : "";
 
   const rolePanels = useMemo(() => {
     if (!project) {
@@ -54,44 +66,42 @@ const ProjectDetail = () => {
     return [
       {
         key: "overview",
-        hat: "🧢",
-        label: "Professionalism",
+        thumbPosition: "center 20%",
+        label: "Project Summary",
         caption: project.summary,
       },
       {
         key: "challenge",
-        hat: "🎩",
-        label: "Problem Solving",
+        thumbPosition: "center 35%",
+        label: "Challenge",
         caption: project.challenge,
       },
       {
         key: "approach",
-        hat: "🎓",
-        label: "Strategic Thinking",
+        thumbPosition: "center 50%",
+        label: "Approach",
         caption: project.approach,
       },
       {
         key: "outcomes",
-        hat: "⛑️",
-        label: "Execution",
+        thumbPosition: "center 65%",
+        label: "Outcomes",
         caption: project.outcomes.slice(0, 2).join(" "),
       },
       {
         key: "skills",
-        hat: "🤠",
-        label: "Adaptability",
+        thumbPosition: "center 80%",
+        label: "Focus Areas",
         caption: `Worked across ${project.tags.slice(0, 3).join(", ")}.`,
       },
       {
         key: "timeline",
-        hat: "👒",
-        label: "Ownership",
+        thumbPosition: "center 92%",
+        label: "Timeline",
         caption: `Delivered in ${project.date} with measurable accountability and consistency.`,
       },
     ];
   }, [project]);
-
-  const activePanel = rolePanels[activeSlide] ?? rolePanels[0];
 
   useEffect(() => {
     if (!project) {
@@ -174,19 +184,15 @@ const ProjectDetail = () => {
     };
   }, [project]);
 
-  useEffect(() => {
-    setActiveSlide(0);
-  }, [project?.slug]);
-
   if (!project) {
     return <Navigate to="/tech-projects" replace />;
   }
 
   return (
-    <div className="min-h-screen bg-[#e7e3da]">
+    <div className="h-screen overflow-hidden bg-[#e7e3da]">
       <ScrollProgressBar />
-      <main className="mx-auto max-w-[78rem] px-4 pb-14 pt-10 font-rajdhani sm:px-7 md:px-12 md:pt-12">
-        <section className="flex min-h-[100vh] min-h-[100dvh] flex-col">
+      <main className="mx-auto h-full max-w-[86rem] px-4 pb-7 pt-8 font-rajdhani sm:px-7 md:px-12 md:pt-10">
+        <section className="flex h-full min-h-0 flex-col">
           <button
             onClick={() => navigate(-1)}
             className="group inline-flex items-center gap-1 border-b border-transparent pb-1 text-sm font-semibold uppercase tracking-[0.2em] text-[#3f3932] transition-colors hover:border-[#7A3A30] hover:text-[#7A3A30]"
@@ -195,107 +201,160 @@ const ProjectDetail = () => {
             <span className="leading-none">Back</span>
           </button>
 
-          <div className="mt-10 flex-1 min-h-[calc(100vh-12.5rem)] min-h-[calc(100dvh-12.5rem)]">
-            <div className="grid h-full content-center gap-12 lg:grid-cols-[1.12fr_1fr] lg:items-start lg:gap-16">
-              <div className="space-y-7 sm:space-y-8">
-                <h1 className="max-w-[31rem] text-[2.25rem] font-bold leading-tight text-[#2a251f] sm:text-[2.8rem] lg:text-[3.1rem]">
-                  A good worker should be able to wear many hats...
+          <div className="mt-5 flex min-h-0 flex-1 flex-col justify-between gap-6">
+            <div className="grid items-center gap-10 lg:grid-cols-[1.18fr_1fr] lg:gap-12">
+              <div className="mx-auto flex w-full max-w-[38rem] flex-col justify-center gap-6 sm:gap-7 lg:mx-0">
+                <h1 className="max-w-[34rem] text-[1.95rem] font-bold leading-tight text-[#2a251f] sm:text-[2.3rem] lg:text-[2.55rem]">
+                  {introTitle}
                 </h1>
-                <p className="max-w-[34rem] text-[1.5rem] leading-relaxed text-[#514a40] sm:text-[1.9rem] lg:text-[2.15rem]">
-                  {project.title} demanded role-switching from strategy to delivery across a full project lifecycle.
-                </p>
-                <p className="max-w-[31rem] text-[1.2rem] leading-relaxed text-[#6f675c] sm:text-[1.45rem] lg:text-[1.6rem]">
-                  As a worker you will often need to adapt to different roles and responsibilities.
+                <p className="max-w-[34rem] text-[1.2rem] leading-relaxed text-[#6a6257] sm:text-[1.34rem] lg:text-[1.45rem]">
+                  {introSupport}
                 </p>
 
-                <div className="relative mt-7 w-full max-w-[24rem]">
-                  <img
-                    src={heroThumbnail}
-                    alt={`${project.title} project preview image`}
-                    loading="eager"
-                    fetchPriority="high"
-                    decoding="async"
-                    width={1200}
-                    height={630}
-                    sizes="(max-width: 768px) 90vw, 384px"
-                    className="h-[14.2rem] w-full rounded-xl object-cover opacity-80 sm:h-[15.3rem]"
+                <div className="relative w-full max-w-[30rem] pt-1 sm:max-w-[32rem]">
+                   <img
+                     src={heroThumbnail}
+                     alt={`${project.title} project preview image`}
+                     loading="eager"
+                     fetchPriority="high"
+                     decoding="async"
+                     width={1200}
+                     height={630}
+                     sizes="(max-width: 768px) 94vw, 520px"
+                     className="h-[19.2rem] w-full rounded-xl object-cover opacity-80 sm:h-[21rem]"
+                     style={{ objectPosition: rolePanels[selectedPanelIndex]?.thumbPosition || "center" }}
                   />
-                  <div className="pointer-events-none absolute bottom-4 left-4 rounded-md bg-[#f8f6f0]/95 px-2 py-1 text-sm font-semibold uppercase tracking-[0.18em] text-[#3f3932]">
-                    Project Character
+                  <div className="pointer-events-none absolute bottom-4 left-4 rounded-md bg-[#f8f6f0]/95 px-2 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-[#3f3932]">
+                    {rolePanels[selectedPanelIndex]?.label || "Project Preview"}
                   </div>
                 </div>
               </div>
 
-              <div className="space-y-8 lg:pt-4">
-                <p className="text-center text-[1.8rem] leading-relaxed text-[#3d372f] sm:text-[2.2rem]">
-                  Click on different hats to see what I can do!
+              <div className="mx-auto flex w-full max-w-[30rem] flex-col justify-center gap-6">
+                <p className="text-center text-[1.35rem] leading-relaxed text-[#3d372f] sm:text-[1.7rem]">
+                  {rightSideIntro}
                 </p>
 
-                <div className="mx-auto grid max-w-[23rem] grid-cols-3 gap-4">
+                <div className="mx-auto grid max-w-[26rem] grid-cols-3 gap-1.5">
                   {rolePanels.map((panel, index) => (
                     <button
                       key={panel.key}
+                      onClick={() => setSelectedPanelIndex(index)}
+                      className={`group overflow-hidden border transition-all duration-200 ${
+                        index === selectedPanelIndex
+                          ? "border-[#15120d] border-2 ring-2 ring-[#7A3A30] ring-offset-1"
+                          : "border border-[#d6cebf] hover:border-[#7A3A30]"
+                      } cursor-pointer bg-white/75`}
+                      aria-label={`View ${panel.label}`}
                       type="button"
-                      onClick={() => setActiveSlide(index)}
-                      className={`flex h-[5.35rem] items-center justify-center rounded-lg border-2 text-[2.7rem] transition-all duration-200 ${
-                        activeSlide === index
-                          ? "border-[#15120d] bg-[#fffdf8] shadow-[0_6px_16px_-10px_rgba(21,18,13,0.9)]"
-                          : "border-[#d6cebf] bg-white/80 hover:-translate-y-0.5 hover:border-[#756d60]"
-                      }`}
-                      aria-label={`Show ${panel.label}`}
                     >
-                      <span aria-hidden="true">{panel.hat}</span>
+                      <img
+                        src={heroThumbnail}
+                        alt=""
+                        loading="lazy"
+                        decoding="async"
+                        width={180}
+                        height={120}
+                        className="h-[7rem] w-full object-cover"
+                        style={{ objectPosition: panel.thumbPosition }}
+                      />
                     </button>
                   ))}
                 </div>
 
-                <div className="mx-auto max-w-[30rem] pt-1 text-center">
-                  <h2 className="text-[2.35rem] font-bold leading-tight text-[#25211b] sm:text-[2.75rem]">
-                    {activePanel?.label}
-                  </h2>
-                  <p className="mt-3 text-[1.4rem] leading-relaxed text-[#5f574d] sm:text-[1.7rem]">
-                    {activePanel?.caption}
+                <div className="mx-auto max-w-[28rem] text-center">
+                  <div className="min-h-[9rem]">
+                    <h2 className="text-[1.85rem] font-bold leading-tight text-[#25211b] sm:text-[2.1rem]">
+                      {rolePanels[selectedPanelIndex]?.label}
+                    </h2>
+                    <p className="mt-2 text-[1.06rem] leading-relaxed text-[#5f574d] sm:text-[1.2rem]">
+                      {rolePanels[selectedPanelIndex]?.caption}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="mx-auto w-full max-w-[70rem] text-[#4d463d]">
+              <div className="grid items-start gap-10 px-2 sm:px-4 md:grid-cols-[1fr_1fr] md:gap-10 lg:gap-12 lg:px-8">
+              <div className="flex flex-col gap-4 pr-5 sm:pr-6 md:pr-5 lg:pr-6 sm:gap-5">
+                <h3 className="text-[1.35rem] font-semibold leading-tight text-[#2e2923] sm:text-[1.55rem]">More About This Project</h3>
+                <p className="text-[1rem] leading-relaxed sm:text-[1.08rem]">
+                  {project.summary}
+                </p>
+                <p className="text-[0.98rem] leading-relaxed text-[#615a50] sm:text-[1.04rem]">
+                  Category: {project.category} • Timeline: {project.date}
+                </p>
+                <p className="text-[0.98rem] leading-relaxed text-[#615a50] sm:text-[1.04rem]">
+                  Key challenge: {project.challenge}
+                </p>
+              </div>
+
+              <div className="flex flex-col gap-6">
+                <div>
+                  <h4 className="text-[1.35rem] font-semibold leading-tight text-[#3b352d] sm:text-[1.55rem]">
+                    Project Metrics
+                  </h4>
+                </div>
+
+                <div className="grid grid-cols-[1fr_1.2fr] gap-6 items-start">
+                  <div className="flex flex-col items-center justify-center">
+                    <div className="relative w-[120px] h-[120px]">
+                      <svg viewBox="0 0 120 120" className="w-full h-full -rotate-90">
+                        <circle cx="60" cy="60" r="50" fill="none" stroke="#e7e3da" strokeWidth="8" />
+                        <circle 
+                          cx="60" 
+                          cy="60" 
+                          r="50" 
+                          fill="none" 
+                          stroke="#7A3A30" 
+                          strokeWidth="8" 
+                          strokeDasharray={`${(83 / 100) * 314} 314`}
+                          strokeLinecap="round"
+                        />
+                      </svg>
+                      <div className="absolute inset-0 flex flex-col items-center justify-center">
+                        <span className="text-[1.5rem] font-bold text-[#7A3A30]">83%</span>
+                        <span className="text-[0.7rem] font-medium text-[#5f574d]">Overall</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div>
+                      <div className="flex justify-between items-center mb-1.5">
+                        <span className="text-[0.9rem] font-medium text-[#3b352d]">Impact</span>
+                        <span className="text-[0.85rem] font-semibold text-[#7A3A30]">85%</span>
+                      </div>
+                      <div className="h-2 bg-[#e7e3da] rounded-full overflow-hidden">
+                        <div className="h-full bg-[#7A3A30]" style={{ width: "85%" }}></div>
+                      </div>
+                    </div>
+                    
+                    <div>
+                      <div className="flex justify-between items-center mb-1.5">
+                        <span className="text-[0.9rem] font-medium text-[#3b352d]">Execution</span>
+                        <span className="text-[0.85rem] font-semibold text-[#7A3A30]">90%</span>
+                      </div>
+                      <div className="h-2 bg-[#e7e3da] rounded-full overflow-hidden">
+                        <div className="h-full bg-[#7A3A30]" style={{ width: "90%" }}></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="border-t border-[#d6cebf]/50 pt-5">
+                  <p className="text-[0.9rem] leading-relaxed text-[#5f574d]">
+                    <span className="font-semibold text-[#3b352d]">Focus:</span> {project.tags.slice(0, 3).join(" • ")}
                   </p>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
 
-        <section className="pt-6 sm:pt-8">
-          <div className="mx-auto mt-12 w-full max-w-[52rem] pb-2 text-[#4d463d] sm:mt-14">
-            <div className="grid gap-8 md:grid-cols-[1.2fr_1fr] md:gap-10">
-              <div className="space-y-5">
-                <h3 className="text-[1.7rem] font-semibold leading-tight text-[#2e2923] sm:text-[2rem]">More About This Project</h3>
-                <p className="text-[1.2rem] leading-relaxed sm:text-[1.35rem]">
-                  This work sits at the intersection of planning, communication, and execution. The goal was to build outcomes
-                  that were practical, measurable, and sustainable over time.
-                </p>
-                <p className="text-[1.15rem] leading-relaxed text-[#615a50] sm:text-[1.3rem]">
-                  Category: {project.category} • Timeline: {project.date}
-                </p>
+              <div className="mt-5 flex justify-center">
+                <div className="h-px w-[85%] max-w-[50rem] bg-[#999999]/50" />
               </div>
-
-              <div className="space-y-4 border-l border-[#c9c0b1]/70 pl-5 md:pl-6">
-                <h4 className="text-[1.15rem] font-semibold uppercase tracking-[0.14em] text-[#3b352d] sm:text-[1.25rem]">
-                  Quick Snapshot
-                </h4>
-                <p className="text-[1.06rem] leading-relaxed text-[#615a50] sm:text-[1.16rem]">
-                  Core focus: {project.tags.slice(0, 4).join(" • ")}
-                </p>
-                <p className="text-[1.06rem] leading-relaxed text-[#615a50] sm:text-[1.16rem]">
-                  Key outcome: {project.outcomes[0] || "High-impact delivery with clear ownership."}
-                </p>
-                <p className="text-[1.06rem] leading-relaxed text-[#615a50] sm:text-[1.16rem]">
-                  Approach: {project.approach.slice(0, 120)}...
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="mx-auto mt-12 w-full max-w-[44rem] pb-4 sm:mt-14">
-            <div className="h-px w-full bg-[#8b8377]/70" />
-            <div className="mt-6 flex items-center justify-center gap-5 sm:gap-7">
+              <div className="mt-4 flex items-center justify-center gap-5 sm:gap-7">
               <a
                 href={project.sourceHref || "https://github.com/dhirendraxd"}
                 target="_blank"
@@ -304,7 +363,7 @@ const ProjectDetail = () => {
                 title="GitHub"
                 className="group inline-flex items-center justify-center text-[#1f1f1f] transition-all duration-200 hover:-translate-y-0.5 hover:text-[#15120d]"
               >
-                <FaGithub size={28} />
+                <FaGithub size={24} />
               </a>
               <a
                 href="https://instagram.com"
@@ -314,7 +373,7 @@ const ProjectDetail = () => {
                 title="Instagram"
                 className="group inline-flex items-center justify-center text-[#d33f68] transition-all duration-200 hover:-translate-y-0.5 hover:text-[#b63156]"
               >
-                <FaInstagram size={28} />
+                <FaInstagram size={24} />
               </a>
               <a
                 href="https://linkedin.com"
@@ -324,9 +383,10 @@ const ProjectDetail = () => {
                 title="LinkedIn"
                 className="group inline-flex items-center justify-center text-[#0a66c2] transition-all duration-200 hover:-translate-y-0.5 hover:text-[#08539d]"
               >
-                <FaLinkedinIn size={28} />
+                <FaLinkedinIn size={24} />
               </a>
             </div>
+          </div>
           </div>
         </section>
       </main>
