@@ -183,10 +183,10 @@ const ProjectDetail = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#e7e3da]">
+    <div className="h-dvh overflow-hidden bg-[#e7e3da]">
       <ScrollProgressBar />
-      <main className="mx-auto max-w-[78rem] px-4 pb-14 pt-10 font-rajdhani sm:px-7 md:px-12 md:pt-12">
-        <section className="flex min-h-[100vh] min-h-[100dvh] flex-col">
+      <main className="mx-auto flex h-full max-w-[78rem] flex-col overflow-hidden px-4 pb-4 pt-4 font-rajdhani sm:px-7 md:px-12 md:pt-5">
+        <section className="flex h-full min-h-0 flex-col">
           <button
             onClick={() => navigate(-1)}
             className="group inline-flex items-center gap-1 border-b border-transparent pb-1 text-sm font-semibold uppercase tracking-[0.2em] text-[#3f3932] transition-colors hover:border-[#7A3A30] hover:text-[#7A3A30]"
@@ -195,20 +195,17 @@ const ProjectDetail = () => {
             <span className="leading-none">Back</span>
           </button>
 
-          <div className="mt-10 flex-1 min-h-[calc(100vh-12.5rem)] min-h-[calc(100dvh-12.5rem)]">
-            <div className="grid h-full content-center gap-12 lg:grid-cols-[1.12fr_1fr] lg:items-start lg:gap-16">
-              <div className="space-y-7 sm:space-y-8">
-                <h1 className="max-w-[31rem] text-[2.25rem] font-bold leading-tight text-[#2a251f] sm:text-[2.8rem] lg:text-[3.1rem]">
+          <div className="mt-3 grid min-h-0 flex-1 grid-rows-[minmax(0,1fr)_auto] gap-4">
+            <div className="grid min-h-0 content-start gap-6 pt-1 lg:grid-cols-[1.08fr_1fr] lg:items-start lg:gap-12 lg:pt-3">
+              <div className="space-y-4 sm:space-y-5 lg:pt-1">
+                <h1 className="max-w-[31rem] text-[1.95rem] font-bold leading-tight text-[#2a251f] sm:text-[2.35rem] lg:text-[2.75rem]">
                   A good worker should be able to wear many hats...
                 </h1>
-                <p className="max-w-[34rem] text-[1.5rem] leading-relaxed text-[#514a40] sm:text-[1.9rem] lg:text-[2.15rem]">
-                  {project.title} demanded role-switching from strategy to delivery across a full project lifecycle.
-                </p>
-                <p className="max-w-[31rem] text-[1.2rem] leading-relaxed text-[#6f675c] sm:text-[1.45rem] lg:text-[1.6rem]">
+                <p className="max-w-[31rem] text-[1rem] leading-relaxed text-[#6f675c] sm:text-[1.18rem] lg:text-[1.28rem]">
                   As a worker you will often need to adapt to different roles and responsibilities.
                 </p>
 
-                <div className="relative mt-7 w-full max-w-[24rem]">
+                <div className="relative mt-4 hidden w-full max-w-[19rem] sm:block">
                   <img
                     src={heroThumbnail}
                     alt={`${project.title} project preview image`}
@@ -217,27 +214,27 @@ const ProjectDetail = () => {
                     decoding="async"
                     width={1200}
                     height={630}
-                    sizes="(max-width: 768px) 90vw, 384px"
-                    className="h-[14.2rem] w-full rounded-xl object-cover opacity-80 sm:h-[15.3rem]"
+                    sizes="304px"
+                    className="h-[9rem] w-full rounded-xl object-cover opacity-80 lg:h-[10rem]"
                   />
-                  <div className="pointer-events-none absolute bottom-4 left-4 rounded-md bg-[#f8f6f0]/95 px-2 py-1 text-sm font-semibold uppercase tracking-[0.18em] text-[#3f3932]">
+                  <div className="pointer-events-none absolute bottom-3 left-3 rounded-md bg-[#f8f6f0]/95 px-2 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-[#3f3932]">
                     Project Character
                   </div>
                 </div>
               </div>
 
-              <div className="space-y-8 lg:pt-4">
-                <p className="text-center text-[1.8rem] leading-relaxed text-[#3d372f] sm:text-[2.2rem]">
+              <div className="space-y-4 lg:pt-1">
+                <p className="text-center text-[1.25rem] leading-relaxed text-[#3d372f] sm:text-[1.55rem] lg:text-[1.7rem]">
                   Click on different hats to see what I can do!
                 </p>
 
-                <div className="mx-auto grid max-w-[23rem] grid-cols-3 gap-4">
+                <div className="mx-auto grid max-w-[20rem] grid-cols-3 gap-2.5 sm:gap-3">
                   {rolePanels.map((panel, index) => (
                     <button
                       key={panel.key}
                       type="button"
                       onClick={() => setActiveSlide(index)}
-                      className={`flex h-[5.35rem] items-center justify-center rounded-lg border-2 text-[2.7rem] transition-all duration-200 ${
+                      className={`flex h-[4.35rem] items-center justify-center rounded-lg border-2 text-[2.15rem] transition-all duration-200 sm:h-[4.7rem] sm:text-[2.35rem] ${
                         activeSlide === index
                           ? "border-[#15120d] bg-[#fffdf8] shadow-[0_6px_16px_-10px_rgba(21,18,13,0.9)]"
                           : "border-[#d6cebf] bg-white/80 hover:-translate-y-0.5 hover:border-[#756d60]"
@@ -249,53 +246,49 @@ const ProjectDetail = () => {
                   ))}
                 </div>
 
-                <div className="mx-auto max-w-[30rem] pt-1 text-center">
-                  <h2 className="text-[2.35rem] font-bold leading-tight text-[#25211b] sm:text-[2.75rem]">
+                <div className="mx-auto max-w-[30rem] text-center">
+                  <h2 className="text-[1.75rem] font-bold leading-tight text-[#25211b] sm:text-[2.05rem]">
                     {activePanel?.label}
                   </h2>
-                  <p className="mt-3 text-[1.4rem] leading-relaxed text-[#5f574d] sm:text-[1.7rem]">
+                  <p className="mt-2 line-clamp-4 text-[1rem] leading-relaxed text-[#5f574d] sm:text-[1.12rem]">
                     {activePanel?.caption}
                   </p>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
 
-        <section className="pt-6 sm:pt-8">
-          <div className="mx-auto mt-12 w-full max-w-[52rem] pb-2 text-[#4d463d] sm:mt-14">
-            <div className="grid gap-8 md:grid-cols-[1.2fr_1fr] md:gap-10">
-              <div className="space-y-5">
-                <h3 className="text-[1.7rem] font-semibold leading-tight text-[#2e2923] sm:text-[2rem]">More About This Project</h3>
-                <p className="text-[1.2rem] leading-relaxed sm:text-[1.35rem]">
+            <div className="mx-auto w-full max-w-[56rem] text-[#4d463d]">
+              <div className="grid gap-4 md:grid-cols-[1.2fr_1fr] md:gap-6">
+                <div className="space-y-2.5">
+                <h3 className="text-[1.25rem] font-semibold leading-tight text-[#2e2923] sm:text-[1.45rem]">More About This Project</h3>
+                <p className="line-clamp-3 text-[0.92rem] leading-relaxed sm:text-[1rem]">
                   This work sits at the intersection of planning, communication, and execution. The goal was to build outcomes
                   that were practical, measurable, and sustainable over time.
                 </p>
-                <p className="text-[1.15rem] leading-relaxed text-[#615a50] sm:text-[1.3rem]">
+                <p className="text-[0.9rem] leading-relaxed text-[#615a50] sm:text-[0.98rem]">
                   Category: {project.category} • Timeline: {project.date}
                 </p>
               </div>
 
-              <div className="space-y-4 border-l border-[#c9c0b1]/70 pl-5 md:pl-6">
-                <h4 className="text-[1.15rem] font-semibold uppercase tracking-[0.14em] text-[#3b352d] sm:text-[1.25rem]">
+                <div className="space-y-2.5 border-[#c9c0b1]/70 md:border-l md:pl-6">
+                <h4 className="text-[0.85rem] font-semibold uppercase tracking-[0.14em] text-[#3b352d] sm:text-[0.95rem]">
                   Quick Snapshot
                 </h4>
-                <p className="text-[1.06rem] leading-relaxed text-[#615a50] sm:text-[1.16rem]">
+                <p className="line-clamp-1 text-[0.9rem] leading-relaxed text-[#615a50] sm:text-[0.98rem]">
                   Core focus: {project.tags.slice(0, 4).join(" • ")}
                 </p>
-                <p className="text-[1.06rem] leading-relaxed text-[#615a50] sm:text-[1.16rem]">
+                <p className="line-clamp-1 text-[0.9rem] leading-relaxed text-[#615a50] sm:text-[0.98rem]">
                   Key outcome: {project.outcomes[0] || "High-impact delivery with clear ownership."}
                 </p>
-                <p className="text-[1.06rem] leading-relaxed text-[#615a50] sm:text-[1.16rem]">
+                <p className="line-clamp-1 text-[0.9rem] leading-relaxed text-[#615a50] sm:text-[0.98rem]">
                   Approach: {project.approach.slice(0, 120)}...
                 </p>
               </div>
             </div>
-          </div>
 
-          <div className="mx-auto mt-12 w-full max-w-[44rem] pb-4 sm:mt-14">
-            <div className="h-px w-full bg-[#8b8377]/70" />
-            <div className="mt-6 flex items-center justify-center gap-5 sm:gap-7">
+              <div className="mx-auto mt-3 w-full max-w-[44rem]">
+                <div className="h-px w-full bg-[#8b8377]/70" />
+                <div className="mt-3 flex items-center justify-center gap-5 sm:gap-7">
               <a
                 href={project.sourceHref || "https://github.com/dhirendraxd"}
                 target="_blank"
@@ -304,7 +297,7 @@ const ProjectDetail = () => {
                 title="GitHub"
                 className="group inline-flex items-center justify-center text-[#1f1f1f] transition-all duration-200 hover:-translate-y-0.5 hover:text-[#15120d]"
               >
-                <FaGithub size={28} />
+                <FaGithub size={24} />
               </a>
               <a
                 href="https://instagram.com"
@@ -314,7 +307,7 @@ const ProjectDetail = () => {
                 title="Instagram"
                 className="group inline-flex items-center justify-center text-[#d33f68] transition-all duration-200 hover:-translate-y-0.5 hover:text-[#b63156]"
               >
-                <FaInstagram size={28} />
+                <FaInstagram size={24} />
               </a>
               <a
                 href="https://linkedin.com"
@@ -324,9 +317,11 @@ const ProjectDetail = () => {
                 title="LinkedIn"
                 className="group inline-flex items-center justify-center text-[#0a66c2] transition-all duration-200 hover:-translate-y-0.5 hover:text-[#08539d]"
               >
-                <FaLinkedinIn size={28} />
+                <FaLinkedinIn size={24} />
               </a>
+                </div>
             </div>
+          </div>
           </div>
         </section>
       </main>
