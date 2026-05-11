@@ -34,9 +34,9 @@ const upsertCanonical = (href: string) => {
 };
 
 const homepageProjectThumbnails: Record<string, string> = {
-  "fellowship-community-labs": new URL("@/assets/civic tech.webp", import.meta.url).href,
-  "ngo-volunteer-management": new URL("@/assets/2nd new .webp", import.meta.url).href,
-  "issue-hive-awarded-3rd-prize-at-kist-fair-2082": new URL("@/assets/issue hive .webp", import.meta.url).href,
+  "fellowship-community-labs": new URL("@/assets/reference image.jpg", import.meta.url).href,
+  "ngo-volunteer-management": new URL("@/assets/reference image.jpg", import.meta.url).href,
+  "issue-hive-awarded-3rd-prize-at-kist-fair-2082": new URL("@/assets/reference image.jpg", import.meta.url).href,
 };
 
 const ProjectDetail = () => {
@@ -54,37 +54,37 @@ const ProjectDetail = () => {
     return [
       {
         key: "overview",
-        hat: "🧢",
+        thumbPosition: "center 20%",
         label: "Professionalism",
         caption: project.summary,
       },
       {
         key: "challenge",
-        hat: "🎩",
+        thumbPosition: "center 34%",
         label: "Problem Solving",
         caption: project.challenge,
       },
       {
         key: "approach",
-        hat: "🎓",
+        thumbPosition: "center 48%",
         label: "Strategic Thinking",
         caption: project.approach,
       },
       {
         key: "outcomes",
-        hat: "⛑️",
+        thumbPosition: "center 62%",
         label: "Execution",
         caption: project.outcomes.slice(0, 2).join(" "),
       },
       {
         key: "skills",
-        hat: "🤠",
+        thumbPosition: "center 76%",
         label: "Adaptability",
         caption: `Worked across ${project.tags.slice(0, 3).join(", ")}.`,
       },
       {
         key: "timeline",
-        hat: "👒",
+        thumbPosition: "center 90%",
         label: "Ownership",
         caption: `Delivered in ${project.date} with measurable accountability and consistency.`,
       },
@@ -195,27 +195,33 @@ const ProjectDetail = () => {
             <span className="leading-none">Back</span>
           </button>
 
-          <div className="mt-3 grid min-h-0 flex-1 grid-rows-[minmax(0,1fr)_auto] gap-4">
-            <div className="grid min-h-0 content-start gap-6 pt-1 lg:grid-cols-[1.08fr_1fr] lg:items-start lg:gap-12 lg:pt-3">
-              <div className="space-y-4 sm:space-y-5 lg:pt-1">
-                <h1 className="max-w-[31rem] text-[1.95rem] font-bold leading-tight text-[#2a251f] sm:text-[2.35rem] lg:text-[2.75rem]">
+          <div className="mt-6 grid min-h-0 flex-1 grid-rows-[minmax(0,1fr)_auto] gap-5">
+            <div className="grid min-h-0 content-start gap-6 pt-4 lg:grid-cols-[1.12fr_1fr] lg:items-start lg:gap-10 lg:pt-5">
+              <div className="space-y-4 sm:space-y-5 lg:pt-2">
+                <h1 className="max-w-[33rem] text-[1.95rem] font-bold leading-tight text-[#2a251f] sm:text-[2.45rem] lg:text-[3rem]">
                   A good worker should be able to wear many hats...
                 </h1>
-                <p className="max-w-[31rem] text-[1rem] leading-relaxed text-[#6f675c] sm:text-[1.18rem] lg:text-[1.28rem]">
+                <p className="max-w-[33rem] text-[1rem] leading-relaxed text-[#6f675c] sm:text-[1.18rem] lg:text-[1.32rem]">
                   As a worker you will often need to adapt to different roles and responsibilities.
                 </p>
 
-                <div className="relative mt-4 hidden w-full max-w-[19rem] sm:block">
+                <div className="relative mt-10 hidden w-full max-w-[35rem] sm:block lg:mt-12">
                   <img
                     src={heroThumbnail}
-                    alt={`${project.title} project preview image`}
+                    alt={`${activePanel?.label || project.title} project preview image`}
                     loading="eager"
                     fetchPriority="high"
                     decoding="async"
                     width={1200}
                     height={630}
-                    sizes="304px"
-                    className="h-[9rem] w-full rounded-xl object-cover opacity-80 lg:h-[10rem]"
+                    sizes="560px"
+                    className="h-[19.5rem] w-full rounded-xl object-cover opacity-80 lg:h-[21.5rem]"
+                    style={{
+                      objectPosition: activePanel?.thumbPosition || "center",
+                      transitionProperty: "object-position, transform, opacity",
+                      transitionDuration: "500ms",
+                      transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+                    }}
                   />
                   <div className="pointer-events-none absolute bottom-3 left-3 rounded-md bg-[#f8f6f0]/95 px-2 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-[#3f3932]">
                     Project Character
@@ -223,31 +229,37 @@ const ProjectDetail = () => {
                 </div>
               </div>
 
-              <div className="space-y-4 lg:pt-1">
-                <p className="text-center text-[1.25rem] leading-relaxed text-[#3d372f] sm:text-[1.55rem] lg:text-[1.7rem]">
+              <div className="mt-4 space-y-4 pt-4 lg:mt-8 lg:pt-8">
+                <p className="text-center text-[1.1rem] leading-relaxed text-[#3d372f] sm:text-[1.42rem] lg:text-[1.55rem]">
                   Click on different hats to see what I can do!
                 </p>
 
-                <div className="mx-auto grid max-w-[20rem] grid-cols-3 gap-2.5 sm:gap-3">
+                <div className="mx-auto grid max-w-[21.5rem] grid-cols-3 gap-2.5 sm:gap-3 lg:mt-2">
                   {rolePanels.map((panel, index) => (
                     <button
                       key={panel.key}
                       type="button"
                       onClick={() => setActiveSlide(index)}
-                      className={`flex h-[4.35rem] items-center justify-center rounded-lg border-2 text-[2.15rem] transition-all duration-200 sm:h-[4.7rem] sm:text-[2.35rem] ${
+                      className={`flex h-[4.85rem] items-center justify-center rounded-lg border-2 text-[2.35rem] transition-all duration-200 sm:h-[5.15rem] sm:text-[2.55rem] ${
                         activeSlide === index
                           ? "border-[#15120d] bg-[#fffdf8] shadow-[0_6px_16px_-10px_rgba(21,18,13,0.9)]"
                           : "border-[#d6cebf] bg-white/80 hover:-translate-y-0.5 hover:border-[#756d60]"
                       }`}
                       aria-label={`Show ${panel.label}`}
                     >
-                      <span aria-hidden="true">{panel.hat}</span>
+                      <img
+                        src={heroThumbnail}
+                        alt=""
+                        aria-hidden="true"
+                        className="h-full w-full object-cover"
+                        style={{ objectPosition: panel.thumbPosition }}
+                      />
                     </button>
                   ))}
                 </div>
 
-                <div className="mx-auto max-w-[30rem] text-center">
-                  <h2 className="text-[1.75rem] font-bold leading-tight text-[#25211b] sm:text-[2.05rem]">
+                <div className="mx-auto mt-2 max-w-[32rem] text-center">
+                  <h2 className="text-[1.72rem] font-bold leading-tight text-[#25211b] sm:text-[2rem]">
                     {activePanel?.label}
                   </h2>
                   <p className="mt-2 line-clamp-4 text-[1rem] leading-relaxed text-[#5f574d] sm:text-[1.12rem]">
@@ -257,8 +269,8 @@ const ProjectDetail = () => {
               </div>
             </div>
 
-            <div className="mx-auto w-full max-w-[56rem] text-[#4d463d]">
-              <div className="grid gap-4 md:grid-cols-[1.2fr_1fr] md:gap-6">
+            <div className="mx-auto mt-3 w-full max-w-[60rem] text-[#4d463d]">
+              <div className="grid gap-5 md:grid-cols-[1.2fr_1fr] md:gap-8">
                 <div className="space-y-2.5">
                 <h3 className="text-[1.25rem] font-semibold leading-tight text-[#2e2923] sm:text-[1.45rem]">More About This Project</h3>
                 <p className="line-clamp-3 text-[0.92rem] leading-relaxed sm:text-[1rem]">
@@ -286,9 +298,9 @@ const ProjectDetail = () => {
               </div>
             </div>
 
-              <div className="mx-auto mt-3 w-full max-w-[44rem]">
+              <div className="mx-auto mt-2 w-full max-w-[48rem]">
                 <div className="h-px w-full bg-[#8b8377]/70" />
-                <div className="mt-3 flex items-center justify-center gap-5 sm:gap-7">
+                <div className="mt-2.5 flex items-center justify-center gap-5 sm:gap-7">
               <a
                 href={project.sourceHref || "https://github.com/dhirendraxd"}
                 target="_blank"

@@ -11,14 +11,14 @@
   "categories": ["portfolio", "marketing", "education"],
   "icons": [
     {
-      "src": "/favicon_cropped_processed_by_imagy.png",
-      "sizes": "192x192",
+      "src": "/favicon.png",
+      "sizes": "any",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/favicon_cropped_processed_by_imagy.png",
-      "sizes": "512x512",
+      "src": "/favicon.png",
+      "sizes": "any",
       "type": "image/png",
       "purpose": "any maskable"
     }
