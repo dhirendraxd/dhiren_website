@@ -6,6 +6,30 @@ import { getProjectBySlug } from "@/data/projectDetails";
 
 const BASE_URL = "https://dhirendrasinghdhami.com.np";
 
+const socialLinks = [
+  {
+    href: "https://github.com/dhirendraxd",
+    label: "GitHub",
+    title: "GitHub",
+    icon: FaGithub,
+    color: "text-[#1f1f1f] hover:text-[#15120d]",
+  },
+  {
+    href: "https://instagram.com",
+    label: "Instagram",
+    title: "Instagram",
+    icon: FaInstagram,
+    color: "text-[#d33f68] hover:text-[#b63156]",
+  },
+  {
+    href: "https://linkedin.com",
+    label: "LinkedIn",
+    title: "LinkedIn",
+    icon: FaLinkedinIn,
+    color: "text-[#0a66c2] hover:text-[#08539d]",
+  },
+];
+
 const getMetaTag = (selector: string) => document.head.querySelector(selector) as HTMLMetaElement | null;
 
 const upsertMetaTag = (selector: string, attrs: Record<string, string>) => {
@@ -33,65 +57,32 @@ const upsertCanonical = (href: string) => {
   canonical.setAttribute("href", href);
 };
 
-const homepageProjectThumbnails: Record<string, string> = {
-  "fellowship-community-labs": new URL("@/assets/reference image.jpg", import.meta.url).href,
-  "ngo-volunteer-management": new URL("@/assets/reference image.jpg", import.meta.url).href,
-  "issue-hive-awarded-3rd-prize-at-kist-fair-2082": new URL("@/assets/reference image.jpg", import.meta.url).href,
-};
-
 const ProjectDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const project = slug ? getProjectBySlug(slug) : undefined;
   const navigate = useNavigate();
-  const [activeSlide, setActiveSlide] = useState(0);
-  const heroThumbnail = project ? homepageProjectThumbnails[project.slug] || project.image : "";
+  const heroThumbnail = project?.image || "";
 
-  const rolePanels = useMemo(() => {
+  const focusPanels = useMemo(() => {
     if (!project) {
       return [];
     }
 
     return [
       {
-        key: "overview",
-        thumbPosition: "center 20%",
         label: "Professionalism",
         caption: project.summary,
       },
       {
-        key: "challenge",
-        thumbPosition: "center 34%",
         label: "Problem Solving",
         caption: project.challenge,
       },
       {
-        key: "approach",
-        thumbPosition: "center 48%",
-        label: "Strategic Thinking",
-        caption: project.approach,
-      },
-      {
-        key: "outcomes",
-        thumbPosition: "center 62%",
         label: "Execution",
-        caption: project.outcomes.slice(0, 2).join(" "),
-      },
-      {
-        key: "skills",
-        thumbPosition: "center 76%",
-        label: "Adaptability",
-        caption: `Worked across ${project.tags.slice(0, 3).join(", ")}.`,
-      },
-      {
-        key: "timeline",
-        thumbPosition: "center 90%",
-        label: "Ownership",
-        caption: `Delivered in ${project.date} with measurable accountability and consistency.`,
+        caption: project.approach,
       },
     ];
   }, [project]);
-
-  const activePanel = rolePanels[activeSlide] ?? rolePanels[0];
 
   useEffect(() => {
     if (!project) {
@@ -174,168 +165,150 @@ const ProjectDetail = () => {
     };
   }, [project]);
 
-  useEffect(() => {
-    setActiveSlide(0);
-  }, [project?.slug]);
-
   if (!project) {
     return <Navigate to="/tech-projects" replace />;
   }
 
+  const tagPills = project.tags.slice(0, 5);
+  const outcomes = project.outcomes.slice(0, 3);
+
   return (
-    <div className="h-dvh overflow-hidden bg-[#e7e3da]">
+    <div className="h-dvh overflow-hidden bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.55),_transparent_30%),linear-gradient(180deg,#f7f3ec_0%,#e6ddcf_100%)] text-[#2d261f]">
       <ScrollProgressBar />
-      <main className="mx-auto flex h-full max-w-[78rem] flex-col overflow-hidden px-4 pb-4 pt-4 font-rajdhani sm:px-7 md:px-12 md:pt-5">
-        <section className="flex h-full min-h-0 flex-col">
+      <main className="mx-auto flex h-full max-w-[84rem] flex-col overflow-hidden px-4 py-4 font-rajdhani sm:px-6 sm:py-5 lg:px-10 lg:py-6">
+        <section className="flex h-full min-h-0 flex-col overflow-hidden">
           <button
             onClick={() => navigate(-1)}
-            className="group inline-flex items-center gap-1 border-b border-transparent pb-1 text-sm font-semibold uppercase tracking-[0.2em] text-[#3f3932] transition-colors hover:border-[#7A3A30] hover:text-[#7A3A30]"
+            className="group mt-1 inline-flex items-center gap-1 text-sm font-semibold uppercase tracking-[0.24em] text-[#3f3932] transition-colors hover:text-[#7A3A30] sm:mt-2"
           >
             <span aria-hidden="true" className="flex leading-none transition-transform duration-300 group-hover:-translate-x-1">&larr;</span>
-            <span className="leading-none">Back</span>
+            <span className="border-b border-transparent leading-none transition-colors group-hover:border-[#7A3A30]">Back</span>
           </button>
 
-          <div className="mt-6 grid min-h-0 flex-1 grid-rows-[minmax(0,1fr)_auto] gap-5">
-            <div className="grid min-h-0 content-start gap-6 pt-4 lg:grid-cols-[1.12fr_1fr] lg:items-start lg:gap-10 lg:pt-5">
-              <div className="space-y-4 sm:space-y-5 lg:pt-2">
-                <h1 className="max-w-[33rem] text-[1.95rem] font-bold leading-tight text-[#2a251f] sm:text-[2.45rem] lg:text-[3rem]">
-                  A good worker should be able to wear many hats...
-                </h1>
-                <p className="max-w-[33rem] text-[1rem] leading-relaxed text-[#6f675c] sm:text-[1.18rem] lg:text-[1.32rem]">
-                  As a worker you will often need to adapt to different roles and responsibilities.
+          <section className="mt-4 grid flex-1 min-h-0 gap-6 lg:grid-cols-[1.08fr_0.92fr] lg:items-start">
+            <div className="space-y-4">
+              <div className="space-y-3">
+                <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#7A3A30]">
+                  Project overview
                 </p>
-
-                <div className="relative mt-10 hidden w-full max-w-[35rem] sm:block lg:mt-12">
-                  <img
-                    src={heroThumbnail}
-                    alt={`${activePanel?.label || project.title} project preview image`}
-                    loading="eager"
-                    fetchPriority="high"
-                    decoding="async"
-                    width={1200}
-                    height={630}
-                    sizes="560px"
-                    className="h-[19.5rem] w-full rounded-xl object-cover opacity-80 lg:h-[21.5rem]"
-                    style={{
-                      objectPosition: activePanel?.thumbPosition || "center",
-                      transitionProperty: "object-position, transform, opacity",
-                      transitionDuration: "500ms",
-                      transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
-                    }}
-                  />
-                  <div className="pointer-events-none absolute bottom-3 left-3 rounded-md bg-[#f8f6f0]/95 px-2 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-[#3f3932]">
-                    Project Character
-                  </div>
-                </div>
+                <h1 className="max-w-[30rem] text-[2rem] font-bold leading-[1.05] text-[#231d18] sm:text-[2.55rem] lg:text-[3.35rem]">
+                  {project.title}
+                </h1>
+                <p className="max-w-[31rem] text-[0.96rem] leading-relaxed text-[#554b41] sm:text-[1rem] lg:text-[1.08rem]">
+                  {project.summary}
+                </p>
               </div>
 
-              <div className="mt-4 space-y-4 pt-4 lg:mt-8 lg:pt-8">
-                <p className="text-center text-[1.1rem] leading-relaxed text-[#3d372f] sm:text-[1.42rem] lg:text-[1.55rem]">
-                  Click on different hats to see what I can do!
-                </p>
+              <div className="relative w-full max-w-[34rem]">
+                <img
+                  src={heroThumbnail}
+                  alt={`${project.title} project preview image`}
+                  loading="eager"
+                  fetchPriority="high"
+                  decoding="async"
+                  width={1200}
+                  height={630}
+                  className="h-[13rem] w-full object-contain sm:h-[16rem] lg:h-[18rem]"
+                />
+              </div>
 
-                <div className="mx-auto grid max-w-[21.5rem] grid-cols-3 gap-2.5 sm:gap-3 lg:mt-2">
-                  {rolePanels.map((panel, index) => (
-                    <button
-                      key={panel.key}
-                      type="button"
-                      onClick={() => setActiveSlide(index)}
-                      className={`flex h-[4.85rem] items-center justify-center rounded-lg border-2 text-[2.35rem] transition-all duration-200 sm:h-[5.15rem] sm:text-[2.55rem] ${
-                        activeSlide === index
-                          ? "border-[#15120d] bg-[#fffdf8] shadow-[0_6px_16px_-10px_rgba(21,18,13,0.9)]"
-                          : "border-[#d6cebf] bg-white/80 hover:-translate-y-0.5 hover:border-[#756d60]"
-                      }`}
-                      aria-label={`Show ${panel.label}`}
+              <div className="space-y-3 max-w-[34rem]">
+                <p className="text-[0.92rem] leading-relaxed text-[#5f574d] sm:text-[0.97rem] lg:text-[1rem]">
+                  This project was about {project.challenge.toLowerCase()} It focused on {project.approach.toLowerCase()} The main result was {project.outcomes[0] || "high-impact delivery with clear ownership.".toLowerCase()}.
+                </p>
+                <p className="text-[0.92rem] leading-relaxed text-[#5f574d] sm:text-[0.97rem] lg:text-[1rem]">
+                  In practice, the work brought together planning, communication, and delivery so the outcome felt practical, measurable, and directly useful for the people it was built for.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex h-full min-h-0 flex-col gap-4 pt-1 sm:gap-5 sm:pt-2 lg:pt-4">
+              <p className="text-center text-[1rem] leading-relaxed text-[#3d372f] sm:text-[1.1rem] lg:text-[1.3rem]">
+                Click on different hats to see what I can do!
+              </p>
+
+              <div className="mx-auto grid max-w-[21.5rem] grid-cols-3 gap-2 sm:gap-2.5">
+                {focusPanels.map((panel) => (
+                  <div
+                    key={panel.label}
+                    className="flex h-[4.3rem] items-center justify-center p-0.5 sm:h-[4.65rem]"
+                  >
+                    <img
+                      src={heroThumbnail}
+                      alt=""
+                      aria-hidden="true"
+                      className="h-full w-full object-cover opacity-90"
+                    />
+                  </div>
+                ))}
+              </div>
+
+              <div className="mx-auto max-w-[28rem] space-y-3">
+                <div className="text-center">
+                  <h2 className="text-[1.5rem] font-bold leading-tight text-[#25211b] sm:text-[1.8rem]">
+                    Professionalism
+                  </h2>
+                  <p className="mt-1.5 text-[0.92rem] leading-relaxed text-[#5f574d] sm:text-[0.98rem]">
+                    Maintain integrity, accountability, and respect.
+                  </p>
+                </div>
+
+                <ul className="space-y-1.5 text-left text-[0.82rem] leading-relaxed text-[#5f574d] sm:text-[0.92rem]">
+                  <li>Category: {project.category}</li>
+                  <li>Timeline: {project.date}</li>
+                  <li>Core focus: {tagPills.join(" • ")}</li>
+                  <li>Key outcome: {project.outcomes[0] || "High-impact delivery with clear ownership."}</li>
+                </ul>
+              </div>
+
+              <div className="mt-auto overflow-hidden lg:flex-1">
+                <img
+                  src={project.image}
+                  alt={`${project.title} detail preview image`}
+                  loading="eager"
+                  decoding="async"
+                  width={1200}
+                  height={630}
+                  className="h-[9rem] w-full object-cover sm:h-[11rem] lg:h-full"
+                />
+              </div>
+            </div>
+          </section>
+        </section>
+
+          <section className="mt-auto pt-4 sm:pt-5">
+            <div className="mx-auto max-w-[50rem]">
+              <div className="h-px w-full bg-[#8b8377]/80" />
+              <div className="mt-3 flex flex-col items-center gap-3">
+                <div className="flex items-center gap-4 sm:gap-5">
+                  {socialLinks.map(({ href, label, title, icon: Icon, color }) => (
+                    <a
+                      key={label}
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={label}
+                      title={title}
+                      className={`group inline-flex items-center justify-center transition-all duration-200 hover:-translate-y-0.5 ${color}`}
                     >
-                      <img
-                        src={heroThumbnail}
-                        alt=""
-                        aria-hidden="true"
-                        className="h-full w-full object-cover"
-                        style={{ objectPosition: panel.thumbPosition }}
-                      />
-                    </button>
+                      <Icon size={24} />
+                    </a>
                   ))}
                 </div>
 
-                <div className="mx-auto mt-2 max-w-[32rem] text-center">
-                  <h2 className="text-[1.72rem] font-bold leading-tight text-[#25211b] sm:text-[2rem]">
-                    {activePanel?.label}
-                  </h2>
-                  <p className="mt-2 line-clamp-4 text-[1rem] leading-relaxed text-[#5f574d] sm:text-[1.12rem]">
-                    {activePanel?.caption}
-                  </p>
-                </div>
+                {project.sourceHref ? (
+                  <a
+                    href={project.sourceHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center border-b border-transparent pb-1 text-xs font-semibold uppercase tracking-[0.18em] text-[#4b4035] transition-colors hover:border-[#7A3A30] hover:text-[#7A3A30]"
+                  >
+                    View source
+                  </a>
+                ) : null}
               </div>
             </div>
-
-            <div className="mx-auto mt-3 w-full max-w-[60rem] text-[#4d463d]">
-              <div className="grid gap-5 md:grid-cols-[1.2fr_1fr] md:gap-8">
-                <div className="space-y-2.5">
-                <h3 className="text-[1.25rem] font-semibold leading-tight text-[#2e2923] sm:text-[1.45rem]">More About This Project</h3>
-                <p className="line-clamp-3 text-[0.92rem] leading-relaxed sm:text-[1rem]">
-                  This work sits at the intersection of planning, communication, and execution. The goal was to build outcomes
-                  that were practical, measurable, and sustainable over time.
-                </p>
-                <p className="text-[0.9rem] leading-relaxed text-[#615a50] sm:text-[0.98rem]">
-                  Category: {project.category} • Timeline: {project.date}
-                </p>
-              </div>
-
-                <div className="space-y-2.5 border-[#c9c0b1]/70 md:border-l md:pl-6">
-                <h4 className="text-[0.85rem] font-semibold uppercase tracking-[0.14em] text-[#3b352d] sm:text-[0.95rem]">
-                  Quick Snapshot
-                </h4>
-                <p className="line-clamp-1 text-[0.9rem] leading-relaxed text-[#615a50] sm:text-[0.98rem]">
-                  Core focus: {project.tags.slice(0, 4).join(" • ")}
-                </p>
-                <p className="line-clamp-1 text-[0.9rem] leading-relaxed text-[#615a50] sm:text-[0.98rem]">
-                  Key outcome: {project.outcomes[0] || "High-impact delivery with clear ownership."}
-                </p>
-                <p className="line-clamp-1 text-[0.9rem] leading-relaxed text-[#615a50] sm:text-[0.98rem]">
-                  Approach: {project.approach.slice(0, 120)}...
-                </p>
-              </div>
-            </div>
-
-              <div className="mx-auto mt-2 w-full max-w-[48rem]">
-                <div className="h-px w-full bg-[#8b8377]/70" />
-                <div className="mt-2.5 flex items-center justify-center gap-5 sm:gap-7">
-              <a
-                href={project.sourceHref || "https://github.com/dhirendraxd"}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="GitHub"
-                title="GitHub"
-                className="group inline-flex items-center justify-center text-[#1f1f1f] transition-all duration-200 hover:-translate-y-0.5 hover:text-[#15120d]"
-              >
-                <FaGithub size={24} />
-              </a>
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-                title="Instagram"
-                className="group inline-flex items-center justify-center text-[#d33f68] transition-all duration-200 hover:-translate-y-0.5 hover:text-[#b63156]"
-              >
-                <FaInstagram size={24} />
-              </a>
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn"
-                title="LinkedIn"
-                className="group inline-flex items-center justify-center text-[#0a66c2] transition-all duration-200 hover:-translate-y-0.5 hover:text-[#08539d]"
-              >
-                <FaLinkedinIn size={24} />
-              </a>
-                </div>
-            </div>
-          </div>
-          </div>
-        </section>
+          </section>
       </main>
     </div>
   );
