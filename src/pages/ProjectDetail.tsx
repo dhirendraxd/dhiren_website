@@ -70,6 +70,14 @@ const ProjectDetail = () => {
     return [project.image].filter(Boolean) as string[];
   })();
   const thumbsRef = useRef<HTMLDivElement | null>(null);
+  const displayThumbs = (() => {
+    const base = thumbnails.length ? thumbnails : [heroThumbnail].filter(Boolean) as string[];
+    const result: string[] = [];
+    for (let i = 0; i < 4; i++) {
+      result.push(base[i] ?? base[0] ?? "");
+    }
+    return result.filter(Boolean);
+  })();
 
   const focusPanels = useMemo(() => {
     if (!project) {
@@ -212,32 +220,20 @@ const ProjectDetail = () => {
 
           <section className="mt-10 grid flex-1 min-h-0 gap-10 lg:grid-cols-[1fr_1fr] lg:items-start">
             {/* Left: large gallery / hero image */}
-            <div className="relative overflow-hidden">
-              {thumbnails.length >= 3 ? (
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  {thumbnails.slice(0, 3).map((t, i) => (
-                    <button
-                      key={t + i}
-                      onClick={() => setCurrentImage(t)}
-                      className="w-full h-[min(40vh,360px)] sm:h-[min(60vh,520px)] overflow-hidden rounded-sm border border-[#e9e1d6] p-0"
-                    >
-                      <img src={t} alt={`gallery-${i + 1}`} className="w-full h-full object-cover" />
-                    </button>
-                  ))}
-                </div>
-              ) : (
-                <img
-                  src={currentImage || heroThumbnail}
-                  alt={`${project.title} project preview image`}
-                  loading="eager"
-                  decoding="async"
-                  width={1400}
-                  height={900}
-                  className="w-full h-auto max-h-[60vh] sm:max-h-[80vh] object-contain"
-                />
-              )}
+            <div className="relative overflow-visible">
+              <div className="w-full h-[min(48vh,420px)] sm:h-[min(64vh,560px)] flex items-center justify-center">
+                  <img
+                    src={currentImage || heroThumbnail}
+                    alt={`${project.title} project preview image`}
+                    loading="eager"
+                    decoding="async"
+                    width={1400}
+                    height={900}
+                    className="max-w-full max-h-full object-contain object-center"
+                  />
+              </div>
 
-              {/* Thumbnails row */}
+              {/* Thumbnails row (show up to 4 small images) */}
               <div
                 ref={thumbsRef}
                 role="tablist"
@@ -262,7 +258,7 @@ const ProjectDetail = () => {
                   e.preventDefault();
                 }}
               >
-                {(thumbnails.length ? thumbnails : [heroThumbnail]).map((t, idx) => (
+                {displayThumbs.map((t, idx) => (
                   <button
                     key={t + idx}
                     data-src={t}
@@ -272,9 +268,9 @@ const ProjectDetail = () => {
                     tabIndex={0}
                     onClick={() => setCurrentImage(t)}
                     aria-label={`Thumbnail ${idx + 1}`}
-                    className={`h-16 min-w-[6rem] sm:w-24 overflow-hidden rounded-sm border p-0 focus:outline-none focus:ring-2 focus:ring-[#7A3A30] ${ (currentImage || heroThumbnail) === t ? 'border-[#7A3A30]' : 'border-[#d9d2c6]'}`}
+                    className={`h-16 min-w-[6rem] sm:w-24 overflow-hidden p-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7A3A30] ${ (currentImage || heroThumbnail) === t ? '' : 'opacity-60'} rounded-none bg-transparent`}
                   >
-                    <img src={t} alt="" className="h-full w-full object-cover" />
+                    <img src={t} alt="" className="h-full w-full object-contain object-center" />
                   </button>
                 ))}
               </div>
