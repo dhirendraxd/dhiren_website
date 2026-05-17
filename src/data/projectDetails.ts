@@ -10,6 +10,7 @@ export type ProjectDetail = {
   outcomes: string[];
   tags: string[];
   image: string;
+  gallery?: string[];
   sourceHref?: string;
 };
 
@@ -146,6 +147,11 @@ export const projectDetails: ProjectDetail[] = [
     ],
     tags: ["Fellowship", "Facilitation", "Social Impact"],
     image: selectedProjectIllustrations.fellowshipCommunityLabs,
+    gallery: [
+      selectedProjectIllustrations.fellowshipCommunityLabs,
+      images.awsCloudClub,
+      images.volunteerPlatform,
+    ],
     sourceHref: "https://www.facebook.com/allinfoundationnp/"
   },
   {
@@ -268,7 +274,8 @@ export const projectDetails: ProjectDetail[] = [
       "Established a lightweight model for transparent community moderation."
     ],
     tags: ["Campus Innovation", "Community", "Student Platform"],
-    image: issueHiveThumbnail
+    image: issueHiveThumbnail,
+    gallery: [issueHiveThumbnail, images.mitraSmart, images.devBus]
   },
   {
     slug: "university-fit-engine",

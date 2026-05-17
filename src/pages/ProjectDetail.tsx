@@ -214,12 +214,12 @@ const ProjectDetail = () => {
             {/* Left: large gallery / hero image */}
             <div className="relative overflow-hidden">
               {thumbnails.length >= 3 ? (
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   {thumbnails.slice(0, 3).map((t, i) => (
                     <button
                       key={t + i}
                       onClick={() => setCurrentImage(t)}
-                      className="w-full h-[min(60vh,520px)] overflow-hidden rounded-sm border border-[#e9e1d6] p-0"
+                      className="w-full h-[min(40vh,360px)] sm:h-[min(60vh,520px)] overflow-hidden rounded-sm border border-[#e9e1d6] p-0"
                     >
                       <img src={t} alt={`gallery-${i + 1}`} className="w-full h-full object-cover" />
                     </button>
@@ -233,7 +233,7 @@ const ProjectDetail = () => {
                   decoding="async"
                   width={1400}
                   height={900}
-                  className="w-full h-auto max-h-[80vh] object-contain"
+                  className="w-full h-auto max-h-[60vh] sm:max-h-[80vh] object-contain"
                 />
               )}
 
@@ -242,7 +242,7 @@ const ProjectDetail = () => {
                 ref={thumbsRef}
                 role="tablist"
                 aria-label="Project thumbnails"
-                className="mt-4 flex gap-3"
+                className="mt-4 flex gap-3 overflow-x-auto py-1 -mx-1"
                 onKeyDown={(e) => {
                   const keys = ['ArrowLeft', 'ArrowRight', 'Home', 'End'];
                   if (!keys.includes(e.key)) return;
@@ -272,7 +272,7 @@ const ProjectDetail = () => {
                     tabIndex={0}
                     onClick={() => setCurrentImage(t)}
                     aria-label={`Thumbnail ${idx + 1}`}
-                    className={`h-16 w-24 overflow-hidden rounded-sm border p-0 focus:outline-none focus:ring-2 focus:ring-[#7A3A30] ${ (currentImage || heroThumbnail) === t ? 'border-[#7A3A30]' : 'border-[#d9d2c6]'}`}
+                    className={`h-16 min-w-[6rem] sm:w-24 overflow-hidden rounded-sm border p-0 focus:outline-none focus:ring-2 focus:ring-[#7A3A30] ${ (currentImage || heroThumbnail) === t ? 'border-[#7A3A30]' : 'border-[#d9d2c6]'}`}
                   >
                     <img src={t} alt="" className="h-full w-full object-cover" />
                   </button>
@@ -281,10 +281,10 @@ const ProjectDetail = () => {
             </div>
 
             {/* Right: concise content block with title, summary and details */}
-            <aside className="lg:sticky lg:top-20 flex flex-col gap-8 self-start pr-8 max-w-[56rem]">
+            <aside className="lg:sticky lg:top-20 flex flex-col gap-8 self-start pr-0 lg:pr-8 max-w-[56rem]">
               <div className="pr-2">
                 <p className="text-xs font-semibold uppercase tracking-[0.26em] text-[#7A3A30]">Selected Project</p>
-                <h1 className="mt-2 text-[2.8rem] font-serif font-bold leading-[1.02] text-[#231d18] sm:text-[3.6rem]">{project.title}</h1>
+                <h1 className="mt-2 text-[2.8rem] font-rajdhani font-bold leading-[1.02] text-[#231d18] sm:text-[3.6rem]">{project.title}</h1>
                 <p className="mt-4 max-w-[56ch] text-[1.02rem] leading-[1.7] text-[#554b41]">{project.summary}</p>
               </div>
 
