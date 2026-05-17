@@ -189,10 +189,30 @@ const ProjectDetail = () => {
   const tagPills = project.tags.slice(0, 5);
   const outcomes = project.outcomes.slice(0, 3);
   const teamMembers = [
-    { name: "Michael Brown", role: "Product Lead", img: "https://picsum.photos/seed/michael/440/640" },
-    { name: "Rahul Mehta", role: "Design Lead", img: "https://picsum.photos/seed/rahul/440/640" },
-    { name: "Sophia Lee", role: "Community Manager", img: "https://picsum.photos/seed/sophia/440/640" },
-    { name: "Daniel Carter", role: "Developer", img: "https://picsum.photos/seed/daniel/720/480" },
+    {
+      name: "Michael Brown",
+      role: "Product Lead",
+      projectWork: "Led product strategy, stakeholder interviews and roadmap definition.",
+      img: "https://picsum.photos/seed/michael/440/640",
+    },
+    {
+      name: "Rahul Mehta",
+      role: "Design Lead",
+      projectWork: "Designed UX flows and visual system; ran usability tests and iterations.",
+      img: "https://picsum.photos/seed/rahul/440/640",
+    },
+    {
+      name: "Sophia Lee",
+      role: "Community Manager",
+      projectWork: "Led community outreach and onboarding; managed volunteer coordination.",
+      img: "https://picsum.photos/seed/sophia/440/640",
+    },
+    {
+      name: "Daniel Carter",
+      role: "Developer",
+      projectWork: "Implemented frontend components, performance optimizations and CI.",
+      img: "https://picsum.photos/seed/daniel/720/480",
+    },
   ];
 
   return (

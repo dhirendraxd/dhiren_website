@@ -31,7 +31,7 @@ const MeetTheTeam: React.FC<{ members: Member[]; href?: string }> = ({ members, 
                 onBlur={() => setHovered(null)}
                 tabIndex={0}
                 className={`relative w-full aspect-square overflow-hidden rounded-none bg-[#f2efe9] transition-all duration-200 ${
-                  isOtherHovered ? 'opacity-40' : isHovered ? 'scale-105 z-10' : ''
+                  isOtherHovered ? 'opacity-60' : isHovered ? 'scale-105 z-10' : ''
                 }`}
               >
                 <img
@@ -50,8 +50,8 @@ const MeetTheTeam: React.FC<{ members: Member[]; href?: string }> = ({ members, 
                     isHovered ? 'opacity-100' : 'opacity-0'
                   }`}
                 >
-                  <div className="w-full bg-gradient-to-t from-[rgba(0,0,0,0.7)] to-transparent p-3">
-                    <div className="text-sm font-rajdhani text-white">{m[i]?.role || 'Team member'}</div>
+                  <div className="w-full bg-gradient-to-t from-[rgba(0,0,0,0.75)] to-transparent p-3">
+                    <div className="text-sm font-rajdhani text-white">{m[i]?.projectWork || m[i]?.role || 'Team member'}</div>
                   </div>
                 </div>
                 <div className="absolute left-3 bottom-3 text-white">
@@ -63,7 +63,8 @@ const MeetTheTeam: React.FC<{ members: Member[]; href?: string }> = ({ members, 
                 </div>
               )}
             </div>
-          ))}
+          );
+          })}
         </div>
       </div>
     </section>
