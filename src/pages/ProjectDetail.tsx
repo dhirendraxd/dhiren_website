@@ -204,7 +204,7 @@ const ProjectDetail = () => {
           <section className="mt-10 grid flex-1 min-h-0 gap-10 lg:grid-cols-[1fr_1fr] lg:items-start">
             {/* Left: large gallery / hero image */}
             <div className="relative overflow-visible">
-              <div className="w-full h-[min(48vh,420px)] sm:h-[min(64vh,560px)] flex items-center justify-center">
+              <div className="w-full h-[min(48vh,420px)] sm:h-[min(64vh,560px)] relative group flex items-center justify-center">
                   <img
                     src={currentImage || heroThumbnail}
                     alt={`${project.title} project preview image`}
@@ -214,6 +214,40 @@ const ProjectDetail = () => {
                     height={900}
                     className="max-w-full max-h-full object-contain object-center"
                   />
+
+                  {displayThumbs.length > 1 && (
+                    <>
+                      <button
+                        type="button"
+                        aria-label="Previous image"
+                        onClick={() => {
+                          const idx = displayThumbs.findIndex((s) => (s || heroThumbnail) === (currentImage || heroThumbnail));
+                          const prev = displayThumbs[(idx - 1 + displayThumbs.length) % displayThumbs.length] || heroThumbnail;
+                          setCurrentImage(prev);
+                        }}
+                        className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 absolute left-3 top-1/2 -translate-y-1/2 z-20 flex h-8 w-8 items-center justify-center text-[#231d18] hover:bg-[rgba(0,0,0,0.06)] hover:text-[#7A3A30] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7A3A30]"
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                        </svg>
+                      </button>
+
+                      <button
+                        type="button"
+                        aria-label="Next image"
+                        onClick={() => {
+                          const idx = displayThumbs.findIndex((s) => (s || heroThumbnail) === (currentImage || heroThumbnail));
+                          const next = displayThumbs[(idx + 1) % displayThumbs.length] || heroThumbnail;
+                          setCurrentImage(next);
+                        }}
+                        className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 absolute right-3 top-1/2 -translate-y-1/2 z-20 flex h-8 w-8 items-center justify-center text-[#231d18] hover:bg-[rgba(0,0,0,0.06)] hover:text-[#7A3A30] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7A3A30]"
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                        </svg>
+                      </button>
+                    </>
+                  )}
               </div>
 
               {/* subtle separator between main image and thumbnails */}
