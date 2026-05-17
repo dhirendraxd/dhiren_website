@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { FaGithub, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
+import MeetTheTeam from "@/components/MeetTheTeam";
 import { getProjectBySlug } from "@/data/projectDetails";
 
 const BASE_URL = "https://dhirendrasinghdhami.com.np";
@@ -187,6 +188,12 @@ const ProjectDetail = () => {
 
   const tagPills = project.tags.slice(0, 5);
   const outcomes = project.outcomes.slice(0, 3);
+  const teamMembers = [
+    { name: "Michael Brown", role: "Product Lead", img: "https://picsum.photos/seed/michael/440/640" },
+    { name: "Rahul Mehta", role: "Design Lead", img: "https://picsum.photos/seed/rahul/440/640" },
+    { name: "Sophia Lee", role: "Community Manager", img: "https://picsum.photos/seed/sophia/440/640" },
+    { name: "Daniel Carter", role: "Developer", img: "https://picsum.photos/seed/daniel/720/480" },
+  ];
 
   return (
     <div className="min-h-screen overflow-auto bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.55),_transparent_30%),linear-gradient(180deg,#f7f3ec_0%,#e6ddcf_100%)] text-[#2d261f]">
@@ -335,6 +342,8 @@ const ProjectDetail = () => {
         </section>
 
         {/* Footer-only: nothing should render after social icons per design */}
+
+        <MeetTheTeam members={teamMembers} />
 
         {/* CTA: Have a project in mind? */}
         <section className="mt-8 py-12">
