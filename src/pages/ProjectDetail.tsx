@@ -171,6 +171,23 @@ const ProjectDetail = () => {
 
   const tagPills = project.tags.slice(0, 5);
   const outcomes = project.outcomes.slice(0, 3);
+  const analyticsStats = [
+    {
+      label: "Outcomes",
+      value: `${String(project.outcomes.length).padStart(2, "0")}`,
+      width: `${Math.min((project.outcomes.length / 3) * 100, 100)}%`,
+    },
+    {
+      label: "Tags",
+      value: `${String(tagPills.length).padStart(2, "0")}`,
+      width: `${Math.min((tagPills.length / 5) * 100, 100)}%`,
+    },
+    {
+      label: "Source",
+      value: project.sourceHref ? "01" : "00",
+      width: project.sourceHref ? "100%" : "34%",
+    },
+  ];
 
   return (
     <div className="h-dvh overflow-hidden bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.55),_transparent_30%),linear-gradient(180deg,#f7f3ec_0%,#e6ddcf_100%)] text-[#2d261f]">
@@ -210,6 +227,35 @@ const ProjectDetail = () => {
                   height={630}
                   className="h-[13rem] w-full object-contain sm:h-[16rem] lg:h-[18rem]"
                 />
+              </div>
+
+              <div className="relative w-full max-w-[34rem] overflow-hidden border-y border-[#8b8377]/45 py-4 sm:py-5">
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 120 44"
+                  preserveAspectRatio="none"
+                  className="pointer-events-none absolute inset-0 h-full w-full opacity-[0.16]"
+                >
+                  <path d="M0 28 C 12 17 24 17 36 28 S 60 39 72 28 S 96 17 120 28" fill="none" stroke="#7A3A30" strokeWidth="1.1" />
+                  <path d="M0 34 C 12 23 24 23 36 34 S 60 45 72 34 S 96 23 120 34" fill="none" stroke="#9c6a55" strokeWidth="0.9" />
+                </svg>
+
+                <div className="relative grid grid-cols-3 gap-3 sm:gap-4">
+                  {analyticsStats.map((stat) => (
+                    <div key={stat.label} className="space-y-2">
+                      <div className="flex items-end justify-between text-[0.68rem] font-semibold uppercase tracking-[0.22em] text-[#5f574d] sm:text-[0.72rem]">
+                        <span>{stat.label}</span>
+                        <span className="text-[1.6rem] font-bold leading-none text-[#2d261f] sm:text-[1.9rem]">{stat.value}</span>
+                      </div>
+                      <div className="h-px w-full bg-[#cbbca7]/80">
+                        <div
+                          className="h-px bg-[#7A3A30]"
+                          style={{ width: stat.width }}
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
 
               <div className="space-y-3 max-w-[34rem]">
