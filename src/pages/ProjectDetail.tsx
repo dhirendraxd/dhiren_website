@@ -74,9 +74,9 @@ const ProjectDetail = () => {
     const base = thumbnails.length ? thumbnails : [heroThumbnail].filter(Boolean) as string[];
     const result: string[] = [];
     for (let i = 0; i < 4; i++) {
-      result.push(base[i] ?? base[0] ?? "");
+      result.push(base[i] ?? base[0] ?? heroThumbnail);
     }
-    return result.filter(Boolean);
+    return result;
   })();
 
   const focusPanels = useMemo(() => {
@@ -187,23 +187,6 @@ const ProjectDetail = () => {
 
   const tagPills = project.tags.slice(0, 5);
   const outcomes = project.outcomes.slice(0, 3);
-  const analyticsStats = [
-    {
-      label: "Outcomes",
-      value: `${String(project.outcomes.length).padStart(2, "0")}`,
-      width: `${Math.min((project.outcomes.length / 3) * 100, 100)}%`,
-    },
-    {
-      label: "Tags",
-      value: `${String(tagPills.length).padStart(2, "0")}`,
-      width: `${Math.min((tagPills.length / 5) * 100, 100)}%`,
-    },
-    {
-      label: "Source",
-      value: project.sourceHref ? "01" : "00",
-      width: project.sourceHref ? "100%" : "34%",
-    },
-  ];
 
   return (
     <div className="min-h-screen overflow-auto bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.55),_transparent_30%),linear-gradient(180deg,#f7f3ec_0%,#e6ddcf_100%)] text-[#2d261f]">
@@ -232,6 +215,9 @@ const ProjectDetail = () => {
                     className="max-w-full max-h-full object-contain object-center"
                   />
               </div>
+
+              {/* subtle separator between main image and thumbnails */}
+              <div className="mt-4 h-px w-full bg-[#e9e1d6]/50" aria-hidden="true" />
 
               {/* Thumbnails row (show up to 4 small images) */}
               <div
@@ -268,9 +254,9 @@ const ProjectDetail = () => {
                     tabIndex={0}
                     onClick={() => setCurrentImage(t)}
                     aria-label={`Thumbnail ${idx + 1}`}
-                    className={`h-16 min-w-[6rem] sm:w-24 overflow-hidden p-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7A3A30] ${ (currentImage || heroThumbnail) === t ? '' : 'opacity-60'} rounded-none bg-transparent`}
+                    className={`h-16 min-w-[6rem] sm:w-24 overflow-hidden p-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7A3A30] ${ (currentImage || heroThumbnail) === t ? '' : 'opacity-60'} rounded-none bg-transparent border-l border-[#e9e1d6]/40 first:border-l-0 px-2`}
                   >
-                    <img src={t} alt="" className="h-full w-full object-contain object-center" />
+                    <img src={t || heroThumbnail} alt="" className="h-full w-full object-contain object-center" />
                   </button>
                 ))}
               </div>
