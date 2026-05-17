@@ -61,7 +61,6 @@ const HeroSection = () => {
                 src={untitledDesignImage}
                 alt="Portrait illustration of Dhiren on the homepage"
                 loading="eager"
-                fetchPriority="high"
                 decoding="async"
                 className="w-[clamp(18rem,32vw,32rem)] md:w-[clamp(22rem,36vw,40rem)] lg:w-[clamp(26rem,40vw,46rem)] xl:w-[clamp(30rem,42vw,52rem)] h-auto"
               />
