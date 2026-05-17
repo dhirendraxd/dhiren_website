@@ -270,25 +270,25 @@ const ProjectDetail = () => {
                 <p className="mt-4 max-w-[56ch] text-[1.02rem] leading-[1.7] text-[#554b41]">{project.summary}</p>
               </div>
 
-              <div className="w-full border-l-2 border-[#e9e1d6] pl-6">
-                <dl className="grid grid-cols-[8.5rem_1fr] gap-y-4 text-sm">
-                  <dt className="text-[0.78rem] font-semibold uppercase text-[#6b6259]">Type</dt>
-                  <dd className="text-[#231d18]">{project.category}</dd>
+              <div className="w-full border-l-2 border-[#e9e1d6] pl-6 pb-6">
+                <dl className="grid grid-cols-[10.5rem_1fr] gap-y-6 text-base">
+                  <dt className="text-[0.85rem] font-semibold uppercase text-[#6b6259]">Type</dt>
+                  <dd className="text-[1rem] leading-[1.8] text-[#231d18]">{project.category}</dd>
 
-                  <dt className="text-[0.78rem] font-semibold uppercase text-[#6b6259]">Location</dt>
-                  <dd className="text-[#231d18]">{project.serviceSlug === 'advocacy-community' ? 'Nepal' : 'Remote'}</dd>
+                  <dt className="text-[0.85rem] font-semibold uppercase text-[#6b6259]">Location</dt>
+                  <dd className="text-[1rem] leading-[1.8] text-[#231d18]">{project.serviceSlug === 'advocacy-community' ? 'Nepal' : 'Remote'}</dd>
 
-                  <dt className="text-[0.78rem] font-semibold uppercase text-[#6b6259]">Completion Year</dt>
-                  <dd className="text-[#231d18]">{(project.date.match(/\d{4}$/) || [project.date])[0]}</dd>
+                  <dt className="text-[0.85rem] font-semibold uppercase text-[#6b6259]">Completion Year</dt>
+                  <dd className="text-[1rem] leading-[1.8] text-[#231d18]">{(project.date.match(/\d{4}$/) || [project.date])[0]}</dd>
 
-                  <dt className="text-[0.78rem] font-semibold uppercase text-[#6b6259]">Size</dt>
-                  <dd className="text-[#231d18]">{project.category}</dd>
+                  <dt className="text-[0.85rem] font-semibold uppercase text-[#6b6259]">Size</dt>
+                  <dd className="text-[1rem] leading-[1.8] text-[#231d18]">{project.category}</dd>
 
-                  <dt className="text-[0.78rem] font-semibold uppercase text-[#6b6259]">Design Style</dt>
-                  <dd className="text-[#231d18]">{project.tags.join(', ')}</dd>
+                  <dt className="text-[0.85rem] font-semibold uppercase text-[#6b6259]">Design Style</dt>
+                  <dd className="text-[1rem] leading-[1.8] text-[#231d18]">{project.tags.join(', ')}</dd>
 
-                  <dt className="text-[0.78rem] font-semibold uppercase text-[#6b6259]">Client</dt>
-                  <dd className="text-[#231d18]">{project.sourceHref ? new URL(project.sourceHref).hostname.replace('www.', '') : '—'}</dd>
+                  <dt className="text-[0.85rem] font-semibold uppercase text-[#6b6259]">Client</dt>
+                  <dd className="text-[1rem] leading-[1.8] text-[#231d18]">{project.sourceHref ? new URL(project.sourceHref).hostname.replace('www.', '') : '—'}</dd>
                 </dl>
               </div>
 
