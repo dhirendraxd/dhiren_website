@@ -217,6 +217,9 @@ const ProjectDetail = () => {
 
                   {displayThumbs.length > 1 && (
                     <>
+                      {/* subtle warm vignette overlays to improve arrow contrast */}
+                      <div className="absolute left-0 top-0 h-full w-12 sm:w-16 z-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-gradient-to-r from-[#7A3A30]/10 to-transparent" aria-hidden />
+                      <div className="absolute right-0 top-0 h-full w-12 sm:w-16 z-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-gradient-to-l from-[#7A3A30]/10 to-transparent" aria-hidden />
                       <button
                         type="button"
                         aria-label="Previous image"

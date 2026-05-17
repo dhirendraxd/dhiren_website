@@ -9,7 +9,7 @@ const navLinks = [
 ];
 
 const Navbar = () => {
-  const location = useLocation();ett
+  const location = useLocation();
   const isHomePage = location.pathname === "/";
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isBarVisible, setIsBarVisible] = useState(false);
