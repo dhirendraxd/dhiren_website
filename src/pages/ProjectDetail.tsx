@@ -309,21 +309,31 @@ const ProjectDetail = () => {
                   e.preventDefault();
                 }}
               >
-                {displayThumbs.map((t, idx) => (
-                  <button
-                    key={t + idx}
-                    data-src={t}
-                    data-selected={(currentImage || heroThumbnail) === t}
-                    role="tab"
-                    aria-selected={(currentImage || heroThumbnail) === t}
-                    tabIndex={0}
-                    onClick={() => setCurrentImage(t)}
-                    aria-label={`Thumbnail ${idx + 1}`}
-                    className={`h-16 min-w-[6rem] sm:w-24 overflow-hidden p-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7A3A30] ${ (currentImage || heroThumbnail) === t ? '' : 'opacity-60'} rounded-none bg-transparent border-l border-[#e9e1d6]/40 first:border-l-0 px-2`}
-                  >
-                    <img src={t || heroThumbnail} alt="" className="h-full w-full object-contain object-center" />
-                  </button>
-                ))}
+                {displayThumbs.map((t, idx) => {
+                  const isSelected = (currentImage || heroThumbnail) === t;
+                  return (
+                    <button
+                      key={t + idx}
+                      data-src={t}
+                      data-selected={isSelected}
+                      role="tab"
+                      aria-selected={isSelected}
+                      tabIndex={0}
+                      onClick={() => setCurrentImage(t)}
+                      aria-label={`Thumbnail ${idx + 1}`}
+                      className={`relative h-16 min-w-[6rem] sm:w-24 overflow-hidden p-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7A3A30] ${isSelected ? '' : 'opacity-60'} rounded-none bg-transparent border-l border-[#e9e1d6]/40 first:border-l-0 px-2`}
+                    >
+                      <div className="h-full w-full">
+                        <img src={t || heroThumbnail} alt="" className="h-full w-full object-contain object-center" />
+                      </div>
+                      {/* Underline for selected thumbnail */}
+                      <span
+                        className={`absolute left-2 right-2 bottom-1 h-0.5 rounded-sm transition-all duration-200 ${isSelected ? 'bg-[#7A3A30] scale-x-100' : 'bg-transparent scale-x-0'}`}
+                        aria-hidden
+                      />
+                    </button>
+                  );
+                })}
               </div>
             </div>
 
