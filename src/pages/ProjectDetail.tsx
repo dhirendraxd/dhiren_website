@@ -472,7 +472,7 @@ const ProjectDetail = () => {
                   <dt className="text-[0.85rem] font-semibold uppercase text-[#6b6259]">Design Style</dt>
                   <dd className="text-[1rem] leading-[1.8] text-[#231d18]">{project.tags.join(', ')}</dd>
 
-                  <ProjectClient sourceHref={project.sourceHref} title={project.title} />
+                  <ProjectClient sourceHref={project.sourceHref} title={project.title} showGithub={project.serviceSlug === 'tech-projects'} />
                 </dl>
               </div>
 
