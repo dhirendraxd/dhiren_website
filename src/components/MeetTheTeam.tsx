@@ -16,12 +16,12 @@ const MeetTheTeam: React.FC<{ members: Member[]; href?: string }> = ({ members, 
       <div className="mx-auto max-w-[88rem] px-6">
         <div className="md:flex md:items-center md:justify-between md:gap-6">
           <div>
-            <div className="text-sm uppercase tracking-wider text-muted-foreground font-semibold">Selected Projects</div>
-            <h3 className="mt-2 text-3xl sm:text-4xl font-rajdhani font-bold text-[#3f3932]">Projects</h3>
+            <div className="text-sm uppercase tracking-wider text-muted-foreground font-semibold">Our Team</div>
+            <h3 className="mt-2 text-3xl sm:text-4xl font-rajdhani font-bold text-[#3f3932]">Meet the team</h3>
           </div>
 
           <div className="mt-3 md:mt-0 md:text-right md:max-w-md">
-            <p className="text-[#5f574d]">Selected tech and community projects focused on outcomes, execution, and measurable impact.</p>
+            <p className="text-[#5f574d]">Small team. Big impact. We design, ship, and occasionally blame the coffee.</p>
           </div>
         </div>
 
