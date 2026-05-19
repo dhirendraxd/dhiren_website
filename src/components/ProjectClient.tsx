@@ -28,7 +28,7 @@ const ProjectClient: React.FC<Props> = ({ sourceHref, title, showGithub = false 
               </svg>
             </a>
 
-            <span className="text-sm text-[#554b41] hidden sm:inline">{new URL(sourceHref).hostname.replace('www.', '')}</span>
+            {/* hostname removed per request — show icons only */}
 
             <a
               href={`https://www.linkedin.com/search/results/all/?keywords=${encodeURIComponent(title || '')}`}
