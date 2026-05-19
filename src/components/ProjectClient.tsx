@@ -10,7 +10,7 @@ type Props = {
 const ProjectClient: React.FC<Props> = ({ sourceHref, title, showGithub = false }) => {
   return (
     <>
-      <dt className="text-[0.85rem] font-semibold uppercase text-[#6b6259]">View more : Client</dt>
+      <dt className="text-[0.85rem] font-semibold uppercase text-[#6b6259]">Explore: Website & Profiles</dt>
       <dd className="text-[1rem] leading-[1.8] text-[#231d18]">
         {sourceHref ? (
           <div className="flex items-center gap-3">
