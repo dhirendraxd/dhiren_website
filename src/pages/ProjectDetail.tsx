@@ -120,7 +120,7 @@ const ProjectDetail = () => {
       const idx = displayThumbs.findIndex((s) => (s || heroThumbnail) === (currentImage || heroThumbnail));
       const next = displayThumbs[(idx + 1) % displayThumbs.length] || heroThumbnail;
       setCurrentImage(next);
-    }, 5000);
+    }, 3000);
 
     return () => clearInterval(id);
   }, [displayThumbs, currentImage, heroThumbnail, isPaused]);
@@ -431,7 +431,7 @@ const ProjectDetail = () => {
                         setCurrentImage(t);
                       }}
                       aria-label={`Thumbnail ${idx + 1}`}
-                      className={`relative h-16 min-w-[6rem] sm:w-24 overflow-hidden p-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7A3A30] ${isSelected ? '' : 'opacity-60'} rounded-none bg-transparent border-l border-[#e9e1d6]/40 first:border-l-0 px-2`}
+                      className={`relative h-16 min-w-[5rem] sm:min-w-[6rem] sm:w-24 overflow-hidden p-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7A3A30] ${isSelected ? '' : 'opacity-60'} rounded-none bg-transparent border-l border-[#e9e1d6]/40 first:border-l-0 px-2`}
                     >
                       <div className="h-full w-full">
                         <img src={t || heroThumbnail} alt="" className="h-full w-full object-contain object-center" />
