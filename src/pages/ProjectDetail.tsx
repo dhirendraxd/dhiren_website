@@ -72,11 +72,15 @@ const ProjectDetail = () => {
     return [project.image].filter(Boolean) as string[];
   })();
   const thumbsRef = useRef<HTMLDivElement | null>(null);
+  const isDraggingRef = useRef(false);
+  const startXRef = useRef<number | null>(null);
   const displayThumbs = (() => {
-    const base = thumbnails.length ? thumbnails : [heroThumbnail].filter(Boolean) as string[];
+    // Use random placeholder images (picsum) seeded by project slug for variety.
+    const seedBase = project?.slug || 'placeholder';
     const result: string[] = [];
     for (let i = 0; i < 4; i++) {
-      result.push(base[i] ?? base[0] ?? heroThumbnail);
+      // 720x480 keeps aspect similar to other thumbnails
+      result.push(`https://picsum.photos/seed/${encodeURIComponent(seedBase + '-' + i)}/720/480`);
     }
     return result;
   })();
@@ -290,6 +294,22 @@ const ProjectDetail = () => {
                 role="tablist"
                 aria-label="Project thumbnails"
                 className="mt-4 flex gap-3 overflow-x-auto py-1 -mx-1"
+                onPointerDown={(e) => {
+                  startXRef.current = (e as PointerEvent).clientX;
+                  isDraggingRef.current = false;
+                }}
+                onPointerMove={(e) => {
+                  if (startXRef.current == null) return;
+                  const cx = (e as PointerEvent).clientX;
+                  if (Math.abs(cx - startXRef.current) > 6) {
+                    isDraggingRef.current = true;
+                  }
+                }}
+                onPointerUp={() => {
+                  startXRef.current = null;
+                  // small delay to ensure click event settles
+                  setTimeout(() => (isDraggingRef.current = false), 0);
+                }}
                 onKeyDown={(e) => {
                   const keys = ['ArrowLeft', 'ArrowRight', 'Home', 'End'];
                   if (!keys.includes(e.key)) return;
@@ -319,7 +339,13 @@ const ProjectDetail = () => {
                       role="tab"
                       aria-selected={isSelected}
                       tabIndex={0}
-                      onClick={() => setCurrentImage(t)}
+                      onClick={(e) => {
+                        if (isDraggingRef.current) {
+                          e.preventDefault();
+                          return;
+                        }
+                        setCurrentImage(t);
+                      }}
                       aria-label={`Thumbnail ${idx + 1}`}
                       className={`relative h-16 min-w-[6rem] sm:w-24 overflow-hidden p-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7A3A30] ${isSelected ? '' : 'opacity-60'} rounded-none bg-transparent border-l border-[#e9e1d6]/40 first:border-l-0 px-2`}
                     >
