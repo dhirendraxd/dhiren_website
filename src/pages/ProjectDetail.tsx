@@ -13,21 +13,22 @@ const socialLinks = [
     label: "GitHub",
     title: "GitHub",
     icon: FaGithub,
-    color: "text-[#1f1f1f] hover:text-[#15120d]",
+    // Icon-only colors (uses group-hover on the parent anchor)
+    color: "text-[#181717] group-hover:text-[#15120d]",
   },
   {
     href: "https://instagram.com",
     label: "Instagram",
     title: "Instagram",
     icon: FaInstagram,
-    color: "text-[#d33f68] hover:text-[#b63156]",
+    color: "text-[#E4405F] group-hover:text-[#b63156]",
   },
   {
     href: "https://linkedin.com",
     label: "LinkedIn",
     title: "LinkedIn",
     icon: FaLinkedinIn,
-    color: "text-[#0a66c2] hover:text-[#08539d]",
+    color: "text-[#0A66C2] group-hover:text-[#08539d]",
   },
 ];
 
@@ -392,15 +393,17 @@ const ProjectDetail = () => {
                 <div className="flex items-center gap-6">
                   {socialLinks
                     .filter((s) => ["GitHub", "Instagram", "LinkedIn"].includes(s.label))
-                    .map(({ href, label, icon: Icon }) => (
+                    .map(({ href, label, icon: Icon, color }) => (
                       <a
                         key={label}
                         href={href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 text-sm text-[#3f3932]"
+                        className="group inline-flex items-center gap-2 text-sm text-[#3f3932]"
                       >
-                        <Icon size={20} />
+                        <span className={`${color} transition-colors duration-200`}>
+                          <Icon size={20} />
+                        </span>
                         <span className="font-rajdhani hidden sm:inline">{label}</span>
                       </a>
                     ))}

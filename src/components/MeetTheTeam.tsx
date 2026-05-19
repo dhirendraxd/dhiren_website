@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import untitledDesignImage from '@/assets/Untitled design.webp';
 
 type Member = {
   name: string;
@@ -13,9 +14,15 @@ const MeetTheTeam: React.FC<{ members: Member[]; href?: string }> = ({ members, 
   return (
     <section className="mt-6 mb-8">
       <div className="mx-auto max-w-[88rem] px-6">
-        <div className="flex items-baseline justify-between">
-          <div aria-hidden />
-          <span className="font-rajdhani text-4xl sm:text-5xl font-bold leading-tight text-[#3f3932]">Meet the team</span>
+        <div className="md:flex md:items-center md:justify-between md:gap-6">
+          <div>
+            <div className="text-sm uppercase tracking-wider text-muted-foreground font-semibold">Selected Projects</div>
+            <h3 className="mt-2 text-3xl sm:text-4xl font-rajdhani font-bold text-[#3f3932]">Projects</h3>
+          </div>
+
+          <div className="mt-3 md:mt-0 md:text-right md:max-w-md">
+            <p className="text-[#5f574d]">Selected tech and community projects focused on outcomes, execution, and measurable impact.</p>
+          </div>
         </div>
 
         <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-6">
@@ -35,8 +42,8 @@ const MeetTheTeam: React.FC<{ members: Member[]; href?: string }> = ({ members, 
                 }`}
               >
                 <img
-                  src={m[i]?.img}
-                  alt={m[i]?.name}
+                  src={untitledDesignImage}
+                  alt={m[i]?.name || 'Team member'}
                   className="h-full w-full object-cover object-center"
                   style={{
                     filter: 'grayscale(100%)',

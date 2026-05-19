@@ -615,9 +615,11 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
                     rel="noopener noreferrer"
                     aria-label="GitHub"
                     title="GitHub"
-                    className="group relative inline-flex h-9 w-9 items-center justify-center p-1 leading-none text-[#181717] transition-all duration-200 hover:-translate-y-0.5 hover:opacity-80"
+                    className="group relative inline-flex h-9 w-9 items-center justify-center p-1 leading-none transition-all duration-200 hover:-translate-y-0.5 hover:opacity-80"
                   >
-                    <FaGithub size={24} />
+                    <span className="text-[#181717] group-hover:text-[#15120d] transition-colors duration-200">
+                      <FaGithub size={24} />
+                    </span>
                     <span className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 rounded bg-foreground px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-background opacity-0 transition-opacity duration-150 group-hover:opacity-100">
                       GitHub
                     </span>
@@ -628,9 +630,11 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
                     rel="noopener noreferrer"
                     aria-label="Instagram"
                     title="Instagram"
-                    className="group relative inline-flex h-9 w-9 items-center justify-center p-1 leading-none text-[#E4405F] transition-all duration-200 hover:-translate-y-0.5 hover:opacity-80"
+                    className="group relative inline-flex h-9 w-9 items-center justify-center p-1 leading-none transition-all duration-200 hover:-translate-y-0.5 hover:opacity-80"
                   >
-                    <FaInstagram size={24} />
+                    <span className="text-[#E4405F] group-hover:text-[#b63156] transition-colors duration-200">
+                      <FaInstagram size={24} />
+                    </span>
                     <span className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 rounded bg-foreground px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-background opacity-0 transition-opacity duration-150 group-hover:opacity-100">
                       Insta
                     </span>
@@ -641,9 +645,11 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
                     rel="noopener noreferrer"
                     aria-label="LinkedIn"
                     title="LinkedIn"
-                    className="group relative inline-flex h-9 w-9 items-center justify-center p-1 leading-none text-[#0A66C2] transition-all duration-200 hover:-translate-y-0.5 hover:opacity-80"
+                    className="group relative inline-flex h-9 w-9 items-center justify-center p-1 leading-none transition-all duration-200 hover:-translate-y-0.5 hover:opacity-80"
                   >
-                    <FaLinkedinIn size={24} />
+                    <span className="text-[#0A66C2] group-hover:text-[#08539d] transition-colors duration-200">
+                      <FaLinkedinIn size={24} />
+                    </span>
                     <span className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 rounded bg-foreground px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-background opacity-0 transition-opacity duration-150 group-hover:opacity-100">
                       LinkedIn
                     </span>
