@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import ProjectClient from '@/components/ProjectClient';
 import { FaGithub, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
@@ -74,6 +75,7 @@ const ProjectDetail = () => {
   const thumbsRef = useRef<HTMLDivElement | null>(null);
   const isDraggingRef = useRef(false);
   const startXRef = useRef<number | null>(null);
+  const [isPaused, setIsPaused] = useState(false);
   const displayThumbs = (() => {
     // Use random placeholder images (picsum) seeded by project slug for variety.
     const seedBase = project?.slug || 'placeholder';
@@ -84,6 +86,45 @@ const ProjectDetail = () => {
     }
     return result;
   })();
+  const activeThumbIndex = displayThumbs.findIndex((s) => (s || heroThumbnail) === (currentImage || heroThumbnail));
+  const dotsRef = useRef<HTMLDivElement | null>(null);
+  const [indicatorStyle, setIndicatorStyle] = useState<{ left: number; width: number }>({ left: 0, width: 8 });
+
+  useEffect(() => {
+    const update = () => {
+      const container = dotsRef.current;
+      if (!container) return;
+      const btns = Array.from(container.querySelectorAll<HTMLButtonElement>('button'));
+      const btn = btns[activeThumbIndex];
+      if (btn) {
+        const cRect = container.getBoundingClientRect();
+        const bRect = btn.getBoundingClientRect();
+        const left = Math.round(bRect.left - cRect.left + (bRect.width - 8) / 2);
+        setIndicatorStyle({ left, width: 8 });
+      } else {
+        setIndicatorStyle({ left: 0, width: 8 });
+      }
+    };
+
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, [activeThumbIndex, displayThumbs]);
+
+  useEffect(() => {
+    if (!displayThumbs || displayThumbs.length <= 1) return;
+    if (isPaused) return;
+
+    const id = setInterval(() => {
+      if (isDraggingRef.current) return;
+      const idx = displayThumbs.findIndex((s) => (s || heroThumbnail) === (currentImage || heroThumbnail));
+      const next = displayThumbs[(idx + 1) % displayThumbs.length] || heroThumbnail;
+      setCurrentImage(next);
+    }, 5000);
+
+    return () => clearInterval(id);
+  }, [displayThumbs, currentImage, heroThumbnail, isPaused]);
+ 
 
   const focusPanels = useMemo(() => {
     if (!project) {
@@ -236,7 +277,13 @@ const ProjectDetail = () => {
           <section className="mt-10 grid flex-1 min-h-0 gap-10 lg:grid-cols-[1fr_1fr] lg:items-start">
             {/* Left: large gallery / hero image */}
             <div className="relative overflow-visible">
-              <div className="w-full h-[min(48vh,420px)] sm:h-[min(64vh,560px)] relative group flex items-center justify-center">
+              <div
+                className="w-full h-[min(48vh,420px)] sm:h-[min(64vh,560px)] relative group flex items-center justify-center"
+                onMouseEnter={() => setIsPaused(true)}
+                onMouseLeave={() => setIsPaused(false)}
+                onFocus={() => setIsPaused(true)}
+                onBlur={() => setIsPaused(false)}
+              >
                   <img
                     src={currentImage || heroThumbnail}
                     alt={`${project.title} project preview image`}
@@ -250,8 +297,8 @@ const ProjectDetail = () => {
                   {displayThumbs.length > 1 && (
                     <>
                       {/* subtle warm vignette overlays to improve arrow contrast */}
-                      <div className="absolute left-0 top-0 h-full w-12 sm:w-16 z-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-gradient-to-r from-[#7A3A30]/10 to-transparent" aria-hidden />
-                      <div className="absolute right-0 top-0 h-full w-12 sm:w-16 z-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-gradient-to-l from-[#7A3A30]/10 to-transparent" aria-hidden />
+                      <div className="absolute left-0 top-0 h-full w-8 sm:w-12 z-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-gradient-to-r from-[#7A3A30]/08 to-transparent" aria-hidden />
+                      <div className="absolute right-0 top-0 h-full w-8 sm:w-12 z-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-gradient-to-l from-[#7A3A30]/08 to-transparent" aria-hidden />
                       <button
                         type="button"
                         aria-label="Previous image"
@@ -288,19 +335,56 @@ const ProjectDetail = () => {
               {/* subtle separator between main image and thumbnails */}
               <div className="mt-4 h-px w-full bg-[#e9e1d6]/50" aria-hidden="true" />
 
+              {/* Dots: small indicators above thumbnails (match thumbnail count) */}
+              <div className="mt-3 flex justify-center" role="tablist" aria-label="Thumbnail pages">
+                <div className="flex items-center gap-2">
+                      {displayThumbs.length > 1 && (
+                        <div className="relative">
+                          <div ref={dotsRef} className="flex items-center gap-2 px-1">
+                            {displayThumbs.map((s, d) => {
+                              const isSelected = (s || heroThumbnail) === (currentImage || heroThumbnail);
+                              return (
+                                <button
+                                  key={d}
+                                  className={
+                                    "h-2 w-2 rounded-full transition-colors duration-200 shrink-0 " +
+                                    (isSelected ? "bg-[#7A3A30]" : "bg-neutral-300 dark:bg-neutral-700")
+                                  }
+                                  aria-label={`Go to image ${d + 1}`}
+                                  onClick={() => {
+                                    if (isDraggingRef.current) return;
+                                    setCurrentImage(s || heroThumbnail);
+                                  }}
+                                />
+                              );
+                            })}
+                          </div>
+                          <span
+                            aria-hidden
+                            style={{
+                              left: indicatorStyle.left,
+                              width: indicatorStyle.width,
+                            }}
+                            className="pointer-events-none absolute top-0 h-2 rounded-full bg-[#7A3A30] transition-left duration-300 ease-in-out"
+                          />
+                        </div>
+                      )}
+                </div>
+              </div>
+
               {/* Thumbnails row (show up to 4 small images) */}
               <div
                 ref={thumbsRef}
                 role="tablist"
                 aria-label="Project thumbnails"
                 className="mt-4 flex gap-3 overflow-x-auto py-1 -mx-1"
-                onPointerDown={(e) => {
-                  startXRef.current = (e as PointerEvent).clientX;
+                onPointerDown={(e: React.PointerEvent<HTMLDivElement>) => {
+                  startXRef.current = e.clientX;
                   isDraggingRef.current = false;
                 }}
-                onPointerMove={(e) => {
+                onPointerMove={(e: React.PointerEvent<HTMLDivElement>) => {
                   if (startXRef.current == null) return;
-                  const cx = (e as PointerEvent).clientX;
+                  const cx = e.clientX;
                   if (Math.abs(cx - startXRef.current) > 6) {
                     isDraggingRef.current = true;
                   }
@@ -388,8 +472,7 @@ const ProjectDetail = () => {
                   <dt className="text-[0.85rem] font-semibold uppercase text-[#6b6259]">Design Style</dt>
                   <dd className="text-[1rem] leading-[1.8] text-[#231d18]">{project.tags.join(', ')}</dd>
 
-                  <dt className="text-[0.85rem] font-semibold uppercase text-[#6b6259]">Client</dt>
-                  <dd className="text-[1rem] leading-[1.8] text-[#231d18]">{project.sourceHref ? new URL(project.sourceHref).hostname.replace('www.', '') : '—'}</dd>
+                  <ProjectClient sourceHref={project.sourceHref} title={project.title} />
                 </dl>
               </div>
 

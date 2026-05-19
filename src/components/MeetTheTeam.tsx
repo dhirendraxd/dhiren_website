@@ -5,6 +5,7 @@ type Member = {
   name: string;
   role?: string;
   img: string;
+  projectWork?: string;
 };
 
 const MeetTheTeam: React.FC<{ members: Member[]; href?: string }> = ({ members, href = '/team' }) => {
