@@ -26,7 +26,7 @@ const MeetTheTeam: React.FC<{ members: Member[]; href?: string }> = ({ members, 
           </div>
         </div>
 
-        <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-6">
+        <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 justify-items-center gap-6">
           {[0, 1, 2, 3].map((i) => {
             const isOtherHovered = hovered !== null && hovered !== i;
             const isHovered = hovered === i;
@@ -38,7 +38,7 @@ const MeetTheTeam: React.FC<{ members: Member[]; href?: string }> = ({ members, 
                 onFocus={() => setHovered(i)}
                 onBlur={() => setHovered(null)}
                 tabIndex={0}
-                className={`relative w-full aspect-square overflow-hidden rounded-none bg-[#f2efe9] transition-all duration-200 ${
+                className={`relative w-full max-w-[11rem] sm:max-w-[12rem] lg:max-w-[13rem] aspect-square overflow-hidden rounded-none bg-[#f2efe9] transition-all duration-200 ${
                   isOtherHovered ? 'opacity-60' : isHovered ? 'scale-105 z-10' : ''
                 }`}
               >

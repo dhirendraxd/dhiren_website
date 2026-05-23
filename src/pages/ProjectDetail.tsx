@@ -234,6 +234,28 @@ const ProjectDetail = () => {
 
   const tagPills = project.tags.slice(0, 5);
   const outcomes = project.outcomes.slice(0, 3);
+  const impactSnapshot = [
+    {
+      label: "Documented outcomes",
+      value: String(project.outcomes.length).padStart(2, "0"),
+      note: "Captured from the project record",
+    },
+    {
+      label: "Focus areas",
+      value: String(project.tags.length).padStart(2, "0"),
+      note: "Strategy, delivery, and reporting lenses",
+    },
+    {
+      label: "Delivery scope",
+      value: project.category,
+      note: project.serviceSlug === "digital-marketing" ? "Marketing and performance work" : "Community and program work",
+    },
+    {
+      label: "Reference",
+      value: project.sourceHref ? "Public" : "Internal",
+      note: project.sourceHref ? "Live source link available" : "No public link provided",
+    },
+  ];
   const teamMembers = [
     {
       name: "Michael Brown",
@@ -488,6 +510,46 @@ const ProjectDetail = () => {
         {/* Footer-only: nothing should render after social icons per design */}
 
         <MeetTheTeam members={teamMembers} />
+
+        <section className="mt-8 py-3 sm:py-4">
+          <div className="mx-auto max-w-[88rem] px-6">
+            <div className="border-t border-[#e4dbcf] pt-5">
+              <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+                <div className="max-w-[44rem]">
+                  <p className="text-xs font-semibold uppercase tracking-[0.26em] text-[#7A3A30]">Impact Snapshot</p>
+                  <h2 className="mt-2 text-[1.6rem] font-rajdhani font-bold leading-tight text-[#231d18] sm:text-[2rem]">
+                    A concise view of the project’s credibility
+                  </h2>
+                  <p className="mt-2 text-sm leading-relaxed text-[#5f574d]">
+                    Built only from the details already listed on this page.
+                  </p>
+                </div>
+
+                <div className="grid gap-3 sm:grid-cols-2 lg:min-w-[34rem] lg:grid-cols-4">
+                  {impactSnapshot.map((item) => (
+                    <div key={item.label} className="border-l border-[#e4dbcf] pl-3">
+                      <div className="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-[#6b6259]">{item.label}</div>
+                      <div className="mt-1 text-[1rem] font-rajdhani font-bold text-[#231d18]">{item.value}</div>
+                      <div className="mt-1 text-[0.82rem] leading-relaxed text-[#675d52]">{item.note}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="mt-5 flex flex-wrap gap-2 text-sm text-[#4f453b]">
+                {outcomes.slice(0, 3).map((outcome) => (
+                  <span key={outcome} className="border border-[#e0d6c8] px-3 py-1.5 rounded-none bg-[#faf7f2]">
+                    {outcome}
+                  </span>
+                ))}
+              </div>
+
+              <p className="mt-4 text-sm leading-relaxed text-[#6b6259]">
+                Public source reference available when provided.
+              </p>
+            </div>
+          </div>
+        </section>
 
         {/* CTA: Have a project in mind? */}
         <section className="mt-8 py-12">

@@ -21,7 +21,7 @@ const ProjectClient: React.FC<Props> = ({ sourceHref, title, showGithub = false 
             href={siteHref}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center h-12 w-12 sm:h-16 sm:w-16 rounded-md text-[#231d18] border-b border-transparent pb-0.5 transition-colors hover:border-[#7A3A30]"
+            className="inline-flex items-center justify-center h-12 w-12 sm:h-16 sm:w-16 rounded-md text-[#231d18] transition-transform duration-200 hover:scale-110"
             aria-label={sourceHref ? 'Open project website' : 'Search web for project'}
             title={sourceHref ? new URL(sourceHref).hostname.replace('www.', '') : `Search web for ${title}`}
           >
@@ -35,7 +35,7 @@ const ProjectClient: React.FC<Props> = ({ sourceHref, title, showGithub = false 
             href={linkedInHref}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center h-12 w-12 sm:h-16 sm:w-16 rounded-md text-[#0A66C2] border-b border-transparent pb-0.5 transition-colors hover:border-[#7A3A30]"
+            className="inline-flex items-center justify-center h-12 w-12 sm:h-16 sm:w-16 rounded-md text-[#0A66C2] transition-transform duration-200 hover:scale-110"
             aria-label="Open LinkedIn profile"
             title="LinkedIn"
           >
@@ -47,7 +47,7 @@ const ProjectClient: React.FC<Props> = ({ sourceHref, title, showGithub = false 
               href={githubHref}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center h-12 w-12 sm:h-16 sm:w-16 rounded-md text-[#181717] border-b border-transparent pb-0.5 transition-colors hover:border-[#7A3A30]"
+              className="inline-flex items-center justify-center h-12 w-12 sm:h-16 sm:w-16 rounded-md text-[#181717] transition-transform duration-200 hover:scale-110"
               aria-label="Open GitHub"
               title="GitHub"
             >
