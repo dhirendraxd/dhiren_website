@@ -456,7 +456,7 @@ const ProjectDetail = () => {
                       className={`relative h-16 min-w-[5rem] sm:min-w-[6rem] sm:w-24 overflow-hidden p-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7A3A30] ${isSelected ? '' : 'opacity-60'} rounded-none bg-transparent border-l border-[#e9e1d6]/40 first:border-l-0 px-2`}
                     >
                       <div className="h-full w-full">
-                        <img src={t || heroThumbnail} alt="" className="h-full w-full object-contain object-center" />
+                        <img src={t || heroThumbnail} alt={project?.title ? `${project.title} thumbnail` : ''} loading="lazy" decoding="async" className="h-full w-full object-contain object-center" />
                       </div>
                       {/* Underline for selected thumbnail */}
                       <span

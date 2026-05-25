@@ -45,6 +45,8 @@ const MeetTheTeam: React.FC<{ members: Member[]; href?: string }> = ({ members, 
                 <img
                   src={untitledDesignImage}
                   alt={m[i]?.name || 'Team member'}
+                  loading="lazy"
+                  decoding="async"
                   className="h-full w-full object-cover object-center"
                   style={{
                     filter: 'grayscale(100%)',

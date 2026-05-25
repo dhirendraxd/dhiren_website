@@ -1,12 +1,17 @@
 User-agent: *
-Allow: /
-Disallow: /src/
+# Allow crawling of public assets and generated files needed for rendering
+Allow: /assets/
+Allow: /fonts/
+Allow: /favicon.png
+Allow: /site.webmanifest
 Disallow: /admin/
 Disallow: /private/
 Disallow: /backup/
 Disallow: /temp/
 Disallow: /api/
-Disallow: /*?*
+# Avoid crawling URL parameter combinations that may create many duplicates
+# but do not block query strings entirely if you rely on them for public content
+# Disallow: /*?*
 
 User-agent: GPTBot
 Disallow: /
