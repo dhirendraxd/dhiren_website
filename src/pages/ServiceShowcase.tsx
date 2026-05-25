@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Armchair, Calculator, Hammer, Home, Palette, Rocket, Square } from "lucide-react";
+import { Armchair, Calculator, Hammer, Home, Palette, Rocket } from "lucide-react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import Seo from "@/components/Seo";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
@@ -562,12 +562,17 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
                 const rowContent = (
                   <span className="flex items-start gap-2.5">
                     <span className="mt-0.5 text-[#231d18]">
-                      <Square
-                        className={`h-3 w-3 transition-colors ${
-                          isActive ? "text-[#231d18]" : "text-[#8d8378] group-hover:text-[#7A3A30]"
-                        }`}
-                        strokeWidth={1.6}
-                      />
+                      {(() => {
+                        const WorkIcon = project.icon;
+                        return (
+                          <WorkIcon
+                            className={`h-3 w-3 transition-colors ${
+                              isActive ? "text-[#231d18]" : "text-[#8d8378] group-hover:text-[#7A3A30]"
+                            }`}
+                            strokeWidth={1.8}
+                          />
+                        );
+                      })()}
                     </span>
                     <span className="min-w-0">
                       <span
@@ -637,7 +642,10 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
                   </div>
                   <div className="mt-7">
                     <h2 className="flex items-center gap-2 text-[1.18rem] font-semibold leading-tight text-[#231d18] sm:text-[1.28rem]">
-                      <Square className="h-3.5 w-3.5" strokeWidth={1.7} />
+                      {(() => {
+                        const ActiveIcon = activeProject.icon;
+                        return <ActiveIcon className="h-3.5 w-3.5" strokeWidth={1.7} />;
+                      })()}
                       {activeProject.title}
                     </h2>
                     <p className="mt-4 max-w-[19rem] text-[0.8rem] leading-[1.62] text-[#5f574d] sm:text-[0.84rem]">
