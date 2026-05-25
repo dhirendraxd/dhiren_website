@@ -111,11 +111,11 @@ const selectedProjectIllustrations = {
 import { assetPath } from '@/lib/assetPath';
 
 const imageAssets = {
-  mitraSmart: assetPath('hackathon-events/1736784796315.jpeg'),
+  mitraSmart: assetPath('reference image.jpg'),
   civicTech: assetPath('civic tech.webp'),
-  eduConnect: assetPath('hackathon-events/kec_lite_2081-thumbnail-1000x525.png'),
-  devBus: assetPath('hackathon-events/logo.png'),
-  volunteerPlatform: assetPath('hackathon-events/logo.png'),
+  eduConnect: assetPath('civic tech.webp'),
+  devBus: assetPath('Untitled design.webp'),
+  volunteerPlatform: assetPath('2nd new .webp'),
   allInFoundation: assetPath('affiliation/all_in_foundation_aif_logo.jpeg'),
   awsCloudClub: assetPath('affiliation/aws_cloud_club_at_tu_logo.jpeg'),
   netMission: assetPath('affiliation/netmission.jpeg'),

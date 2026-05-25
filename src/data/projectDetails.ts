@@ -84,9 +84,9 @@ import { assetPath } from '@/lib/assetPath';
 export const issueHiveThumbnail = assetPath('issue hive .webp');
 
 const images = {
-  mitraSmart: assetPath('hackathon-events/1736784796315.jpeg'),
-  eduConnect: assetPath('hackathon-events/kec_lite_2081-thumbnail-1000x525.png'),
-  devBus: assetPath('hackathon-events/logo.png'),
+  mitraSmart: assetPath('reference image.jpg'),
+  eduConnect: assetPath('civic tech.webp'),
+  devBus: assetPath('Untitled design.webp'),
   volunteerPlatform: assetPath('2nd new .webp'),
   allInFoundation: assetPath('affiliation/all_in_foundation_aif_logo.jpeg'),
   awsCloudClub: assetPath('affiliation/aws_cloud_club_at_tu_logo.jpeg'),
@@ -277,7 +277,7 @@ export const projectDetails: ProjectDetail[] = [
     ],
     tags: ["Campus Innovation", "Community", "Student Platform"],
     image: issueHiveThumbnail,
-    gallery: [issueHiveThumbnail, images.mitraSmart, images.devBus]
+    gallery: [images.mitraSmart, images.devBus, images.volunteerPlatform, images.eduConnect]
   },
   {
     slug: "university-fit-engine",

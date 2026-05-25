@@ -65,46 +65,50 @@ const ProjectDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const project = slug ? getProjectBySlug(slug) : undefined;
   const navigate = useNavigate();
-  const heroThumbnail = project?.image || "";
-  const [currentImage, setCurrentImage] = useState<string>(project?.image || "");
+  const [currentImage, setCurrentImage] = useState<string>("");
   const [slideDirection, setSlideDirection] = useState<1 | -1>(1);
-  const thumbnails: string[] = (() => {
+  const displayThumbs = useMemo(() => {
     if (!project) return [];
+
     const g = (project as unknown as { gallery?: unknown }).gallery;
-    if (Array.isArray(g)) return g.filter(Boolean) as string[];
-    return [project.image].filter(Boolean) as string[];
-  })();
+    const galleryImages = Array.isArray(g) ? (g.filter(Boolean) as string[]) : [];
+    const generatedImages = Array.from({ length: 4 }, (_, i) => {
+      return `https://picsum.photos/seed/${encodeURIComponent(`${project.slug}-${i}`)}/720/480`;
+    });
+
+    return [...galleryImages, ...generatedImages]
+      .filter((image, index, images) => image !== project.image && images.indexOf(image) === index)
+      .slice(0, 4);
+  }, [project]);
   const thumbsRef = useRef<HTMLDivElement | null>(null);
   const isDraggingRef = useRef(false);
   const startXRef = useRef<number | null>(null);
   const heroSwipeStartXRef = useRef<number | null>(null);
   const [isPaused, setIsPaused] = useState(false);
-  const displayThumbs = (() => {
-    // Use random placeholder images (picsum) seeded by project slug for variety.
-    const seedBase = project?.slug || 'placeholder';
-    const result: string[] = [];
-    for (let i = 0; i < 4; i++) {
-      // 720x480 keeps aspect similar to other thumbnails
-      result.push(`https://picsum.photos/seed/${encodeURIComponent(seedBase + '-' + i)}/720/480`);
-    }
-    return result;
-  })();
-  const activeThumbIndex = displayThumbs.findIndex((s) => (s || heroThumbnail) === (currentImage || heroThumbnail));
+  const activeThumbIndex = displayThumbs.findIndex((s) => s === currentImage);
+  const selectedThumbIndex = activeThumbIndex >= 0 ? activeThumbIndex : 0;
   const dotsRef = useRef<HTMLDivElement | null>(null);
   const [indicatorStyle, setIndicatorStyle] = useState<{ left: number; width: number }>({ left: 0, width: 8 });
 
   const goToImage = useCallback((nextImage: string, direction: 1 | -1 = 1) => {
-    if (!nextImage || nextImage === (currentImage || heroThumbnail)) return;
+    if (!nextImage || nextImage === currentImage) return;
     setSlideDirection(direction);
     setCurrentImage(nextImage);
-  }, [currentImage, heroThumbnail]);
+  }, [currentImage]);
+
+  useEffect(() => {
+    setCurrentImage((image) => {
+      if (displayThumbs.includes(image)) return image;
+      return displayThumbs[0] || "";
+    });
+  }, [displayThumbs]);
 
   useEffect(() => {
     const update = () => {
       const container = dotsRef.current;
       if (!container) return;
       const btns = Array.from(container.querySelectorAll<HTMLButtonElement>('button'));
-      const btn = btns[activeThumbIndex];
+      const btn = btns[selectedThumbIndex];
       if (btn) {
         const cRect = container.getBoundingClientRect();
         const bRect = btn.getBoundingClientRect();
@@ -118,7 +122,7 @@ const ProjectDetail = () => {
     update();
     window.addEventListener('resize', update);
     return () => window.removeEventListener('resize', update);
-  }, [activeThumbIndex, displayThumbs]);
+  }, [selectedThumbIndex, displayThumbs]);
 
   useEffect(() => {
     if (!displayThumbs || displayThumbs.length <= 1) return;
@@ -126,13 +130,13 @@ const ProjectDetail = () => {
 
     const id = setInterval(() => {
       if (isDraggingRef.current) return;
-      const idx = displayThumbs.findIndex((s) => (s || heroThumbnail) === (currentImage || heroThumbnail));
-      const next = displayThumbs[(idx + 1) % displayThumbs.length] || heroThumbnail;
+      const idx = displayThumbs.findIndex((s) => s === currentImage);
+      const next = displayThumbs[((idx >= 0 ? idx : 0) + 1) % displayThumbs.length];
       goToImage(next, 1);
     }, 10000);
 
     return () => clearInterval(id);
-  }, [displayThumbs, currentImage, heroThumbnail, isPaused, goToImage]);
+  }, [displayThumbs, currentImage, isPaused, goToImage]);
  
 
   const focusPanels = useMemo(() => {
@@ -328,12 +332,13 @@ const ProjectDetail = () => {
                   const threshold = 40;
 
                   if (Math.abs(deltaX) >= threshold) {
-                    const idx = displayThumbs.findIndex((s) => (s || heroThumbnail) === (currentImage || heroThumbnail));
+                    const idx = displayThumbs.findIndex((s) => s === currentImage);
+                    const safeIdx = idx >= 0 ? idx : 0;
                     if (deltaX > 0) {
-                      const prev = displayThumbs[(idx - 1 + displayThumbs.length) % displayThumbs.length] || heroThumbnail;
+                      const prev = displayThumbs[(safeIdx - 1 + displayThumbs.length) % displayThumbs.length];
                       goToImage(prev, -1);
                     } else {
-                      const next = displayThumbs[(idx + 1) % displayThumbs.length] || heroThumbnail;
+                      const next = displayThumbs[(safeIdx + 1) % displayThumbs.length];
                       goToImage(next, 1);
                     }
                   }
@@ -349,26 +354,28 @@ const ProjectDetail = () => {
               >
                   <div className="relative h-full w-full overflow-hidden">
                     <AnimatePresence initial={false} custom={slideDirection} mode="wait">
-                      <motion.img
-                        key={currentImage || heroThumbnail}
-                        custom={slideDirection}
-                        variants={{
-                          enter: (direction: 1 | -1) => ({ x: direction > 0 ? '100%' : '-100%' }),
-                          center: { x: 0 },
-                          exit: (direction: 1 | -1) => ({ x: direction > 0 ? '-100%' : '100%' }),
-                        }}
-                        initial="enter"
-                        animate="center"
-                        exit="exit"
-                        transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-                        src={currentImage || heroThumbnail}
-                        alt={`${project.title} project preview image`}
-                        loading="eager"
-                        decoding="async"
-                        width={1400}
-                        height={900}
-                        className="absolute inset-0 h-full w-full object-contain object-center"
-                      />
+                      {currentImage && (
+                        <motion.img
+                          key={currentImage}
+                          custom={slideDirection}
+                          variants={{
+                            enter: (direction: 1 | -1) => ({ x: direction > 0 ? '100%' : '-100%' }),
+                            center: { x: 0 },
+                            exit: (direction: 1 | -1) => ({ x: direction > 0 ? '-100%' : '100%' }),
+                          }}
+                          initial="enter"
+                          animate="center"
+                          exit="exit"
+                          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                          src={currentImage}
+                          alt={`${project.title} project preview image`}
+                          loading="eager"
+                          decoding="async"
+                          width={1400}
+                          height={900}
+                          className="absolute inset-0 h-full w-full object-contain object-center"
+                        />
+                      )}
                     </AnimatePresence>
                   </div>
 
@@ -381,8 +388,9 @@ const ProjectDetail = () => {
                         type="button"
                         aria-label="Previous image"
                         onClick={() => {
-                          const idx = displayThumbs.findIndex((s) => (s || heroThumbnail) === (currentImage || heroThumbnail));
-                          const prev = displayThumbs[(idx - 1 + displayThumbs.length) % displayThumbs.length] || heroThumbnail;
+                          const idx = displayThumbs.findIndex((s) => s === currentImage);
+                          const safeIdx = idx >= 0 ? idx : 0;
+                          const prev = displayThumbs[(safeIdx - 1 + displayThumbs.length) % displayThumbs.length];
                           goToImage(prev, -1);
                         }}
                         className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 absolute left-3 top-1/2 -translate-y-1/2 z-20 flex h-8 w-8 items-center justify-center text-[#231d18] hover:bg-[rgba(0,0,0,0.06)] hover:text-[#7A3A30] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7A3A30]"
@@ -396,8 +404,9 @@ const ProjectDetail = () => {
                         type="button"
                         aria-label="Next image"
                         onClick={() => {
-                          const idx = displayThumbs.findIndex((s) => (s || heroThumbnail) === (currentImage || heroThumbnail));
-                          const next = displayThumbs[(idx + 1) % displayThumbs.length] || heroThumbnail;
+                          const idx = displayThumbs.findIndex((s) => s === currentImage);
+                          const safeIdx = idx >= 0 ? idx : 0;
+                          const next = displayThumbs[(safeIdx + 1) % displayThumbs.length];
                           goToImage(next, 1);
                         }}
                         className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 absolute right-3 top-1/2 -translate-y-1/2 z-20 flex h-8 w-8 items-center justify-center text-[#231d18] hover:bg-[rgba(0,0,0,0.06)] hover:text-[#7A3A30] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7A3A30]"
@@ -420,7 +429,7 @@ const ProjectDetail = () => {
                         <div className="relative">
                           <div ref={dotsRef} className="flex items-center gap-2 px-1">
                             {displayThumbs.map((s, d) => {
-                              const isSelected = (s || heroThumbnail) === (currentImage || heroThumbnail);
+                              const isSelected = s === currentImage;
                               return (
                                 <button
                                   key={d}
@@ -431,8 +440,8 @@ const ProjectDetail = () => {
                                   aria-label={`Go to image ${d + 1}`}
                                   onClick={() => {
                                     if (isDraggingRef.current) return;
-                                    const nextImage = s || heroThumbnail;
-                                    const direction: 1 | -1 = d >= activeThumbIndex ? 1 : -1;
+                                    const nextImage = s;
+                                    const direction: 1 | -1 = d >= selectedThumbIndex ? 1 : -1;
                                     goToImage(nextImage, direction);
                                   }}
                                 />
@@ -490,13 +499,13 @@ const ProjectDetail = () => {
 
                   btns[idx].focus();
                   const nextImage = btns[idx].getAttribute('data-src') || '';
-                  const direction: 1 | -1 = idx >= activeThumbIndex ? 1 : -1;
+                  const direction: 1 | -1 = idx >= selectedThumbIndex ? 1 : -1;
                   goToImage(nextImage, direction);
                   e.preventDefault();
                 }}
               >
                 {displayThumbs.map((t, idx) => {
-                  const isSelected = (currentImage || heroThumbnail) === t;
+                  const isSelected = currentImage === t;
                   return (
                     <button
                       key={t + idx}
@@ -510,14 +519,14 @@ const ProjectDetail = () => {
                           e.preventDefault();
                           return;
                         }
-                        const direction: 1 | -1 = idx >= activeThumbIndex ? 1 : -1;
+                        const direction: 1 | -1 = idx >= selectedThumbIndex ? 1 : -1;
                         goToImage(t, direction);
                       }}
                       aria-label={`Thumbnail ${idx + 1}`}
                       className={`relative h-16 min-w-[5rem] sm:min-w-[6rem] sm:w-24 overflow-hidden p-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7A3A30] ${isSelected ? '' : 'opacity-60'} rounded-none bg-transparent border-l border-[#e9e1d6]/40 first:border-l-0 px-2`}
                     >
                       <div className="h-full w-full">
-                        <img src={t || heroThumbnail} alt={project?.title ? `${project.title} thumbnail` : ''} loading="lazy" decoding="async" className="h-full w-full object-contain object-center" />
+                        <img src={t} alt={project?.title ? `${project.title} thumbnail` : ''} loading="lazy" decoding="async" className="h-full w-full object-contain object-center" />
                       </div>
                       {/* Underline for selected thumbnail */}
                       <span
