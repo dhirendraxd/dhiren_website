@@ -534,7 +534,7 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.45, ease: "easeOut" }}
       >
-        <section className="mx-auto min-h-[100svh] max-w-[74rem] px-5 pb-28 pt-20 sm:px-8 sm:pt-24 md:px-12 md:pt-28 lg:px-10 lg:pt-32">
+        <section className="mx-auto min-h-[125svh] max-w-[74rem] px-5 pb-44 pt-20 sm:px-8 sm:pt-24 md:px-12 md:pt-28 lg:px-10 lg:pt-32">
           <div className="mb-14 grid gap-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(18rem,0.85fr)] lg:items-end">
             <div>
               <p className="text-[0.64rem] uppercase tracking-[0.38em] text-[#90857a]">UNSER PROZESS</p>
