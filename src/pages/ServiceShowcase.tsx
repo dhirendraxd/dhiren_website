@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Home, Square } from "lucide-react";
+import { Armchair, Calculator, Hammer, Home, Palette, Rocket, Square } from "lucide-react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import Seo from "@/components/Seo";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
-import { getProjectSlugByTitle, issueHiveThumbnail } from "@/data/projectDetails";
+import { issueHiveThumbnail } from "@/data/projectDetails";
 
 type ServiceSlug = "digital-marketing" | "advocacy-community" | "tech-projects";
 
@@ -121,45 +121,6 @@ const imageAssets = {
   ctrlBits: assetPath('affiliation/new logo fark blue grad in white.png'),
   rotaract: assetPath('affiliation/rac .jpg'),
   sustainabilitySolutions: assetPath('affiliation/sustainabilitysolutionsnepal_logo.jpeg'),
-};
-
-const legacyOrganizationLinks: Record<string, string> = {
-  "/affiliations/1": "https://www.facebook.com/allinfoundationnp/",
-  "/affiliations/2": "https://aws.amazon.com",
-  "/affiliations/3": "https://netmission.asia",
-  "/affiliations/4": "https://rotary.org",
-  "/affiliations/5": "https://www.ctrlbits.com/",
-  "/affiliations/6": "https://sustainability.com.np/",
-};
-
-const getCardAction = (card: ShowcaseCard) => {
-  const projectSlug = getProjectSlugByTitle(card.title);
-  if (projectSlug) {
-    return {
-      href: `/projects/${projectSlug}`,
-      external: false,
-    };
-  }
-
-  if (!card.href) {
-    return null;
-  }
-
-  if (card.href in legacyOrganizationLinks) {
-    return {
-      href: legacyOrganizationLinks[card.href],
-      external: true,
-    };
-  }
-
-  if (card.href.startsWith("/hackathon")) {
-    return null;
-  }
-
-  return {
-    href: card.href,
-    external: Boolean(card.external),
-  };
 };
 
 const serviceShowcases: Record<ServiceSlug, ShowcasePageConfig> = {
@@ -489,15 +450,50 @@ const serviceShowcases: Record<ServiceSlug, ShowcasePageConfig> = {
 const isServiceSlug = (value: string): value is ServiceSlug => value in serviceShowcases;
 const defaultServiceSlug: ServiceSlug = "digital-marketing";
 
+const processSteps = [
+  {
+    title: "Immobilienanalyse",
+    description: "Wir prüfen, ob das Objekt sich für ein Ferienhaus eignet und analysieren das Potenzial.",
+    icon: Home,
+  },
+  {
+    title: "Konzept & Zahlenwerk",
+    description: "Eigentümer erhalten ein klares Konzept mit allen Zahlen und Potenzialen.",
+    icon: Calculator,
+  },
+  {
+    title: "Moodboard & Design",
+    description: "Wir erstellen Moodboards und entwickeln ein individuelles Einrichtungskonzept.",
+    icon: Palette,
+  },
+  {
+    title: "Interieur & Möbel",
+    description: "Wir bestellen Möbel und Interieur bei unseren Designpartnern.",
+    icon: Armchair,
+  },
+  {
+    title: "Renovierungsbegleitung",
+    description: "Wir begleiten die Renovierung und stellen sicher, dass alles perfekt umgesetzt wird.",
+    icon: Hammer,
+  },
+  {
+    title: "Markteinführung",
+    description: "Wir bringen das Ferienhaus auf den Markt – bereit für tolle Gäste.",
+    icon: Rocket,
+  },
+];
+
 const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
   const { slug } = useParams<{ slug: string }>();
-  const [activeWorkIndex, setActiveWorkIndex] = useState(0);
+  const [activeWorkIndex, setActiveWorkIndex] = useState(2);
 
   const routeSlug = forcedSlug ?? slug;
   const resolvedSlug = !routeSlug ? defaultServiceSlug : isServiceSlug(routeSlug) ? routeSlug : null;
+  const visibleWorkItems = processSteps;
+  const activeProject = visibleWorkItems[activeWorkIndex] ?? visibleWorkItems[0];
 
   useEffect(() => {
-    setActiveWorkIndex(0);
+    setActiveWorkIndex(2);
   }, [resolvedSlug]);
 
   if (!resolvedSlug) {
@@ -507,9 +503,7 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
   const showcase = serviceShowcases[resolvedSlug];
   const pageTitle = `${showcase.heroTitle} | Dhirendra Singh Dhami`;
   const pageDescription = showcase.heroSummary;
-  const workItems = showcase.projects;
-  const activeProject = workItems[activeWorkIndex] ?? workItems[0];
-  const visibleWorkItems = workItems.slice(0, 6);
+  const activeStep = processSteps[activeWorkIndex] ?? processSteps[0];
   const partnerItems = [
     ...showcase.stats.map((stat) => ({
       initial: stat.value.replace(/[^A-Za-z0-9]/g, "").slice(0, 1) || stat.label.slice(0, 1),
@@ -540,108 +534,81 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.45, ease: "easeOut" }}
       >
-        <section className="mx-auto min-h-[38rem] max-w-[74rem] px-5 pb-16 pt-6 sm:px-8 md:px-12">
-          <h1 className="sr-only">{showcase.heroTitle}</h1>
-          <div className="flex items-center justify-between gap-4">
-            <button
-              onClick={() => window.history.back()}
-              className="group inline-flex items-center gap-1 text-sm font-semibold uppercase tracking-[0.2em] text-[#3f3932] transition-colors hover:text-[#7A3A30]"
-            >
-              <span aria-hidden="true" className="flex leading-none transition-transform duration-300 group-hover:-translate-x-1">&larr;</span>
-              <span className="leading-none border-b border-transparent transition-colors group-hover:border-[#7A3A30]">Back</span>
-            </button>
-
-            <div className="hidden items-center gap-2 sm:flex">
-              {projectFilters.map((filter) => (
-                <button
-                  key={filter}
-                  type="button"
-                  onClick={() => setActiveFilter(filter)}
-                  className={`border-b px-1 pb-1 text-xs font-semibold uppercase tracking-[0.18em] transition-colors ${
-                    activeFilter === filter
-                      ? "border-[#7A3A30] text-[#7A3A30]"
-                      : "border-transparent text-[#6b6259] hover:border-[#c7bbae] hover:text-[#231d18]"
-                  }`}
-                >
-                  {filter}
-                </button>
-              ))}
+        <section className="mx-auto max-w-[74rem] px-5 pb-16 pt-10 sm:px-8 md:px-12 lg:px-10">
+          <div className="mb-10 grid gap-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(18rem,0.85fr)] lg:items-end">
+            <div>
+              <p className="text-[0.68rem] uppercase tracking-[0.34em] text-[#8d8378]">UNSER PROZESS</p>
+              <h1 className="mt-4 max-w-[16rem] text-[2.2rem] font-normal leading-[0.95] tracking-[-0.03em] text-[#231d18] sm:text-[3rem]">
+                In sechs Schritten zum <span className="italic">Erfolg</span>
+              </h1>
             </div>
+            <p className="max-w-[21rem] text-[0.95rem] leading-[1.5] text-[#6e6459] lg:justify-self-end">
+              Von der ersten Analyse bis zur Markteinführung – wir begleiten Sie durch jeden Schritt der Transformation.
+            </p>
           </div>
 
-          <div className="mt-7 grid gap-10 lg:grid-cols-[minmax(0,34rem)_minmax(20rem,26rem)] lg:items-start lg:justify-center">
+          <div className="grid gap-8 lg:grid-cols-[minmax(0,1.02fr)_minmax(20rem,0.88fr)] lg:items-start lg:justify-center">
             <div className="space-y-0">
               {visibleWorkItems.map((project, index) => {
-                  const action = getCardAction(project);
-                  const isActive = index === activeWorkIndex;
-                  const rowClass = `group block min-h-[4.45rem] border-b border-[#ded6cb] transition-colors ${
-                    isActive
-                      ? "border-transparent bg-white px-5 py-4 shadow-[0_14px_32px_rgba(35,29,24,0.05)]"
-                      : "px-5 py-4 hover:bg-[#f0e9df]"
-                  }`;
-                  const rowContent = (
-                    <span className="flex items-start gap-3">
-                      <span className="mt-0.5 text-[#231d18]">
-                        <ArrowUpRight className={`h-4 w-4 transition-colors ${isActive ? "text-[#7A3A30]" : "text-[#8d8378]"}`} />
-                      </span>
-                      <span className="min-w-0">
-                        <span className="block text-[1rem] font-bold leading-tight text-[#231d18]">{project.title}</span>
-                        <span className="mt-1 block max-w-[29rem] text-[0.8rem] leading-relaxed text-[#71675d]">{project.description}</span>
-                      </span>
+                const isActive = index === activeWorkIndex;
+                const rowClass = `group block min-h-[4.45rem] text-left transition-colors ${
+                  isActive
+                    ? "bg-white px-5 py-4 shadow-[0_14px_32px_rgba(35,29,24,0.05)]"
+                    : "border-b border-[#ddd3c7] px-5 py-4 hover:bg-[#f0e9df]"
+                }`;
+                const rowContent = (
+                  <span className="flex items-start gap-3">
+                    <span className="mt-0.5 text-[#231d18]">
+                      <Square className={`h-3.5 w-3.5 transition-colors ${isActive ? "text-[#231d18]" : "text-[#8d8378]"}`} />
                     </span>
-                  );
+                    <span className="min-w-0">
+                      <span className="block text-[0.98rem] font-bold leading-tight text-[#231d18]">{project.title}</span>
+                      <span className="mt-1 block max-w-[29rem] text-[0.78rem] leading-[1.55] text-[#918679]">{project.description}</span>
+                    </span>
+                  </span>
+                );
 
-                  return (
-                    <div key={project.title} className="grid grid-cols-[2.5rem_minmax(0,1fr)] gap-x-5">
-                      <button
-                        type="button"
-                        onClick={() => setActiveWorkIndex(index)}
-                        className={`mt-4 flex h-8 w-8 items-center justify-center justify-self-center rounded-full text-[0.64rem] font-bold transition-colors ${
-                          isActive
-                            ? "bg-[#120e0b] text-[#f5f1eb]"
-                            : "border border-[#d8cfc3] bg-[#f5f1eb] text-[#7b7066] hover:border-[#7A3A30] hover:text-[#7A3A30]"
-                        }`}
-                        aria-label={`Show work item ${index + 1}`}
-                      >
-                        {String(index + 1).padStart(2, "0")}
-                      </button>
+                return (
+                  <div key={project.title} className="grid grid-cols-[2.75rem_minmax(0,1fr)] gap-x-5">
+                    <button
+                      type="button"
+                      onClick={() => setActiveWorkIndex(index)}
+                      className={`mt-4 flex h-9 w-9 items-center justify-center justify-self-center rounded-full text-[0.64rem] font-bold transition-colors ${
+                        isActive
+                          ? "bg-[#120e0b] text-[#f5f1eb]"
+                          : "border border-[#d8cfc3] bg-[#f5f1eb] text-[#7b7066] hover:border-[#7A3A30] hover:text-[#7A3A30]"
+                      }`}
+                      aria-label={`Show work item ${index + 1}`}
+                    >
+                      {String(index + 1).padStart(2, "0")}
+                    </button>
 
-                      {action?.external ? (
-                        <a
-                          href={action.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onMouseEnter={() => setActiveWorkIndex(index)}
-                          onFocus={() => setActiveWorkIndex(index)}
-                          className={rowClass}
-                        >
-                          {rowContent}
-                        </a>
-                      ) : (
-                        <Link
-                          to={action?.href ?? "#"}
-                          onMouseEnter={() => setActiveWorkIndex(index)}
-                          onFocus={() => setActiveWorkIndex(index)}
-                          className={rowClass}
-                        >
-                          {rowContent}
-                        </Link>
-                      )}
-                    </div>
-                  );
-                })}
+                    <button
+                      type="button"
+                      onClick={() => setActiveWorkIndex(index)}
+                      onMouseEnter={() => setActiveWorkIndex(index)}
+                      onFocus={() => setActiveWorkIndex(index)}
+                      className={rowClass}
+                    >
+                      {rowContent}
+                    </button>
+                  </div>
+                );
+              })}
             </div>
 
             {activeProject && (
               <aside className="pt-0 lg:sticky lg:top-8">
-                <div className="border border-[#dfd6ca] bg-white p-8 shadow-[0_16px_42px_rgba(35,29,24,0.06)]">
-                  <div className="text-[5.2rem] font-bold leading-none text-[#231d18]/10">
+                <div className="border border-[#dfd6ca] bg-white p-8 shadow-[0_16px_42px_rgba(35,29,24,0.06)] sm:p-10">
+                  <div className="text-[4.8rem] font-bold leading-none text-[#231d18]/10 sm:text-[5.2rem]">
                     {String(activeWorkIndex + 1).padStart(2, "0")}
                   </div>
                   <div className="mt-7">
-                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#7A3A30]">{activeProject.category}</p>
-                    <h2 className="mt-3 text-[1.35rem] font-bold leading-tight text-[#231d18]">{activeProject.title}</h2>
-                    <p className="mt-4 text-[0.92rem] leading-relaxed text-[#5f574d]">{activeProject.description}</p>
+                    <h2 className="flex items-center gap-2 text-[1.3rem] font-bold leading-tight text-[#231d18]">
+                      <Home className="h-4 w-4" />
+                      {activeProject.title}
+                    </h2>
+                    <p className="mt-4 max-w-[20rem] text-[0.84rem] leading-relaxed text-[#5f574d]">{activeProject.description}</p>
                     <div className="mt-8 flex items-center gap-2">
                       {visibleWorkItems.slice(0, 6).map((item, index) => (
                         <span
@@ -651,25 +618,6 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
                         />
                       ))}
                     </div>
-                    {activeProjectAction && (
-                      activeProjectAction.external ? (
-                        <a
-                          href={activeProjectAction.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="mt-7 inline-flex items-center gap-2 border-b border-[#7A3A30] pb-1 text-sm font-bold text-[#7A3A30]"
-                        >
-                          View work <ArrowUpRight className="h-4 w-4" />
-                        </a>
-                      ) : (
-                        <Link
-                          to={activeProjectAction.href}
-                          className="mt-7 inline-flex items-center gap-2 border-b border-[#7A3A30] pb-1 text-sm font-bold text-[#7A3A30]"
-                        >
-                          View work <ArrowUpRight className="h-4 w-4" />
-                        </Link>
-                      )
-                    )}
                   </div>
                 </div>
               </aside>
@@ -680,10 +628,10 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
         <section className="bg-[#100c09] px-5 py-20 text-[#f5f1eb] sm:px-8 md:px-12">
           <div className="mx-auto max-w-[74rem]">
             <div className="mx-auto max-w-[38rem] text-center">
-              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#bfa99a]">{showcase.statsLabel}</p>
-              <h2 className="mt-4 font-rajdhani text-[2.35rem] font-bold leading-tight sm:text-[3rem]">
+              <p className="text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-[#bfa99a]">{showcase.statsLabel}</p>
+              <h2 className="mt-4 font-rajdhani text-[2.35rem] font-normal leading-tight sm:text-[3rem]">
                 {showcase.statsTitle.split(" ").slice(0, 3).join(" ")}
-                <span className="block font-normal italic">{showcase.statsTitle.split(" ").slice(3).join(" ")}</span>
+                <span className="block italic">{showcase.statsTitle.split(" ").slice(3).join(" ")}</span>
               </h2>
               <p className="mx-auto mt-5 max-w-[34rem] text-[0.92rem] leading-relaxed text-white/65">
                 {showcase.heroSummary}
@@ -708,10 +656,9 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
             <div className="mt-12 flex justify-center">
               <Link
                 to="/#contact"
-                className="group inline-flex items-center gap-2 border-b border-[#bfa99a] pb-1 text-sm font-bold text-[#f5f1eb] transition-colors hover:text-[#bfa99a]"
+                className="inline-flex border-b border-[#bfa99a] pb-1 text-sm font-bold text-[#f5f1eb] transition-colors hover:text-[#bfa99a]"
               >
-                Start a conversation
-                <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                Contact me →
               </Link>
             </div>
           </div>
