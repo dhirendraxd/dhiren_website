@@ -4,6 +4,7 @@ import { ArrowRight, ArrowUpRight, Megaphone, Code2, Users } from "lucide-react"
 import { Link } from "react-router-dom";
 import { getRelevantExperiences } from "@/data/affiliations";
 import { issueHiveThumbnail } from "@/data/projectDetails";
+import { assetPath } from '@/lib/assetPath';
 
 const AboutSection = () => {
   const [showAllExperiences, setShowAllExperiences] = useState(false);
@@ -35,14 +36,14 @@ const AboutSection = () => {
       id: 2,
       type: "Community Project",
       title: "Community fellowship initiatives for collaborative social impact.",
-      image: new URL("@/assets/civic tech.webp", import.meta.url).href,
+      image: assetPath('civic tech.webp'),
       href: "/projects/fellowship-community-labs",
     },
     {
       id: 3,
       type: "Tech Project",
       title: "Volunteer platform design for NGOs and youth programs.",
-      image: new URL("@/assets/2nd new .webp", import.meta.url).href,
+      image: assetPath('2nd new .webp'),
       href: "/projects/ngo-volunteer-management",
     },
     {

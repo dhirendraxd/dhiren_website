@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import untitledDesignImage from "@/assets/Untitled design.webp";
+import { assetPath } from '@/lib/assetPath';
+const untitledDesignImage = assetPath('Untitled design.webp');
 
 const HeroSection = () => {
   const [showScrollIndicator, setShowScrollIndicator] = useState(true);
