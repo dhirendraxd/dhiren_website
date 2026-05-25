@@ -48,25 +48,28 @@ const MeetTheTeam: React.FC<{ members: Member[]; href?: string }> = ({ members, 
                   alt={m[i]?.name || 'Team member'}
                   loading="lazy"
                   decoding="async"
-                  className="h-full w-full object-cover object-center"
-                  style={{
-                    filter: 'grayscale(100%)',
-                    transition: 'transform 200ms ease, opacity 200ms ease',
-                  }}
+                  className={`h-full w-full object-cover object-center transition-all duration-300 ${
+                    isHovered ? 'scale-100 brightness-50 grayscale' : 'scale-100 grayscale'
+                  }`}
                 />
-                {/* Hover/focus overlay showing short role/bio */}
+                {/* Full-cover overlay so hover effect applies across the entire image */}
                 <div
                   aria-hidden={!isHovered}
-                  className={`absolute inset-0 flex items-end p-4 transition-opacity duration-200 ${
+                  className={`absolute inset-0 transition-opacity duration-200 ${
                     isHovered ? 'opacity-100' : 'opacity-0'
                   }`}
                 >
-                  <div className="w-full bg-gradient-to-t from-[rgba(0,0,0,0.75)] to-transparent p-3">
-                    <div className="text-sm font-rajdhani text-white">{m[i]?.projectWork || m[i]?.role || 'Team member'}</div>
+                  <div className="absolute inset-0 bg-black/45" />
+                  <div className="absolute inset-x-0 top-0 p-4 bg-gradient-to-b from-black/70 to-transparent">
+                    <div className="text-sm font-rajdhani font-semibold text-white drop-shadow">
+                      {m[i]?.name || 'Team member'}
+                    </div>
                   </div>
-                </div>
-                <div className="absolute left-3 bottom-3 text-white">
-                  <div className="text-sm font-rajdhani font-semibold drop-shadow">{m[i]?.name}</div>
+                  <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/75 to-transparent">
+                    <div className="text-sm font-rajdhani text-white">
+                      {m[i]?.projectWork || m[i]?.role || 'Team member'}
+                    </div>
+                  </div>
                 </div>
               {i === 3 && (
                 <div className="absolute right-3 top-3">
