@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowUpRight, Sparkles } from "lucide-react";
-import { FaGithub, FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import { Home, Square } from "lucide-react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import Seo from "@/components/Seo";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
@@ -161,41 +160,6 @@ const getCardAction = (card: ShowcaseCard) => {
     href: card.href,
     external: Boolean(card.external),
   };
-};
-
-const ProjectImage = ({ card }: { card: ShowcaseCard }) => {
-  const action = getCardAction(card);
-
-  const image = (
-    <img
-      src={card.image}
-      alt={`${card.title} project thumbnail`}
-      loading="lazy"
-      decoding="async"
-      width={400}
-      height={250}
-      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-      className="aspect-[16/10] h-auto w-full object-cover"
-    />
-  );
-
-  if (!action) {
-    return image;
-  }
-
-  if (action.external) {
-    return (
-      <a href={action.href} target="_blank" rel="noopener noreferrer" className="block" aria-label={card.title}>
-        {image}
-      </a>
-    );
-  }
-
-  return (
-    <Link to={action.href} className="block" aria-label={card.title}>
-      {image}
-    </Link>
-  );
 };
 
 const serviceShowcases: Record<ServiceSlug, ShowcasePageConfig> = {
@@ -527,13 +491,13 @@ const defaultServiceSlug: ServiceSlug = "digital-marketing";
 
 const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
   const { slug } = useParams<{ slug: string }>();
-  const [activeFilter, setActiveFilter] = useState("All");
+  const [activeWorkIndex, setActiveWorkIndex] = useState(0);
 
   const routeSlug = forcedSlug ?? slug;
   const resolvedSlug = !routeSlug ? defaultServiceSlug : isServiceSlug(routeSlug) ? routeSlug : null;
 
   useEffect(() => {
-    setActiveFilter("All");
+    setActiveWorkIndex(0);
   }, [resolvedSlug]);
 
   if (!resolvedSlug) {
@@ -543,14 +507,24 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
   const showcase = serviceShowcases[resolvedSlug];
   const pageTitle = `${showcase.heroTitle} | Dhirendra Singh Dhami`;
   const pageDescription = showcase.heroSummary;
-  const projectFilters = ["All", ...showcase.filters];
-  const visibleProjects =
-    activeFilter === "All"
-      ? showcase.projects
-      : showcase.projects.filter((project) => project.category === activeFilter);
+  const workItems = showcase.projects;
+  const activeProject = workItems[activeWorkIndex] ?? workItems[0];
+  const visibleWorkItems = workItems.slice(0, 6);
+  const partnerItems = [
+    ...showcase.stats.map((stat) => ({
+      initial: stat.value.replace(/[^A-Za-z0-9]/g, "").slice(0, 1) || stat.label.slice(0, 1),
+      title: stat.label,
+      subtitle: stat.value,
+    })),
+    ...(showcase.skillHighlights ?? []).map((skill) => ({
+      initial: skill.slice(0, 1),
+      title: skill,
+      subtitle: "Focus Area",
+    })),
+  ].slice(0, 6);
 
   return (
-    <div className="min-h-screen bg-card">
+    <div className="min-h-screen bg-[#f5f1eb] text-[#231d18]">
       <Seo
         title={pageTitle}
         description={pageDescription}
@@ -561,105 +535,186 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
       <ScrollProgressBar />
 
       <motion.main
-        className="mx-auto max-w-[84rem] h-screen overflow-hidden bg-card"
+        className="font-rajdhani"
         initial={{ opacity: 0, y: 18 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.45, ease: "easeOut" }}
       >
-        <section className="h-full px-4 pb-6 pt-6 font-rajdhani sm:px-6 sm:pt-8 md:px-12 md:pt-10 overflow-hidden flex flex-col">
-          <button
-            onClick={() => window.history.back()}
-            className="group inline-flex items-center gap-1 text-sm font-semibold uppercase tracking-[0.2em] text-[#3f3932] transition-colors hover:text-[#7A3A30]"
-          >
-            <span aria-hidden="true" className="flex leading-none transition-transform duration-300 group-hover:-translate-x-1">&larr;</span>
-            <span className="leading-none border-b border-transparent transition-colors group-hover:border-[#7A3A30]">Back</span>
-          </button>
+        <section className="mx-auto min-h-[38rem] max-w-[74rem] px-5 pb-16 pt-6 sm:px-8 md:px-12">
+          <h1 className="sr-only">{showcase.heroTitle}</h1>
+          <div className="flex items-center justify-between gap-4">
+            <button
+              onClick={() => window.history.back()}
+              className="group inline-flex items-center gap-1 text-sm font-semibold uppercase tracking-[0.2em] text-[#3f3932] transition-colors hover:text-[#7A3A30]"
+            >
+              <span aria-hidden="true" className="flex leading-none transition-transform duration-300 group-hover:-translate-x-1">&larr;</span>
+              <span className="leading-none border-b border-transparent transition-colors group-hover:border-[#7A3A30]">Back</span>
+            </button>
 
-          <div className="flex flex-col items-center justify-center flex-1">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-rajdhani font-bold text-center leading-tight tracking-tight">
-              {showcase.heroTitle.split(' ').map((word, i) => {
-                const isKeyword = word.toLowerCase().includes('marketing') || word.toLowerCase().includes('growth') || word.toLowerCase().includes('creation') || word.toLowerCase().includes('advocacy');
-                return (
-                  <span key={i} className={isKeyword ? 'text-[#7A3A30]' : 'text-[#3f3932]'}>
-                    {word}
-                    {i < showcase.heroTitle.split(' ').length - 1 && ' '}
-                  </span>
-                );
-              })}
-            </h1>
-            <p className="mt-4 text-center text-sm sm:text-base text-[#5a5550] max-w-[36rem] leading-relaxed">
-              {showcase.heroSummary}
-            </p>
+            <div className="hidden items-center gap-2 sm:flex">
+              {projectFilters.map((filter) => (
+                <button
+                  key={filter}
+                  type="button"
+                  onClick={() => setActiveFilter(filter)}
+                  className={`border-b px-1 pb-1 text-xs font-semibold uppercase tracking-[0.18em] transition-colors ${
+                    activeFilter === filter
+                      ? "border-[#7A3A30] text-[#7A3A30]"
+                      : "border-transparent text-[#6b6259] hover:border-[#c7bbae] hover:text-[#231d18]"
+                  }`}
+                >
+                  {filter}
+                </button>
+              ))}
+            </div>
           </div>
 
-          <section className="mt-auto px-4 py-6 font-rajdhani sm:px-6 md:px-12 flex-shrink-0">
-            <div className="relative flex flex-col items-center justify-end gap-6">
-              <div className="grid w-full max-w-[34rem] grid-cols-3 gap-3 sm:gap-4">
-                {showcase.skillHighlights?.slice(0, 6).map((skill, index) => (
-                  <div
-                    key={skill}
-                    className="flex items-center justify-center border border-[#7b7366]/50 bg-[#f5f1eb] p-4 text-center transition-colors hover:border-[#12110f] hover:bg-[#ede2d6]"
-                  >
-                    <span className="text-xs font-semibold uppercase tracking-[0.1em] text-[#3f3932] leading-tight">{skill}</span>
-                  </div>
-                ))}
-              </div>
+          <div className="mt-7 grid gap-10 lg:grid-cols-[minmax(0,34rem)_minmax(20rem,26rem)] lg:items-start lg:justify-center">
+            <div className="space-y-0">
+              {visibleWorkItems.map((project, index) => {
+                  const action = getCardAction(project);
+                  const isActive = index === activeWorkIndex;
+                  const rowClass = `group block min-h-[4.45rem] border-b border-[#ded6cb] transition-colors ${
+                    isActive
+                      ? "border-transparent bg-white px-5 py-4 shadow-[0_14px_32px_rgba(35,29,24,0.05)]"
+                      : "px-5 py-4 hover:bg-[#f0e9df]"
+                  }`;
+                  const rowContent = (
+                    <span className="flex items-start gap-3">
+                      <span className="mt-0.5 text-[#231d18]">
+                        <ArrowUpRight className={`h-4 w-4 transition-colors ${isActive ? "text-[#7A3A30]" : "text-[#8d8378]"}`} />
+                      </span>
+                      <span className="min-w-0">
+                        <span className="block text-[1rem] font-bold leading-tight text-[#231d18]">{project.title}</span>
+                        <span className="mt-1 block max-w-[29rem] text-[0.8rem] leading-relaxed text-[#71675d]">{project.description}</span>
+                      </span>
+                    </span>
+                  );
 
-              <div className="w-full max-w-[24rem]">
-                <div className="h-px w-full bg-[#8b8377]/80" />
-              </div>
+                  return (
+                    <div key={project.title} className="grid grid-cols-[2.5rem_minmax(0,1fr)] gap-x-5">
+                      <button
+                        type="button"
+                        onClick={() => setActiveWorkIndex(index)}
+                        className={`mt-4 flex h-8 w-8 items-center justify-center justify-self-center rounded-full text-[0.64rem] font-bold transition-colors ${
+                          isActive
+                            ? "bg-[#120e0b] text-[#f5f1eb]"
+                            : "border border-[#d8cfc3] bg-[#f5f1eb] text-[#7b7066] hover:border-[#7A3A30] hover:text-[#7A3A30]"
+                        }`}
+                        aria-label={`Show work item ${index + 1}`}
+                      >
+                        {String(index + 1).padStart(2, "0")}
+                      </button>
 
-              <div className="flex flex-col items-center pb-0">
-                <div className="flex items-center gap-3">
-                  <a
-                    href="https://github.com/dhirendraxd"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="GitHub"
-                    title="GitHub"
-                    className="group relative inline-flex h-9 w-9 items-center justify-center p-1 leading-none transition-all duration-200 hover:-translate-y-0.5 hover:opacity-80"
-                  >
-                    <span className="text-[#181717] group-hover:text-[#15120d] transition-colors duration-200">
-                      <FaGithub size={24} />
-                    </span>
-                    <span className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 rounded bg-foreground px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-background opacity-0 transition-opacity duration-150 group-hover:opacity-100">
-                      GitHub
-                    </span>
-                  </a>
-                  <a
-                    href="https://instagram.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Instagram"
-                    title="Instagram"
-                    className="group relative inline-flex h-9 w-9 items-center justify-center p-1 leading-none transition-all duration-200 hover:-translate-y-0.5 hover:opacity-80"
-                  >
-                    <span className="text-[#E4405F] group-hover:text-[#b63156] transition-colors duration-200">
-                      <FaInstagram size={24} />
-                    </span>
-                    <span className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 rounded bg-foreground px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-background opacity-0 transition-opacity duration-150 group-hover:opacity-100">
-                      Insta
-                    </span>
-                  </a>
-                  <a
-                    href="https://linkedin.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="LinkedIn"
-                    title="LinkedIn"
-                    className="group relative inline-flex h-9 w-9 items-center justify-center p-1 leading-none transition-all duration-200 hover:-translate-y-0.5 hover:opacity-80"
-                  >
-                    <span className="text-[#0A66C2] group-hover:text-[#08539d] transition-colors duration-200">
-                      <FaLinkedinIn size={24} />
-                    </span>
-                    <span className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 rounded bg-foreground px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-background opacity-0 transition-opacity duration-150 group-hover:opacity-100">
-                      LinkedIn
-                    </span>
-                  </a>
-                </div>
-              </div>
+                      {action?.external ? (
+                        <a
+                          href={action.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onMouseEnter={() => setActiveWorkIndex(index)}
+                          onFocus={() => setActiveWorkIndex(index)}
+                          className={rowClass}
+                        >
+                          {rowContent}
+                        </a>
+                      ) : (
+                        <Link
+                          to={action?.href ?? "#"}
+                          onMouseEnter={() => setActiveWorkIndex(index)}
+                          onFocus={() => setActiveWorkIndex(index)}
+                          className={rowClass}
+                        >
+                          {rowContent}
+                        </Link>
+                      )}
+                    </div>
+                  );
+                })}
             </div>
-          </section>
+
+            {activeProject && (
+              <aside className="pt-0 lg:sticky lg:top-8">
+                <div className="border border-[#dfd6ca] bg-white p-8 shadow-[0_16px_42px_rgba(35,29,24,0.06)]">
+                  <div className="text-[5.2rem] font-bold leading-none text-[#231d18]/10">
+                    {String(activeWorkIndex + 1).padStart(2, "0")}
+                  </div>
+                  <div className="mt-7">
+                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#7A3A30]">{activeProject.category}</p>
+                    <h2 className="mt-3 text-[1.35rem] font-bold leading-tight text-[#231d18]">{activeProject.title}</h2>
+                    <p className="mt-4 text-[0.92rem] leading-relaxed text-[#5f574d]">{activeProject.description}</p>
+                    <div className="mt-8 flex items-center gap-2">
+                      {visibleWorkItems.slice(0, 6).map((item, index) => (
+                        <span
+                          key={`${item.title}-progress`}
+                          className={`h-0.5 flex-1 ${index === activeWorkIndex ? "bg-[#231d18]" : "bg-[#d8cfc3]"}`}
+                          aria-hidden="true"
+                        />
+                      ))}
+                    </div>
+                    {activeProjectAction && (
+                      activeProjectAction.external ? (
+                        <a
+                          href={activeProjectAction.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="mt-7 inline-flex items-center gap-2 border-b border-[#7A3A30] pb-1 text-sm font-bold text-[#7A3A30]"
+                        >
+                          View work <ArrowUpRight className="h-4 w-4" />
+                        </a>
+                      ) : (
+                        <Link
+                          to={activeProjectAction.href}
+                          className="mt-7 inline-flex items-center gap-2 border-b border-[#7A3A30] pb-1 text-sm font-bold text-[#7A3A30]"
+                        >
+                          View work <ArrowUpRight className="h-4 w-4" />
+                        </Link>
+                      )
+                    )}
+                  </div>
+                </div>
+              </aside>
+            )}
+          </div>
+        </section>
+
+        <section className="bg-[#100c09] px-5 py-20 text-[#f5f1eb] sm:px-8 md:px-12">
+          <div className="mx-auto max-w-[74rem]">
+            <div className="mx-auto max-w-[38rem] text-center">
+              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#bfa99a]">{showcase.statsLabel}</p>
+              <h2 className="mt-4 font-rajdhani text-[2.35rem] font-bold leading-tight sm:text-[3rem]">
+                {showcase.statsTitle.split(" ").slice(0, 3).join(" ")}
+                <span className="block font-normal italic">{showcase.statsTitle.split(" ").slice(3).join(" ")}</span>
+              </h2>
+              <p className="mx-auto mt-5 max-w-[34rem] text-[0.92rem] leading-relaxed text-white/65">
+                {showcase.heroSummary}
+              </p>
+            </div>
+
+            <div className="mt-14 grid border-y border-white/10 sm:grid-cols-2 lg:grid-cols-3">
+              {partnerItems.map((item, index) => (
+                <div
+                  key={`${item.title}-${index}`}
+                  className="flex min-h-[10rem] flex-col items-center justify-center border-white/10 px-6 py-8 text-center sm:border-l sm:[&:nth-child(2n+1)]:border-l-0 lg:[&:nth-child(2n+1)]:border-l lg:[&:nth-child(3n+1)]:border-l-0 lg:[&:nth-child(n+4)]:border-t"
+                >
+                  <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white/10 text-[1.3rem] font-bold text-white">
+                    {item.initial}
+                  </div>
+                  <p className="mt-4 text-sm font-semibold text-white">{item.title}</p>
+                  <p className="mt-1 text-xs text-white/55">{item.subtitle}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-12 flex justify-center">
+              <Link
+                to="/#contact"
+                className="group inline-flex items-center gap-2 border-b border-[#bfa99a] pb-1 text-sm font-bold text-[#f5f1eb] transition-colors hover:text-[#bfa99a]"
+              >
+                Start a conversation
+                <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              </Link>
+            </div>
+          </div>
         </section>
       </motion.main>
     </div>

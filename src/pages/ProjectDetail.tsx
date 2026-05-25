@@ -581,42 +581,35 @@ const ProjectDetail = () => {
 
         <MeetTheTeam members={teamMembers} />
 
-        <section className="mt-8 py-3 sm:py-4">
+        <section className="mt-10 py-6 sm:py-8">
           <div className="mx-auto max-w-[88rem] px-6">
-            <div className="border-t border-[#e4dbcf] pt-5">
-              <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
-                <div className="max-w-[44rem]">
-                  <p className="text-xs font-semibold uppercase tracking-[0.26em] text-[#7A3A30]">Impact Snapshot</p>
-                  <h2 className="mt-2 text-[1.6rem] font-rajdhani font-bold leading-tight text-[#231d18] sm:text-[2rem]">
-                    A concise view of the project’s credibility
-                  </h2>
-                  <p className="mt-2 text-sm leading-relaxed text-[#5f574d]">
-                    Built only from the details already listed on this page.
-                  </p>
-                </div>
+            <div className="border-t border-[#d8cfc3] pt-8 sm:pt-10">
+              <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
+                <h2 className="font-rajdhani text-[2rem] font-bold uppercase leading-tight text-[#231d18] sm:text-[2.8rem]">
+                  Impact Snapshot
+                </h2>
 
-                <div className="grid gap-3 sm:grid-cols-2 lg:min-w-[34rem] lg:grid-cols-4">
+                <div className="grid gap-x-10 gap-y-7 sm:grid-cols-2 lg:min-w-[40rem] lg:grid-cols-4">
                   {impactSnapshot.map((item) => (
-                    <div key={item.label} className="border-l border-[#e4dbcf] pl-3">
-                      <div className="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-[#6b6259]">{item.label}</div>
-                      <div className="mt-1 text-[1rem] font-rajdhani font-bold text-[#231d18]">{item.value}</div>
-                      <div className="mt-1 text-[0.82rem] leading-relaxed text-[#675d52]">{item.note}</div>
+                    <div key={item.label} className="space-y-2.5">
+                      <div className="text-[0.78rem] font-semibold uppercase tracking-[0.16em] text-[#6f655b]">{item.label}</div>
+                      <div className="text-[1.55rem] font-rajdhani font-bold leading-tight text-[#7A3A30]">{item.value}</div>
+                      <div className="max-w-[16rem] text-[0.95rem] leading-relaxed text-[#5f574d]">{item.note}</div>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="mt-5 flex flex-wrap gap-2 text-sm text-[#4f453b]">
-                {outcomes.slice(0, 3).map((outcome) => (
-                  <span key={outcome} className="border border-[#e0d6c8] px-3 py-1.5 rounded-none bg-[#faf7f2]">
+              <div className="mt-10 grid gap-6 border-t border-[#e4dbcf] pt-7 text-[1rem] text-[#3f3932] sm:grid-cols-3">
+                {outcomes.slice(0, 3).map((outcome, index) => (
+                  <p key={outcome} className="relative border-l border-[#d8cfc3] pl-5 leading-relaxed">
+                    <span className="mb-2 block font-rajdhani text-[1.1rem] font-bold leading-none text-[#7A3A30]">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
                     {outcome}
-                  </span>
+                  </p>
                 ))}
               </div>
-
-              <p className="mt-4 text-sm leading-relaxed text-[#6b6259]">
-                Public source reference available when provided.
-              </p>
             </div>
           </div>
         </section>
