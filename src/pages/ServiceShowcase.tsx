@@ -534,15 +534,18 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.45, ease: "easeOut" }}
       >
-        <section className="mx-auto max-w-[74rem] px-5 pb-16 pt-10 sm:px-8 md:px-12 lg:px-10">
-          <div className="mb-10 grid gap-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(18rem,0.85fr)] lg:items-end">
+        <section className="mx-auto min-h-[100svh] max-w-[74rem] px-5 pb-28 pt-20 sm:px-8 sm:pt-24 md:px-12 md:pt-28 lg:px-10 lg:pt-32">
+          <div className="mb-14 grid gap-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(18rem,0.85fr)] lg:items-end">
             <div>
-              <p className="text-[0.68rem] uppercase tracking-[0.34em] text-[#8d8378]">UNSER PROZESS</p>
-              <h1 className="mt-4 max-w-[16rem] text-[2.2rem] font-normal leading-[0.95] tracking-[-0.03em] text-[#231d18] sm:text-[3rem]">
-                In sechs Schritten zum <span className="italic">Erfolg</span>
+              <p className="text-[0.64rem] uppercase tracking-[0.38em] text-[#90857a]">UNSER PROZESS</p>
+              <h1 className="mt-4 max-w-[15rem] text-[2.3rem] font-normal leading-[0.9] tracking-[-0.04em] text-[#231d18] sm:max-w-[18rem] sm:text-[3.1rem] lg:text-[3.35rem]">
+                <span className="block whitespace-nowrap">In sechs Schritten</span>
+                <span className="block whitespace-nowrap">
+                  zum <span className="italic">Erfolg</span>
+                </span>
               </h1>
             </div>
-            <p className="max-w-[21rem] text-[0.95rem] leading-[1.5] text-[#6e6459] lg:justify-self-end">
+            <p className="max-w-[22rem] text-[0.92rem] leading-[1.62] text-[#6f655a] lg:justify-self-end">
               Von der ersten Analyse bis zur Markteinführung – wir begleiten Sie durch jeden Schritt der Transformation.
             </p>
           </div>
@@ -554,39 +557,68 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
                 const rowClass = `group block min-h-[4.45rem] text-left transition-colors ${
                   isActive
                     ? "bg-white px-5 py-4 shadow-[0_14px_32px_rgba(35,29,24,0.05)]"
-                    : "border-b border-[#ddd3c7] px-5 py-4 hover:bg-[#f0e9df]"
+                    : "border-b border-[#ddd3c7] px-5 py-4 hover:bg-[#faf3f1]"
                 }`;
                 const rowContent = (
-                  <span className="flex items-start gap-3">
+                  <span className="flex items-start gap-2.5">
                     <span className="mt-0.5 text-[#231d18]">
-                      <Square className={`h-3.5 w-3.5 transition-colors ${isActive ? "text-[#231d18]" : "text-[#8d8378]"}`} />
+                      <Square
+                        className={`h-3 w-3 transition-colors ${
+                          isActive ? "text-[#231d18]" : "text-[#8d8378] group-hover:text-[#7A3A30]"
+                        }`}
+                        strokeWidth={1.6}
+                      />
                     </span>
                     <span className="min-w-0">
-                      <span className="block text-[0.98rem] font-bold leading-tight text-[#231d18]">{project.title}</span>
-                      <span className="mt-1 block max-w-[29rem] text-[0.78rem] leading-[1.55] text-[#918679]">{project.description}</span>
+                      <span
+                        className={`block text-[0.92rem] font-semibold leading-tight sm:text-[0.98rem] ${
+                          isActive ? "text-[#231d18]" : "text-[#231d18] transition-colors group-hover:text-[#7A3A30]"
+                        }`}
+                      >
+                        {project.title}
+                      </span>
+                      <span
+                        className={`mt-1 block max-w-[29rem] text-[0.72rem] leading-[1.55] sm:text-[0.78rem] ${
+                          isActive ? "text-[#92877b]" : "text-[#92877b] transition-colors group-hover:text-[#8f5c50]"
+                        }`}
+                      >
+                        {project.description}
+                      </span>
                     </span>
                   </span>
                 );
 
                 return (
-                  <div key={project.title} className="grid grid-cols-[2.75rem_minmax(0,1fr)] gap-x-5">
-                    <button
-                      type="button"
-                      onClick={() => setActiveWorkIndex(index)}
-                      className={`mt-4 flex h-9 w-9 items-center justify-center justify-self-center rounded-full text-[0.64rem] font-bold transition-colors ${
-                        isActive
-                          ? "bg-[#120e0b] text-[#f5f1eb]"
-                          : "border border-[#d8cfc3] bg-[#f5f1eb] text-[#7b7066] hover:border-[#7A3A30] hover:text-[#7A3A30]"
-                      }`}
-                      aria-label={`Show work item ${index + 1}`}
-                    >
-                      {String(index + 1).padStart(2, "0")}
-                    </button>
+                  <div
+                    key={project.title}
+                    className="relative grid grid-cols-[2.7rem_minmax(0,1fr)] gap-x-[1.125rem]"
+                  >
+                    {index < 4 && (
+                      <span aria-hidden="true" className="absolute left-[1.35rem] top-0 bottom-0 w-px bg-[#ded6cb]" />
+                    )}
+
+                    <div className="relative flex justify-center">
+                      {index < 4 ? (
+                        <button
+                          type="button"
+                          onClick={() => setActiveWorkIndex(index)}
+                          className={`relative z-10 mt-4 flex h-[2.125rem] w-[2.125rem] items-center justify-center rounded-full text-[0.6rem] font-semibold transition-colors ${
+                            isActive
+                              ? "bg-[#120e0b] text-[#f5f1eb]"
+                              : "border border-[#d8cfc3] bg-[#f5f1eb] text-[#7b7066] hover:border-[#7A3A30] hover:text-[#7A3A30]"
+                          }`}
+                          aria-label={`Show work item ${index + 1}`}
+                        >
+                          {String(index + 1).padStart(2, "0")}
+                        </button>
+                      ) : (
+                        <span aria-hidden="true" className="mt-4 h-[2.125rem] w-[2.125rem]" />
+                      )}
+                    </div>
 
                     <button
                       type="button"
                       onClick={() => setActiveWorkIndex(index)}
-                      onMouseEnter={() => setActiveWorkIndex(index)}
                       onFocus={() => setActiveWorkIndex(index)}
                       className={rowClass}
                     >
@@ -599,16 +631,18 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
 
             {activeProject && (
               <aside className="pt-0 lg:sticky lg:top-8">
-                <div className="border border-[#dfd6ca] bg-white p-8 shadow-[0_16px_42px_rgba(35,29,24,0.06)] sm:p-10">
-                  <div className="text-[4.8rem] font-bold leading-none text-[#231d18]/10 sm:text-[5.2rem]">
+                <div className="border border-[#dfd6ca] bg-white p-7 shadow-[0_16px_42px_rgba(35,29,24,0.06)] sm:p-9">
+                  <div className="text-[4.4rem] font-normal leading-none text-[#231d18]/10 sm:text-[5rem]">
                     {String(activeWorkIndex + 1).padStart(2, "0")}
                   </div>
                   <div className="mt-7">
-                    <h2 className="flex items-center gap-2 text-[1.3rem] font-bold leading-tight text-[#231d18]">
-                      <Home className="h-4 w-4" />
+                    <h2 className="flex items-center gap-2 text-[1.18rem] font-semibold leading-tight text-[#231d18] sm:text-[1.28rem]">
+                      <Square className="h-3.5 w-3.5" strokeWidth={1.7} />
                       {activeProject.title}
                     </h2>
-                    <p className="mt-4 max-w-[20rem] text-[0.84rem] leading-relaxed text-[#5f574d]">{activeProject.description}</p>
+                    <p className="mt-4 max-w-[19rem] text-[0.8rem] leading-[1.62] text-[#5f574d] sm:text-[0.84rem]">
+                      {activeProject.description}
+                    </p>
                     <div className="mt-8 flex items-center gap-2">
                       {visibleWorkItems.slice(0, 6).map((item, index) => (
                         <span
