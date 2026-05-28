@@ -6,6 +6,14 @@ import Seo from "@/components/Seo";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
 import { getRelevantExperiences } from "@/data/affiliations";
 import { issueHiveThumbnail } from "@/data/projectDetails";
+import digitalMarketingAnalyticsIcon from "@/assets/digital marketing icons/analytics.png";
+import digitalMarketingBriefcaseIcon from "@/assets/digital marketing icons/briefcase.png";
+import digitalMarketingContentCreationIcon from "@/assets/digital marketing icons/content-creation.png";
+import digitalMarketingGraphicDesignIcon from "@/assets/digital marketing icons/graphic-design.png";
+import digitalMarketingPodcastingIcon from "@/assets/digital marketing icons/podcasting.png";
+import digitalMarketingPpcIcon from "@/assets/digital marketing icons/ppc.png";
+import digitalMarketingSeoIcon from "@/assets/digital marketing icons/seo-search-symbol.png";
+import digitalMarketingSocialMediaIcon from "@/assets/digital marketing icons/social-media-marketing.png";
 
 type ServiceSlug = "digital-marketing" | "advocacy-community" | "tech-projects";
 
@@ -119,12 +127,64 @@ const imageAssets = {
   allInFoundation: assetPath('affiliation/all_in_foundation_aif_logo.jpeg'),
   awsCloudClub: assetPath('affiliation/aws_cloud_club_at_tu_logo.jpeg'),
   netMission: assetPath('affiliation/netmission.jpeg'),
-  ctrlBits: assetPath('briefcase.png'),
+  ctrlBits: digitalMarketingBriefcaseIcon,
   // use the briefcase PNG as the small icon for CtrlBits rows
   // (file added at src/assets/briefcase.png)
   rotaract: assetPath('affiliation/rac .jpg'),
   sustainabilitySolutions: assetPath('affiliation/sustainabilitysolutionsnepal_logo.jpeg'),
 };
+
+const digitalMarketingIcons = {
+  analytics: digitalMarketingAnalyticsIcon,
+  briefcase: digitalMarketingBriefcaseIcon,
+  contentCreation: digitalMarketingContentCreationIcon,
+  graphicDesign: digitalMarketingGraphicDesignIcon,
+  podcasting: digitalMarketingPodcastingIcon,
+  ppc: digitalMarketingPpcIcon,
+  seo: digitalMarketingSeoIcon,
+  socialMedia: digitalMarketingSocialMediaIcon,
+};
+
+const digitalMarketingSkillCards = [
+  {
+    title: "Search Engine Optimization (SEO)",
+    subtitle: "Organic Search",
+    icon: digitalMarketingIcons.seo,
+  },
+  {
+    title: "Pay-Per-Click (PPC) & SEM",
+    subtitle: "Paid Search",
+    icon: digitalMarketingIcons.ppc,
+  },
+  {
+    title: "Social Media Marketing",
+    subtitle: "Audience Growth",
+    icon: digitalMarketingIcons.socialMedia,
+  },
+  {
+    title: "Analytics",
+    subtitle: "Analytics and Monitoring",
+    icon: digitalMarketingIcons.analytics,
+  },
+  {
+    title: "Graphic Design",
+    subtitle: "Visual Identity",
+    icon: digitalMarketingIcons.graphicDesign,
+  },
+  {
+    title: "Content Creation & Strategy",
+    subtitle: "Content Studio",
+    icon: digitalMarketingIcons.contentCreation,
+  },
+] as const;
+
+const digitalMarketingSkillCardIcons = digitalMarketingSkillCards.reduce(
+  (accumulator, card) => {
+    accumulator[card.title] = card.icon;
+    return accumulator;
+  },
+  {} as Record<(typeof digitalMarketingSkillCards)[number]["title"], string>,
+);
 
 const serviceShowcases: Record<ServiceSlug, ShowcasePageConfig> = {
   "digital-marketing": {
@@ -175,8 +235,8 @@ const serviceShowcases: Record<ServiceSlug, ShowcasePageConfig> = {
         category: "Content Planning",
       },
     ],
-    statsLabel: "Statistics",
-    statsTitle: "Digital Marketing Impact in Numbers",
+    statsLabel: "Skills",
+    statsTitle: "Digital Marketing Skills",
     statsSummary: "",
     statsImage: imageAssets.ctrlBits,
     stats: [
@@ -486,9 +546,9 @@ const serviceExperienceSections: Record<ServiceSlug, ExperienceSection> = {
   "digital-marketing": {
     badge: "WORK EXPERIENCE",
     titleLineOne: "Work experience",
-    titleLineTwo: "relevant to this page",
+    titleLineTwo: "that powers digital growth",
     summary:
-      "A practical mix of digital-marketing work and closely related experience across CtrlBits, ALL In Foundation, AWS Cloud Club, and NetMission, covering SEO, content, paid media, social publishing, reporting, and campaign coordination.",
+      "CtrlBits, AIF, AWS Cloud Club, and NetMission - SEO, content, paid media, and reporting.",
     steps: [
       {
         company: "CtrlBits",
@@ -537,7 +597,7 @@ const serviceExperienceSections: Record<ServiceSlug, ExperienceSection> = {
   "advocacy-community": {
     badge: "WORK EXPERIENCE",
     titleLineOne: "Work experience",
-    titleLineTwo: "in advocacy and community",
+    titleLineTwo: "with community impact",
     summary:
       "A focused look at community programs, digital-rights advocacy, volunteer coordination, and partnership-driven work that complements the page.",
     steps: [
@@ -582,7 +642,7 @@ const serviceExperienceSections: Record<ServiceSlug, ExperienceSection> = {
   "tech-projects": {
     badge: "WORK EXPERIENCE",
     titleLineOne: "Work experience",
-    titleLineTwo: "behind technical builds",
+    titleLineTwo: "behind every build",
     summary:
       "A snapshot of prototyping, API integration, delivery coordination, and debugging work that supports the technical side of the portfolio.",
     steps: [
@@ -665,18 +725,25 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
   const showcase = serviceShowcases[resolvedSlug];
   const pageTitle = `${showcase.heroTitle} | Dhirendra Singh Dhami`;
   const pageDescription = showcase.heroSummary;
-  const partnerItems = [
-    ...showcase.stats.map((stat) => ({
-      initial: stat.value.replace(/[^A-Za-z0-9]/g, "").slice(0, 1) || stat.label.slice(0, 1),
-      title: stat.label,
-      subtitle: stat.value,
-    })),
-    ...(showcase.skillHighlights ?? []).map((skill) => ({
-      initial: skill.slice(0, 1),
-      title: skill,
-      subtitle: "Focus Area",
-    })),
-  ].slice(0, 6);
+  const partnerItems = (
+    resolvedSlug === "digital-marketing"
+      ? digitalMarketingSkillCards.map((card) => ({
+          ...card,
+          icon: digitalMarketingSkillCardIcons[card.title],
+        }))
+      : [
+          ...showcase.stats.map((stat) => ({
+            title: stat.label,
+            subtitle: stat.value,
+            icon: digitalMarketingIcons.analytics,
+          })),
+          ...(showcase.skillHighlights ?? []).map((skill) => ({
+            title: skill,
+            subtitle: "Focus Area",
+            icon: digitalMarketingIcons.analytics,
+          })),
+        ]
+  ).slice(0, 6);
 
   return (
     <div className="min-h-screen bg-[#f5f1eb] text-[#231d18]">
@@ -699,15 +766,15 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
           <BackButton />
           <div className="mb-14 grid gap-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(18rem,0.85fr)] lg:items-end">
             <div>
-              <p className="text-[0.7rem] uppercase tracking-[0.34em] text-[#90857a] sm:text-[0.72rem] sm:tracking-[0.38em]">{experienceSection.badge}</p>
-              <h1 className="mt-4 max-w-[16rem] text-[2.3rem] font-normal leading-[0.92] tracking-[-0.04em] text-[#231d18] sm:max-w-[18rem] sm:text-[3.35rem] lg:text-[3.85rem]">
-                <span className="block sm:whitespace-nowrap">{experienceSection.titleLineOne}</span>
-                <span className="block sm:whitespace-nowrap">
+              <p className="text-[0.65rem] uppercase tracking-[0.34em] text-[#90857a] sm:text-[0.68rem] sm:tracking-[0.38em]">{experienceSection.badge}</p>
+              <h1 className="mt-4 max-w-[16rem] text-[2rem] font-normal leading-[0.92] tracking-[-0.04em] text-[#231d18] sm:max-w-[18rem] sm:text-[2.95rem] lg:text-[3.35rem]">
+                <span className="block font-semibold sm:whitespace-nowrap">{experienceSection.titleLineOne}</span>
+                <span className="block sm:whitespace-nowrap text-[0.9em] text-[#6f655a]">
                   {experienceSection.titleLineTwo}
                 </span>
               </h1>
             </div>
-            <p className="max-w-[22rem] text-[0.92rem] leading-[1.65] text-[#6f655a] sm:text-[1rem] lg:justify-self-end">
+            <p className="max-w-[22rem] text-[0.84rem] leading-[1.6] text-[#6f655a] sm:text-[0.92rem] lg:justify-self-end">
               {experienceSection.summary}
             </p>
           </div>
@@ -882,7 +949,7 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
                 <span className="block italic">{showcase.statsTitle.split(" ").slice(3).join(" ")}</span>
               </h2>
               <p className="mx-auto mt-5 max-w-[34rem] text-[0.92rem] leading-relaxed text-[#6f655a] sm:text-[1rem]">
-                {showcase.heroSummary}
+                {resolvedSlug === "digital-marketing" ? "A visual summary of the core skills used in my digital marketing work." : showcase.heroSummary}
               </p>
             </div>
 
@@ -892,9 +959,7 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
                   key={`${item.title}-${index}`}
                   className="flex min-h-[9rem] flex-col items-center justify-center border-[#dfd6ca] px-5 py-7 text-center sm:border-l sm:[&:nth-child(2n+1)]:border-l-0 lg:[&:nth-child(2n+1)]:border-l lg:[&:nth-child(3n+1)]:border-l-0 lg:[&:nth-child(n+4)]:border-t"
                 >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#7A3A30]/10 text-[1.2rem] font-bold text-[#7A3A30] sm:h-14 sm:w-14 sm:text-[1.45rem]">
-                    {item.initial}
-                  </div>
+                  <img src={item.icon} alt="" aria-hidden="true" className="h-12 w-12 object-contain sm:h-14 sm:w-14" />
                   <p className="mt-4 text-[0.9rem] font-semibold text-[#231d18] sm:text-[0.98rem]">{item.title}</p>
                   <p className="mt-1 text-[0.78rem] text-[#7c7167] sm:text-[0.84rem]">{item.subtitle}</p>
                 </div>
