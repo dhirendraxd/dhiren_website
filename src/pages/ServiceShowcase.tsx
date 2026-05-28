@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Armchair, Calculator, Hammer, Home, Palette, Rocket } from "lucide-react";
-import { Link, Navigate, useParams } from "react-router-dom";
+import { ArrowLeft, BarChart3, LineChart, Megaphone, Search, Share2, Users } from "lucide-react";
+import { Link, Navigate, useParams, useNavigate } from "react-router-dom";
 import Seo from "@/components/Seo";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
+import { getRelevantExperiences } from "@/data/affiliations";
 import { issueHiveThumbnail } from "@/data/projectDetails";
 
 type ServiceSlug = "digital-marketing" | "advocacy-community" | "tech-projects";
@@ -447,41 +448,181 @@ const serviceShowcases: Record<ServiceSlug, ShowcasePageConfig> = {
   },
 };
 
+const BackButton = () => {
+  const navigate = useNavigate();
+  return (
+    <button
+      onClick={() => navigate(-1)}
+      className="absolute left-4 top-4 z-40 group inline-flex items-center gap-1 text-sm font-semibold uppercase tracking-[0.24em] text-[#3f3932] transition-colors hover:text-[#7A3A30] sm:left-8 sm:top-8"
+    >
+      <span aria-hidden className="flex leading-none transition-transform duration-300 group-hover:-translate-x-1">&larr;</span>
+      <span className="border-b border-transparent leading-none transition-colors group-hover:border-[#7A3A30]">Back</span>
+    </button>
+  );
+};
+
 const isServiceSlug = (value: string): value is ServiceSlug => value in serviceShowcases;
 const defaultServiceSlug: ServiceSlug = "digital-marketing";
 
-const processSteps = [
-  {
-    title: "Immobilienanalyse",
-    description: "Wir prüfen, ob das Objekt sich für ein Ferienhaus eignet und analysieren das Potenzial.",
-    icon: Home,
+type ExperienceStep = {
+  company?: string;
+  title: string;
+  description: string;
+  dateLabel?: string;
+  icon: typeof Search;
+};
+
+type ExperienceSection = {
+  badge: string;
+  titleLineOne: string;
+  titleLineTwo: string;
+  summary: string;
+  steps: ExperienceStep[];
+};
+
+const serviceExperienceSections: Record<ServiceSlug, ExperienceSection> = {
+  "digital-marketing": {
+    badge: "WORK EXPERIENCE",
+    titleLineOne: "Work experience",
+    titleLineTwo: "relevant to this page",
+    summary:
+      "A practical mix of digital-marketing work and closely related experience across CtrlBits, ALL In Foundation, AWS Cloud Club, and NetMission, covering SEO, content, paid media, social publishing, reporting, and campaign coordination.",
+    steps: [
+      {
+        company: "CtrlBits",
+        title: "Digital Marketer",
+        description: "I optimized pages, keywords, and structure so the right audience could find the brand and its services.",
+        dateLabel: "Apr 2025 - Present",
+        icon: Search,
+      },
+      {
+        company: "ALL In Foundation",
+        title: "Content Strategist",
+        description: "I planned copy and campaign content that supported clarity, relevance, and consistent output.",
+        dateLabel: "Feb 2026 - Present",
+        icon: Megaphone,
+      },
+      {
+        company: "AWS Cloud Club",
+        title: "Paid Media Specialist",
+        description: "I tuned campaign budgets, targeting, and creatives to improve reach, clicks, and conversions.",
+        dateLabel: "Mar 2025 - Present",
+        icon: BarChart3,
+      },
+      {
+        company: "NetMission",
+        title: "Social Media Manager",
+        description: "I managed posts, visual updates, and timing so campaign activity stayed active and aligned.",
+        dateLabel: "Dec 2025 - Present",
+        icon: Share2,
+      },
+      {
+        company: "Cross-Project Work",
+        title: "Reporting Analyst",
+        description: "I read performance data from work across these projects and turned it into practical next steps for the next round.",
+        dateLabel: "2025 - 2026",
+        icon: LineChart,
+      },
+      {
+        company: "Client and Team Work",
+        title: "Campaign Coordinator",
+        description: "I worked with clients and teams across these workplaces to translate goals into campaigns, assets, and measurable progress.",
+        dateLabel: "2025 - 2026",
+        icon: Users,
+      },
+    ],
   },
-  {
-    title: "Konzept & Zahlenwerk",
-    description: "Eigentümer erhalten ein klares Konzept mit allen Zahlen und Potenzialen.",
-    icon: Calculator,
+  "advocacy-community": {
+    badge: "WORK EXPERIENCE",
+    titleLineOne: "Work experience",
+    titleLineTwo: "in advocacy and community",
+    summary:
+      "A focused look at community programs, digital-rights advocacy, volunteer coordination, and partnership-driven work that complements the page.",
+    steps: [
+      {
+        title: "Community Program Design",
+        description: "Shaping initiatives that bring people together around clear goals and shared outcomes.",
+        dateLabel: "2025",
+        icon: Users,
+      },
+      {
+        title: "Digital Rights Advocacy",
+        description: "Helping translate rights-based topics into accessible communication and campaign formats.",
+        dateLabel: "2025",
+        icon: Megaphone,
+      },
+      {
+        title: "Volunteer Coordination",
+        description: "Organizing people, schedules, and responsibilities so community activity stays dependable.",
+        dateLabel: "2024 - 2025",
+        icon: Share2,
+      },
+      {
+        title: "Stakeholder Alignment",
+        description: "Keeping partners, contributors, and teams moving in the same direction.",
+        dateLabel: "2025",
+        icon: BarChart3,
+      },
+      {
+        title: "Impact Tracking",
+        description: "Monitoring participation and outcomes to understand what is working and what needs tuning.",
+        dateLabel: "2025 - 2026",
+        icon: LineChart,
+      },
+      {
+        title: "Sustained Delivery",
+        description: "Carrying programs from planning into consistent, repeatable execution.",
+        dateLabel: "2025 - Present",
+        icon: Search,
+      },
+    ],
   },
-  {
-    title: "Moodboard & Design",
-    description: "Wir erstellen Moodboards und entwickeln ein individuelles Einrichtungskonzept.",
-    icon: Palette,
+  "tech-projects": {
+    badge: "WORK EXPERIENCE",
+    titleLineOne: "Work experience",
+    titleLineTwo: "behind technical builds",
+    summary:
+      "A snapshot of prototyping, API integration, delivery coordination, and debugging work that supports the technical side of the portfolio.",
+    steps: [
+      {
+        title: "Rapid Prototyping",
+        description: "Turning ideas into usable interfaces and working flows quickly enough to validate them early.",
+        dateLabel: "2024 - 2025",
+        icon: Search,
+      },
+      {
+        title: "Feature Implementation",
+        description: "Building pages and interactions that keep the product focused and usable.",
+        dateLabel: "2025",
+        icon: Share2,
+      },
+      {
+        title: "API Integration",
+        description: "Connecting external data and services into the product without breaking the flow.",
+        dateLabel: "2025",
+        icon: BarChart3,
+      },
+      {
+        title: "Debugging & Refinement",
+        description: "Finding issues, tightening behavior, and improving performance under pressure.",
+        dateLabel: "2025 - 2026",
+        icon: LineChart,
+      },
+      {
+        title: "Team Delivery",
+        description: "Keeping work coordinated across teammates, deadlines, and changing requirements.",
+        dateLabel: "2024 - 2026",
+        icon: Users,
+      },
+      {
+        title: "Launch Readiness",
+        description: "Polishing the final build so it can be presented, tested, and shared with confidence.",
+        dateLabel: "2025",
+        icon: Megaphone,
+      },
+    ],
   },
-  {
-    title: "Interieur & Möbel",
-    description: "Wir bestellen Möbel und Interieur bei unseren Designpartnern.",
-    icon: Armchair,
-  },
-  {
-    title: "Renovierungsbegleitung",
-    description: "Wir begleiten die Renovierung und stellen sicher, dass alles perfekt umgesetzt wird.",
-    icon: Hammer,
-  },
-  {
-    title: "Markteinführung",
-    description: "Wir bringen das Ferienhaus auf den Markt – bereit für tolle Gäste.",
-    icon: Rocket,
-  },
-];
+};
 
 const progressBarWidths = [
   "w-40",
@@ -492,14 +633,24 @@ const progressBarWidths = [
   "w-8",
 ];
 
+const normalizeCompanyName = (value: string) => value.toLowerCase().replace(/[^a-z0-9]/g, "");
+
 const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
   const { slug } = useParams<{ slug: string }>();
   const [activeWorkIndex, setActiveWorkIndex] = useState(2);
 
   const routeSlug = forcedSlug ?? slug;
   const resolvedSlug = !routeSlug ? defaultServiceSlug : isServiceSlug(routeSlug) ? routeSlug : null;
-  const visibleWorkItems = processSteps;
+  const experienceSection = serviceExperienceSections[resolvedSlug];
+  const visibleWorkItems = experienceSection.steps;
   const activeProject = visibleWorkItems[activeWorkIndex] ?? visibleWorkItems[0];
+  const relevantExperienceLookup = new Map(
+    getRelevantExperiences().map((experience) => [normalizeCompanyName(experience.company), experience]),
+  );
+  const activeExperience = relevantExperienceLookup.get(normalizeCompanyName(activeProject.company ?? activeProject.title));
+  const activeProjectDateLabel = activeExperience
+    ? `${activeExperience.dateRange}${activeExperience.duration ? ` · ${activeExperience.duration}` : ""}`
+    : activeProject.dateLabel ?? "2025 - 2026";
 
   useEffect(() => {
     setActiveWorkIndex(2);
@@ -512,7 +663,6 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
   const showcase = serviceShowcases[resolvedSlug];
   const pageTitle = `${showcase.heroTitle} | Dhirendra Singh Dhami`;
   const pageDescription = showcase.heroSummary;
-  const activeStep = processSteps[activeWorkIndex] ?? processSteps[0];
   const partnerItems = [
     ...showcase.stats.map((stat) => ({
       initial: stat.value.replace(/[^A-Za-z0-9]/g, "").slice(0, 1) || stat.label.slice(0, 1),
@@ -543,23 +693,24 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.45, ease: "easeOut" }}
       >
-        <section className="mx-auto min-h-[125svh] max-w-[74rem] px-5 pb-44 pt-20 sm:px-8 sm:pt-24 md:px-12 md:pt-28 lg:px-10 lg:pt-32">
+        <section className="relative mx-auto min-h-[125svh] max-w-[74rem] px-5 pb-36 pt-18 sm:px-8 sm:pt-24 md:px-12 md:pt-28 lg:px-10 lg:pt-32">
+          <BackButton />
           <div className="mb-14 grid gap-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(18rem,0.85fr)] lg:items-end">
             <div>
-              <p className="text-[0.64rem] uppercase tracking-[0.38em] text-[#90857a]">UNSER PROZESS</p>
-              <h1 className="mt-4 max-w-[15rem] text-[2.3rem] font-normal leading-[0.9] tracking-[-0.04em] text-[#231d18] sm:max-w-[18rem] sm:text-[3.1rem] lg:text-[3.35rem]">
-                <span className="block whitespace-nowrap">In sechs Schritten</span>
-                <span className="block whitespace-nowrap">
-                  zum <span className="italic">Erfolg</span>
+              <p className="text-[0.7rem] uppercase tracking-[0.34em] text-[#90857a] sm:text-[0.72rem] sm:tracking-[0.38em]">{experienceSection.badge}</p>
+              <h1 className="mt-4 max-w-[16rem] text-[2.3rem] font-normal leading-[0.92] tracking-[-0.04em] text-[#231d18] sm:max-w-[18rem] sm:text-[3.35rem] lg:text-[3.85rem]">
+                <span className="block sm:whitespace-nowrap">{experienceSection.titleLineOne}</span>
+                <span className="block sm:whitespace-nowrap">
+                  {experienceSection.titleLineTwo}
                 </span>
               </h1>
             </div>
-            <p className="max-w-[22rem] text-[0.92rem] leading-[1.62] text-[#6f655a] lg:justify-self-end">
-              Von der ersten Analyse bis zur Markteinführung – wir begleiten Sie durch jeden Schritt der Transformation.
+            <p className="max-w-[22rem] text-[0.92rem] leading-[1.65] text-[#6f655a] sm:text-[1rem] lg:justify-self-end">
+              {experienceSection.summary}
             </p>
           </div>
 
-          <div className="grid gap-10 lg:grid-cols-[minmax(0,1.08fr)_minmax(24rem,0.92fr)] lg:items-start lg:justify-center">
+          <div className="grid gap-8 lg:grid-cols-[minmax(0,1.08fr)_minmax(24rem,0.92fr)] lg:items-start lg:justify-center">
             <div className="space-y-0">
               {visibleWorkItems.map((project, index) => {
                 const isActive = index === activeWorkIndex;
@@ -571,30 +722,52 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
                 const rowContent = (
                   <span className="flex items-start gap-3.5">
                     <span className="mt-0.5 text-[#231d18]">
-                      {(() => {
-                        const WorkIcon = project.icon;
-                        return (
-                          <WorkIcon
-                            className={`h-3 w-3 transition-colors ${
-                              isActive ? "text-[#ffffff]" : "text-[#8d8378]"
-                            }`}
-                            strokeWidth={1.8}
-                          />
-                        );
-                      })()}
+                      {project.company === "CtrlBits" ? (
+                        <img
+                          src={imageAssets.ctrlBits}
+                          alt="CtrlBits"
+                          className={`h-5 w-5 object-contain ${isActive ? "opacity-100" : "opacity-90"}`}
+                        />
+                      ) : (
+                        (() => {
+                          const WorkIcon = project.icon;
+                          return (
+                            <WorkIcon
+                              className={`h-3 w-3 transition-colors sm:h-[0.85rem] sm:w-[0.85rem] ${
+                                isActive ? "text-[#ffffff]" : "text-[#8d8378]"
+                              }`}
+                              strokeWidth={1.8}
+                            />
+                          );
+                        })()
+                      )}
                     </span>
                     <span className="min-w-0">
                       <span
-                        className={`block text-[0.92rem] font-semibold leading-tight sm:text-[0.98rem] ${
+                        className={`block font-semibold leading-tight ${
+                          index === 0
+                            ? "text-[1.02rem] sm:text-[1.14rem]"
+                            : index === 1
+                              ? "text-[0.99rem] sm:text-[1.09rem]"
+                              : index === 2
+                                ? "text-[0.96rem] sm:text-[1.06rem]"
+                                : "text-[0.94rem] sm:text-[1.02rem]"
+                        } ${
                           isActive ? "text-[#ffffff]" : "text-[#231d18]"
                         }`}
                       >
-                        {project.title}
+                        {project.company ?? project.title}
                       </span>
                       <span
-                        className={`mt-1 block max-w-[29rem] text-[0.72rem] leading-[1.55] sm:text-[0.78rem] ${
+                        className={`mt-1 block max-w-[29rem] text-[0.76rem] leading-[1.55] sm:text-[0.88rem] ${
                           isActive ? "text-[#ffffff]/85" : "text-[#92877b]"
                         }`}
+                        style={{
+                          display: "-webkit-box",
+                          WebkitBoxOrient: "vertical",
+                          WebkitLineClamp: 2,
+                          overflow: "hidden",
+                        }}
                       >
                         {project.description}
                       </span>
@@ -616,7 +789,7 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
                         <button
                           type="button"
                           onClick={() => setActiveWorkIndex(index)}
-                          className={`relative z-10 mt-4 flex h-[2.35rem] w-[2.35rem] items-center justify-center rounded-full text-[0.68rem] font-semibold transition-colors ${
+                          className={`relative z-10 mt-4 flex h-[2.2rem] w-[2.2rem] items-center justify-center rounded-full text-[0.68rem] font-semibold transition-colors sm:h-[2.35rem] sm:w-[2.35rem] sm:text-[0.74rem] ${
                             isActive
                               ? "bg-[#120e0b] text-[#f5f1eb]"
                               : "border border-[#d8cfc3] bg-[#f5f1eb] text-[#7b7066]"
@@ -645,19 +818,37 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
 
             {activeProject && (
               <aside className="pt-0 lg:sticky lg:top-8">
-                <div className="flex h-[18rem] flex-col overflow-hidden border border-[#dfd6ca] bg-white p-8 shadow-[0_16px_42px_rgba(35,29,24,0.06)] sm:h-[19rem] sm:p-10 lg:h-[20rem] lg:p-11">
-                  <div className="text-[4.4rem] font-normal leading-none text-[#231d18]/10 sm:text-[5rem]">
+                <div className="relative flex min-h-[17.5rem] flex-col overflow-hidden border border-[#dfd6ca] bg-white p-6 shadow-[0_16px_42px_rgba(35,29,24,0.06)] sm:h-[19rem] sm:p-10 lg:h-[20rem] lg:p-11">
+                  <div className="text-[3.4rem] font-normal leading-none text-[#231d18]/10 sm:text-[5rem]">
                     {String(activeWorkIndex + 1).padStart(2, "0")}
                   </div>
-                  <div className="mt-8 flex flex-1 flex-col">
-                    <h2 className="flex items-center gap-2.5 text-[1.18rem] font-semibold leading-tight text-[#231d18] sm:text-[1.28rem]">
-                      {(() => {
-                        const ActiveIcon = activeProject.icon;
-                        return <ActiveIcon className="h-3.5 w-3.5" strokeWidth={1.7} />;
-                      })()}
-                      {activeProject.title}
-                    </h2>
-                    <p className="mt-5 max-w-[21rem] text-[0.8rem] leading-[1.7] text-[#5f574d] sm:text-[0.84rem]">
+                  <div className="mt-6 flex flex-1 flex-col sm:mt-8">
+                    <div className="flex items-start justify-between gap-4 pr-20 sm:pr-28">
+                      <h2 className="flex items-center gap-2.5 text-[1.05rem] font-semibold leading-tight text-[#231d18] sm:text-[1.45rem]">
+                        {(() => {
+                          const ActiveIcon = activeProject.icon;
+                          return <ActiveIcon className="h-3.5 w-3.5" strokeWidth={1.7} />;
+                        })()}
+                        {activeProject.title}
+                      </h2>
+                      <span className="absolute right-3 top-3 max-w-[9.5rem] text-right text-[0.66rem] font-semibold uppercase tracking-[0.18em] leading-[1.15] text-[#7A3A30] sm:right-6 sm:top-6 sm:max-w-[11rem] sm:text-[0.74rem] sm:tracking-[0.2em] lg:right-8 lg:top-8">
+                        <span className="block whitespace-nowrap">
+                          {activeExperience?.dateRange ?? activeProjectDateLabel.split(" · ")[0]}
+                        </span>
+                        <span className="mt-1 block whitespace-nowrap normal-case tracking-[0.14em] text-[#7A3A30]/80">
+                          {activeExperience?.duration ?? activeProjectDateLabel.split(" · ")[1] ?? ""}
+                        </span>
+                      </span>
+                    </div>
+                    <p
+                      className="mt-4 max-w-[21rem] text-[0.8rem] leading-[1.58] text-[#5f574d] sm:text-[0.94rem]"
+                      style={{
+                        display: "-webkit-box",
+                        WebkitBoxOrient: "vertical",
+                        WebkitLineClamp: 2,
+                        overflow: "hidden",
+                      }}
+                    >
                       {activeProject.description}
                     </p>
                     <div className="mt-auto flex items-center gap-2 pt-8">
@@ -676,41 +867,45 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
           </div>
         </section>
 
-        <section className="bg-[#f5f1eb] px-5 py-20 text-[#231d18] sm:px-8 md:px-12">
+        <section className="bg-[#f5f1eb] px-5 py-16 text-[#231d18] sm:px-8 sm:py-20 md:px-12">
           <div className="mx-auto max-w-[74rem]">
             <div className="mx-auto max-w-[38rem] text-center">
-              <p className="text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-[#7A3A30]">{showcase.statsLabel}</p>
-              <h2 className="mt-4 font-rajdhani text-[2.35rem] font-normal leading-tight sm:text-[3rem]">
+              <p className="text-[0.72rem] font-semibold uppercase tracking-[0.28em] text-[#7A3A30]">{showcase.statsLabel}</p>
+              <h2 className="mt-4 font-rajdhani text-[2.25rem] font-normal leading-tight sm:text-[3rem] lg:text-[3.4rem]">
                 {showcase.statsTitle.split(" ").slice(0, 3).join(" ")}
                 <span className="block italic">{showcase.statsTitle.split(" ").slice(3).join(" ")}</span>
               </h2>
-              <p className="mx-auto mt-5 max-w-[34rem] text-[0.92rem] leading-relaxed text-[#6f655a]">
+              <p className="mx-auto mt-5 max-w-[34rem] text-[0.92rem] leading-relaxed text-[#6f655a] sm:text-[1rem]">
                 {showcase.heroSummary}
               </p>
             </div>
 
-            <div className="mt-14 grid border-y border-[#dfd6ca] sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-12 grid border-y border-[#dfd6ca] sm:grid-cols-2 lg:mt-14 lg:grid-cols-3">
               {partnerItems.map((item, index) => (
                 <div
                   key={`${item.title}-${index}`}
-                  className="flex min-h-[10rem] flex-col items-center justify-center border-[#dfd6ca] px-6 py-8 text-center sm:border-l sm:[&:nth-child(2n+1)]:border-l-0 lg:[&:nth-child(2n+1)]:border-l lg:[&:nth-child(3n+1)]:border-l-0 lg:[&:nth-child(n+4)]:border-t"
+                  className="flex min-h-[9rem] flex-col items-center justify-center border-[#dfd6ca] px-5 py-7 text-center sm:border-l sm:[&:nth-child(2n+1)]:border-l-0 lg:[&:nth-child(2n+1)]:border-l lg:[&:nth-child(3n+1)]:border-l-0 lg:[&:nth-child(n+4)]:border-t"
                 >
-                  <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[#7A3A30]/10 text-[1.3rem] font-bold text-[#7A3A30]">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#7A3A30]/10 text-[1.2rem] font-bold text-[#7A3A30] sm:h-14 sm:w-14 sm:text-[1.45rem]">
                     {item.initial}
                   </div>
-                  <p className="mt-4 text-sm font-semibold text-[#231d18]">{item.title}</p>
-                  <p className="mt-1 text-xs text-[#7c7167]">{item.subtitle}</p>
+                  <p className="mt-4 text-[0.9rem] font-semibold text-[#231d18] sm:text-[0.98rem]">{item.title}</p>
+                  <p className="mt-1 text-[0.78rem] text-[#7c7167] sm:text-[0.84rem]">{item.subtitle}</p>
                 </div>
               ))}
             </div>
 
-            <div className="mt-12 flex justify-center">
-              <Link
-                to="/#contact"
-                className="inline-flex border-b border-[#7A3A30] pb-1 text-sm font-bold text-[#231d18] transition-colors hover:text-[#7A3A30]"
-              >
-                Contact me →
-              </Link>
+            <div className="mt-12 text-center">
+              <p className="text-[0.95rem] text-[#6f655a]">Have a project or partnership in mind?</p>
+              <div className="mt-3">
+                <Link
+                  to="/#contact"
+                  className="inline-flex items-center gap-2 text-[1.05rem] font-semibold text-[#231d18] hover:text-[#7A3A30] border-b border-transparent hover:border-[#7A3A30]"
+                >
+                  Contact me
+                  <span aria-hidden className="ml-1">→</span>
+                </Link>
+              </div>
             </div>
           </div>
         </section>
