@@ -119,7 +119,9 @@ const imageAssets = {
   allInFoundation: assetPath('affiliation/all_in_foundation_aif_logo.jpeg'),
   awsCloudClub: assetPath('affiliation/aws_cloud_club_at_tu_logo.jpeg'),
   netMission: assetPath('affiliation/netmission.jpeg'),
-  ctrlBits: assetPath('affiliation/new logo fark blue grad in white.png'),
+  ctrlBits: assetPath('briefcase.png'),
+  // use the briefcase PNG as the small icon for CtrlBits rows
+  // (file added at src/assets/briefcase.png)
   rotaract: assetPath('affiliation/rac .jpg'),
   sustainabilitySolutions: assetPath('affiliation/sustainabilitysolutionsnepal_logo.jpeg'),
 };
@@ -825,10 +827,14 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
                   <div className="mt-6 flex flex-1 flex-col sm:mt-8">
                     <div className="flex items-start justify-between gap-4 pr-20 sm:pr-28">
                       <h2 className="flex items-center gap-2.5 text-[1.05rem] font-semibold leading-tight text-[#231d18] sm:text-[1.45rem]">
-                        {(() => {
-                          const ActiveIcon = activeProject.icon;
-                          return <ActiveIcon className="h-3.5 w-3.5" strokeWidth={1.7} />;
-                        })()}
+                        {activeProject.company === "CtrlBits" ? (
+                          <img src={imageAssets.ctrlBits} alt="CtrlBits" className="h-4 w-4 object-contain" />
+                        ) : (
+                          (() => {
+                            const ActiveIcon = activeProject.icon;
+                            return <ActiveIcon className="h-3.5 w-3.5" strokeWidth={1.7} />;
+                          })()
+                        )}
                         {activeProject.title}
                       </h2>
                       <span className="absolute right-3 top-3 max-w-[9.5rem] text-right text-[0.66rem] font-semibold uppercase tracking-[0.18em] leading-[1.15] text-[#7A3A30] sm:right-6 sm:top-6 sm:max-w-[11rem] sm:text-[0.74rem] sm:tracking-[0.2em] lg:right-8 lg:top-8">
