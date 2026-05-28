@@ -699,7 +699,7 @@ const normalizeCompanyName = (value: string) => value.toLowerCase().replace(/[^a
 
 const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
   const { slug } = useParams<{ slug: string }>();
-  const [activeWorkIndex, setActiveWorkIndex] = useState(2);
+  const [activeWorkIndex, setActiveWorkIndex] = useState(0);
 
   const routeSlug = forcedSlug ?? slug;
   const resolvedSlug = !routeSlug ? defaultServiceSlug : isServiceSlug(routeSlug) ? routeSlug : null;
@@ -715,7 +715,7 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
     : activeProject.dateLabel ?? "2025 - 2026";
 
   useEffect(() => {
-    setActiveWorkIndex(2);
+    setActiveWorkIndex(0);
   }, [resolvedSlug]);
 
   if (!resolvedSlug) {
@@ -762,7 +762,7 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.45, ease: "easeOut" }}
       >
-        <section className="relative mx-auto min-h-[125svh] max-w-[74rem] px-5 pb-36 pt-18 sm:px-8 sm:pt-24 md:px-12 md:pt-28 lg:px-10 lg:pt-32">
+        <section className="relative mx-auto min-h-[108svh] max-w-[74rem] px-5 pb-10 pt-18 sm:px-8 sm:pb-12 sm:pt-24 md:px-12 md:pt-28 lg:px-10 lg:pt-32">
           <BackButton />
           <div className="mb-14 grid gap-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(18rem,0.85fr)] lg:items-end">
             <div>
@@ -847,36 +847,32 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
                 return (
                   <div
                     key={project.title}
-                    className="relative grid grid-cols-[2.7rem_minmax(0,1fr)] gap-x-[1.35rem]"
+                    className="relative grid min-h-[6.5rem] grid-cols-[2.7rem_minmax(0,1fr)] gap-x-[1.35rem]"
                   >
-                    {index < 4 && (
+                    {index < visibleWorkItems.length - 1 && (
                       <span aria-hidden="true" className="absolute left-[1.35rem] top-0 bottom-0 w-px bg-[#ded6cb]" />
                     )}
 
                     <div className="relative flex justify-center">
-                      {index < 4 ? (
-                        <button
-                          type="button"
-                          onClick={() => setActiveWorkIndex(index)}
-                          className={`relative z-10 mt-4 flex h-[2.2rem] w-[2.2rem] items-center justify-center rounded-full text-[0.68rem] font-semibold transition-colors sm:h-[2.35rem] sm:w-[2.35rem] sm:text-[0.74rem] ${
-                            isActive
-                              ? "bg-[#120e0b] text-[#f5f1eb]"
-                              : "border border-[#d8cfc3] bg-[#f5f1eb] text-[#7b7066]"
-                          }`}
-                          aria-label={`Show work item ${index + 1}`}
-                        >
-                          {String(index + 1).padStart(2, "0")}
-                        </button>
-                      ) : (
-                        <span aria-hidden="true" className="mt-4 h-[2.125rem] w-[2.125rem]" />
-                      )}
+                      <button
+                        type="button"
+                        onClick={() => setActiveWorkIndex(index)}
+                        className={`relative z-10 mt-4 flex h-[2.2rem] w-[2.2rem] items-center justify-center rounded-full text-[0.68rem] font-semibold transition-colors sm:h-[2.35rem] sm:w-[2.35rem] sm:text-[0.74rem] ${
+                          isActive
+                            ? "bg-[#120e0b] text-[#f5f1eb]"
+                            : "border border-[#d8cfc3] bg-[#f5f1eb] text-[#7b7066]"
+                        }`}
+                        aria-label={`Show work item ${index + 1}`}
+                      >
+                        {String(index + 1).padStart(2, "0")}
+                      </button>
                     </div>
 
                     <button
                       type="button"
                       onClick={() => setActiveWorkIndex(index)}
                       onFocus={() => setActiveWorkIndex(index)}
-                      className={rowClass}
+                      className={`${rowClass} h-full`}
                     >
                       {rowContent}
                     </button>
@@ -886,7 +882,7 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
             </div>
 
             {activeProject && (
-              <aside className="pt-0 lg:sticky lg:top-8">
+              <aside className="pt-0">
                 <div className="relative flex min-h-[17.5rem] flex-col overflow-hidden border border-[#dfd6ca] bg-white p-6 shadow-[0_16px_42px_rgba(35,29,24,0.06)] sm:h-[19rem] sm:p-10 lg:h-[20rem] lg:p-11">
                   <div className="text-[3.4rem] font-normal leading-none text-[#231d18]/10 sm:text-[5rem]">
                     {String(activeWorkIndex + 1).padStart(2, "0")}
@@ -924,7 +920,7 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
                     >
                       {activeProject.description}
                     </p>
-                    <div className="mt-auto flex items-center gap-2 pt-8">
+                    <div className="mt-auto flex items-center gap-2 pt-4 sm:pt-5">
                       {visibleWorkItems.slice(0, 6).map((item, index) => (
                         <span
                           key={`${item.title}-progress`}
@@ -940,13 +936,14 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
           </div>
         </section>
 
-        <section className="bg-[#f5f1eb] px-5 py-16 text-[#231d18] sm:px-8 sm:py-20 md:px-12">
+        <section className="bg-[#f5f1eb] px-5 pb-8 pt-0 text-[#231d18] sm:px-8 sm:pb-10 sm:pt-0 md:px-12">
           <div className="mx-auto max-w-[74rem]">
             <div className="mx-auto max-w-[38rem] text-center">
               <p className="text-[0.72rem] font-semibold uppercase tracking-[0.28em] text-[#7A3A30]">{showcase.statsLabel}</p>
               <h2 className="mt-4 font-rajdhani text-[2.25rem] font-normal leading-tight sm:text-[3rem] lg:text-[3.4rem]">
-                {showcase.statsTitle.split(" ").slice(0, 3).join(" ")}
-                <span className="block italic">{showcase.statsTitle.split(" ").slice(3).join(" ")}</span>
+                {showcase.statsTitle.split(" ").slice(0, 1).join(" ")}{" "}
+                <span className="font-semibold text-[#7A3A30]">{showcase.statsTitle.split(" ")[1]}</span>{" "}
+                <span>{showcase.statsTitle.split(" ").slice(2).join(" ")}</span>
               </h2>
               <p className="mx-auto mt-5 max-w-[34rem] text-[0.92rem] leading-relaxed text-[#6f655a] sm:text-[1rem]">
                 {resolvedSlug === "digital-marketing" ? "A visual summary of the core skills used in my digital marketing work." : showcase.heroSummary}
