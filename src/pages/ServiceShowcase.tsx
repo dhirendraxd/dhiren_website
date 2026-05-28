@@ -484,7 +484,7 @@ const processSteps = [
 ];
 
 const progressBarWidths = [
-  "w-24",
+  "w-40",
   "w-20",
   "w-16",
   "w-12",
@@ -616,7 +616,7 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
                         <button
                           type="button"
                           onClick={() => setActiveWorkIndex(index)}
-                          className={`relative z-10 mt-4 flex h-[2.125rem] w-[2.125rem] items-center justify-center rounded-full text-[0.6rem] font-semibold transition-colors ${
+                          className={`relative z-10 mt-4 flex h-[2.35rem] w-[2.35rem] items-center justify-center rounded-full text-[0.68rem] font-semibold transition-colors ${
                             isActive
                               ? "bg-[#120e0b] text-[#f5f1eb]"
                               : "border border-[#d8cfc3] bg-[#f5f1eb] text-[#7b7066]"
