@@ -483,6 +483,15 @@ const processSteps = [
   },
 ];
 
+const progressBarWidths = [
+  "w-24",
+  "w-20",
+  "w-16",
+  "w-12",
+  "w-10",
+  "w-8",
+];
+
 const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
   const { slug } = useParams<{ slug: string }>();
   const [activeWorkIndex, setActiveWorkIndex] = useState(2);
@@ -550,24 +559,24 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
             </p>
           </div>
 
-          <div className="grid gap-8 lg:grid-cols-[minmax(0,1.02fr)_minmax(20rem,0.88fr)] lg:items-start lg:justify-center">
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,1.08fr)_minmax(24rem,0.92fr)] lg:items-start lg:justify-center">
             <div className="space-y-0">
               {visibleWorkItems.map((project, index) => {
                 const isActive = index === activeWorkIndex;
-                const rowClass = `group block min-h-[4.45rem] text-left transition-colors ${
+                const rowClass = `group block min-h-[4.65rem] text-left transition-colors ${
                   isActive
-                    ? "bg-white px-5 py-4 shadow-[0_14px_32px_rgba(35,29,24,0.05)]"
-                    : "border-b border-[#ddd3c7] px-5 py-4 hover:bg-[#faf3f1]"
+                    ? "bg-[#7A3A30] px-6 py-[1.125rem] shadow-[0_14px_32px_rgba(122,58,48,0.14)]"
+                    : "border-b border-[#ddd3c7] px-6 py-[1.125rem]"
                 }`;
                 const rowContent = (
-                  <span className="flex items-start gap-2.5">
+                  <span className="flex items-start gap-3.5">
                     <span className="mt-0.5 text-[#231d18]">
                       {(() => {
                         const WorkIcon = project.icon;
                         return (
                           <WorkIcon
                             className={`h-3 w-3 transition-colors ${
-                              isActive ? "text-[#231d18]" : "text-[#8d8378] group-hover:text-[#7A3A30]"
+                              isActive ? "text-[#ffffff]" : "text-[#8d8378]"
                             }`}
                             strokeWidth={1.8}
                           />
@@ -577,14 +586,14 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
                     <span className="min-w-0">
                       <span
                         className={`block text-[0.92rem] font-semibold leading-tight sm:text-[0.98rem] ${
-                          isActive ? "text-[#231d18]" : "text-[#231d18] transition-colors group-hover:text-[#7A3A30]"
+                          isActive ? "text-[#ffffff]" : "text-[#231d18]"
                         }`}
                       >
                         {project.title}
                       </span>
                       <span
                         className={`mt-1 block max-w-[29rem] text-[0.72rem] leading-[1.55] sm:text-[0.78rem] ${
-                          isActive ? "text-[#92877b]" : "text-[#92877b] transition-colors group-hover:text-[#8f5c50]"
+                          isActive ? "text-[#ffffff]/85" : "text-[#92877b]"
                         }`}
                       >
                         {project.description}
@@ -596,7 +605,7 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
                 return (
                   <div
                     key={project.title}
-                    className="relative grid grid-cols-[2.7rem_minmax(0,1fr)] gap-x-[1.125rem]"
+                    className="relative grid grid-cols-[2.7rem_minmax(0,1fr)] gap-x-[1.35rem]"
                   >
                     {index < 4 && (
                       <span aria-hidden="true" className="absolute left-[1.35rem] top-0 bottom-0 w-px bg-[#ded6cb]" />
@@ -610,7 +619,7 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
                           className={`relative z-10 mt-4 flex h-[2.125rem] w-[2.125rem] items-center justify-center rounded-full text-[0.6rem] font-semibold transition-colors ${
                             isActive
                               ? "bg-[#120e0b] text-[#f5f1eb]"
-                              : "border border-[#d8cfc3] bg-[#f5f1eb] text-[#7b7066] hover:border-[#7A3A30] hover:text-[#7A3A30]"
+                              : "border border-[#d8cfc3] bg-[#f5f1eb] text-[#7b7066]"
                           }`}
                           aria-label={`Show work item ${index + 1}`}
                         >
@@ -636,26 +645,26 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
 
             {activeProject && (
               <aside className="pt-0 lg:sticky lg:top-8">
-                <div className="border border-[#dfd6ca] bg-white p-7 shadow-[0_16px_42px_rgba(35,29,24,0.06)] sm:p-9">
+                <div className="flex h-[18rem] flex-col overflow-hidden border border-[#dfd6ca] bg-white p-8 shadow-[0_16px_42px_rgba(35,29,24,0.06)] sm:h-[19rem] sm:p-10 lg:h-[20rem] lg:p-11">
                   <div className="text-[4.4rem] font-normal leading-none text-[#231d18]/10 sm:text-[5rem]">
                     {String(activeWorkIndex + 1).padStart(2, "0")}
                   </div>
-                  <div className="mt-7">
-                    <h2 className="flex items-center gap-2 text-[1.18rem] font-semibold leading-tight text-[#231d18] sm:text-[1.28rem]">
+                  <div className="mt-8 flex flex-1 flex-col">
+                    <h2 className="flex items-center gap-2.5 text-[1.18rem] font-semibold leading-tight text-[#231d18] sm:text-[1.28rem]">
                       {(() => {
                         const ActiveIcon = activeProject.icon;
                         return <ActiveIcon className="h-3.5 w-3.5" strokeWidth={1.7} />;
                       })()}
                       {activeProject.title}
                     </h2>
-                    <p className="mt-4 max-w-[19rem] text-[0.8rem] leading-[1.62] text-[#5f574d] sm:text-[0.84rem]">
+                    <p className="mt-5 max-w-[21rem] text-[0.8rem] leading-[1.7] text-[#5f574d] sm:text-[0.84rem]">
                       {activeProject.description}
                     </p>
-                    <div className="mt-8 flex items-center gap-2">
+                    <div className="mt-auto flex items-center gap-2 pt-8">
                       {visibleWorkItems.slice(0, 6).map((item, index) => (
                         <span
                           key={`${item.title}-progress`}
-                          className={`h-0.5 flex-1 ${index === activeWorkIndex ? "bg-[#231d18]" : "bg-[#d8cfc3]"}`}
+                          className={`h-0.5 ${progressBarWidths[index] ?? "w-8"} ${index === activeWorkIndex ? "bg-[#231d18]" : "bg-[#d8cfc3]"}`}
                           aria-hidden="true"
                         />
                       ))}
@@ -667,30 +676,30 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
           </div>
         </section>
 
-        <section className="bg-[#100c09] px-5 py-20 text-[#f5f1eb] sm:px-8 md:px-12">
+        <section className="bg-[#f5f1eb] px-5 py-20 text-[#231d18] sm:px-8 md:px-12">
           <div className="mx-auto max-w-[74rem]">
             <div className="mx-auto max-w-[38rem] text-center">
-              <p className="text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-[#bfa99a]">{showcase.statsLabel}</p>
+              <p className="text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-[#7A3A30]">{showcase.statsLabel}</p>
               <h2 className="mt-4 font-rajdhani text-[2.35rem] font-normal leading-tight sm:text-[3rem]">
                 {showcase.statsTitle.split(" ").slice(0, 3).join(" ")}
                 <span className="block italic">{showcase.statsTitle.split(" ").slice(3).join(" ")}</span>
               </h2>
-              <p className="mx-auto mt-5 max-w-[34rem] text-[0.92rem] leading-relaxed text-white/65">
+              <p className="mx-auto mt-5 max-w-[34rem] text-[0.92rem] leading-relaxed text-[#6f655a]">
                 {showcase.heroSummary}
               </p>
             </div>
 
-            <div className="mt-14 grid border-y border-white/10 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-14 grid border-y border-[#dfd6ca] sm:grid-cols-2 lg:grid-cols-3">
               {partnerItems.map((item, index) => (
                 <div
                   key={`${item.title}-${index}`}
-                  className="flex min-h-[10rem] flex-col items-center justify-center border-white/10 px-6 py-8 text-center sm:border-l sm:[&:nth-child(2n+1)]:border-l-0 lg:[&:nth-child(2n+1)]:border-l lg:[&:nth-child(3n+1)]:border-l-0 lg:[&:nth-child(n+4)]:border-t"
+                  className="flex min-h-[10rem] flex-col items-center justify-center border-[#dfd6ca] px-6 py-8 text-center sm:border-l sm:[&:nth-child(2n+1)]:border-l-0 lg:[&:nth-child(2n+1)]:border-l lg:[&:nth-child(3n+1)]:border-l-0 lg:[&:nth-child(n+4)]:border-t"
                 >
-                  <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white/10 text-[1.3rem] font-bold text-white">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[#7A3A30]/10 text-[1.3rem] font-bold text-[#7A3A30]">
                     {item.initial}
                   </div>
-                  <p className="mt-4 text-sm font-semibold text-white">{item.title}</p>
-                  <p className="mt-1 text-xs text-white/55">{item.subtitle}</p>
+                  <p className="mt-4 text-sm font-semibold text-[#231d18]">{item.title}</p>
+                  <p className="mt-1 text-xs text-[#7c7167]">{item.subtitle}</p>
                 </div>
               ))}
             </div>
@@ -698,7 +707,7 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
             <div className="mt-12 flex justify-center">
               <Link
                 to="/#contact"
-                className="inline-flex border-b border-[#bfa99a] pb-1 text-sm font-bold text-[#f5f1eb] transition-colors hover:text-[#bfa99a]"
+                className="inline-flex border-b border-[#7A3A30] pb-1 text-sm font-bold text-[#231d18] transition-colors hover:text-[#7A3A30]"
               >
                 Contact me →
               </Link>
