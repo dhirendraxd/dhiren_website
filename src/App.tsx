@@ -26,16 +26,6 @@ const pageTransition: Transition = {
 
 const RouteFallback = () => <div className="min-h-screen bg-background" aria-hidden="true" />;
 
-const LegacyServiceRedirect = () => {
-  const { slug } = useParams<{ slug?: string }>();
-
-  if (!slug) {
-    return <Navigate to="/digital-marketing" replace />;
-  }
-
-  return <Navigate to={`/${slug}`} replace />;
-};
-
 const AnimatedRoutes = () => {
   const location = useLocation();
 
@@ -61,8 +51,6 @@ const AnimatedRoutes = () => {
             <Route path="/digital-marketing" element={<ServiceShowcase forcedSlug="digital-marketing" />} />
             <Route path="/advocacy-community" element={<ServiceShowcase forcedSlug="advocacy-community" />} />
             <Route path="/tech-projects" element={<ServiceShowcase forcedSlug="tech-projects" />} />
-            <Route path="/services" element={<Navigate to="/digital-marketing" replace />} />
-            <Route path="/services/:slug" element={<LegacyServiceRedirect />} />
             <Route path="/projects/:slug" element={<ProjectDetail />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

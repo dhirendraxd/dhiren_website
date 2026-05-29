@@ -66,7 +66,7 @@ const AboutSection = () => {
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
           >
-            <p className="text-xs uppercase tracking-widest font-semibold text-muted-foreground">My Services</p>
+            <p className="text-xs uppercase tracking-widest font-semibold text-muted-foreground">Selected Pages</p>
 
             <div className="grid md:grid-cols-[1.1fr_1fr] gap-6 md:gap-8 items-start">
               <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground leading-tight max-w-md">
