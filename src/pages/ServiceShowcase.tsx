@@ -15,6 +15,8 @@ import digitalMarketingDigitalRightsIcon from "@/assets/digital marketing icons/
 import digitalMarketingGraphicDesignIcon from "@/assets/digital marketing icons/graphic-design.png";
 import digitalMarketingPodcastingIcon from "@/assets/digital marketing icons/podcasting.png";
 import digitalMarketingPpcIcon from "@/assets/digital marketing icons/ppc.png";
+import digitalMarketingCivicTechIcon from "@/assets/digital marketing icons/civic tech.png";
+import digitalMarketingGovernanceAndDemocracyIcon from "@/assets/digital marketing icons/governance adn demo.png";
 import digitalMarketingSeoIcon from "@/assets/digital marketing icons/seo-search-symbol.png";
 import digitalMarketingSocialMediaIcon from "@/assets/digital marketing icons/social-media-marketing.png";
 import digitalMarketingVolunteeringIcon from "@/assets/digital marketing icons/volunteering.png";
@@ -124,8 +126,6 @@ import { assetPath } from '@/lib/assetPath';
 
 const imageAssets = {
   mitraSmart: assetPath('reference image.jpg'),
-  civicTech: assetPath('digital marketing icons/civic tech.png'),
-  governanceAndDemocracy: assetPath('digital marketing icons/governance adn demo.png'),
   eduConnect: assetPath('civic tech.webp'),
   devBus: assetPath('Untitled design.webp'),
   volunteerPlatform: assetPath('2nd new .webp'),
@@ -318,7 +318,7 @@ const serviceShowcases: Record<ServiceSlug, ShowcasePageConfig> = {
     stats: [
       { label: "Civic Tech", value: "6+" },
       { label: "Governance and Democracy", value: "18+" },
-      { label: "Active Volunteer Hours", value: "250+" },
+      { label: "Volunteering", value: "250+" },
     ],
     filters: ["Advocacy", "Community", "Leadership", "Sustainability"],
     projects: [
@@ -450,7 +450,7 @@ const serviceShowcases: Record<ServiceSlug, ShowcasePageConfig> = {
       {
         title: "University Fit Engine",
         description: "Recommendation logic and student profile matching for admission discovery.",
-        image: imageAssets.civicTech,
+        image: digitalMarketingCivicTechIcon,
         date: "20 Feb 2025",
         href: "/hackathon/2",
         category: "AI",
@@ -731,9 +731,9 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
   const pageTitle = `${showcase.heroTitle} | Dhirendra Singh Dhami`;
   const pageDescription = showcase.heroSummary;
   const advocacyCommunityIconMap = {
-    "Civic Tech": imageAssets.civicTech,
-    "Governance and Democracy": imageAssets.governanceAndDemocracy,
-    "Active Volunteer Hours": digitalMarketingVolunteeringIcon,
+    "Civic Tech": digitalMarketingCivicTechIcon,
+    "Governance and Democracy": digitalMarketingGovernanceAndDemocracyIcon,
+    Volunteering: digitalMarketingVolunteeringIcon,
     "Climate Change": digitalMarketingClimateChangeIcon,
     Podcast: digitalMarketingPodcastingIcon,
     "Digital Rights Advocacy": digitalMarketingDigitalRightsIcon,
