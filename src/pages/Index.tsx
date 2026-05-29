@@ -11,6 +11,27 @@ import Footer from "@/components/Footer";
 import Seo from "@/components/Seo";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
 
+const homeSchema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Dhirendra Singh Dhami",
+    alternateName: ["Dhiren"],
+    jobTitle: "Digital Marketing Specialist",
+    description: "Digital marketer and youth advocate focused on SEO, campaign growth, and civic-tech initiatives.",
+    url: "https://dhirendrasinghdhami.com.np/",
+    image: heroImage,
+    sameAs: ["https://github.com/dhirendraxd"],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Dhirendra Singh Dhami Portfolio",
+    url: "https://dhirendrasinghdhami.com.np/",
+    description: "Portfolio of Dhirendra Singh Dhami: digital marketing, SEO, and youth advocacy.",
+  },
+];
+
 const Index = () => {
   const location = useLocation();
 
@@ -41,6 +62,7 @@ const Index = () => {
         image={heroImage}
         imageAlt="Portrait illustration of Dhiren on the homepage"
         type="website"
+        schema={homeSchema}
       />
       <ScrollProgressBar />
       <Navbar />

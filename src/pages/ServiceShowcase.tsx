@@ -766,6 +766,20 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
         canonicalPath={`/${resolvedSlug}`}
         image={showcase.statsImage}
         imageAlt={`${showcase.statsTitle} visual summary`}
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          name: pageTitle,
+          description: pageDescription,
+          url: `https://dhirendrasinghdhami.com.np/${resolvedSlug}`,
+          primaryImageOfPage: showcase.statsImage,
+          inLanguage: "en",
+          isPartOf: {
+            "@type": "WebSite",
+            name: "Dhirendra Singh Dhami Portfolio",
+            url: "https://dhirendrasinghdhami.com.np/",
+          },
+        }}
       />
       <ScrollProgressBar />
 

@@ -8,6 +8,7 @@ type SeoProps = {
   imageAlt?: string;
   type?: "website" | "article" | "profile";
   noIndex?: boolean;
+  schema?: Record<string, unknown> | Array<Record<string, unknown>>;
 };
 
 const SITE_NAME = "Dhirendra Singh Dhami Portfolio";
@@ -61,10 +62,11 @@ const removeTag = (selector: string) => {
   }
 };
 
-const Seo = ({ title, description, canonicalPath, image, imageAlt, type = "website", noIndex = false }: SeoProps) => {
+const Seo = ({ title, description, canonicalPath, image, imageAlt, type = "website", noIndex = false, schema }: SeoProps) => {
   useEffect(() => {
     const canonicalUrl = normalizeUrl(canonicalPath);
     const imageType = image ? inferImageType(image) : null;
+    const schemaId = "seo-jsonld";
 
     document.title = title;
     setTag('meta[name="description"]', { name: "description", content: description });
@@ -109,6 +111,21 @@ const Seo = ({ title, description, canonicalPath, image, imageAlt, type = "websi
       removeTag('meta[name="twitter:image:alt"]');
       removeTag('link[data-seo="preload-image"]');
     }
+
+    const existingSchema = document.getElementById(schemaId);
+    existingSchema?.remove();
+
+    if (schema) {
+      const script = document.createElement("script");
+      script.id = schemaId;
+      script.type = "application/ld+json";
+      script.text = JSON.stringify(schema, null, 2);
+      document.head.appendChild(script);
+    }
+
+    return () => {
+      document.getElementById(schemaId)?.remove();
+    };
   }, [canonicalPath, description, image, imageAlt, noIndex, title, type]);
 
   return null;
