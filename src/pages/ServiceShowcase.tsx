@@ -968,7 +968,7 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
                   key={`${item.title}-${index}`}
                   className="flex min-h-[9rem] flex-col items-center justify-center border-[#dfd6ca] px-5 py-7 text-center sm:border-l sm:[&:nth-child(2n+1)]:border-l-0 lg:[&:nth-child(2n+1)]:border-l lg:[&:nth-child(3n+1)]:border-l-0 lg:[&:nth-child(n+4)]:border-t"
                 >
-                  <img src={item.icon} alt="" aria-hidden="true" className="h-12 w-12 object-contain sm:h-14 sm:w-14" />
+                  <img src={item.icon} alt="" aria-hidden="true" loading="lazy" decoding="async" className="h-12 w-12 object-contain sm:h-14 sm:w-14" />
                   <p className="mt-4 text-[0.9rem] font-semibold text-[#231d18] sm:text-[0.98rem]">{item.title}</p>
                   <p className="mt-1 text-[0.78rem] text-[#7c7167] sm:text-[0.84rem]">{item.subtitle}</p>
                 </div>

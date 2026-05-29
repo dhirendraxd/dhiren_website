@@ -371,6 +371,7 @@ const ProjectDetail = () => {
                           alt={`${project.title} project preview image`}
                           loading="eager"
                           decoding="async"
+                          fetchPriority="high"
                           width={1400}
                           height={900}
                           className="absolute inset-0 h-full w-full object-contain object-center"
