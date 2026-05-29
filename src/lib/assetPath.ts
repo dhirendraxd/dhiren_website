@@ -1,5 +1,5 @@
 export const assetPath = (relativePath: string) => {
-  // relativePath should be path under src/assets, e.g. 'hackathon-events/logo.png' or 'civic tech.webp'
+  // relativePath should be path under src/assets, e.g. 'hackathon-events/logo.webp' or 'civic tech.webp'
   const clean = relativePath.replace(/^\/+/, '');
 
   // In production, prefer optimized WebP copies under /optimized_images/

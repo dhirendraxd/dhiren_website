@@ -84,7 +84,7 @@ import { assetPath } from '@/lib/assetPath';
 export const issueHiveThumbnail = assetPath('issue hive .webp');
 
 const images = {
-  mitraSmart: assetPath('reference image.jpg'),
+  mitraSmart: assetPath('reference image.webp'),
   eduConnect: assetPath('civic tech.webp'),
   devBus: assetPath('Untitled design.webp'),
   volunteerPlatform: assetPath('2nd new .webp'),

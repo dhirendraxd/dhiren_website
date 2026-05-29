@@ -2,7 +2,7 @@ User-agent: *
 # Allow crawling of public assets and generated files needed for rendering
 Allow: /assets/
 Allow: /fonts/
-Allow: /favicon.png
+Allow: /favicon.webp
 Allow: /site.webmanifest
 Disallow: /admin/
 Disallow: /private/
