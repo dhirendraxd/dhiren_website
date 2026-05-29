@@ -36,14 +36,14 @@ const AboutSection = () => {
       id: 2,
       type: "Community Project",
       title: "Community fellowship initiatives for collaborative social impact.",
-      image: assetPath('civic tech.webp'),
+      image: assetPath('civic-tech.webp'),
       href: "/projects/fellowship-community-labs",
     },
     {
       id: 3,
       type: "Tech Project",
       title: "Volunteer platform design for NGOs and youth programs.",
-      image: assetPath('2nd new .webp'),
+      image: assetPath('2nd-new.webp'),
       href: "/projects/ngo-volunteer-management",
     },
     {

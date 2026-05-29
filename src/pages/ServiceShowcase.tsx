@@ -6,25 +6,25 @@ import Seo from "@/components/Seo";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
 import { getRelevantExperiences } from "@/data/affiliations";
 import { issueHiveThumbnail } from "@/data/projectDetails";
-import digitalMarketingAnalyticsIcon from "@/assets/digital marketing icons/analytics.webp";
-import digitalMarketingBriefcaseIcon from "@/assets/digital marketing icons/briefcase.webp";
-import digitalMarketingClimateChangeIcon from "@/assets/digital marketing icons/climate-change.webp";
-import digitalMarketingCommunityIcon from "@/assets/digital marketing icons/community .webp";
-import digitalMarketingContentCreationIcon from "@/assets/digital marketing icons/content-creation.webp";
-import digitalMarketingDigitalRightsIcon from "@/assets/digital marketing icons/digital rights.webp";
-import digitalMarketingGraphicDesignIcon from "@/assets/digital marketing icons/graphic-design.webp";
-import digitalMarketingPodcastingIcon from "@/assets/digital marketing icons/podcasting.webp";
-import digitalMarketingPpcIcon from "@/assets/digital marketing icons/ppc.webp";
-import digitalMarketingCivicTechIcon from "@/assets/digital marketing icons/civic tech.webp";
-import digitalMarketingGovernanceAndDemocracyIcon from "@/assets/digital marketing icons/governance adn demo.webp";
-import digitalMarketingSeoIcon from "@/assets/digital marketing icons/seo-search-symbol.webp";
-import digitalMarketingSocialMediaIcon from "@/assets/digital marketing icons/social-media-marketing.webp";
-import digitalMarketingVolunteeringIcon from "@/assets/digital marketing icons/volunteering.webp";
-import techProjectCivicTechIcon from "@/assets/tech projects /civic tech .webp";
-import techProjectHackathonIcon from "@/assets/tech projects /hackathon.webp";
-import techProjectClimateTechIcon from "@/assets/tech projects /climate tech.webp";
-import techProjectEdTechIcon from "@/assets/tech projects /ed tech.webp";
-import techProjectOthersIcon from "@/assets/tech projects /others .webp";
+import digitalMarketingAnalyticsIcon from "@/assets/digital-marketing-icons/analytics.webp";
+import digitalMarketingBriefcaseIcon from "@/assets/digital-marketing-icons/briefcase.webp";
+import digitalMarketingClimateChangeIcon from "@/assets/digital-marketing-icons/climate-change.webp";
+import digitalMarketingCommunityIcon from "@/assets/digital-marketing-icons/community.webp";
+import digitalMarketingContentCreationIcon from "@/assets/digital-marketing-icons/content-creation.webp";
+import digitalMarketingDigitalRightsIcon from "@/assets/digital-marketing-icons/digital-rights.webp";
+import digitalMarketingGraphicDesignIcon from "@/assets/digital-marketing-icons/graphic-design.webp";
+import digitalMarketingPodcastingIcon from "@/assets/digital-marketing-icons/podcasting.webp";
+import digitalMarketingPpcIcon from "@/assets/digital-marketing-icons/ppc.webp";
+import digitalMarketingCivicTechIcon from "@/assets/digital-marketing-icons/civic-tech.webp";
+import digitalMarketingGovernanceAndDemocracyIcon from "@/assets/digital-marketing-icons/governance-and-democracy.webp";
+import digitalMarketingSeoIcon from "@/assets/digital-marketing-icons/seo-search-symbol.webp";
+import digitalMarketingSocialMediaIcon from "@/assets/digital-marketing-icons/social-media-marketing.webp";
+import digitalMarketingVolunteeringIcon from "@/assets/digital-marketing-icons/volunteering.webp";
+import techProjectCivicTechIcon from "@/assets/tech-projects/civic-tech.webp";
+import techProjectHackathonIcon from "@/assets/tech-projects/hackathon.webp";
+import techProjectClimateTechIcon from "@/assets/tech-projects/climate-tech.webp";
+import techProjectEdTechIcon from "@/assets/tech-projects/ed-tech.webp";
+import techProjectOthersIcon from "@/assets/tech-projects/others.webp";
 
 type ServiceSlug = "digital-marketing" | "advocacy-community" | "tech-projects";
 
@@ -130,10 +130,10 @@ const selectedProjectIllustrations = {
 import { assetPath } from '@/lib/assetPath';
 
 const imageAssets = {
-  mitraSmart: assetPath('reference image.webp'),
-  eduConnect: assetPath('civic tech.webp'),
-  devBus: assetPath('Untitled design.webp'),
-  volunteerPlatform: assetPath('2nd new .webp'),
+  mitraSmart: assetPath('reference-image.webp'),
+  eduConnect: assetPath('civic-tech.webp'),
+  devBus: assetPath('untitled-design.webp'),
+  volunteerPlatform: assetPath('2nd-new.webp'),
 };
 
 const digitalMarketingIcons = {

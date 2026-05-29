@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { assetPath } from '@/lib/assetPath';
-const heroImage = assetPath('Untitled design.webp');
+const heroImage = assetPath('untitled-design.webp');
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";

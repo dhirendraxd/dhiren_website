@@ -81,13 +81,13 @@ const selectedProjectIllustrations = {
 
 import { assetPath } from '@/lib/assetPath';
 
-export const issueHiveThumbnail = assetPath('issue hive .webp');
+export const issueHiveThumbnail = assetPath('issue-hive.webp');
 
 const images = {
-  mitraSmart: assetPath('reference image.webp'),
-  eduConnect: assetPath('civic tech.webp'),
-  devBus: assetPath('Untitled design.webp'),
-  volunteerPlatform: assetPath('2nd new .webp'),
+  mitraSmart: assetPath('reference-image.webp'),
+  eduConnect: assetPath('civic-tech.webp'),
+  devBus: assetPath('untitled-design.webp'),
+  volunteerPlatform: assetPath('2nd-new.webp'),
 };
 
 export const projectDetails: ProjectDetail[] = [

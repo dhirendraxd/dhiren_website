@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { assetPath } from '@/lib/assetPath';
-const untitledDesignImage = assetPath('Untitled design.webp');
+const untitledDesignImage = assetPath('untitled-design.webp');
 
 type Member = {
   name: string;
