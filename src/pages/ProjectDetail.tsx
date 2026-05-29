@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import ProjectClient from '@/components/ProjectClient';
+import Seo from "@/components/Seo";
 import { FaGithub, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
@@ -33,33 +34,6 @@ const socialLinks = [
     color: "text-[#0A66C2] group-hover:text-[#08539d]",
   },
 ];
-
-const getMetaTag = (selector: string) => document.head.querySelector(selector) as HTMLMetaElement | null;
-
-const upsertMetaTag = (selector: string, attrs: Record<string, string>) => {
-  let tag = getMetaTag(selector);
-  if (!tag) {
-    tag = document.createElement("meta");
-    document.head.appendChild(tag);
-  }
-
-  Object.entries(attrs).forEach(([key, value]) => {
-    tag?.setAttribute(key, value);
-  });
-};
-
-const getCanonical = () => document.head.querySelector("link[rel='canonical']") as HTMLLinkElement | null;
-
-const upsertCanonical = (href: string) => {
-  let canonical = getCanonical();
-  if (!canonical) {
-    canonical = document.createElement("link");
-    canonical.setAttribute("rel", "canonical");
-    document.head.appendChild(canonical);
-  }
-
-  canonical.setAttribute("href", href);
-};
 
 const ProjectDetail = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -160,90 +134,27 @@ const ProjectDetail = () => {
     ];
   }, [project]);
 
-  useEffect(() => {
-    if (!project) {
-      return;
-    }
-
-    const projectUrl = `${BASE_URL}/projects/${project.slug}`;
-    const previousTitle = document.title;
-    const previousDescription = getMetaTag('meta[name="description"]')?.getAttribute("content") || "";
-    const previousOgTitle = getMetaTag('meta[property="og:title"]')?.getAttribute("content") || "";
-    const previousOgDescription = getMetaTag('meta[property="og:description"]')?.getAttribute("content") || "";
-    const previousOgUrl = getMetaTag('meta[property="og:url"]')?.getAttribute("content") || "";
-    const previousOgImage = getMetaTag('meta[property="og:image"]')?.getAttribute("content") || "";
-    const previousOgImageAlt = getMetaTag('meta[property="og:image:alt"]')?.getAttribute("content") || "";
-    const previousTwitterTitle = getMetaTag('meta[name="twitter:title"]')?.getAttribute("content") || "";
-    const previousTwitterDescription = getMetaTag('meta[name="twitter:description"]')?.getAttribute("content") || "";
-    const previousTwitterImage = getMetaTag('meta[name="twitter:image"]')?.getAttribute("content") || "";
-    const previousTwitterImageAlt = getMetaTag('meta[name="twitter:image:alt"]')?.getAttribute("content") || "";
-    const previousCanonical = getCanonical()?.getAttribute("href") || "";
-
-    const pageTitle = `${project.title} | Project Case Study | Dhirendra Singh Dhami`;
-    document.title = pageTitle;
-
-    upsertMetaTag('meta[name="description"]', { name: "description", content: project.summary });
-    upsertMetaTag('meta[property="og:type"]', { property: "og:type", content: "article" });
-    upsertMetaTag('meta[property="og:site_name"]', { property: "og:site_name", content: "Dhirendra Singh Dhami Portfolio" });
-    upsertMetaTag('meta[property="og:title"]', { property: "og:title", content: pageTitle });
-    upsertMetaTag('meta[property="og:description"]', { property: "og:description", content: project.summary });
-    upsertMetaTag('meta[property="og:url"]', { property: "og:url", content: projectUrl });
-    upsertMetaTag('meta[property="og:image"]', { property: "og:image", content: project.image });
-    upsertMetaTag('meta[property="og:image:alt"]', { property: "og:image:alt", content: `${project.title} project preview image` });
-    upsertMetaTag('meta[name="twitter:title"]', { name: "twitter:title", content: pageTitle });
-    upsertMetaTag('meta[name="twitter:description"]', { name: "twitter:description", content: project.summary });
-    upsertMetaTag('meta[name="twitter:card"]', { name: "twitter:card", content: "summary_large_image" });
-    upsertMetaTag('meta[name="twitter:image"]', { name: "twitter:image", content: project.image });
-    upsertMetaTag('meta[name="twitter:image:alt"]', { name: "twitter:image:alt", content: `${project.title} project preview image` });
-    upsertCanonical(projectUrl);
-
-    const jsonLdId = "project-jsonld";
-    const previousJsonLd = document.getElementById(jsonLdId);
-    const script = document.createElement("script");
-    script.id = jsonLdId;
-    script.type = "application/ld+json";
-    script.text = JSON.stringify(
-      {
-        "@context": "https://schema.org",
-        "@type": "CreativeWork",
-        headline: project.title,
-        description: project.summary,
-        datePublished: project.date,
-        image: project.image,
-        url: projectUrl,
-        keywords: project.tags,
-        author: {
-          "@type": "Person",
-          name: "Dhirendra Singh Dhami",
-          url: BASE_URL,
-        },
-      },
-      null,
-      2,
-    );
-    previousJsonLd?.remove();
-    document.head.appendChild(script);
-
-    return () => {
-      document.title = previousTitle;
-      upsertMetaTag('meta[name="description"]', { name: "description", content: previousDescription });
-      upsertMetaTag('meta[property="og:title"]', { property: "og:title", content: previousOgTitle });
-      upsertMetaTag('meta[property="og:description"]', { property: "og:description", content: previousOgDescription });
-      upsertMetaTag('meta[property="og:url"]', { property: "og:url", content: previousOgUrl });
-      upsertMetaTag('meta[property="og:image"]', { property: "og:image", content: previousOgImage });
-      upsertMetaTag('meta[property="og:image:alt"]', { property: "og:image:alt", content: previousOgImageAlt });
-      upsertMetaTag('meta[name="twitter:title"]', { name: "twitter:title", content: previousTwitterTitle });
-      upsertMetaTag('meta[name="twitter:description"]', { name: "twitter:description", content: previousTwitterDescription });
-      upsertMetaTag('meta[name="twitter:image"]', { name: "twitter:image", content: previousTwitterImage });
-      upsertMetaTag('meta[name="twitter:image:alt"]', { name: "twitter:image:alt", content: previousTwitterImageAlt });
-      upsertCanonical(previousCanonical || BASE_URL);
-      document.getElementById(jsonLdId)?.remove();
-    };
-  }, [project]);
-
   if (!project) {
     return <Navigate to="/tech-projects" replace />;
   }
+
+  const projectUrl = `${BASE_URL}/projects/${project.slug}`;
+  const pageTitle = `${project.title} | Project Case Study | Dhirendra Singh Dhami`;
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    headline: project.title,
+    description: project.summary,
+    datePublished: project.date,
+    image: project.image,
+    url: projectUrl,
+    keywords: project.tags,
+    author: {
+      "@type": "Person",
+      name: "Dhirendra Singh Dhami",
+      url: BASE_URL,
+    },
+  };
 
   const tagPills = project.tags.slice(0, 5);
   const outcomes = project.outcomes.slice(0, 3);
@@ -298,6 +209,15 @@ const ProjectDetail = () => {
 
   return (
     <div className="min-h-screen overflow-auto bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.55),_transparent_30%),linear-gradient(180deg,#f7f3ec_0%,#e6ddcf_100%)] text-[#2d261f]">
+      <Seo
+        title={pageTitle}
+        description={project.summary}
+        canonicalPath={`/projects/${project.slug}`}
+        image={project.image}
+        imageAlt={`${project.title} project preview image`}
+        type="article"
+        schema={schema}
+      />
       <ScrollProgressBar />
       <main className="mx-auto flex h-full max-w-[96rem] flex-col overflow-visible px-6 py-6 font-rajdhani sm:px-8 sm:py-6 lg:px-12 lg:py-8">
         <section className="flex h-full min-h-0 flex-col overflow-visible">
