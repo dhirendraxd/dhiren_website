@@ -9,7 +9,7 @@ export type ProjectDetail = {
   approach: string;
   outcomes: string[];
   tags: string[];
-  image: string;
+  image?: string;
   gallery?: string[];
   sourceHref?: string;
 };
@@ -88,12 +88,6 @@ const images = {
   eduConnect: assetPath('civic tech.webp'),
   devBus: assetPath('Untitled design.webp'),
   volunteerPlatform: assetPath('2nd new .webp'),
-  allInFoundation: assetPath('affiliation/all_in_foundation_aif_logo.jpeg'),
-  awsCloudClub: assetPath('affiliation/aws_cloud_club_at_tu_logo.jpeg'),
-  netMission: assetPath('affiliation/netmission.jpeg'),
-  ctrlBits: assetPath('affiliation/new logo fark blue grad in white.png'),
-  rotaract: assetPath('affiliation/rac .jpg'),
-  sustainabilitySolutions: assetPath('affiliation/sustainabilitysolutionsnepal_logo.jpeg'),
 };
 
 export const projectDetails: ProjectDetail[] = [
@@ -112,7 +106,6 @@ export const projectDetails: ProjectDetail[] = [
       "Established a repeatable process for content and ad iteration."
     ],
     tags: ["SEO", "SEM", "SMM", "PPC", "Analytics"],
-    image: images.ctrlBits,
     sourceHref: "https://www.ctrlbits.com/"
   },
   {
@@ -130,7 +123,6 @@ export const projectDetails: ProjectDetail[] = [
       "Created reusable session material for future cohorts."
     ],
     tags: ["Advocacy", "Community", "Digital Rights"],
-    image: images.netMission,
     sourceHref: "https://netmission.asia"
   },
   {
@@ -151,7 +143,6 @@ export const projectDetails: ProjectDetail[] = [
     image: selectedProjectIllustrations.fellowshipCommunityLabs,
     gallery: [
       selectedProjectIllustrations.fellowshipCommunityLabs,
-      images.awsCloudClub,
       images.volunteerPlatform,
     ],
     sourceHref: "https://www.facebook.com/allinfoundationnp/"
@@ -171,7 +162,6 @@ export const projectDetails: ProjectDetail[] = [
       "Better continuity between program cycles."
     ],
     tags: ["Youth Leadership", "Operations", "Civic Programs"],
-    image: images.rotaract,
     sourceHref: "https://rotary.org"
   },
   {
@@ -189,7 +179,6 @@ export const projectDetails: ProjectDetail[] = [
       "Improved confidence in pilot planning."
     ],
     tags: ["Mentoring", "Sustainability", "Design Thinking"],
-    image: images.sustainabilitySolutions,
     sourceHref: "https://sustainability.com.np/"
   },
   {
@@ -207,7 +196,6 @@ export const projectDetails: ProjectDetail[] = [
       "Higher clarity on ownership of next steps."
     ],
     tags: ["Community", "Coordination", "Facilitation"],
-    image: images.awsCloudClub,
     sourceHref: "https://aws.amazon.com"
   },
   {
@@ -345,7 +333,6 @@ export const projectDetails: ProjectDetail[] = [
       "Better documentation quality across sessions."
     ],
     tags: ["Cloud", "Community", "Workshop"],
-    image: images.awsCloudClub,
     sourceHref: "https://aws.amazon.com"
   },
   {
@@ -363,7 +350,6 @@ export const projectDetails: ProjectDetail[] = [
       "Reduced repetitive admin inquiries."
     ],
     tags: ["Microsite", "Information Design", "Community"],
-    image: images.allInFoundation,
     sourceHref: "https://www.facebook.com/allinfoundationnp/"
   },
   {
@@ -381,7 +367,6 @@ export const projectDetails: ProjectDetail[] = [
       "Scalable structure for future content additions."
     ],
     tags: ["Civic Tech", "Knowledge Portal", "Digital Rights"],
-    image: images.netMission,
     sourceHref: "https://netmission.asia"
   },
   {
@@ -399,7 +384,6 @@ export const projectDetails: ProjectDetail[] = [
       "Improved readiness for pilot execution."
     ],
     tags: ["Sustainability", "Innovation", "Prototyping"],
-    image: images.sustainabilitySolutions,
     sourceHref: "https://sustainability.com.np/"
   }
 ];

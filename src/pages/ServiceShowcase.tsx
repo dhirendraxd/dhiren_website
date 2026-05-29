@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowLeft, BarChart3, LineChart, Megaphone, Search, Share2, Users } from "lucide-react";
+import { ArrowLeft, BarChart3, Briefcase, LineChart, Megaphone, Search, Share2, Users } from "lucide-react";
 import { Link, Navigate, useParams, useNavigate } from "react-router-dom";
 import Seo from "@/components/Seo";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
@@ -40,7 +40,7 @@ type ShowcaseMetric = {
 type ShowcaseCard = {
   title: string;
   description: string;
-  image: string;
+  image?: string;
   date: string;
   href?: string;
   category: string;
@@ -134,14 +134,6 @@ const imageAssets = {
   eduConnect: assetPath('civic tech.webp'),
   devBus: assetPath('Untitled design.webp'),
   volunteerPlatform: assetPath('2nd new .webp'),
-  allInFoundation: assetPath('affiliation/all_in_foundation_aif_logo.jpeg'),
-  awsCloudClub: assetPath('affiliation/aws_cloud_club_at_tu_logo.jpeg'),
-  netMission: assetPath('affiliation/netmission.jpeg'),
-  ctrlBits: digitalMarketingBriefcaseIcon,
-  // use the briefcase PNG as the small icon for CtrlBits rows
-  // (file added at src/assets/briefcase.png)
-  rotaract: assetPath('affiliation/rac .jpg'),
-  sustainabilitySolutions: assetPath('affiliation/sustainabilitysolutionsnepal_logo.jpeg'),
 };
 
 const digitalMarketingIcons = {
@@ -214,7 +206,6 @@ const serviceShowcases: Record<ServiceSlug, ShowcasePageConfig> = {
       {
         title: "CtrlBits Organic Growth Sprint",
         description: "SEO-led blog strategy and technical optimization to lift discoverability for product and service pages.",
-        image: imageAssets.ctrlBits,
         date: "Apr 2025",
         href: "https://www.ctrlbits.com/",
         category: "SEO & Technical Optimization",
@@ -223,7 +214,6 @@ const serviceShowcases: Record<ServiceSlug, ShowcasePageConfig> = {
       {
         title: "AIF Awareness Content Series",
         description: "Story-driven social content that improved campaign clarity for fellowship and community initiatives.",
-        image: imageAssets.allInFoundation,
         date: "Feb 2026",
         href: "/affiliations/1",
         category: "Content Storytelling",
@@ -231,7 +221,6 @@ const serviceShowcases: Record<ServiceSlug, ShowcasePageConfig> = {
       {
         title: "AWS Event Promotion Funnel",
         description: "Community event promotion framework combining outreach posts, sign-up tracking, and follow-up loops.",
-        image: imageAssets.awsCloudClub,
         date: "Mar 2025",
         href: "/affiliations/2",
         category: "Campaign Strategy",
@@ -239,7 +228,6 @@ const serviceShowcases: Record<ServiceSlug, ShowcasePageConfig> = {
       {
         title: "NetMission Advocacy Media Plan",
         description: "Content calendar and publishing cadence designed to increase participation around digital rights topics.",
-        image: imageAssets.netMission,
         date: "Dec 2025",
         href: "/affiliations/3",
         category: "Content Planning",
@@ -248,7 +236,7 @@ const serviceShowcases: Record<ServiceSlug, ShowcasePageConfig> = {
     statsLabel: "Skills",
     statsTitle: "Digital Marketing Skills",
     statsSummary: "",
-    statsImage: imageAssets.ctrlBits,
+    statsImage: imageAssets.mitraSmart,
     stats: [
       { label: "SEO Projects", value: "20+" },
       { label: "Paid Media Campaigns", value: "15+" },
@@ -260,7 +248,6 @@ const serviceShowcases: Record<ServiceSlug, ShowcasePageConfig> = {
       {
         title: "CtrlBits : Digital Marketing",
         description: "Led integrated digital marketing at CtrlBits covering SEO, SMM, SEM, and PPC, including on-page optimization, social media execution, ad campaign tuning, and performance tracking.",
-        image: imageAssets.ctrlBits,
         date: "16 Apr 2025",
         href: "https://www.ctrlbits.com/",
         category: "Digital Marketing",
@@ -286,7 +273,6 @@ const serviceShowcases: Record<ServiceSlug, ShowcasePageConfig> = {
       {
         title: "ALL In Foundation Fellowship",
         description: "Community-centered fellowship work focused on social impact and collaborative learning initiatives.",
-        image: imageAssets.allInFoundation,
         date: "Feb 2026",
         href: "/affiliations/1",
         category: "Community",
@@ -294,7 +280,6 @@ const serviceShowcases: Record<ServiceSlug, ShowcasePageConfig> = {
       {
         title: "NetMission Digital Rights Track",
         description: "Advocacy projects and learning cohorts around internet governance and rights-based participation.",
-        image: imageAssets.netMission,
         date: "Dec 2025",
         href: "/affiliations/3",
         category: "Advocacy",
@@ -302,7 +287,6 @@ const serviceShowcases: Record<ServiceSlug, ShowcasePageConfig> = {
       {
         title: "Rotaract Youth Programs",
         description: "Service and leadership activities designed to support youth participation in civic projects.",
-        image: imageAssets.rotaract,
         date: "Jun 2025",
         href: "/affiliations/4",
         category: "Leadership",
@@ -310,7 +294,6 @@ const serviceShowcases: Record<ServiceSlug, ShowcasePageConfig> = {
       {
         title: "Sustainability Mentorship",
         description: "Structured mentorship for sustainable business model experimentation.",
-        image: imageAssets.sustainabilitySolutions,
         date: "Aug 2025",
         href: "/affiliations/6",
         category: "Sustainability",
@@ -319,7 +302,7 @@ const serviceShowcases: Record<ServiceSlug, ShowcasePageConfig> = {
     statsLabel: "Statistics",
     statsTitle: "Advocacy and Community Work in Numbers",
     statsSummary: "",
-    statsImage: imageAssets.netMission,
+    statsImage: imageAssets.mitraSmart,
     stats: [
       { label: "Civic Tech", value: "6+" },
       { label: "Governance and Democracy", value: "18+" },
@@ -330,7 +313,6 @@ const serviceShowcases: Record<ServiceSlug, ShowcasePageConfig> = {
       {
         title: "Digital Rights Awareness Series",
         description: "Local-first content sessions to simplify digital rights and internet governance topics.",
-        image: imageAssets.netMission,
         date: "19 Jan 2026",
         href: "/affiliations/3",
         category: "Advocacy",
@@ -346,7 +328,6 @@ const serviceShowcases: Record<ServiceSlug, ShowcasePageConfig> = {
       {
         title: "Youth Civic Program Rollout",
         description: "Support operations for youth-focused events and volunteering programs.",
-        image: imageAssets.rotaract,
         date: "28 Jul 2025",
         href: "/affiliations/4",
         category: "Leadership",
@@ -354,7 +335,6 @@ const serviceShowcases: Record<ServiceSlug, ShowcasePageConfig> = {
       {
         title: "Sustainable Idea Mentoring",
         description: "Mentorship project around design thinking and practical sustainability models.",
-        image: imageAssets.sustainabilitySolutions,
         date: "03 Nov 2025",
         href: "/affiliations/6",
         category: "Sustainability",
@@ -362,7 +342,6 @@ const serviceShowcases: Record<ServiceSlug, ShowcasePageConfig> = {
       {
         title: "Community Dialogue Forum",
         description: "Cross-group dialogue format connecting volunteers, fellows, and civic contributors.",
-        image: imageAssets.awsCloudClub,
         date: "09 Aug 2025",
         href: "/affiliations/2",
         category: "Community",
@@ -396,8 +375,7 @@ const serviceShowcases: Record<ServiceSlug, ShowcasePageConfig> = {
   "tech-projects": {
     badge: "",
     heroTitle: "Hackathons and Builds",
-    heroSummary:
-      "A focused view of the technical side of hackathons: coding core features, integrating APIs, debugging issues, and shipping functional prototypes under tight timelines.",
+    heroSummary: "Hackathon experiments, civic tooling, and build work centered on practical delivery, validation, and iteration.",
     skillHighlights: [
       "Workflow Automation",
       "Others",
@@ -405,7 +383,7 @@ const serviceShowcases: Record<ServiceSlug, ShowcasePageConfig> = {
     ],
     featured: [
       {
-        title: "Mitra Smart",
+        title: "Document Validation Flow",
         description: "AI-powered document validation and smart form guidance for public service workflows.",
         image: imageAssets.mitraSmart,
         date: "2025",
@@ -413,7 +391,7 @@ const serviceShowcases: Record<ServiceSlug, ShowcasePageConfig> = {
         category: "Civic Tech",
       },
       {
-        title: "Edu Connect Global",
+        title: "University Fit Engine",
         description: "University matching platform combining profile intelligence and recommendation logic.",
         image: imageAssets.eduConnect,
         date: "2025",
@@ -421,7 +399,7 @@ const serviceShowcases: Record<ServiceSlug, ShowcasePageConfig> = {
         category: "AI",
       },
       {
-        title: "DevBus",
+        title: "AI Hiring Assessment Flow",
         description: "SME recruitment workflow using AI-assisted assessment and matching mechanisms.",
         image: imageAssets.devBus,
         date: "2025",
@@ -430,7 +408,7 @@ const serviceShowcases: Record<ServiceSlug, ShowcasePageConfig> = {
       },
       {
         title: "Volunteer Recruitment Platform",
-        description: "Web platform for NGO volunteer matching, event posting, and stipend flow management.",
+        description: "Volunteer recruitment and matching flow for web-based community operations.",
         image: imageAssets.volunteerPlatform,
         date: "2024",
         href: "/hackathon/4",
@@ -484,7 +462,6 @@ const serviceShowcases: Record<ServiceSlug, ShowcasePageConfig> = {
       {
         title: "Cloud Community Toolkit",
         description: "Workshop support resources and platform docs for technical community sessions.",
-        image: imageAssets.awsCloudClub,
         date: "09 Jul 2025",
         href: "/affiliations/2",
         category: "Hackathon",
@@ -492,7 +469,6 @@ const serviceShowcases: Record<ServiceSlug, ShowcasePageConfig> = {
       {
         title: "Impact Program Microsite",
         description: "Fast prototype structure for social initiative updates and onboarding flows.",
-        image: imageAssets.allInFoundation,
         date: "27 Mar 2026",
         href: "/affiliations/1",
         category: "Web Platform",
@@ -500,7 +476,6 @@ const serviceShowcases: Record<ServiceSlug, ShowcasePageConfig> = {
       {
         title: "Digital Rights Resource Portal",
         description: "Knowledge-sharing interface to present governance resources in digestible format.",
-        image: imageAssets.netMission,
         date: "06 Feb 2026",
         href: "/affiliations/3",
         category: "Civic Tech",
@@ -508,7 +483,6 @@ const serviceShowcases: Record<ServiceSlug, ShowcasePageConfig> = {
       {
         title: "Sustainability Idea Sandbox",
         description: "Interactive concept board for testing sustainable business solution hypotheses.",
-        image: imageAssets.sustainabilitySolutions,
         date: "30 Dec 2025",
         href: "/affiliations/6",
         category: "Hackathon",
@@ -831,13 +805,13 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
                   <span className="flex items-start gap-3.5">
                     <span className="mt-0.5 text-[#231d18]">
                       {project.company === "CtrlBits" ? (
-                        <img
-                          src={imageAssets.ctrlBits}
-                          alt="CtrlBits"
-                          className={`h-5 w-5 object-contain ${isActive ? "opacity-100" : "opacity-90"}`}
+                        <Briefcase
+                          className={`h-3 w-3 transition-colors sm:h-[0.85rem] sm:w-[0.85rem] ${
+                            isActive ? "text-[#ffffff]" : "text-[#8d8378]"
+                          }`}
+                          strokeWidth={1.8}
                         />
-                      ) : (
-                        (() => {
+                      ) : (() => {
                           const WorkIcon = project.icon;
                           return (
                             <WorkIcon
@@ -847,8 +821,7 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
                               strokeWidth={1.8}
                             />
                           );
-                        })()
-                      )}
+                        })()}
                     </span>
                     <span className="min-w-0">
                       <span
@@ -930,7 +903,7 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
                     <div className="flex items-start justify-between gap-4 pr-20 sm:pr-28">
                       <h2 className="flex items-center gap-2.5 text-[1.05rem] font-semibold leading-tight text-[#231d18] sm:text-[1.45rem]">
                         {activeProject.company === "CtrlBits" ? (
-                          <img src={imageAssets.ctrlBits} alt="CtrlBits" className="h-4 w-4 object-contain" />
+                          <Briefcase className="h-3.5 w-3.5" strokeWidth={1.7} />
                         ) : (
                           (() => {
                             const ActiveIcon = activeProject.icon;
