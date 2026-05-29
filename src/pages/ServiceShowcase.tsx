@@ -20,6 +20,11 @@ import digitalMarketingGovernanceAndDemocracyIcon from "@/assets/digital marketi
 import digitalMarketingSeoIcon from "@/assets/digital marketing icons/seo-search-symbol.png";
 import digitalMarketingSocialMediaIcon from "@/assets/digital marketing icons/social-media-marketing.png";
 import digitalMarketingVolunteeringIcon from "@/assets/digital marketing icons/volunteering.png";
+import techProjectCivicTechIcon from "@/assets/tech projects /civic tech .png";
+import techProjectHackathonIcon from "@/assets/tech projects /hackathon.png";
+import techProjectClimateTechIcon from "@/assets/tech projects /climate tech.png";
+import techProjectEdTechIcon from "@/assets/tech projects /ed tech.png";
+import techProjectOthersIcon from "@/assets/tech projects /others .png";
 
 type ServiceSlug = "digital-marketing" | "advocacy-community" | "tech-projects";
 
@@ -394,12 +399,9 @@ const serviceShowcases: Record<ServiceSlug, ShowcasePageConfig> = {
     heroSummary:
       "A focused view of the technical side of hackathons: coding core features, integrating APIs, debugging issues, and shipping functional prototypes under tight timelines.",
     skillHighlights: [
-      "Rapid Prototyping & MVP Delivery",
-      "AI Integration & Workflow Design",
-      "Web Platform Development",
-      "API Integration",
-      "Debugging & Performance Tuning",
-      "Hackathon Execution",
+      "Workflow Automation",
+      "Others",
+      "Research & Validation",
     ],
     featured: [
       {
@@ -441,16 +443,16 @@ const serviceShowcases: Record<ServiceSlug, ShowcasePageConfig> = {
     statsImage: imageAssets.mitraSmart,
     stats: [
       { label: "Hackathon Builds", value: "12+" },
-      { label: "Rapid Prototypes", value: "25+" },
-      { label: "Collaborative Teams", value: "15+" },
-      { label: "Production Concepts", value: "8+" },
+      { label: "Civic Tech", value: "6+" },
+      { label: "Climate Tech", value: "4+" },
+      { label: "Ed Tech", value: "8+" },
     ],
     filters: ["Hackathon", "Web Platform", "AI", "Civic Tech"],
     projects: [
       {
         title: "University Fit Engine",
         description: "Recommendation logic and student profile matching for admission discovery.",
-        image: digitalMarketingCivicTechIcon,
+        image: imageAssets.eduConnect,
         date: "20 Feb 2025",
         href: "/hackathon/2",
         category: "AI",
@@ -742,6 +744,13 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
     "Partnership & Stakeholder Engagement": digitalMarketingCommunityIcon,
     "Sustainability Initiative Planning": digitalMarketingClimateChangeIcon,
   } as const;
+  const techProjectIconMap = {
+    "Hackathon Builds": techProjectHackathonIcon,
+    "Civic Tech": techProjectCivicTechIcon,
+    "Climate Tech": techProjectClimateTechIcon,
+    "Ed Tech": techProjectEdTechIcon,
+    Others: techProjectOthersIcon,
+  } as const;
   const partnerItems = (
     resolvedSlug === "digital-marketing"
       ? digitalMarketingSkillCards.map((card) => ({
@@ -765,12 +774,12 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
           ...showcase.stats.map((stat) => ({
             title: stat.label,
             subtitle: stat.value,
-            icon: digitalMarketingIcons.analytics,
+            icon: techProjectIconMap[stat.label as keyof typeof techProjectIconMap] ?? digitalMarketingIcons.analytics,
           })),
           ...(showcase.skillHighlights ?? []).map((skill) => ({
             title: skill,
             subtitle: "Focus Area",
-            icon: digitalMarketingIcons.analytics,
+            icon: techProjectIconMap[skill as keyof typeof techProjectIconMap] ?? digitalMarketingIcons.analytics,
           })),
         ]
   ).slice(0, 6);
