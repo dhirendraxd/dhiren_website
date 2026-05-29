@@ -8,12 +8,16 @@ import { getRelevantExperiences } from "@/data/affiliations";
 import { issueHiveThumbnail } from "@/data/projectDetails";
 import digitalMarketingAnalyticsIcon from "@/assets/digital marketing icons/analytics.png";
 import digitalMarketingBriefcaseIcon from "@/assets/digital marketing icons/briefcase.png";
+import digitalMarketingClimateChangeIcon from "@/assets/digital marketing icons/climate-change.png";
+import digitalMarketingCommunityIcon from "@/assets/digital marketing icons/community .png";
 import digitalMarketingContentCreationIcon from "@/assets/digital marketing icons/content-creation.png";
+import digitalMarketingDigitalRightsIcon from "@/assets/digital marketing icons/digital rights.png";
 import digitalMarketingGraphicDesignIcon from "@/assets/digital marketing icons/graphic-design.png";
 import digitalMarketingPodcastingIcon from "@/assets/digital marketing icons/podcasting.png";
 import digitalMarketingPpcIcon from "@/assets/digital marketing icons/ppc.png";
 import digitalMarketingSeoIcon from "@/assets/digital marketing icons/seo-search-symbol.png";
 import digitalMarketingSocialMediaIcon from "@/assets/digital marketing icons/social-media-marketing.png";
+import digitalMarketingVolunteeringIcon from "@/assets/digital marketing icons/volunteering.png";
 
 type ServiceSlug = "digital-marketing" | "advocacy-community" | "tech-projects";
 
@@ -120,7 +124,8 @@ import { assetPath } from '@/lib/assetPath';
 
 const imageAssets = {
   mitraSmart: assetPath('reference image.jpg'),
-  civicTech: assetPath('civic tech.webp'),
+  civicTech: assetPath('digital marketing icons/civic tech.png'),
+  governanceAndDemocracy: assetPath('digital marketing icons/governance adn demo.png'),
   eduConnect: assetPath('civic tech.webp'),
   devBus: assetPath('Untitled design.webp'),
   volunteerPlatform: assetPath('2nd new .webp'),
@@ -264,7 +269,8 @@ const serviceShowcases: Record<ServiceSlug, ShowcasePageConfig> = {
     heroSummary:
       "This space highlights advocacy and community initiatives where collaboration, youth leadership, and digital rights engagement drive meaningful outcomes. The focus is on people, participation, and sustained community value.",
     skillHighlights: [
-      "Community Program Design",
+      "Climate Change",
+      "Podcast",
       "Digital Rights Advocacy",
       "Youth Leadership & Mobilization",
       "Volunteer Coordination",
@@ -310,9 +316,8 @@ const serviceShowcases: Record<ServiceSlug, ShowcasePageConfig> = {
     statsSummary: "",
     statsImage: imageAssets.netMission,
     stats: [
-      { label: "Programs and Cohorts", value: "6+" },
-      { label: "Community Initiatives", value: "18+" },
-      { label: "Collaborating Organizations", value: "8+" },
+      { label: "Civic Tech", value: "6+" },
+      { label: "Governance and Democracy", value: "18+" },
       { label: "Active Volunteer Hours", value: "250+" },
     ],
     filters: ["Advocacy", "Community", "Leadership", "Sustainability"],
@@ -725,12 +730,37 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
   const showcase = serviceShowcases[resolvedSlug];
   const pageTitle = `${showcase.heroTitle} | Dhirendra Singh Dhami`;
   const pageDescription = showcase.heroSummary;
+  const advocacyCommunityIconMap = {
+    "Civic Tech": imageAssets.civicTech,
+    "Governance and Democracy": imageAssets.governanceAndDemocracy,
+    "Active Volunteer Hours": digitalMarketingVolunteeringIcon,
+    "Climate Change": digitalMarketingClimateChangeIcon,
+    Podcast: digitalMarketingPodcastingIcon,
+    "Digital Rights Advocacy": digitalMarketingDigitalRightsIcon,
+    "Youth Leadership & Mobilization": digitalMarketingCommunityIcon,
+    "Volunteer Coordination": digitalMarketingVolunteeringIcon,
+    "Partnership & Stakeholder Engagement": digitalMarketingCommunityIcon,
+    "Sustainability Initiative Planning": digitalMarketingClimateChangeIcon,
+  } as const;
   const partnerItems = (
     resolvedSlug === "digital-marketing"
       ? digitalMarketingSkillCards.map((card) => ({
           ...card,
           icon: digitalMarketingSkillCardIcons[card.title],
         }))
+      : resolvedSlug === "advocacy-community"
+        ? [
+            ...showcase.stats.map((stat, index) => ({
+              title: stat.label,
+              subtitle: stat.value,
+              icon: advocacyCommunityIconMap[stat.label as keyof typeof advocacyCommunityIconMap] ?? digitalMarketingIcons.analytics,
+            })),
+            ...(showcase.skillHighlights ?? []).map((skill, index) => ({
+              title: skill,
+              subtitle: "Focus Area",
+              icon: advocacyCommunityIconMap[skill as keyof typeof advocacyCommunityIconMap] ?? digitalMarketingIcons.analytics,
+            })),
+          ]
       : [
           ...showcase.stats.map((stat) => ({
             title: stat.label,
