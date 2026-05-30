@@ -284,15 +284,18 @@ const AboutSection = () => {
                       </Link>
 
                       {index === projects.length - 1 && (
-                        <Link
-                          to="/projects"
-                          className="group inline-flex items-center gap-2 text-lg font-medium text-foreground/90 transition-colors duration-300 hover:text-[#7A3A30] sm:ml-24 lg:ml-40"
-                        >
-                          <span className="relative inline-block tracking-wide after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-[#7A3A30] after:transition-all after:duration-300 group-hover:after:w-full">
-                            View All Projects
-                          </span>
-                          <ArrowRight size={18} className="transition-transform duration-300 group-hover:translate-x-0.5" />
-                        </Link>
+                        <div className="flex flex-col items-start gap-2 sm:ml-24 lg:ml-40">
+                          <Link
+                            to="/projects"
+                            className="group inline-flex items-center gap-2 text-lg font-medium text-foreground/90 transition-colors duration-300 hover:text-[#7A3A30]"
+                          >
+                            <span className="relative inline-block tracking-wide after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-[#7A3A30] after:transition-all after:duration-300 group-hover:after:w-full">
+                              View All Projects
+                            </span>
+                            <ArrowRight size={18} className="transition-transform duration-300 group-hover:translate-x-0.5" />
+                          </Link>
+                          <span className="h-px w-24 bg-border/70" aria-hidden="true" />
+                        </div>
                       )}
                     </div>
                     <div className="h-px w-28 bg-border mt-2.5" />

@@ -1,22 +1,14 @@
-import { defineConfig } from "vite";
+import { defineConfig, type PluginOption } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
-// Image optimization during build (optional dev dependency: vite-plugin-imagemin)
-let viteImagemin: any;
-try {
-  // require dynamically so dev server continues if plugin isn't installed
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  viteImagemin = require('vite-plugin-imagemin');
-} catch (e) {
-  viteImagemin = null;
-}
 
-export default defineConfig(({ command }) => {
+export default defineConfig(async ({ command }) => {
   const isBuild = command === 'build';
+  const { default: viteImagemin } = await import('vite-plugin-imagemin');
 
-  const plugins: any[] = [react()];
+  const plugins: PluginOption[] = [react()];
 
-  if (isBuild && viteImagemin) {
+  if (isBuild) {
     plugins.push(
       viteImagemin({
         gifsicle: { optimizationLevel: 7, interlaced: false },

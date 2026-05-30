@@ -72,13 +72,13 @@ const ProjectDetail = () => {
 
     const g = (project as unknown as { gallery?: unknown }).gallery;
     const galleryImages = Array.isArray(g) ? (g.filter(Boolean) as string[]) : [];
-    const generatedImages = Array.from({ length: 4 }, (_, i) => {
-      return `https://picsum.photos/seed/${encodeURIComponent(`${project.slug}-${i}`)}/720/480`;
-    });
+    const uniqueGalleryImages = galleryImages.filter((image, index, images) => image !== project.image && images.indexOf(image) === index);
 
-    return [...galleryImages, ...generatedImages]
-      .filter((image, index, images) => image !== project.image && images.indexOf(image) === index)
-      .slice(0, 4);
+    if (uniqueGalleryImages.length > 0) {
+      return uniqueGalleryImages.slice(0, 4);
+    }
+
+    return project.image ? [project.image] : [];
   }, [project]);
   const thumbsRef = useRef<HTMLDivElement | null>(null);
   const isDraggingRef = useRef(false);

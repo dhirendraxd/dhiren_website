@@ -15,6 +15,19 @@ const featuredProjects = featuredProjectSlugs
 	.map((slug) => projectDetails.find((project) => project.slug === slug))
 	.filter((project): project is NonNullable<typeof project> => Boolean(project));
 
+const projectsSchema = {
+	"@context": "https://schema.org",
+	"@type": "WebPage",
+	name: "Projects | Dhirendra Singh Dhami",
+	description: "A focused collection of Dhiren's featured projects.",
+	url: "https://dhirendrasinghdhami.com.np/projects",
+	isPartOf: {
+		"@type": "WebSite",
+		name: "Dhirendra Singh Dhami Portfolio",
+		url: "https://dhirendrasinghdhami.com.np/",
+	},
+};
+
 const ProjectsPage = () => {
 	const featuredImage = featuredProjects.find((project) => project.image)?.image ?? issueHiveThumbnail;
 	const totalProjects = featuredProjects.length;
@@ -28,18 +41,7 @@ const ProjectsPage = () => {
 				canonicalPath="/projects"
 				image={featuredImage}
 				imageAlt="Featured project preview for Dhirendra Singh Dhami"
-				schema={{
-					"@context": "https://schema.org",
-					"@type": "WebPage",
-					name: "Projects | Dhirendra Singh Dhami",
-					description: "A focused collection of Dhiren's featured projects.",
-					url: "https://dhirendrasinghdhami.com.np/projects",
-					isPartOf: {
-						"@type": "WebSite",
-						name: "Dhirendra Singh Dhami Portfolio",
-						url: "https://dhirendrasinghdhami.com.np/",
-					},
-				}}
+				schema={projectsSchema}
 			/>
 			<ScrollProgressBar />
 

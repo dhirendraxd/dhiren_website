@@ -126,7 +126,7 @@ const Seo = ({ title, description, canonicalPath, image, imageAlt, type = "websi
     return () => {
       document.getElementById(schemaId)?.remove();
     };
-  }, [canonicalPath, description, image, imageAlt, noIndex, title, type]);
+  }, [canonicalPath, description, image, imageAlt, noIndex, schema, title, type]);
 
   return null;
 };
