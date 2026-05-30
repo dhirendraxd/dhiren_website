@@ -269,7 +269,7 @@ const AboutSection = () => {
                       {project.title}
                     </h4>
 
-                    <div className="mt-10 flex items-center justify-between">
+                    <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
                       <Link
                         to={project.href}
                         className="group inline-flex items-center gap-2 text-lg font-medium text-foreground/90 transition-colors duration-300 hover:text-[#7A3A30]"
@@ -282,6 +282,18 @@ const AboutSection = () => {
                           className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                         />
                       </Link>
+
+                      {index === projects.length - 1 && (
+                        <Link
+                          to="/projects"
+                          className="group inline-flex items-center gap-2 text-lg font-medium text-foreground/90 transition-colors duration-300 hover:text-[#7A3A30] sm:ml-24 lg:ml-40"
+                        >
+                          <span className="relative inline-block tracking-wide after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-[#7A3A30] after:transition-all after:duration-300 group-hover:after:w-full">
+                            View All Projects
+                          </span>
+                          <ArrowRight size={18} className="transition-transform duration-300 group-hover:translate-x-0.5" />
+                        </Link>
+                      )}
                     </div>
                     <div className="h-px w-28 bg-border mt-2.5" />
                   </div>
@@ -303,6 +315,7 @@ const AboutSection = () => {
                 </motion.article>
               );
             })}
+
           </div>
         </div>
 
