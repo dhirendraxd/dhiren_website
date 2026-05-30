@@ -81,7 +81,8 @@ const selectedProjectIllustrations = {
 
 import { assetPath } from '@/lib/assetPath';
 
-export const issueHiveThumbnail = assetPath('issue-hive.webp');
+export const issueHiveHeroImage = assetPath('issue-hive.webp');
+export const issueHiveThumbnail = assetPath('issue-hive-thumb.webp');
 
 const images = {
   mitraSmart: assetPath('reference-image.webp'),
@@ -264,8 +265,8 @@ export const projectDetails: ProjectDetail[] = [
       "Established a lightweight model for transparent community moderation."
     ],
     tags: ["Campus Innovation", "Community", "Student Platform"],
-    image: issueHiveThumbnail,
-    gallery: [images.mitraSmart, images.devBus, images.volunteerPlatform, images.eduConnect]
+    image: issueHiveHeroImage,
+    gallery: [issueHiveThumbnail, images.mitraSmart, images.devBus, images.volunteerPlatform, images.eduConnect]
   },
   {
     slug: "university-fit-engine",
