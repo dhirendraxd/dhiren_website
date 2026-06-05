@@ -242,7 +242,7 @@ const ProjectDetail = () => {
   }, [project]);
 
   if (!project) {
-    return <Navigate to="/tech-projects" replace />;
+    return <Navigate to="/projects" replace />;
   }
 
   const tagPills = project.tags.slice(0, 5);
