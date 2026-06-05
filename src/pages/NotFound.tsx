@@ -56,9 +56,10 @@ const NotFound = () => {
           <div className="flex items-center justify-center gap-4">
             <Link
               to="/projects"
-              className="inline-flex items-center gap-2 rounded-none border border-[#e9e1d6] px-4 py-2 text-sm font-semibold text-[#3f3932] hover:bg-[#7A3A30]/6 hover:border-[#7A3A30] transition-colors"
+              className="group inline-flex items-center gap-2 rounded-none bg-[#7A3A30] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#7A3A30]/90"
             >
-              View Projects
+              <span>View Projects</span>
+              <span className="ml-2 inline-block opacity-0 -translate-x-2 transition-all duration-200 group-hover:opacity-100 group-hover:translate-x-0">→</span>
             </Link>
 
             <Link

@@ -634,6 +634,49 @@ const ProjectDetail = () => {
           </div>
         </section>
 
+        {/* FAQ: styled card accordion below contact CTA */}
+        <section className="mt-12 py-10">
+          <div className="mx-auto max-w-[88rem] px-6">
+            <div className="border-t border-[#e4dbcf] pt-10">
+              <div className="flex flex-col items-center">
+                <div className="mb-3 inline-flex items-center gap-2 text-sm text-[#7A3A30]">
+                  <span className="h-2 w-2 rounded-full bg-[#ffb86b] shadow-sm" />
+                  <span className="uppercase tracking-[0.18em]">FAQ</span>
+                </div>
+
+                <h3 className="font-rajdhani text-[2.2rem] font-bold text-[#231d18] mb-3 text-center">Your questions, clearly answered here</h3>
+                <p className="max-w-[64ch] text-center text-[#5f574d] mb-6">Quick answers to common questions about working together, timelines, and pricing.</p>
+              </div>
+
+              <div className="mx-auto max-w-3xl space-y-3">
+                <details className="group bg-white border border-[#f3efe8] p-4 rounded-lg shadow-sm">
+                  <summary className="flex items-center justify-between cursor-pointer text-[1rem] font-semibold text-[#231d18]">
+                    <span>What types of projects have you completed in the past?</span>
+                    <span className="ml-4 flex h-8 w-8 items-center justify-center rounded-full border border-[#e9e1d6] text-[#7A3A30] transition-transform group-open:rotate-45">+</span>
+                  </summary>
+                  <p className="mt-3 text-[0.95rem] text-[#5f574d]">I’ve worked across digital marketing, community programs, and tech projects—ranging from campaign execution and SEO to community labs and campus innovation platforms.</p>
+                </details>
+
+                <details className="group bg-white border border-[#f3efe8] p-4 rounded-lg shadow-sm">
+                  <summary className="flex items-center justify-between cursor-pointer text-[1rem] font-semibold text-[#231d18]">
+                    <span>Do you provide a guarantee for your work?</span>
+                    <span className="ml-4 flex h-8 w-8 items-center justify-center rounded-full border border-[#e9e1d6] text-[#7A3A30] transition-transform group-open:rotate-45">+</span>
+                  </summary>
+                  <p className="mt-3 text-[0.95rem] text-[#5f574d]">I offer clear deliverables and a revision plan; ongoing support and performance-based guarantees are scoped into retainers or special agreements as needed.</p>
+                </details>
+
+                <details className="group bg-white border border-[#f3efe8] p-4 rounded-lg shadow-sm">
+                  <summary className="flex items-center justify-between cursor-pointer text-[1rem] font-semibold text-[#231d18]">
+                    <span>How do we collaborate and communicate?</span>
+                    <span className="ml-4 flex h-8 w-8 items-center justify-center rounded-full border border-[#e9e1d6] text-[#7A3A30] transition-transform group-open:rotate-45">+</span>
+                  </summary>
+                  <p className="mt-3 text-[0.95rem] text-[#5f574d]">I adapt to your workflow—Slack, email, or regular calls. Weekly check-ins are recommended during active sprints and concise updates between milestones.</p>
+                </details>
+              </div>
+            </div>
+          </div>
+        </section>
+
           <section className="mt-auto pt-4 sm:pt-5">
             <div className="mx-auto max-w-[50rem]">
               <div className="h-px w-full bg-[#8b8377]/80" />
