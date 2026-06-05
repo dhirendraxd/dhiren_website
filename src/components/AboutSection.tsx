@@ -56,11 +56,11 @@ const AboutSection = () => {
   ];
 
   return (
-    <section id="about" className="scroll-mt-24 pt-24 pb-14 md:pb-16 px-8 md:px-12 bg-card font-rajdhani" role="region" aria-label="About section">
+    <section id="about" className="scroll-mt-24 pt-24 pb-10 md:pb-12 px-8 md:px-12 bg-card font-rajdhani" role="region" aria-label="About section">
       <div className="max-w-[84rem] mx-auto">
-        <div className="space-y-12">
+        <div className="space-y-10">
           <motion.div
-            className="space-y-6"
+            className="space-y-3"
             initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -68,7 +68,7 @@ const AboutSection = () => {
           >
             <p className="text-xs uppercase tracking-widest font-semibold text-muted-foreground">Selected Pages</p>
 
-            <div className="grid md:grid-cols-[1.1fr_1fr] gap-8 md:gap-12 items-start">
+            <div className="grid md:grid-cols-[1.1fr_1fr] gap-6 md:gap-8 items-start">
               <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground leading-tight max-w-md">
                 What I Work On
               </h2>
@@ -79,7 +79,7 @@ const AboutSection = () => {
             </div>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
             {workAreas.map((area, index) => {
               const Icon = area.icon;
               const isHighlighted = index === 0;
@@ -87,7 +87,7 @@ const AboutSection = () => {
               return (
                 <motion.div
                   key={area.title}
-                  className={`border min-h-[260px] p-8 flex flex-col justify-between ${
+                  className={`border min-h-[260px] p-7 flex flex-col justify-between ${
                     isHighlighted
                       ? "bg-[#7A3A30] border-[#7A3A30] text-[#FFF5F0]"
                       : "bg-card border-border text-foreground"
