@@ -581,58 +581,10 @@ const ProjectDetail = () => {
 
         <MeetTheTeam members={teamMembers} />
 
-        <section className="mt-10 py-6 sm:py-8">
-          <div className="mx-auto max-w-[88rem] px-6">
-            <div className="border-t border-[#d8cfc3] pt-8 sm:pt-10">
-              <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
-                <h2 className="font-rajdhani text-[2rem] font-bold uppercase leading-tight text-[#231d18] sm:text-[2.8rem]">
-                  Impact Snapshot
-                </h2>
-
-                <div className="grid gap-x-10 gap-y-7 sm:grid-cols-2 lg:min-w-[40rem] lg:grid-cols-4">
-                  {impactSnapshot.map((item) => (
-                    <div key={item.label} className="space-y-2.5">
-                      <div className="text-[0.78rem] font-semibold uppercase tracking-[0.16em] text-[#6f655b]">{item.label}</div>
-                      <div className="text-[1.55rem] font-rajdhani font-bold leading-tight text-[#7A3A30]">{item.value}</div>
-                      <div className="max-w-[16rem] text-[0.95rem] leading-relaxed text-[#5f574d]">{item.note}</div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="mt-10 grid gap-6 border-t border-[#e4dbcf] pt-7 text-[1rem] text-[#3f3932] sm:grid-cols-3">
-                {outcomes.slice(0, 3).map((outcome, index) => (
-                  <p key={outcome} className="relative border-l border-[#d8cfc3] pl-5 leading-relaxed">
-                    <span className="mb-2 block font-rajdhani text-[1.1rem] font-bold leading-none text-[#7A3A30]">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                    {outcome}
-                  </p>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
+        
 
         {/* CTA: Have a project in mind? */}
-        <section className="mt-8 py-12">
-          <div className="mx-auto max-w-[88rem] px-6 text-center">
-            <h2 className="mb-4 text-[2rem] font-rajdhani font-bold leading-tight text-[#231d18] sm:text-[2.8rem]">HAVE A PROJECT IN MIND?</h2>
-            <p className="mx-auto mb-6 max-w-[68ch] text-[1rem] leading-relaxed text-[#5f574d]">Together, we can create something clear and impactful. Let’s collaborate to bring ideas to life in a way that resonates with everyone.</p>
-
-            <div className="mb-6">
-              <a
-                href="#contact"
-                className="group inline-block px-6 py-3 text-sm font-rajdhani font-semibold text-[#3f3932] underline underline-offset-4 decoration-[#cfc6bb] transition-colors"
-              >
-                <span className="group-hover:text-[#7A3A30] group-hover:decoration-[#7A3A30]">Contact Me</span>
-                <span className="ml-2 inline-block opacity-0 -translate-x-2 transition-all duration-200 group-hover:opacity-100 group-hover:translate-x-0 text-[#7A3A30]">→</span>
-              </a>
-            </div>
-
-            {/* social links intentionally removed from CTA box; placed under page footer line */}
-          </div>
-        </section>
+        
 
         {/* FAQ: styled card accordion below contact CTA */}
         <section className="mt-12 py-10">
@@ -648,8 +600,8 @@ const ProjectDetail = () => {
                 <p className="max-w-[64ch] text-center text-[#5f574d] mb-6">Quick answers to common questions about working together, timelines, and pricing.</p>
               </div>
 
-              <div className="mx-auto max-w-3xl space-y-3">
-                <details className="group bg-white border border-[#f3efe8] p-4 rounded-lg shadow-sm">
+              <div className="mx-auto grid max-w-4xl grid-cols-1 gap-4 sm:grid-cols-2">
+                <details className="group bg-white group-open:bg-transparent group-open:shadow-none border border-[#f3efe8] p-5 rounded-none shadow-sm">
                   <summary className="flex items-center justify-between cursor-pointer text-[1rem] font-semibold text-[#231d18]">
                     <span>What types of projects have you completed in the past?</span>
                     <span className="ml-4 flex h-8 w-8 items-center justify-center rounded-full border border-[#e9e1d6] text-[#7A3A30] transition-transform group-open:rotate-45">+</span>
@@ -657,7 +609,7 @@ const ProjectDetail = () => {
                   <p className="mt-3 text-[0.95rem] text-[#5f574d]">I’ve worked across digital marketing, community programs, and tech projects—ranging from campaign execution and SEO to community labs and campus innovation platforms.</p>
                 </details>
 
-                <details className="group bg-white border border-[#f3efe8] p-4 rounded-lg shadow-sm">
+                <details className="group bg-white group-open:bg-transparent group-open:shadow-none border border-[#f3efe8] p-5 rounded-none shadow-sm">
                   <summary className="flex items-center justify-between cursor-pointer text-[1rem] font-semibold text-[#231d18]">
                     <span>Do you provide a guarantee for your work?</span>
                     <span className="ml-4 flex h-8 w-8 items-center justify-center rounded-full border border-[#e9e1d6] text-[#7A3A30] transition-transform group-open:rotate-45">+</span>
@@ -665,12 +617,20 @@ const ProjectDetail = () => {
                   <p className="mt-3 text-[0.95rem] text-[#5f574d]">I offer clear deliverables and a revision plan; ongoing support and performance-based guarantees are scoped into retainers or special agreements as needed.</p>
                 </details>
 
-                <details className="group bg-white border border-[#f3efe8] p-4 rounded-lg shadow-sm">
+                <details className="group bg-white group-open:bg-transparent group-open:shadow-none border border-[#f3efe8] p-5 rounded-none shadow-sm">
                   <summary className="flex items-center justify-between cursor-pointer text-[1rem] font-semibold text-[#231d18]">
                     <span>How do we collaborate and communicate?</span>
                     <span className="ml-4 flex h-8 w-8 items-center justify-center rounded-full border border-[#e9e1d6] text-[#7A3A30] transition-transform group-open:rotate-45">+</span>
                   </summary>
                   <p className="mt-3 text-[0.95rem] text-[#5f574d]">I adapt to your workflow—Slack, email, or regular calls. Weekly check-ins are recommended during active sprints and concise updates between milestones.</p>
+                </details>
+
+                <details className="group bg-white group-open:bg-transparent group-open:shadow-none border border-[#f3efe8] p-5 rounded-none shadow-sm">
+                  <summary className="flex items-center justify-between cursor-pointer text-[1rem] font-semibold text-[#231d18]">
+                    <span>What are typical timelines and costs?</span>
+                    <span className="ml-4 flex h-8 w-8 items-center justify-center rounded-full border border-[#e9e1d6] text-[#7A3A30] transition-transform group-open:rotate-45">+</span>
+                  </summary>
+                  <p className="mt-3 text-[0.95rem] text-[#5f574d]">Most projects fall between 4–12 weeks; costs depend on scope. I share a clear proposal with milestones and pricing during discovery.</p>
                 </details>
               </div>
             </div>
