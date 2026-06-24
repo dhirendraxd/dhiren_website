@@ -42,16 +42,15 @@ const ProjectCard = ({
 	sectionLabel: string;
 }) => {
 	const hasImage = Boolean(project.image);
-	const shortSummary = project.summary.split(/[.!?]/)[0].trim() + ".";
 
 	return (
-		<article className="group relative border border-[#ddd3c7] bg-[#fbf8f2] overflow-hidden transition-colors duration-300 hover:border-[#7A3A30]/35">
-			{/* Bottom accent line on hover */}
-			<span className="pointer-events-none absolute inset-x-0 bottom-0 h-[2px] origin-left scale-x-0 bg-[#7A3A30] transition-transform duration-300 group-hover:scale-x-100" aria-hidden="true" />
+		<article className="group relative overflow-hidden border border-[#e8e0d6] transition-colors duration-300 hover:border-[#c5bbb2]">
+			{/* Top accent line on hover */}
+			<span className="pointer-events-none absolute inset-x-0 top-0 h-[2px] origin-left scale-x-0 bg-[#7A3A30] transition-transform duration-500 group-hover:scale-x-100" aria-hidden="true" />
 
 			<Link to={`/projects/${project.slug}`} className="block">
 				{/* Image */}
-				<div className="relative overflow-hidden bg-[#ede8e1]">
+				<div className="relative overflow-hidden">
 					{hasImage ? (
 						<img
 							src={project.image}
@@ -60,43 +59,36 @@ const ProjectCard = ({
 							decoding="async"
 							width={960}
 							height={640}
-							className="aspect-[3/2] w-full object-cover transition-transform duration-500 group-hover:scale-[1.05]"
+							className="aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
 						/>
 					) : (
-						<div className="flex aspect-[3/2] w-full items-end p-5 bg-[linear-gradient(135deg,#f0e8de_0%,#e0d0be_100%)]">
+						<div className="flex aspect-[4/3] w-full items-end p-5 bg-[linear-gradient(135deg,#f0e8de_0%,#e0d0be_100%)]">
 							<div className="text-xl font-semibold leading-tight text-[#3a3a3a]">{project.title}</div>
 						</div>
 					)}
 
 					{/* Index — top right */}
-					<span className="absolute right-3 top-3 font-mono text-[0.6rem] tabular-nums text-white/55 select-none">
+					<span className="absolute right-3 top-3 font-mono text-[0.58rem] tabular-nums text-white/45 select-none">
 						{String(index + 1).padStart(2, "0")}
 					</span>
 				</div>
 
 				{/* Content */}
-				<div className="p-5 space-y-3">
-					<div className="flex items-start justify-between gap-2">
-						<h3 className="text-[1.22rem] font-bold leading-snug tracking-tight text-[#3a3a3a] transition-colors duration-200 group-hover:text-[#7A3A30]">
+				<div className="px-3.5 py-3 flex items-center justify-between gap-2">
+					<div className="min-w-0">
+						<h3 className="truncate text-[0.95rem] font-bold tracking-tight text-[#3a3a3a] transition-colors duration-200 group-hover:text-[#7A3A30]">
 							{project.title}
 						</h3>
-						<span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center border border-[#e4dbcf] text-[#a89f96] transition-all duration-300 group-hover:border-[#7A3A30]/40 group-hover:text-[#7A3A30]">
-							<ArrowUpRight size={13} />
-						</span>
-					</div>
-
-					<p className="text-[0.83rem] leading-[1.7] text-[#6b6259]">{shortSummary}</p>
-
-					<div className="flex items-center justify-between gap-3 border-t border-[#e9e1d6] pt-3">
-						<div className="flex flex-wrap gap-1.5">
-							{project.tags.slice(0, 3).map((tag) => (
-								<span key={tag} className="border border-[#e0d8cf] px-1.5 py-0.5 text-[0.58rem] font-semibold uppercase tracking-[0.1em] text-[#8a7f72]">
-									{tag}
+						<div className="mt-0.5 flex items-center gap-1.5">
+							{project.tags.slice(0, 2).map((tag, i) => (
+								<span key={tag} className="inline-flex items-center gap-1.5">
+									<span className="text-[0.53rem] font-semibold uppercase tracking-[0.1em] text-[#a89f96]">{tag}</span>
+									{i === 0 && project.tags.length > 1 && <span className="text-[#d0c9c0]" aria-hidden="true">·</span>}
 								</span>
 							))}
 						</div>
-						<span className="shrink-0 font-mono text-[0.67rem] text-[#a89f96]">{project.date}</span>
 					</div>
+					<ArrowUpRight size={13} className="shrink-0 text-[#c4bab2] transition-colors duration-300 group-hover:text-[#7A3A30]" />
 				</div>
 			</Link>
 		</article>
@@ -148,9 +140,9 @@ const ProjectsPage = () => {
 					</div>
 
 					{/* Sections */}
-					<div className="space-y-16 py-12 pb-14">
+					<div className="grid gap-10 py-12 pb-14 lg:grid-cols-2 lg:items-start">
 						{sections.map((section, sectionIdx) => {
-							const allInSection = projectDetails.filter((p) => p.serviceSlug === section.slug);
+							const allInSection = projectDetails.filter((p) => p.serviceSlug === section.slug).slice(0, 2);
 
 							return (
 								<motion.section
@@ -177,7 +169,7 @@ const ProjectsPage = () => {
 									</div>
 
 									{allInSection.length > 0 ? (
-										<div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+										<div className="grid gap-5">
 											{allInSection.map((project, i) => (
 												<ProjectCard key={project.slug} project={project} index={i} sectionLabel={section.label} />
 											))}
