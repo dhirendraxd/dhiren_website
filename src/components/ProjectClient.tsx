@@ -18,7 +18,7 @@ const ProjectClient: React.FC<Props> = ({ sourceHref, title, showGithub = false 
         href={siteHref}
         target="_blank"
         rel="noopener noreferrer"
-        className="group inline-flex items-center gap-1.5 text-[0.8rem] font-semibold text-[#231d18] transition-colors duration-200 hover:text-[#7A3A30]"
+        className="group inline-flex items-center gap-1.5 text-[0.8rem] font-semibold text-[#3a3a3a] transition-colors duration-200 hover:text-[#7A3A30]"
         aria-label={sourceHref ? 'Open project website' : 'Search web for project'}
         title={sourceHref ? new URL(sourceHref).hostname.replace('www.', '') : `Search web for ${title}`}
       >
@@ -52,7 +52,7 @@ const ProjectClient: React.FC<Props> = ({ sourceHref, title, showGithub = false 
             href={githubHref}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-[0.8rem] font-semibold text-[#231d18] transition-opacity duration-200 hover:opacity-75"
+            className="inline-flex items-center gap-1.5 text-[0.8rem] font-semibold text-[#3a3a3a] transition-opacity duration-200 hover:opacity-75"
             aria-label="Open GitHub"
             title="GitHub"
           >

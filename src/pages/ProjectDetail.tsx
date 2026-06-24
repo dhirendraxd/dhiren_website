@@ -393,7 +393,7 @@ const ProjectDetail = () => {
                           const prev = displayThumbs[(safeIdx - 1 + displayThumbs.length) % displayThumbs.length];
                           goToImage(prev, -1);
                         }}
-                        className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 absolute left-3 top-1/2 -translate-y-1/2 z-20 flex h-8 w-8 items-center justify-center text-[#231d18] hover:bg-[rgba(0,0,0,0.06)] hover:text-[#7A3A30] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7A3A30]"
+                        className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 absolute left-3 top-1/2 -translate-y-1/2 z-20 flex h-8 w-8 items-center justify-center text-[#3a3a3a] hover:bg-[rgba(0,0,0,0.06)] hover:text-[#7A3A30] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7A3A30]"
                       >
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2">
                           <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
@@ -409,7 +409,7 @@ const ProjectDetail = () => {
                           const next = displayThumbs[(safeIdx + 1) % displayThumbs.length];
                           goToImage(next, 1);
                         }}
-                        className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 absolute right-3 top-1/2 -translate-y-1/2 z-20 flex h-8 w-8 items-center justify-center text-[#231d18] hover:bg-[rgba(0,0,0,0.06)] hover:text-[#7A3A30] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7A3A30]"
+                        className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 absolute right-3 top-1/2 -translate-y-1/2 z-20 flex h-8 w-8 items-center justify-center text-[#3a3a3a] hover:bg-[rgba(0,0,0,0.06)] hover:text-[#7A3A30] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7A3A30]"
                       >
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2">
                           <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
@@ -545,7 +545,7 @@ const ProjectDetail = () => {
               {/* Title block */}
               <div>
                 <p className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-[#7A3A30]">Selected Project</p>
-                <h1 className="mt-1.5 font-rajdhani text-[2.4rem] font-bold leading-[1.05] text-[#231d18] sm:text-[3rem]">{project.title}</h1>
+                <h1 className="mt-1.5 font-rajdhani text-[2.4rem] font-bold leading-[1.05] text-[#3a3a3a] sm:text-[3rem]">{project.title}</h1>
                 <p className="mt-3 text-[0.93rem] leading-[1.7] text-[#5f574d]">{project.summary}</p>
               </div>
 
@@ -604,7 +604,7 @@ const ProjectDetail = () => {
               {/* Header */}
               <div className="mb-6 flex flex-col items-center gap-1.5">
                 <p className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-[#7A3A30]">FAQ</p>
-                <h3 className="font-rajdhani text-[1.9rem] font-bold text-[#231d18] text-center leading-tight tracking-tight">
+                <h3 className="font-rajdhani text-[1.9rem] font-bold text-[#3a3a3a] text-center leading-tight tracking-tight">
                   Your questions, clearly answered here
                 </h3>
                 <p className="max-w-[44ch] text-center text-[0.83rem] text-[#6b6259]">
@@ -634,7 +634,7 @@ const ProjectDetail = () => {
                 ].map(({ q, a }, idx) => (
                   <details key={q} className={`group border-[#e9e1d6] sm:odd:pr-6 sm:even:pl-6 ${idx < 2 ? 'border-b' : idx === 2 ? 'border-b sm:border-b-0' : ''}`}>
                     <summary className="flex cursor-pointer items-center justify-between gap-3 py-3.5 list-none [&::-webkit-details-marker]:hidden">
-                      <span className="text-[0.88rem] font-semibold text-[#231d18] transition-colors duration-200 group-hover:text-[#7A3A30]">
+                      <span className="text-[0.88rem] font-semibold text-[#3a3a3a] transition-colors duration-200 group-hover:text-[#7A3A30]">
                         {q}
                       </span>
                       <span className="shrink-0 text-base font-light text-[#7A3A30] transition-transform duration-300 group-open:rotate-45 select-none leading-none">

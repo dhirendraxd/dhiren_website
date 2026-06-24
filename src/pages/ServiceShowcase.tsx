@@ -759,7 +759,7 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
   ).slice(0, 6);
 
   return (
-    <div className="min-h-screen bg-[#f5f1eb] text-[#231d18]">
+    <div className="min-h-screen bg-[#f5f1eb] text-[#3a3a3a]">
       <Seo
         title={pageTitle}
         description={pageDescription}
@@ -797,7 +797,7 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
                 <span className="h-px w-6 bg-[#7A3A30]" aria-hidden="true" />
                 <p className="text-[0.65rem] uppercase tracking-[0.34em] text-[#7A3A30] sm:text-[0.68rem] sm:tracking-[0.38em]">{experienceSection.badge}</p>
               </div>
-              <h1 className="mt-6 text-[2rem] font-normal leading-[1.05] tracking-[-0.03em] text-[#231d18] sm:text-[2.95rem] lg:text-[3.35rem]">
+              <h1 className="mt-6 text-[2rem] font-normal leading-[1.05] tracking-[-0.03em] text-[#3a3a3a] sm:text-[2.95rem] lg:text-[3.35rem]">
                 <span className="block font-semibold">{experienceSection.titleLineOne}</span>
                 <span className="block text-[0.9em] text-[#6f655a] font-light">
                   {experienceSection.titleLineTwo}
@@ -822,7 +822,7 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
                 }`;
                 const rowContent = (
                   <span className="flex items-start gap-3.5">
-                    <span className="mt-0.5 text-[#231d18]">
+                    <span className="mt-0.5 text-[#3a3a3a]">
                       {project.company === "CtrlBits" ? (
                         <Briefcase
                           className={`h-3 w-3 transition-colors sm:h-[0.85rem] sm:w-[0.85rem] ${
@@ -853,7 +853,7 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
                                 ? "text-[0.96rem] sm:text-[1.06rem]"
                                 : "text-[0.94rem] sm:text-[1.02rem]"
                         } ${
-                          isActive ? "text-[#ffffff]" : "text-[#231d18]"
+                          isActive ? "text-[#ffffff]" : "text-[#3a3a3a]"
                         }`}
                       >
                         {project.company ?? project.title}
@@ -932,12 +932,12 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
                     transition={{ duration: 0.14, ease: "easeOut" }}
                     className="flex flex-1 flex-col"
                   >
-                  <div className="text-[3.4rem] font-normal leading-none text-[#231d18]/10 sm:text-[5rem]">
+                  <div className="text-[3.4rem] font-normal leading-none text-[#3a3a3a]/10 sm:text-[5rem]">
                     {String(activeWorkIndex + 1).padStart(2, "0")}
                   </div>
                   <div className="mt-6 flex flex-1 flex-col sm:mt-8">
                     <div className="flex items-start gap-4 pr-20 sm:pr-28">
-                      <h2 className="flex items-center gap-2.5 text-[1.05rem] font-semibold leading-tight text-[#231d18] sm:text-[1.45rem]">
+                      <h2 className="flex items-center gap-2.5 text-[1.05rem] font-semibold leading-tight text-[#3a3a3a] sm:text-[1.45rem]">
                         {activeProject.company === "CtrlBits" ? (
                           <Briefcase className="h-3.5 w-3.5" strokeWidth={1.7} />
                         ) : (
@@ -964,7 +964,7 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
                       {visibleWorkItems.slice(0, 6).map((item, index) => (
                         <span
                           key={`${item.title}-progress`}
-                          className={`h-0.5 ${progressBarWidths[index] ?? "w-8"} ${index === activeWorkIndex ? "bg-[#231d18]" : "bg-[#d8cfc3]"}`}
+                          className={`h-0.5 ${progressBarWidths[index] ?? "w-8"} ${index === activeWorkIndex ? "bg-[#3a3a3a]" : "bg-[#d8cfc3]"}`}
                           aria-hidden="true"
                         />
                       ))}
@@ -978,7 +978,7 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
           </div>
         </section>
 
-        <section className="bg-[#f5f1eb] px-5 pb-8 pt-0 text-[#231d18] sm:px-8 sm:pb-10 sm:pt-0 md:px-12">
+        <section className="bg-[#f5f1eb] px-5 pb-8 pt-0 text-[#3a3a3a] sm:px-8 sm:pb-10 sm:pt-0 md:px-12">
           <div className="mx-auto max-w-[74rem]">
             <div className="mx-auto max-w-[38rem] text-center">
               <p className="text-[0.72rem] font-semibold uppercase tracking-[0.28em] text-[#7A3A30]">{showcase.statsLabel}</p>
@@ -999,7 +999,7 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
                   className="flex min-h-[9rem] flex-col items-center justify-center border-[#dfd6ca] px-5 py-7 text-center sm:border-l sm:[&:nth-child(2n+1)]:border-l-0 lg:[&:nth-child(2n+1)]:border-l lg:[&:nth-child(3n+1)]:border-l-0 lg:[&:nth-child(n+4)]:border-t"
                 >
                   <img src={item.icon} alt="" aria-hidden="true" loading="lazy" decoding="async" className="h-12 w-12 object-contain sm:h-14 sm:w-14" />
-                  <p className="mt-4 text-[0.9rem] font-semibold text-[#231d18] sm:text-[0.98rem]">{item.title}</p>
+                  <p className="mt-4 text-[0.9rem] font-semibold text-[#3a3a3a] sm:text-[0.98rem]">{item.title}</p>
                   <p className="mt-1 text-[0.78rem] text-[#7c7167] sm:text-[0.84rem]">{item.subtitle}</p>
                 </div>
               ))}

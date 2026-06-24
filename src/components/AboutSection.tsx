@@ -75,7 +75,7 @@ const AboutSection = () => {
             viewport={{ once: true }}
           >
             <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-              <h2 className="font-rajdhani text-[clamp(2rem,3.8vw,3.2rem)] font-bold leading-[1.05] tracking-tight text-[#231d18]">
+              <h2 className="font-rajdhani text-[clamp(2rem,3.8vw,3.2rem)] font-bold leading-[1.05] tracking-tight text-[#3a3a3a]">
                 What I Work On
               </h2>
               <p className="text-[0.88rem] text-[#6f655a] leading-[1.75] max-w-[36ch] md:text-right">
@@ -106,14 +106,14 @@ const AboutSection = () => {
                     <div className="flex items-start justify-between">
                       <Icon
                         size={20}
-                        className={isAccent ? "text-[#FFF5F0]/75" : "text-[#7A3A30]"}
+                        className={isAccent ? "text-[#FFF5F0]/75" : "text-[#3a3a3a]/70"}
                         strokeWidth={1.75}
                       />
-                      <span className={`font-mono text-[0.58rem] tabular-nums select-none ${isAccent ? "text-[#FFF5F0]/25" : "text-[#231d18]/20"}`}>
+                      <span className={`font-mono text-[0.72rem] tabular-nums select-none ${isAccent ? "text-[#FFF5F0]/25" : "text-[#3a3a3a]/20"}`}>
                         {String(index + 1).padStart(2, "0")}
                       </span>
                     </div>
-                    <h3 className={`text-[1.2rem] font-bold tracking-tight leading-snug ${isAccent ? "text-[#FFF5F0]" : "text-[#231d18]"}`}>
+                    <h3 className={`text-[1.2rem] font-bold tracking-tight leading-snug ${isAccent ? "text-[#FFF5F0]" : "text-[#3a3a3a]"}`}>
                       {area.title}
                     </h3>
                     <p className={`text-[0.86rem] leading-[1.72] ${isAccent ? "text-[#F4D8CF]" : "text-[#6f655a]"}`}>
@@ -124,7 +124,7 @@ const AboutSection = () => {
                   <Link
                     to={area.href}
                     className={`group mt-6 inline-flex items-center gap-1.5 text-[0.7rem] font-semibold uppercase tracking-[0.18em] transition-colors duration-200 ${
-                      isAccent ? "text-[#FFF5F0]/70 hover:text-[#FFF5F0]" : "text-[#6f655a] hover:text-[#7A3A30]"
+                      isAccent ? "text-[#FFF5F0]/70 hover:text-[#FFF5F0] hover:underline underline-offset-4 decoration-[#FFF5F0]/40" : "text-[#6f655a] hover:text-[#7A3A30] hover:underline underline-offset-4 decoration-[#7A3A30]/40"
                     }`}
                   >
                     Explore
@@ -146,7 +146,7 @@ const AboutSection = () => {
             viewport={{ once: true }}
           >
             <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-              <h2 className="font-rajdhani text-[clamp(1.8rem,3vw,2.6rem)] font-bold tracking-tight text-[#231d18]">
+              <h2 className="font-rajdhani text-[clamp(1.8rem,3vw,2.6rem)] font-bold tracking-tight text-[#3a3a3a]">
                 Relevant Experience
               </h2>
               <p className="text-[0.88rem] text-[#6f655a] leading-[1.72] max-w-[36ch] md:text-right">
@@ -163,7 +163,7 @@ const AboutSection = () => {
                   key={item.title}
                   className={`group/exp flex flex-col md:flex-row md:items-center md:justify-between gap-3 ${
                     isDark
-                      ? "bg-[#231d18] px-8 py-8"
+                      ? "bg-[#3a3a3a] px-8 py-8"
                       : "border border-[#e4dbcf] px-6 py-5"
                   }`}
                   initial={{ opacity: 0, y: 16 }}
@@ -172,11 +172,11 @@ const AboutSection = () => {
                   viewport={{ once: true }}
                 >
                   <div className="flex items-center gap-5">
-                    <span className="shrink-0 font-mono text-[0.62rem] tabular-nums text-[#7A3A30]">
+                    <span className="shrink-0 font-mono text-[0.62rem] tabular-nums text-white">
                       {String(index + 1).padStart(2, "0")}
                     </span>
                     <div>
-                      <h4 className={`font-bold tracking-tight ${isDark ? "text-[1.15rem] text-white" : "text-[1.08rem] text-[#231d18]"}`}>{item.title}</h4>
+                      <h4 className={`font-bold tracking-tight ${isDark ? "text-[1.15rem] text-white" : "text-[1.08rem] text-[#3a3a3a]"}`}>{item.title}</h4>
                       <a
                         href={item.link}
                         target="_blank"
@@ -192,7 +192,7 @@ const AboutSection = () => {
                   </div>
 
                   <div className="shrink-0 whitespace-nowrap">
-                    <span className={`font-semibold ${isDark ? "text-[1rem] text-white" : "text-[0.94rem] text-[#231d18]"}`}>{item.dateRange}</span>
+                    <span className={`font-semibold ${isDark ? "text-[1rem] text-white" : "text-[0.94rem] text-[#3a3a3a]"}`}>{item.dateRange}</span>
                     <span className={`ml-1.5 ${isDark ? "text-[0.88rem] text-[#6f655a]" : "text-[0.84rem] text-[#a89f96]"}`}>· {item.duration}</span>
                   </div>
                 </motion.div>
@@ -233,7 +233,7 @@ const AboutSection = () => {
               <p className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-[#7A3A30]">Selected Projects</p>
             </div>
             <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-              <h3 className="font-rajdhani text-[clamp(1.8rem,3.2vw,2.8rem)] font-bold tracking-tight text-[#231d18]">
+              <h3 className="font-rajdhani text-[clamp(1.8rem,3.2vw,2.8rem)] font-bold tracking-tight text-[#3a3a3a]">
                 A few things I've built.
               </h3>
               <p className="text-[0.88rem] text-[#6f655a] leading-[1.72] max-w-[36ch] md:text-right">
@@ -260,14 +260,14 @@ const AboutSection = () => {
                       {project.type}
                     </p>
 
-                    <h4 className="mt-2.5 font-rajdhani text-[1.5rem] md:text-[1.85rem] font-bold tracking-tight leading-snug text-[#231d18] max-w-xl">
+                    <h4 className="mt-2.5 font-rajdhani text-[1.5rem] md:text-[1.85rem] font-bold tracking-tight leading-snug text-[#3a3a3a] max-w-xl">
                       {project.title}
                     </h4>
 
                     <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
                       <Link
                         to={project.href}
-                        className="group inline-flex items-center gap-1.5 text-[0.75rem] font-semibold uppercase tracking-[0.16em] text-[#231d18] transition-colors hover:text-[#7A3A30]"
+                        className="group inline-flex items-center gap-1.5 text-[0.75rem] font-semibold uppercase tracking-[0.16em] text-[#3a3a3a] transition-colors hover:text-[#7A3A30]"
                       >
                         <span className="relative after:absolute after:left-0 after:-bottom-px after:h-px after:w-0 after:bg-[#7A3A30] after:transition-all after:duration-200 group-hover:after:w-full">
                           Explore Work

@@ -64,7 +64,7 @@ const ProjectCard = ({
 						/>
 					) : (
 						<div className="flex aspect-[3/2] w-full items-end p-5 bg-[linear-gradient(135deg,#f0e8de_0%,#e0d0be_100%)]">
-							<div className="text-xl font-semibold leading-tight text-[#231d18]">{project.title}</div>
+							<div className="text-xl font-semibold leading-tight text-[#3a3a3a]">{project.title}</div>
 						</div>
 					)}
 
@@ -77,7 +77,7 @@ const ProjectCard = ({
 				{/* Content */}
 				<div className="p-5 space-y-3">
 					<div className="flex items-start justify-between gap-2">
-						<h3 className="text-[1.22rem] font-bold leading-snug tracking-tight text-[#231d18] transition-colors duration-200 group-hover:text-[#7A3A30]">
+						<h3 className="text-[1.22rem] font-bold leading-snug tracking-tight text-[#3a3a3a] transition-colors duration-200 group-hover:text-[#7A3A30]">
 							{project.title}
 						</h3>
 						<span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center border border-[#e4dbcf] text-[#a89f96] transition-all duration-300 group-hover:border-[#7A3A30]/40 group-hover:text-[#7A3A30]">
@@ -107,7 +107,7 @@ const ProjectsPage = () => {
 	const featuredImage = projectDetails.find((p) => p.image)?.image ?? issueHiveThumbnail;
 
 	return (
-		<div className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(255,250,244,0.9),_transparent_32%),linear-gradient(180deg,#f7f3ec_0%,#efe6d8_100%)] text-[#231d18]">
+		<div className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(255,250,244,0.9),_transparent_32%),linear-gradient(180deg,#f7f3ec_0%,#efe6d8_100%)] text-[#3a3a3a]">
 			<Seo
 				title="Projects | Dhirendra Singh Dhami"
 				description="A focused collection of Dhiren's featured projects with direct links to the case studies."
@@ -138,7 +138,7 @@ const ProjectsPage = () => {
 					<div className="mt-10 border-b border-[#ddd3c7] pb-10">
 						<p className="text-[0.68rem] font-semibold uppercase tracking-[0.34em] text-[#7A3A30]">Selected Work</p>
 						<div className="mt-3 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-							<h1 className="text-[clamp(2.6rem,5vw,5rem)] font-bold leading-[0.92] tracking-[-0.03em] text-[#231d18] max-w-xl">
+							<h1 className="text-[clamp(2.6rem,5vw,5rem)] font-bold leading-[0.92] tracking-[-0.03em] text-[#3a3a3a] max-w-xl">
 								A few things<br />I've built.
 							</h1>
 							<p className="max-w-[30ch] text-[0.93rem] leading-[1.75] text-[#6f655a] md:text-right">
@@ -167,7 +167,7 @@ const ProjectsPage = () => {
 										</span>
 										<div className="flex flex-1 items-baseline justify-between gap-4 border-b border-[#e0d8cf] pb-3">
 											<div className="flex items-baseline gap-3">
-												<h2 className="text-[1.05rem] font-bold tracking-tight text-[#231d18]">{section.label}</h2>
+												<h2 className="text-[1.05rem] font-bold tracking-tight text-[#3a3a3a]">{section.label}</h2>
 												<span className="hidden text-[0.78rem] text-[#9a9089] sm:inline">{section.description}</span>
 											</div>
 											<span className="shrink-0 font-mono text-[0.65rem] text-[#a89f96]">

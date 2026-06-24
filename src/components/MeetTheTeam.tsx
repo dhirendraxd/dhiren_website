@@ -24,7 +24,7 @@ const MeetTheTeam: React.FC<{ members: Member[]; href?: string }> = ({ members }
             <p className="text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-[#7A3A30]">Our Team</p>
           </div>
           <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
-            <h3 className="font-rajdhani text-3xl font-bold text-[#231d18] sm:text-4xl tracking-tight">Meet the team</h3>
+            <h3 className="font-rajdhani text-3xl font-bold text-[#3a3a3a] sm:text-4xl tracking-tight">Meet the team</h3>
             <p className="max-w-xs text-[0.9rem] leading-relaxed text-[#5f574d] md:text-right">
               Small team. Big impact. We design, ship, and occasionally blame the coffee.
             </p>
@@ -62,7 +62,7 @@ const MeetTheTeam: React.FC<{ members: Member[]; href?: string }> = ({ members }
                 />
 
                 {/* Always-visible bottom gradient with name */}
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#231d18]/85 via-[#231d18]/30 to-transparent px-4 pb-4 pt-12 pointer-events-none">
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#3a3a3a]/85 via-[#3a3a3a]/30 to-transparent px-4 pb-4 pt-12 pointer-events-none">
                   <p className="font-rajdhani text-[0.88rem] font-semibold leading-tight text-[#f5f1eb]">
                     {member?.name || 'Team member'}
                   </p>

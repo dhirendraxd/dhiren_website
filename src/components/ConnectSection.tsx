@@ -14,14 +14,14 @@ const ConnectSection = () => {
           <div className="flex flex-col items-center text-center gap-8">
             <blockquote className="flex flex-col items-center gap-3">
               <span className="font-rajdhani text-[2.8rem] leading-none text-[#e4dbcf] select-none" aria-hidden="true">"</span>
-              <p className="font-rajdhani text-[clamp(1.5rem,2.8vw,2.4rem)] tracking-tight text-[#231d18] leading-snug max-w-[26ch] -mt-4">
+              <p className="font-rajdhani text-[clamp(1.5rem,2.8vw,2.4rem)] tracking-tight text-[#3a3a3a] leading-snug max-w-[26ch] -mt-4">
                 Half curiosity, half <span className="text-[#7A3A30]">"why not"</span> —<br /> that's most of what I do.
               </p>
             </blockquote>
 
             <div className="w-full flex items-center gap-6">
               <div className="shrink-0">
-                <p className="font-rajdhani text-[1.4rem] font-bold tracking-tight text-[#231d18]">Connect</p>
+                <p className="font-rajdhani text-[1.4rem] font-bold tracking-tight text-[#3a3a3a]">Connect</p>
               </div>
 
               <span className="flex-1 h-px bg-[#e9e1d6]/60" aria-hidden="true" />

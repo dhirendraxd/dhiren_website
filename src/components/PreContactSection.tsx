@@ -23,10 +23,10 @@ const PreContactSection = () => {
               <div
                 key={item.label}
                 className={`py-14 px-6 flex flex-col items-center justify-center gap-1 text-center border ${
-                  isMid ? "bg-[#231d18] border-[#231d18]" : "border-[#e4dbcf]"
+                  isMid ? "bg-[#3a3a3a] border-[#3a3a3a]" : "border-[#e4dbcf]"
                 }`}
               >
-                <p className={`font-rajdhani text-[2.4rem] font-semibold leading-none tracking-tight ${isMid ? "text-[#f5f1eb]" : "text-[#231d18]"}`}>
+                <p className={`font-rajdhani text-[2.4rem] font-semibold leading-none tracking-tight ${isMid ? "text-[#f5f1eb]" : "text-[#3a3a3a]"}`}>
                   {item.value}
                 </p>
                 <p className={`text-[0.75rem] font-normal uppercase tracking-[0.16em] ${isMid ? "text-[#a89f96]" : "text-[#a89f96]"}`}>{item.label}</p>
