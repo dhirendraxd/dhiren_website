@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, BarChart3, Briefcase, LineChart, Megaphone, Search, Share2, Users } from "lucide-react";
-import { Link, Navigate, useParams, useNavigate } from "react-router-dom";
+import { Navigate, useParams, useNavigate } from "react-router-dom";
 import Seo from "@/components/Seo";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
 import { getRelevantExperiences } from "@/data/affiliations";
@@ -791,29 +791,34 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
       >
         <section className="relative mx-auto min-h-[108svh] max-w-[74rem] px-5 pb-10 pt-18 sm:px-8 sm:pb-12 sm:pt-24 md:px-12 md:pt-28 lg:px-10 lg:pt-32">
           <BackButton />
-          <div className="mb-14 grid gap-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(18rem,0.85fr)] lg:items-end">
+          <div className="mb-14 grid gap-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(18rem,0.85fr)] lg:items-end">
             <div>
-              <p className="text-[0.65rem] uppercase tracking-[0.34em] text-[#90857a] sm:text-[0.68rem] sm:tracking-[0.38em]">{experienceSection.badge}</p>
-              <h1 className="mt-4 max-w-[16rem] text-[2rem] font-normal leading-[0.92] tracking-[-0.04em] text-[#231d18] sm:max-w-[18rem] sm:text-[2.95rem] lg:text-[3.35rem]">
-                <span className="block font-semibold sm:whitespace-nowrap">{experienceSection.titleLineOne}</span>
-                <span className="block sm:whitespace-nowrap text-[0.9em] text-[#6f655a]">
+              <div className="flex items-center gap-3">
+                <span className="h-px w-6 bg-[#7A3A30]" aria-hidden="true" />
+                <p className="text-[0.65rem] uppercase tracking-[0.34em] text-[#7A3A30] sm:text-[0.68rem] sm:tracking-[0.38em]">{experienceSection.badge}</p>
+              </div>
+              <h1 className="mt-6 text-[2rem] font-normal leading-[1.05] tracking-[-0.03em] text-[#231d18] sm:text-[2.95rem] lg:text-[3.35rem]">
+                <span className="block font-semibold">{experienceSection.titleLineOne}</span>
+                <span className="block text-[0.9em] text-[#6f655a] font-light">
                   {experienceSection.titleLineTwo}
                 </span>
               </h1>
             </div>
-            <p className="max-w-[22rem] text-[0.84rem] leading-[1.6] text-[#6f655a] sm:text-[0.92rem] lg:justify-self-end">
-              {experienceSection.summary}
-            </p>
+            <div className="lg:border-l lg:border-[#ddd3c7] lg:pl-8 lg:pb-1">
+              <p className="max-w-[22rem] text-[0.84rem] leading-[1.7] text-[#6f655a] sm:text-[0.92rem]">
+                {experienceSection.summary}
+              </p>
+            </div>
           </div>
 
           <div className="grid gap-8 lg:grid-cols-[minmax(0,1.08fr)_minmax(24rem,0.92fr)] lg:items-start lg:justify-center">
             <div className="space-y-0">
               {visibleWorkItems.map((project, index) => {
                 const isActive = index === activeWorkIndex;
-                const rowClass = `group block min-h-[4.65rem] text-left transition-colors ${
+                const rowClass = `group block min-h-[4.65rem] text-left transition-all duration-200 ${
                   isActive
-                    ? "bg-[#7A3A30] px-6 py-[1.125rem] shadow-[0_14px_32px_rgba(122,58,48,0.14)]"
-                    : "border-b border-[#ddd3c7] px-6 py-[1.125rem]"
+                    ? "bg-[#7A3A30] px-6 py-[1.125rem]"
+                    : "border-b border-[#ddd3c7] px-6 py-[1.125rem] hover:bg-[#ede8e1]"
                 }`;
                 const rowContent = (
                   <span className="flex items-start gap-3.5">
@@ -883,10 +888,10 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
                       <button
                         type="button"
                         onClick={() => setActiveWorkIndex(index)}
-                        className={`relative z-10 mt-4 flex h-[2.2rem] w-[2.2rem] items-center justify-center rounded-full text-[0.68rem] font-semibold transition-colors sm:h-[2.35rem] sm:w-[2.35rem] sm:text-[0.74rem] ${
+                        className={`relative z-10 mt-4 flex h-[2.2rem] w-[2.2rem] items-center justify-center rounded-full text-[0.68rem] font-semibold transition-all duration-300 ease-out sm:h-[2.35rem] sm:w-[2.35rem] sm:text-[0.74rem] ${
                           isActive
-                            ? "bg-[#120e0b] text-[#f5f1eb]"
-                            : "border border-[#d8cfc3] bg-[#f5f1eb] text-[#7b7066]"
+                            ? "bg-[#120e0b] text-[#f5f1eb] scale-110"
+                            : "border border-[#d8cfc3] bg-[#f5f1eb] text-[#7b7066] hover:border-[#7A3A30] hover:text-[#7A3A30]"
                         }`}
                         aria-label={`Show work item ${index + 1}`}
                       >
@@ -910,11 +915,28 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
             {activeProject && (
               <aside className="pt-0">
                 <div className="relative flex min-h-[17.5rem] flex-col overflow-hidden border border-[#dfd6ca] bg-white p-6 shadow-[0_16px_42px_rgba(35,29,24,0.06)] sm:h-[19rem] sm:p-10 lg:h-[20rem] lg:p-11">
+                  <span className="absolute right-6 top-6 max-w-[9.5rem] text-right text-[0.66rem] font-semibold uppercase tracking-[0.18em] leading-[1.15] text-[#7A3A30] sm:right-10 sm:top-10 sm:max-w-[11rem] sm:text-[0.74rem] sm:tracking-[0.2em] lg:right-11 lg:top-11">
+                    <span className="block whitespace-nowrap">
+                      {activeExperience?.dateRange ?? activeProjectDateLabel.split(" · ")[0]}
+                    </span>
+                    <span className="mt-1 block whitespace-nowrap normal-case tracking-[0.14em] text-[#7A3A30]/80">
+                      {activeExperience?.duration ?? activeProjectDateLabel.split(" · ")[1] ?? ""}
+                    </span>
+                  </span>
+                  <AnimatePresence mode="wait">
+                  <motion.div
+                    key={activeWorkIndex}
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    transition={{ duration: 0.14, ease: "easeOut" }}
+                    className="flex flex-1 flex-col"
+                  >
                   <div className="text-[3.4rem] font-normal leading-none text-[#231d18]/10 sm:text-[5rem]">
                     {String(activeWorkIndex + 1).padStart(2, "0")}
                   </div>
                   <div className="mt-6 flex flex-1 flex-col sm:mt-8">
-                    <div className="flex items-start justify-between gap-4 pr-20 sm:pr-28">
+                    <div className="flex items-start gap-4 pr-20 sm:pr-28">
                       <h2 className="flex items-center gap-2.5 text-[1.05rem] font-semibold leading-tight text-[#231d18] sm:text-[1.45rem]">
                         {activeProject.company === "CtrlBits" ? (
                           <Briefcase className="h-3.5 w-3.5" strokeWidth={1.7} />
@@ -926,14 +948,6 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
                         )}
                         {activeProject.title}
                       </h2>
-                      <span className="absolute right-3 top-3 max-w-[9.5rem] text-right text-[0.66rem] font-semibold uppercase tracking-[0.18em] leading-[1.15] text-[#7A3A30] sm:right-6 sm:top-6 sm:max-w-[11rem] sm:text-[0.74rem] sm:tracking-[0.2em] lg:right-8 lg:top-8">
-                        <span className="block whitespace-nowrap">
-                          {activeExperience?.dateRange ?? activeProjectDateLabel.split(" · ")[0]}
-                        </span>
-                        <span className="mt-1 block whitespace-nowrap normal-case tracking-[0.14em] text-[#7A3A30]/80">
-                          {activeExperience?.duration ?? activeProjectDateLabel.split(" · ")[1] ?? ""}
-                        </span>
-                      </span>
                     </div>
                     <p
                       className="mt-4 max-w-[21rem] text-[0.8rem] leading-[1.58] text-[#5f574d] sm:text-[0.94rem]"
@@ -956,6 +970,8 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
                       ))}
                     </div>
                   </div>
+                  </motion.div>
+                  </AnimatePresence>
                 </div>
               </aside>
             )}
@@ -989,18 +1005,6 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
               ))}
             </div>
 
-            <div className="mt-12 text-center">
-              <p className="text-[0.95rem] text-[#6f655a]">Have a project or partnership in mind?</p>
-              <div className="mt-3">
-                <Link
-                  to="/#contact"
-                  className="inline-flex items-center gap-2 text-[1.05rem] font-semibold text-[#231d18] hover:text-[#7A3A30] border-b border-transparent hover:border-[#7A3A30]"
-                >
-                  Contact me
-                  <span aria-hidden className="ml-1">→</span>
-                </Link>
-              </div>
-            </div>
           </div>
         </section>
       </motion.main>

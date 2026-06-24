@@ -83,14 +83,15 @@ const AboutSection = () => {
             {workAreas.map((area, index) => {
               const Icon = area.icon;
               const isHighlighted = index === 0;
+              const indexLabel = String(index + 1).padStart(2, "0");
 
               return (
                 <motion.div
                   key={area.title}
-                  className={`border min-h-[260px] p-7 flex flex-col justify-between ${
+                  className={`group/card border min-h-[260px] p-7 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 ${
                     isHighlighted
                       ? "bg-[#7A3A30] border-[#7A3A30] text-[#FFF5F0]"
-                      : "bg-card border-border text-foreground"
+                      : "bg-card border-border text-foreground hover:border-foreground/30"
                   }`}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -98,11 +99,16 @@ const AboutSection = () => {
                   viewport={{ once: true }}
                 >
                   <div className="space-y-5">
-                    <Icon
-                      size={24}
-                      className={isHighlighted ? "text-[#FFF5F0]" : "text-foreground"}
-                      strokeWidth={1.75}
-                    />
+                    <div className="flex items-start justify-between">
+                      <Icon
+                        size={24}
+                        className={`transition-transform duration-300 group-hover/card:scale-110 ${isHighlighted ? "text-[#FFF5F0]" : "text-foreground"}`}
+                        strokeWidth={1.75}
+                      />
+                      <span className={`text-xs font-mono tabular-nums select-none ${isHighlighted ? "text-[#FFF5F0]/30" : "text-foreground/15"}`}>
+                        {indexLabel}
+                      </span>
+                    </div>
                     <h3 className="text-2xl font-semibold tracking-tight leading-tight">{area.title}</h3>
                     <p className={`text-sm leading-relaxed ${isHighlighted ? "text-[#F4D8CF]" : "text-muted-foreground"}`}>
                       {area.description}
@@ -120,7 +126,7 @@ const AboutSection = () => {
                     <span className="relative inline-block after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-current after:transition-all after:duration-300 group-hover:after:w-full">
                       Read More
                     </span>
-                    <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-0.5" />
+                    <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
                   </Link>
                 </motion.div>
               );
@@ -149,10 +155,10 @@ const AboutSection = () => {
               return (
                 <motion.div
                   key={item.title}
-                  className={`border px-6 py-6 md:px-8 md:py-7 flex flex-col md:flex-row md:items-center md:justify-between gap-4 ${
+                  className={`group/exp border px-6 py-6 md:px-8 md:py-7 flex flex-col md:flex-row md:items-center md:justify-between gap-4 transition-all duration-300 hover:-translate-y-0.5 ${
                     isHighlighted
                       ? "bg-foreground border-foreground text-background"
-                      : "bg-card border-border text-foreground"
+                      : "bg-card border-border text-foreground hover:border-foreground/30"
                   }`}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -161,7 +167,7 @@ const AboutSection = () => {
                 >
                   <div className="flex items-start gap-4">
                     <span
-                      className={`h-8 w-8 shrink-0 inline-flex items-center justify-center text-sm font-bold ${
+                      className={`h-8 w-8 shrink-0 inline-flex items-center justify-center text-sm font-bold transition-transform duration-300 group-hover/exp:scale-110 ${
                         isHighlighted ? "bg-background/15 text-background" : "bg-foreground text-background"
                       }`}
                     >
@@ -254,7 +260,7 @@ const AboutSection = () => {
               return (
                 <motion.article
                   key={project.id}
-                  className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center"
+                  className="group/proj grid lg:grid-cols-2 gap-10 lg:gap-14 items-center"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.45, delay: index * 0.08 }}
@@ -302,7 +308,7 @@ const AboutSection = () => {
                   </div>
 
                   <div className={`overflow-hidden ${isReverse ? "order-1 lg:order-2" : "order-1 lg:order-1"}`}>
-                    <Link to={project.href} aria-label={project.title} className="mx-auto block w-full max-w-[34rem]">
+                    <Link to={project.href} aria-label={project.title} className="mx-auto block w-full max-w-[34rem] overflow-hidden">
                       <img
                         src={project.image}
                         alt={`${project.title} project thumbnail`}
@@ -311,7 +317,7 @@ const AboutSection = () => {
                         width={544}
                         height={340}
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 544px"
-                        className={`aspect-[16/10] w-full ${project.id === 3 ? "object-contain" : "object-cover"}`}
+                        className={`aspect-[16/10] w-full transition-transform duration-500 group-hover/proj:scale-[1.03] ${project.id === 3 ? "object-contain" : "object-cover"}`}
                       />
                     </Link>
                   </div>

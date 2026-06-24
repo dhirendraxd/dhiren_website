@@ -197,13 +197,12 @@ const Footer = () => {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -2 }}
                         transition={{ duration: 0.22 }}
-                        className="group absolute inset-0 inline-flex items-center justify-center rounded-none border border-foreground bg-[#f7f4ee] text-foreground text-sm font-medium transition-colors duration-300 hover:bg-[#7A3A30] hover:text-white disabled:cursor-not-allowed disabled:opacity-75"
+                        className="group absolute inset-0 inline-flex items-center justify-center rounded-none border border-foreground bg-[#f7f4ee] text-foreground text-sm font-medium transition-all duration-500 ease-out hover:bg-[#7A3A30] hover:text-white disabled:cursor-not-allowed disabled:opacity-75"
                       >
                         <span>{isSubmitting ? "Sending" : "Send Me"}</span>
-                        <Send
-                          size={14}
-                          className="ml-0 w-0 opacity-0 transition-all duration-300 group-hover:ml-1 group-hover:w-[14px] group-hover:opacity-100"
-                        />
+                        <span className="inline-block max-w-0 overflow-hidden transition-all duration-500 ease-out group-hover:max-w-[22px]">
+                          <Send size={14} className="ml-1.5" />
+                        </span>
                       </motion.button>
                     )}
                   </AnimatePresence>

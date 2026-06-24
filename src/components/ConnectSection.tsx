@@ -23,12 +23,10 @@ const ConnectSection = () => {
                     rel="noopener noreferrer"
                     aria-label="LinkedIn"
                     title="LinkedIn"
-                    className="group relative inline-flex items-center justify-center p-1 leading-none text-[#0A66C2] transition-all duration-200 hover:opacity-80 hover:-translate-y-0.5"
+                    className="group relative inline-flex flex-col items-center gap-1 p-1 leading-none text-[#0A66C2] transition-transform duration-200 hover:-translate-y-1 hover:scale-110"
                   >
                     <FaLinkedinIn size={26} />
-                    <span className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 rounded bg-foreground px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-background opacity-0 transition-opacity duration-150 group-hover:opacity-100">
-                      LinkedIn
-                    </span>
+                    <span className="h-px w-0 bg-[#0A66C2] transition-all duration-300 group-hover:w-full" aria-hidden="true" />
                   </a>
                   <a
                     href="https://instagram.com"
@@ -36,12 +34,10 @@ const ConnectSection = () => {
                     rel="noopener noreferrer"
                     aria-label="Instagram"
                     title="Instagram"
-                    className="group relative inline-flex items-center justify-center p-1 leading-none text-[#E4405F] transition-all duration-200 hover:opacity-80 hover:-translate-y-0.5"
+                    className="group relative inline-flex flex-col items-center gap-1 p-1 leading-none text-[#E4405F] transition-transform duration-200 hover:-translate-y-1 hover:scale-110"
                   >
                     <FaInstagram size={26} />
-                    <span className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 rounded bg-foreground px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-background opacity-0 transition-opacity duration-150 group-hover:opacity-100">
-                      Insta
-                    </span>
+                    <span className="h-px w-0 bg-[#E4405F] transition-all duration-300 group-hover:w-full" aria-hidden="true" />
                   </a>
                   <a
                     href="https://github.com/dhirendraxd"
@@ -49,12 +45,10 @@ const ConnectSection = () => {
                     rel="noopener noreferrer"
                     aria-label="GitHub"
                     title="GitHub"
-                    className="group relative inline-flex items-center justify-center p-1 leading-none text-[#181717] transition-all duration-200 hover:opacity-80 hover:-translate-y-0.5"
+                    className="group relative inline-flex flex-col items-center gap-1 p-1 leading-none text-[#181717] transition-transform duration-200 hover:-translate-y-1 hover:scale-110"
                   >
                     <FaGithub size={26} />
-                    <span className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 rounded bg-foreground px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-background opacity-0 transition-opacity duration-150 group-hover:opacity-100">
-                      GitHub
-                    </span>
+                    <span className="h-px w-0 bg-[#181717] transition-all duration-300 group-hover:w-full" aria-hidden="true" />
                   </a>
                 </nav>
               </div>
