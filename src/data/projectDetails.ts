@@ -266,7 +266,7 @@ export const projectDetails: ProjectDetail[] = [
     ],
     tags: ["Campus Innovation", "Community", "Student Platform"],
     image: issueHiveHeroImage,
-    gallery: [issueHiveThumbnail, images.mitraSmart, images.devBus, images.volunteerPlatform, images.eduConnect]
+    gallery: [issueHiveHeroImage, images.mitraSmart, images.devBus, images.volunteerPlatform, images.eduConnect]
   },
   {
     slug: "university-fit-engine",

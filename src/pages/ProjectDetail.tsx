@@ -72,10 +72,10 @@ const ProjectDetail = () => {
 
     const g = (project as unknown as { gallery?: unknown }).gallery;
     const galleryImages = Array.isArray(g) ? (g.filter(Boolean) as string[]) : [];
-    const uniqueGalleryImages = galleryImages.filter((image, index, images) => image !== project.image && images.indexOf(image) === index);
+    const uniqueGalleryImages = galleryImages.filter((image, index, arr) => arr.indexOf(image) === index);
 
     if (uniqueGalleryImages.length > 0) {
-      return uniqueGalleryImages.slice(0, 4);
+      return uniqueGalleryImages.slice(0, 5);
     }
 
     return project.image ? [project.image] : [];
@@ -539,40 +539,50 @@ const ProjectDetail = () => {
               </div>
             </div>
 
-            {/* Right: concise content block with title, summary and details */}
-            <aside className="lg:sticky lg:top-20 flex flex-col gap-8 self-start pr-0 lg:pr-8 max-w-[56rem]">
-              <div className="pr-2">
-                <p className="text-xs font-semibold uppercase tracking-[0.26em] text-[#7A3A30]">Selected Project</p>
-                <h1 className="mt-2 text-[2.8rem] font-rajdhani font-bold leading-[1.02] text-[#231d18] sm:text-[3.6rem]">{project.title}</h1>
-                <p className="mt-4 max-w-[56ch] text-[1.02rem] leading-[1.7] text-[#554b41]">{project.summary}</p>
+            {/* Right: project info */}
+            <aside className="lg:sticky lg:top-20 flex flex-col gap-5 self-start pr-0 lg:pr-8 max-w-[56rem]">
+
+              {/* Title block */}
+              <div>
+                <p className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-[#7A3A30]">Selected Project</p>
+                <h1 className="mt-1.5 font-rajdhani text-[2.4rem] font-bold leading-[1.05] text-[#231d18] sm:text-[3rem]">{project.title}</h1>
+                <p className="mt-3 text-[0.93rem] leading-[1.7] text-[#5f574d]">{project.summary}</p>
               </div>
 
-              <div className="w-full border-l-2 border-[#e9e1d6] pl-6 pb-6">
-                <dl className="grid grid-cols-[10.5rem_1fr] gap-y-6 text-base">
-                  <dt className="text-[0.85rem] font-semibold uppercase text-[#6b6259]">Type</dt>
-                  <dd className="text-[1rem] leading-[1.8] text-[#231d18]">{project.category}</dd>
-
-                  <dt className="text-[0.85rem] font-semibold uppercase text-[#6b6259]">Location</dt>
-                  <dd className="text-[1rem] leading-[1.8] text-[#231d18]">{project.serviceSlug === 'advocacy-community' ? 'Nepal' : 'Remote'}</dd>
-
-                  <dt className="text-[0.85rem] font-semibold uppercase text-[#6b6259]">Completion Year</dt>
-                  <dd className="text-[1rem] leading-[1.8] text-[#231d18]">{(project.date.match(/\d{4}$/) || [project.date])[0]}</dd>
-
-                  <dt className="text-[0.85rem] font-semibold uppercase text-[#6b6259]">Size</dt>
-                  <dd className="text-[1rem] leading-[1.8] text-[#231d18]">{project.category}</dd>
-
-                  <dt className="text-[0.85rem] font-semibold uppercase text-[#6b6259]">Design Style</dt>
-                  <dd className="text-[1rem] leading-[1.8] text-[#231d18]">{project.tags.join(', ')}</dd>
-
-                  <ProjectClient
-                    sourceHref={project.sourceHref}
-                    title={project.title}
-                    showGithub={project.serviceSlug === 'tech-projects' || project.serviceSlug === 'digital-marketing'}
-                  />
-                </dl>
+              {/* Tags + meta in one compact row */}
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+                {tagPills.map((tag) => (
+                  <span key={tag} className="border border-[#e4dbcf] px-2 py-0.5 text-[0.68rem] font-semibold uppercase tracking-[0.1em] text-[#6b6259]">
+                    {tag}
+                  </span>
+                ))}
+                <span className="h-3 w-px bg-[#d4ccc4]" aria-hidden="true" />
+                <span className="text-[0.78rem] text-[#6b6259]">
+                  {project.serviceSlug === 'advocacy-community' ? 'Nepal' : 'Remote'} · {(project.date.match(/\d{4}$/) || [project.date])[0]}
+                </span>
               </div>
 
-              {/* View source intentionally removed per design */}
+              {/* Explore links */}
+              <ProjectClient
+                sourceHref={project.sourceHref}
+                title={project.title}
+                showGithub={project.serviceSlug === 'tech-projects' || project.serviceSlug === 'digital-marketing'}
+              />
+
+              {/* Key Outcomes */}
+              {outcomes.length > 0 && (
+                <div className="border-t border-[#e9e1d6] pt-5">
+                  <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-[#6b6259] mb-4">Key Outcomes</p>
+                  <div>
+                    {outcomes.map((o, i) => (
+                      <div key={o} className="flex items-start gap-4 border-b border-[#e9e1d6] py-4 last:border-b-0">
+                        <span className="shrink-0 font-mono text-[0.68rem] tabular-nums text-[#7A3A30] mt-0.5">{String(i + 1).padStart(2, "0")}</span>
+                        <p className="text-[0.95rem] leading-[1.65] text-[#3a332c]">{o}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </aside>
           </section>
         </section>
@@ -586,53 +596,56 @@ const ProjectDetail = () => {
         {/* CTA: Have a project in mind? */}
         
 
-        {/* FAQ: styled card accordion below contact CTA */}
+        {/* FAQ */}
         <section className="mt-12 py-10">
           <div className="mx-auto max-w-[88rem] px-6">
             <div className="border-t border-[#e4dbcf] pt-10">
-              <div className="flex flex-col items-center">
-                <div className="mb-3 inline-flex items-center gap-2 text-sm text-[#7A3A30]">
-                  <span className="h-2 w-2 rounded-full bg-[#ffb86b] shadow-sm" />
-                  <span className="uppercase tracking-[0.18em]">FAQ</span>
-                </div>
 
-                <h3 className="font-rajdhani text-[2.2rem] font-bold text-[#231d18] mb-3 text-center">Your questions, clearly answered here</h3>
-                <p className="max-w-[64ch] text-center text-[#5f574d] mb-6">Quick answers to common questions about working together, timelines, and pricing.</p>
+              {/* Header */}
+              <div className="mb-6 flex flex-col items-center gap-1.5">
+                <p className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-[#7A3A30]">FAQ</p>
+                <h3 className="font-rajdhani text-[1.9rem] font-bold text-[#231d18] text-center leading-tight tracking-tight">
+                  Your questions, clearly answered here
+                </h3>
+                <p className="max-w-[44ch] text-center text-[0.83rem] text-[#6b6259]">
+                  Quick answers about working together, timelines, and pricing.
+                </p>
               </div>
 
-              <div className="mx-auto grid max-w-4xl grid-cols-1 gap-4 sm:grid-cols-2">
-                <details className="group bg-white group-open:bg-transparent group-open:shadow-none border border-[#f3efe8] p-5 rounded-none shadow-sm">
-                  <summary className="flex items-center justify-between cursor-pointer text-[1rem] font-semibold text-[#231d18]">
-                    <span>What types of projects have you completed in the past?</span>
-                    <span className="ml-4 flex h-8 w-8 items-center justify-center rounded-full border border-[#e9e1d6] text-[#7A3A30] transition-transform group-open:rotate-45">+</span>
-                  </summary>
-                  <p className="mt-3 text-[0.95rem] text-[#5f574d]">I’ve worked across digital marketing, community programs, and tech projects—ranging from campaign execution and SEO to community labs and campus innovation platforms.</p>
-                </details>
-
-                <details className="group bg-white group-open:bg-transparent group-open:shadow-none border border-[#f3efe8] p-5 rounded-none shadow-sm">
-                  <summary className="flex items-center justify-between cursor-pointer text-[1rem] font-semibold text-[#231d18]">
-                    <span>Do you provide a guarantee for your work?</span>
-                    <span className="ml-4 flex h-8 w-8 items-center justify-center rounded-full border border-[#e9e1d6] text-[#7A3A30] transition-transform group-open:rotate-45">+</span>
-                  </summary>
-                  <p className="mt-3 text-[0.95rem] text-[#5f574d]">I offer clear deliverables and a revision plan; ongoing support and performance-based guarantees are scoped into retainers or special agreements as needed.</p>
-                </details>
-
-                <details className="group bg-white group-open:bg-transparent group-open:shadow-none border border-[#f3efe8] p-5 rounded-none shadow-sm">
-                  <summary className="flex items-center justify-between cursor-pointer text-[1rem] font-semibold text-[#231d18]">
-                    <span>How do we collaborate and communicate?</span>
-                    <span className="ml-4 flex h-8 w-8 items-center justify-center rounded-full border border-[#e9e1d6] text-[#7A3A30] transition-transform group-open:rotate-45">+</span>
-                  </summary>
-                  <p className="mt-3 text-[0.95rem] text-[#5f574d]">I adapt to your workflow—Slack, email, or regular calls. Weekly check-ins are recommended during active sprints and concise updates between milestones.</p>
-                </details>
-
-                <details className="group bg-white group-open:bg-transparent group-open:shadow-none border border-[#f3efe8] p-5 rounded-none shadow-sm">
-                  <summary className="flex items-center justify-between cursor-pointer text-[1rem] font-semibold text-[#231d18]">
-                    <span>What are typical timelines and costs?</span>
-                    <span className="ml-4 flex h-8 w-8 items-center justify-center rounded-full border border-[#e9e1d6] text-[#7A3A30] transition-transform group-open:rotate-45">+</span>
-                  </summary>
-                  <p className="mt-3 text-[0.95rem] text-[#5f574d]">Most projects fall between 4–12 weeks; costs depend on scope. I share a clear proposal with milestones and pricing during discovery.</p>
-                </details>
+              {/* Accordion */}
+              <div className="mx-auto max-w-3xl grid grid-cols-1 sm:grid-cols-2 sm:divide-x sm:divide-[#e9e1d6]">
+                {[
+                  {
+                    q: "What types of projects have you completed in the past?",
+                    a: "I’ve worked across digital marketing, community programs, and tech projects—ranging from campaign execution and SEO to community labs and campus innovation platforms.",
+                  },
+                  {
+                    q: "Do you provide a guarantee for your work?",
+                    a: "I offer clear deliverables and a revision plan; ongoing support and performance-based guarantees are scoped into retainers or special agreements as needed.",
+                  },
+                  {
+                    q: "How do we collaborate and communicate?",
+                    a: "I adapt to your workflow—Slack, email, or regular calls. Weekly check-ins are recommended during active sprints and concise updates between milestones.",
+                  },
+                  {
+                    q: "What are typical timelines and costs?",
+                    a: "Most projects fall between 4–12 weeks; costs depend on scope. I share a clear proposal with milestones and pricing during discovery.",
+                  },
+                ].map(({ q, a }, idx) => (
+                  <details key={q} className={`group border-[#e9e1d6] sm:odd:pr-6 sm:even:pl-6 ${idx < 2 ? 'border-b' : idx === 2 ? 'border-b sm:border-b-0' : ''}`}>
+                    <summary className="flex cursor-pointer items-center justify-between gap-3 py-3.5 list-none [&::-webkit-details-marker]:hidden">
+                      <span className="text-[0.88rem] font-semibold text-[#231d18] transition-colors duration-200 group-hover:text-[#7A3A30]">
+                        {q}
+                      </span>
+                      <span className="shrink-0 text-base font-light text-[#7A3A30] transition-transform duration-300 group-open:rotate-45 select-none leading-none">
+                        +
+                      </span>
+                    </summary>
+                    <p className="pb-3.5 text-[0.84rem] leading-[1.72] text-[#5f574d]">{a}</p>
+                  </details>
+                ))}
               </div>
+
             </div>
           </div>
         </section>
