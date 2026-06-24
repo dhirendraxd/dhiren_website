@@ -8,22 +8,23 @@ import { assetPath } from '@/lib/assetPath';
 
 const AboutSection = () => {
   const [showAllExperiences, setShowAllExperiences] = useState(false);
+
   const workAreas = [
     {
       title: "Digital Marketing",
-      description: "SEO, PPC, content marketing, and visual design to scale your reach and drive growth.",
+      description: "SEO, PPC, content marketing, and visual design to scale reach and drive measurable growth.",
       icon: Megaphone,
       href: "/digital-marketing",
     },
     {
-      title: "Advocacy & Community Projects",
-      description: "Advocacy and community-centered initiatives focused on awareness, collaboration, and social impact.",
+      title: "Advocacy & Community",
+      description: "Awareness campaigns, fellowship programs, and civic initiatives focused on collaboration and social impact.",
       icon: Users,
       href: "/advocacy-community",
     },
     {
       title: "Hackathons & Builds",
-      description: "Technical hackathon work in short: coding core features, integrating APIs, debugging flows, and shipping prototypes.",
+      description: "Shipping working prototypes — core features, API integrations, and deployment under tight timelines.",
       icon: Code2,
       href: "/tech-projects",
     },
@@ -34,47 +35,51 @@ const AboutSection = () => {
   const projects = [
     {
       id: 2,
-      type: "Community Project",
+      type: "Community",
       title: "Community fellowship initiatives for collaborative social impact.",
       image: assetPath('civic-tech.webp'),
       href: "/projects/fellowship-community-labs",
     },
     {
       id: 3,
-      type: "Tech Project",
+      type: "Tech",
       title: "Volunteer platform design for NGOs and youth programs.",
       image: assetPath('2nd-new.webp'),
       href: "/projects/ngo-volunteer-management",
     },
     {
       id: 1,
-      type: "Tech Project",
-      title: "Issue Hive - Awarded 3rd Prize at KIST Fair 2082",
+      type: "Tech",
+      title: "Issue Hive — Awarded 3rd Prize at KIST Fair 2082",
       image: issueHiveThumbnail,
       href: "/projects/issue-hive-awarded-3rd-prize-at-kist-fair-2082",
     },
   ];
 
   return (
-    <section id="about" className="scroll-mt-24 pt-24 pb-10 md:pb-12 px-8 md:px-12 bg-card font-rajdhani" role="region" aria-label="About section">
-      <div className="max-w-[84rem] mx-auto">
-        <div className="space-y-10">
+    <section
+      id="about"
+      className="scroll-mt-24 pt-24 pb-12 px-8 md:px-12 bg-card font-rajdhani"
+      role="region"
+      aria-label="About section"
+    >
+      <div className="max-w-[84rem] mx-auto space-y-24">
+
+        {/* — What I Work On — */}
+        <div>
           <motion.div
-            className="space-y-3"
-            initial={{ opacity: 0, y: -20 }}
+            className="border-t border-[#e9e1d6] pt-8 mb-10"
+            initial={{ opacity: 0, y: -16 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.45 }}
             viewport={{ once: true }}
           >
-            <p className="text-xs uppercase tracking-widest font-semibold text-muted-foreground">Selected Pages</p>
-
-            <div className="grid md:grid-cols-[1.1fr_1fr] gap-6 md:gap-8 items-start">
-              <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground leading-tight max-w-md">
+            <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+              <h2 className="font-rajdhani text-[clamp(2rem,3.8vw,3.2rem)] font-bold leading-[1.05] tracking-tight text-[#231d18]">
                 What I Work On
               </h2>
-
-              <p className="text-sm text-muted-foreground leading-relaxed max-w-md">
-                Focused on three core areas: digital marketing, advocacy and community projects, and hackathons and builds.
+              <p className="text-[0.88rem] text-[#6f655a] leading-[1.75] max-w-[36ch] md:text-right">
+                Digital marketing, community and advocacy work, and building things — from campaigns to prototypes.
               </p>
             </div>
           </motion.div>
@@ -82,51 +87,48 @@ const AboutSection = () => {
           <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
             {workAreas.map((area, index) => {
               const Icon = area.icon;
-              const isHighlighted = index === 0;
-              const indexLabel = String(index + 1).padStart(2, "0");
+              const isAccent = index === 0;
 
               return (
                 <motion.div
                   key={area.title}
-                  className={`group/card border min-h-[260px] p-7 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 ${
-                    isHighlighted
-                      ? "bg-[#7A3A30] border-[#7A3A30] text-[#FFF5F0]"
-                      : "bg-card border-border text-foreground hover:border-foreground/30"
+                  className={`group/card border min-h-[320px] p-10 flex flex-col justify-between transition-colors duration-300 ${
+                    isAccent
+                      ? "bg-[#7A3A30] border-[#7A3A30]"
+                      : "bg-card border-[#e4dbcf] hover:border-[#7A3A30]/40"
                   }`}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
+                  transition={{ duration: 0.4, delay: index * 0.08 }}
                   viewport={{ once: true }}
                 >
-                  <div className="space-y-5">
+                  <div className="space-y-4">
                     <div className="flex items-start justify-between">
                       <Icon
-                        size={24}
-                        className={`transition-transform duration-300 group-hover/card:scale-110 ${isHighlighted ? "text-[#FFF5F0]" : "text-foreground"}`}
+                        size={20}
+                        className={isAccent ? "text-[#FFF5F0]/75" : "text-[#7A3A30]"}
                         strokeWidth={1.75}
                       />
-                      <span className={`text-xs font-mono tabular-nums select-none ${isHighlighted ? "text-[#FFF5F0]/30" : "text-foreground/15"}`}>
-                        {indexLabel}
+                      <span className={`font-mono text-[0.58rem] tabular-nums select-none ${isAccent ? "text-[#FFF5F0]/25" : "text-[#231d18]/20"}`}>
+                        {String(index + 1).padStart(2, "0")}
                       </span>
                     </div>
-                    <h3 className="text-2xl font-semibold tracking-tight leading-tight">{area.title}</h3>
-                    <p className={`text-sm leading-relaxed ${isHighlighted ? "text-[#F4D8CF]" : "text-muted-foreground"}`}>
+                    <h3 className={`text-[1.2rem] font-bold tracking-tight leading-snug ${isAccent ? "text-[#FFF5F0]" : "text-[#231d18]"}`}>
+                      {area.title}
+                    </h3>
+                    <p className={`text-[0.86rem] leading-[1.72] ${isAccent ? "text-[#F4D8CF]" : "text-[#6f655a]"}`}>
                       {area.description}
                     </p>
                   </div>
 
                   <Link
                     to={area.href}
-                    className={`group inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider transition-colors duration-300 ${
-                      isHighlighted
-                        ? "text-[#FFF5F0] hover:text-[#FDE8DD]"
-                        : "text-foreground/80 hover:text-[#7A3A30]"
+                    className={`group mt-6 inline-flex items-center gap-1.5 text-[0.7rem] font-semibold uppercase tracking-[0.18em] transition-colors duration-200 ${
+                      isAccent ? "text-[#FFF5F0]/70 hover:text-[#FFF5F0]" : "text-[#6f655a] hover:text-[#7A3A30]"
                     }`}
                   >
-                    <span className="relative inline-block after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-current after:transition-all after:duration-300 group-hover:after:w-full">
-                      Read More
-                    </span>
-                    <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
+                    Explore
+                    <ArrowRight size={11} className="transition-transform duration-200 group-hover:translate-x-0.5" />
                   </Link>
                 </motion.div>
               );
@@ -134,181 +136,161 @@ const AboutSection = () => {
           </div>
         </div>
 
-        <div className="mt-24 space-y-10">
+        {/* — Relevant Experience — */}
+        <div>
           <motion.div
-            className="flex flex-col items-center text-center space-y-4"
-            initial={{ opacity: 0, y: -20 }}
+            className="border-t border-[#e9e1d6] pt-8 mb-8"
+            initial={{ opacity: 0, y: -16 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.45 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground">Relevant Experience</h3>
-            <p className="text-sm text-muted-foreground max-w-2xl leading-relaxed">
-              Hands-on experience across SEO, content, campaign execution, and performance analytics to improve reach, engagement, and conversions.
-            </p>
+            <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+              <h2 className="font-rajdhani text-[clamp(1.8rem,3vw,2.6rem)] font-bold tracking-tight text-[#231d18]">
+                Relevant Experience
+              </h2>
+              <p className="text-[0.88rem] text-[#6f655a] leading-[1.72] max-w-[36ch] md:text-right">
+                Roles across marketing execution, community leadership, and civic-tech programs.
+              </p>
+            </div>
           </motion.div>
 
-          <div className="space-y-4">
+          <div className="space-y-2">
             {experiments.slice(0, showAllExperiences ? experiments.length : 3).map((item, index) => {
-              const isHighlighted = index === 0;
-
+              const isDark = index === 0;
               return (
                 <motion.div
                   key={item.title}
-                  className={`group/exp border px-6 py-6 md:px-8 md:py-7 flex flex-col md:flex-row md:items-center md:justify-between gap-4 transition-all duration-300 hover:-translate-y-0.5 ${
-                    isHighlighted
-                      ? "bg-foreground border-foreground text-background"
-                      : "bg-card border-border text-foreground hover:border-foreground/30"
+                  className={`group/exp flex flex-col md:flex-row md:items-center md:justify-between gap-3 ${
+                    isDark
+                      ? "bg-[#231d18] px-8 py-8"
+                      : "border border-[#e4dbcf] px-6 py-5"
                   }`}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: index * 0.08 }}
+                  transition={{ duration: 0.35, delay: index * 0.07 }}
                   viewport={{ once: true }}
                 >
-                  <div className="flex items-start gap-4">
-                    <span
-                      className={`h-8 w-8 shrink-0 inline-flex items-center justify-center text-sm font-bold transition-transform duration-300 group-hover/exp:scale-110 ${
-                        isHighlighted ? "bg-background/15 text-background" : "bg-foreground text-background"
-                      }`}
-                    >
-                      {index + 1}
+                  <div className="flex items-center gap-5">
+                    <span className="shrink-0 font-mono text-[0.62rem] tabular-nums text-[#7A3A30]">
+                      {String(index + 1).padStart(2, "0")}
                     </span>
-
-                    <div className="space-y-1">
-                      <h4 className="text-xl font-semibold tracking-tight">{item.title}</h4>
+                    <div>
+                      <h4 className={`font-bold tracking-tight ${isDark ? "text-[1.15rem] text-white" : "text-[1.08rem] text-[#231d18]"}`}>{item.title}</h4>
                       <a
                         href={item.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className={`text-sm leading-relaxed underline underline-offset-4 decoration-transparent transition-colors hover:decoration-current ${
-                          isHighlighted ? "text-background/80 hover:text-background" : "text-muted-foreground hover:text-[#7A3A30]"
-                        }`}
+                        className={`${isDark ? "text-[1rem] text-[#c8bfb5] hover:text-white transition-colors duration-200 underline-offset-4 hover:underline" : "text-[0.94rem] text-[#6f655a]"}`}
                       >
                         {item.company}
                       </a>
-                      {item.suffix ? (
-                        <span className={`text-sm leading-relaxed ${isHighlighted ? "text-background/80" : "text-muted-foreground"}`}>
-                          {item.suffix}
-                        </span>
-                      ) : null}
+                      {item.suffix && (
+                        <span className={`ml-2 ${isDark ? "text-[0.88rem] text-[#6f655a]" : "text-[0.84rem] text-[#a89f96]"}`}>{item.suffix}</span>
+                      )}
                     </div>
                   </div>
 
-                  <div
-                    className={`md:pl-6 md:border-l whitespace-nowrap flex items-center gap-1.5 ${
-                      isHighlighted ? "border-background/35" : "border-border"
-                    }`}
-                  >
-                    <span className={`text-sm font-semibold tracking-wide ${isHighlighted ? "text-background" : "text-foreground"}`}>
-                      {item.dateRange}
-                    </span>
-                    <span className={`text-xs font-medium ${isHighlighted ? "text-background/60" : "text-muted-foreground"}`}>
-                      · {item.duration}
-                    </span>
+                  <div className="shrink-0 whitespace-nowrap">
+                    <span className={`font-semibold ${isDark ? "text-[1rem] text-white" : "text-[0.94rem] text-[#231d18]"}`}>{item.dateRange}</span>
+                    <span className={`ml-1.5 ${isDark ? "text-[0.88rem] text-[#6f655a]" : "text-[0.84rem] text-[#a89f96]"}`}>· {item.duration}</span>
                   </div>
                 </motion.div>
               );
             })}
-            
+
             {!showAllExperiences && experiments.length > 3 && (
               <motion.div
                 className="flex justify-center pt-4"
-                initial={{ opacity: 0, y: 10 }}
+                initial={{ opacity: 0, y: 8 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: 0.3 }}
+                transition={{ duration: 0.3, delay: 0.25 }}
                 viewport={{ once: true }}
               >
                 <button
                   onClick={() => setShowAllExperiences(true)}
-                  className="group inline-flex items-center gap-2 text-xs font-medium text-muted-foreground hover:text-[#7A3A30] transition-colors duration-300"
+                  className="group inline-flex items-center gap-1.5 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-[#6b6259] transition-colors hover:text-[#7A3A30]"
                 >
-                  <span className="relative inline-block after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-[#7A3A30] after:transition-all after:duration-300 group-hover:after:w-full">
-                    View More
-                  </span>
-                  <ArrowRight size={12} className="transition-transform duration-300 group-hover:translate-x-0.5" />
+                  View More
+                  <ArrowRight size={11} className="transition-transform duration-200 group-hover:translate-x-0.5" />
                 </button>
               </motion.div>
             )}
           </div>
         </div>
 
-        <div id="projects" className="mt-28 space-y-14">
+        {/* — Selected Projects — */}
+        <div id="projects">
           <motion.div
-            className="space-y-3"
-            initial={{ opacity: 0, y: -20 }}
+            className="border-t border-[#e9e1d6] pt-8 mb-12"
+            initial={{ opacity: 0, y: -16 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.45 }}
             viewport={{ once: true }}
           >
-            <p className="text-xs uppercase tracking-widest font-semibold text-muted-foreground">Selected Projects</p>
-
-            <div className="grid md:grid-cols-[1.1fr_1fr] gap-6 md:gap-8 items-start">
-              <h3 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground leading-tight max-w-md">
-                Projects
+            <div className="flex items-center gap-3 mb-3">
+              <span className="h-px w-5 bg-[#7A3A30]" aria-hidden="true" />
+              <p className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-[#7A3A30]">Selected Projects</p>
+            </div>
+            <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+              <h3 className="font-rajdhani text-[clamp(1.8rem,3.2vw,2.8rem)] font-bold tracking-tight text-[#231d18]">
+                A few things I've built.
               </h3>
-
-              <p className="text-sm text-muted-foreground leading-relaxed max-w-md">
-                Selected tech and community projects focused on outcomes, execution, and measurable impact.
+              <p className="text-[0.88rem] text-[#6f655a] leading-[1.72] max-w-[36ch] md:text-right">
+                Community programs, platform concepts, and a campus tool that won an award.
               </p>
             </div>
           </motion.div>
 
-          <div className="space-y-14">
+          <div className="space-y-0">
             {projects.map((project, index) => {
               const isReverse = index % 2 === 1;
 
               return (
                 <motion.article
                   key={project.id}
-                  className="group/proj grid lg:grid-cols-2 gap-10 lg:gap-14 items-center"
-                  initial={{ opacity: 0, y: 20 }}
+                  className="group/proj grid lg:grid-cols-2 gap-10 lg:gap-14 items-center border-t border-[#e9e1d6] py-10 last:border-b last:border-[#e9e1d6]"
+                  initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.45, delay: index * 0.08 }}
+                  transition={{ duration: 0.4, delay: index * 0.07 }}
                   viewport={{ once: true }}
                 >
                   <div className={isReverse ? "order-2 lg:order-1" : "order-2 lg:order-2"}>
-                    <span className="inline-flex items-center rounded-none bg-foreground text-background px-4 py-1 text-[11px] font-semibold uppercase tracking-wider">
+                    <p className="text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-[#7A3A30]">
                       {project.type}
-                    </span>
+                    </p>
 
-                    <h4 className="mt-5 text-4xl md:text-[2.6rem] font-bold tracking-tight leading-tight text-foreground max-w-xl">
+                    <h4 className="mt-2.5 font-rajdhani text-[1.5rem] md:text-[1.85rem] font-bold tracking-tight leading-snug text-[#231d18] max-w-xl">
                       {project.title}
                     </h4>
 
-                    <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
+                    <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
                       <Link
                         to={project.href}
-                        className="group inline-flex items-center gap-2 text-lg font-medium text-foreground/90 transition-colors duration-300 hover:text-[#7A3A30]"
+                        className="group inline-flex items-center gap-1.5 text-[0.75rem] font-semibold uppercase tracking-[0.16em] text-[#231d18] transition-colors hover:text-[#7A3A30]"
                       >
-                        <span className="relative inline-block tracking-wide after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-[#7A3A30] after:transition-all after:duration-300 group-hover:after:w-full">
+                        <span className="relative after:absolute after:left-0 after:-bottom-px after:h-px after:w-0 after:bg-[#7A3A30] after:transition-all after:duration-200 group-hover:after:w-full">
                           Explore Work
                         </span>
-                        <ArrowUpRight
-                          size={18}
-                          className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                        />
+                        <ArrowUpRight size={12} className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                       </Link>
 
                       {index === projects.length - 1 && (
-                        <div className="flex flex-col items-start gap-2 sm:ml-24 lg:ml-40">
-                          <Link
-                            to="/projects"
-                            className="group inline-flex items-center gap-2 text-lg font-medium text-foreground/90 transition-colors duration-300 hover:text-[#7A3A30]"
-                          >
-                            <span className="relative inline-block tracking-wide after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-[#7A3A30] after:transition-all after:duration-300 group-hover:after:w-full">
-                              View All Projects
-                            </span>
-                            <ArrowRight size={18} className="transition-transform duration-300 group-hover:translate-x-0.5" />
-                          </Link>
-                          <span className="h-px w-24 bg-border/70" aria-hidden="true" />
-                        </div>
+                        <Link
+                          to="/projects"
+                          className="group inline-flex items-center gap-1.5 text-[0.75rem] font-semibold uppercase tracking-[0.16em] text-[#6f655a] transition-colors hover:text-[#7A3A30]"
+                        >
+                          <span className="relative after:absolute after:left-0 after:-bottom-px after:h-px after:w-0 after:bg-[#7A3A30] after:transition-all after:duration-200 group-hover:after:w-full">
+                            View All Projects
+                          </span>
+                          <ArrowRight size={12} className="transition-transform duration-200 group-hover:translate-x-0.5" />
+                        </Link>
                       )}
                     </div>
-                    <div className="h-px w-28 bg-border mt-2.5" />
                   </div>
 
                   <div className={`overflow-hidden ${isReverse ? "order-1 lg:order-2" : "order-1 lg:order-1"}`}>
-                    <Link to={project.href} aria-label={project.title} className="mx-auto block w-full max-w-[34rem] overflow-hidden">
+                    <Link to={project.href} aria-label={project.title} className="block w-full max-w-[34rem] overflow-hidden">
                       <img
                         src={project.image}
                         alt={`${project.title} project thumbnail`}
@@ -317,14 +299,13 @@ const AboutSection = () => {
                         width={544}
                         height={340}
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 544px"
-                        className={`aspect-[16/10] w-full transition-transform duration-500 group-hover/proj:scale-[1.03] ${project.id === 3 ? "object-contain" : "object-cover"}`}
+                        className="aspect-[16/10] w-full object-cover transition-transform duration-500 group-hover/proj:scale-[1.03]"
                       />
                     </Link>
                   </div>
                 </motion.article>
               );
             })}
-
           </div>
         </div>
 

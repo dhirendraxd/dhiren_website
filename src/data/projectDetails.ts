@@ -91,23 +91,101 @@ const images = {
   volunteerPlatform: assetPath('2nd-new.webp'),
 };
 
+const unsplash = (id: string) =>
+  `https://images.unsplash.com/photo-${id}?w=960&h=640&fit=crop&auto=format&q=80`;
+
+const netImages = {
+  communityWorkshop: unsplash('1522202176988-66273c2fd55f'),  // people collaborating around table
+  youthCommunity:    unsplash('1529156069898-49953e39b3ac'),  // diverse group of young people
+  sustainability:    unsplash('1542601906990-b4d3fb778b09'),  // hands holding green plant
+  techCloud:         unsplash('1451187580459-43490279c0fa'),  // earth from space / cloud tech
+  webDev:            unsplash('1467232004584-a241de8bcf5d'),  // laptop / web development
+  dialogue:          unsplash('1573497019940-1c28c88b4f3e'),  // professional meeting discussion
+  digitalRights:     unsplash('1516321318423-f06f85e504b3'),  // digital screen / interface
+  greenInnovation:   unsplash('1473341304170-971dccb5ac1e'),  // wind turbines / clean energy
+  socialMedia:       unsplash('1611162617213-7d7a39e9b1d7'),  // social media on phone
+  analytics:         unsplash('1551288049-bebda4e38f71'),     // data analytics dashboard
+  design:            unsplash('1626785774573-4b799315345d'),  // graphic design workspace
+  fellowshipLab:     unsplash('1517245386807-bb43f82c33c4'),  // workshop / group ideation
+  mentoring:         unsplash('1573496359142-b8d87734a5a2'),  // two people in mentoring session
+  civicMission:      unsplash('1563986768494-4dee2763ff3f'),  // digital connection / cyber
+};
+
 export const projectDetails: ProjectDetail[] = [
   {
-    slug: "ctrlbits-digital-marketing",
-    title: "CtrlBits : Digital Marketing",
+    slug: "seo-smm-content-strategy",
+    title: "SEO & SMM Strategy",
     serviceSlug: "digital-marketing",
-    category: "Digital Marketing",
+    category: "SEO / SMM",
     date: "16 Apr 2025",
-    summary: "Integrated digital marketing execution for CtrlBits, combining SEO, SEM, social publishing, and campaign optimization to strengthen organic and paid performance.",
+    summary: "Integrated SEO and social media strategy for CtrlBits — keyword targeting, content themes, and platform-specific publishing to build compounding organic reach.",
     challenge: "Marketing channels were active but not consistently aligned to one funnel, limiting compounding growth and clear reporting.",
-    approach: "Built a unified monthly plan across keyword targeting, ad groups, social content themes, and performance dashboards with weekly optimization loops.",
+    approach: "Built a unified monthly plan across keyword targeting, social content calendars, and performance dashboards with weekly optimization loops.",
     outcomes: [
       "Improved search visibility for core service pages.",
-      "Standardized campaign reporting across SEO and paid channels.",
-      "Established a repeatable process for content and ad iteration."
+      "Standardized reporting across SEO and social channels.",
+      "Established a repeatable process for content and keyword iteration."
     ],
-    tags: ["SEO", "SEM", "SMM", "PPC", "Analytics"],
-    sourceHref: "https://www.ctrlbits.com/"
+    tags: ["SEO", "SEM", "SMM", "Content Strategy"],
+    image: netImages.socialMedia,
+    sourceHref: "https://www.ctrlbits.com/",
+    gallery: [
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1504868584819-0a05a73e4dc8?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1543286386-2e659306cd6c?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1512428559087-560fa5ceab42?w=960&h=640&fit=crop&auto=format&q=80",
+    ],
+  },
+  {
+    slug: "graphics-design-brand-identity",
+    title: "Graphics Design & Brand Identity",
+    serviceSlug: "digital-marketing",
+    category: "Design",
+    date: "10 Mar 2025",
+    summary: "Visual design execution across brand kits, social assets, and campaign creatives — building a consistent visual language across every digital touchpoint.",
+    challenge: "Brand visuals were inconsistent across platforms, weakening recognition and diluting campaign impact.",
+    approach: "Built a reusable visual system with templates, brand guidelines, and platform-specific asset libraries for faster creative turnaround.",
+    outcomes: [
+      "Consistent visual identity across all brand touchpoints.",
+      "Faster creative turnaround with reusable asset templates.",
+      "Improved brand recall in social campaign performance."
+    ],
+    tags: ["Graphics Design", "Branding", "Visual Identity"],
+    image: netImages.design,
+    sourceHref: "https://www.ctrlbits.com/",
+    gallery: [
+      "https://images.unsplash.com/photo-1561070791-2526f30ee1b4?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1572044162444-ad60f128bba4?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1534447677209-da0980d0a105?w=960&h=640&fit=crop&auto=format&q=80",
+    ],
+  },
+  {
+    slug: "analytics-paid-ads-performance",
+    title: "Analytics & Paid Ads",
+    serviceSlug: "digital-marketing",
+    category: "Paid Media",
+    date: "22 May 2025",
+    summary: "Performance marketing setup combining paid media campaigns with analytics dashboards — turning ad spend into measurable, data-backed decisions.",
+    challenge: "Ad spend was active but lacked clear attribution and optimization feedback loops.",
+    approach: "Set up conversion tracking, audience segmentation, and weekly reporting to align spend with measurable outcomes across channels.",
+    outcomes: [
+      "Improved ROAS across active paid campaigns.",
+      "Clearer attribution model for conversion events.",
+      "Structured reporting cadence for budget decisions."
+    ],
+    tags: ["Analytics", "Paid Ads", "PPC", "Performance Marketing"],
+    image: netImages.analytics,
+    sourceHref: "https://www.ctrlbits.com/",
+    gallery: [
+      "https://images.unsplash.com/photo-1542744095-291d1f67b221?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1504868584819-0a05a73e4dc8?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1512428559087-560fa5ceab42?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1543286386-2e659306cd6c?w=960&h=640&fit=crop&auto=format&q=80",
+    ],
   },
   {
     slug: "digital-rights-awareness-series",
@@ -124,7 +202,15 @@ export const projectDetails: ProjectDetail[] = [
       "Created reusable session material for future cohorts."
     ],
     tags: ["Advocacy", "Community", "Digital Rights"],
-    sourceHref: "https://netmission.asia"
+    image: netImages.civicMission,
+    sourceHref: "https://netmission.asia",
+    gallery: [
+      "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1531482615286-7188771f0a3d?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=960&h=640&fit=crop&auto=format&q=80",
+    ],
   },
   {
     slug: "fellowship-community-labs",
@@ -132,7 +218,7 @@ export const projectDetails: ProjectDetail[] = [
     serviceSlug: "advocacy-community",
     category: "Community",
     date: "14 Mar 2026",
-    summary: "Facilitated collaborative lab-style sessions for fellows to frame social problems and test practical intervention ideas.",
+    summary: "Lab-style sessions where fellows framed real social problems and tested early-stage intervention ideas together.",
     challenge: "Participants had strong motivation but lacked a shared structure for ideation and validation.",
     approach: "Used guided facilitation with problem statements, quick field validation, and feedback rounds to sharpen project direction.",
     outcomes: [
@@ -141,10 +227,13 @@ export const projectDetails: ProjectDetail[] = [
       "Documented lab workflow for reuse in later cycles."
     ],
     tags: ["Fellowship", "Facilitation", "Social Impact"],
-    image: selectedProjectIllustrations.fellowshipCommunityLabs,
+    image: netImages.fellowshipLab,
     gallery: [
-      selectedProjectIllustrations.fellowshipCommunityLabs,
-      images.volunteerPlatform,
+      "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1568992687947-868a62a9f521?w=960&h=640&fit=crop&auto=format&q=80",
     ],
     sourceHref: "https://www.facebook.com/allinfoundationnp/"
   },
@@ -163,7 +252,15 @@ export const projectDetails: ProjectDetail[] = [
       "Better continuity between program cycles."
     ],
     tags: ["Youth Leadership", "Operations", "Civic Programs"],
-    sourceHref: "https://rotary.org"
+    image: netImages.youthCommunity,
+    sourceHref: "https://rotary.org",
+    gallery: [
+      "https://images.unsplash.com/photo-1580582932707-520aef1e7625?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1531538606174-0f90ff5dce83?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1506869640319-fe1a20fd4ca2?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1517457373958-bac9ebd2f4e8?w=960&h=640&fit=crop&auto=format&q=80",
+    ],
   },
   {
     slug: "sustainable-idea-mentoring",
@@ -180,7 +277,15 @@ export const projectDetails: ProjectDetail[] = [
       "Improved confidence in pilot planning."
     ],
     tags: ["Mentoring", "Sustainability", "Design Thinking"],
-    sourceHref: "https://sustainability.com.np/"
+    image: netImages.mentoring,
+    sourceHref: "https://sustainability.com.np/",
+    gallery: [
+      "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1500829242034-e6a0de0c6aee?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1416339426682-caa3a2640c1b?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1442850473887-3c39d36b9e94?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1536329583941-14287ec6fc4e?w=960&h=640&fit=crop&auto=format&q=80",
+    ],
   },
   {
     slug: "community-dialogue-forum",
@@ -197,7 +302,15 @@ export const projectDetails: ProjectDetail[] = [
       "Higher clarity on ownership of next steps."
     ],
     tags: ["Community", "Coordination", "Facilitation"],
-    sourceHref: "https://aws.amazon.com"
+    image: netImages.dialogue,
+    sourceHref: "https://aws.amazon.com",
+    gallery: [
+      "https://images.unsplash.com/photo-1521737604082-bf3dcfca0dc3?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=960&h=640&fit=crop&auto=format&q=80",
+    ],
   },
   {
     slug: "volunteer-coordination-hub",
@@ -214,7 +327,14 @@ export const projectDetails: ProjectDetail[] = [
       "Higher program execution reliability."
     ],
     tags: ["Volunteering", "Leadership", "Program Ops"],
-    image: images.volunteerPlatform
+    image: images.volunteerPlatform,
+    gallery: [
+      "https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1531482615286-7188771f0a3d?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1506869640319-fe1a20fd4ca2?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1568992687947-868a62a9f521?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1517457373958-bac9ebd2f4e8?w=960&h=640&fit=crop&auto=format&q=80",
+    ],
   },
   {
     slug: "policy-literacy-mini-sessions",
@@ -231,7 +351,14 @@ export const projectDetails: ProjectDetail[] = [
       "Reusable session format for future campaigns."
     ],
     tags: ["Policy", "Advocacy", "Education"],
-    image: images.mitraSmart
+    image: images.mitraSmart,
+    gallery: [
+      "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1580582932707-520aef1e7625?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=960&h=640&fit=crop&auto=format&q=80",
+    ],
   },
   {
     slug: "local-sustainability-challenge",
@@ -248,7 +375,14 @@ export const projectDetails: ProjectDetail[] = [
       "Clearer path from idea to pilot concept."
     ],
     tags: ["Sustainability", "Community Challenge", "Innovation"],
-    image: images.eduConnect
+    image: images.eduConnect,
+    gallery: [
+      "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1500829242034-e6a0de0c6aee?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1416339426682-caa3a2640c1b?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1536329583941-14287ec6fc4e?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1442850473887-3c39d36b9e94?w=960&h=640&fit=crop&auto=format&q=80",
+    ],
   },
   {
     slug: "issue-hive-awarded-3rd-prize-at-kist-fair-2082",
@@ -256,7 +390,7 @@ export const projectDetails: ProjectDetail[] = [
     serviceSlug: "tech-projects",
     category: "Campus Innovation",
     date: "Feb 2026",
-    summary: "College-focused platform that enables students to submit, support, and track campus-related issues simply and transparently.",
+    summary: "A campus reporting platform where students can raise, support, and track issues — built for visibility and won 3rd Prize at KIST Fair 2082.",
     challenge: "Campus concerns were easy to raise informally but difficult to track, prioritize, and resolve in a visible way.",
     approach: "Designed a minimal student-first reporting flow with community moderation, issue visibility, and simple status tracking.",
     outcomes: [
@@ -266,7 +400,13 @@ export const projectDetails: ProjectDetail[] = [
     ],
     tags: ["Campus Innovation", "Community", "Student Platform"],
     image: issueHiveHeroImage,
-    gallery: [issueHiveHeroImage, images.mitraSmart, images.devBus, images.volunteerPlatform, images.eduConnect]
+    gallery: [
+      "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1509062522246-d23e4e59e61c?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1531945086322-65f4b0f0c2e1?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1558021212-51b6ecfa0db9?w=960&h=640&fit=crop&auto=format&q=80",
+    ]
   },
   {
     slug: "university-fit-engine",
@@ -283,7 +423,14 @@ export const projectDetails: ProjectDetail[] = [
       "Prototype-ready matching framework."
     ],
     tags: ["AI", "Recommendation", "Education Tech"],
-    image: images.eduConnect
+    image: images.eduConnect,
+    gallery: [
+      "https://images.unsplash.com/photo-1580582932707-520aef1e7625?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1512428559087-560fa5ceab42?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1509062522246-d23e4e59e61c?w=960&h=640&fit=crop&auto=format&q=80",
+    ],
   },
   {
     slug: "ai-hiring-assessment-flow",
@@ -300,7 +447,14 @@ export const projectDetails: ProjectDetail[] = [
       "Reusable model for role-specific hiring tracks."
     ],
     tags: ["AI", "HR Tech", "Assessment"],
-    image: images.devBus
+    image: images.devBus,
+    gallery: [
+      "https://images.unsplash.com/photo-1534972195531-d236584f74d8?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1542744095-291d1f67b221?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1504868584819-0a05a73e4dc8?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=960&h=640&fit=crop&auto=format&q=80",
+    ],
   },
   {
     slug: "ngo-volunteer-management",
@@ -308,7 +462,7 @@ export const projectDetails: ProjectDetail[] = [
     serviceSlug: "tech-projects",
     category: "Web Platform",
     date: "04 Oct 2024",
-    summary: "Platform concept for NGO event publishing, volunteer matching, and stipend-support tracking.",
+    summary: "A platform concept that connects NGOs with volunteers — handling event publishing, role matching, and basic stipend tracking.",
     challenge: "Volunteer coordination and event communication were fragmented across tools.",
     approach: "Created an integrated flow for role matching, event lifecycle updates, and basic stipend status visibility.",
     outcomes: [
@@ -317,7 +471,14 @@ export const projectDetails: ProjectDetail[] = [
       "Clear path for phased product expansion."
     ],
     tags: ["Web Platform", "NGO", "Volunteer Ops"],
-    image: images.volunteerPlatform
+    image: images.volunteerPlatform,
+    gallery: [
+      "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1531482615286-7188771f0a3d?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1506869640319-fe1a20fd4ca2?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1517457373958-bac9ebd2f4e8?w=960&h=640&fit=crop&auto=format&q=80",
+    ],
   },
   {
     slug: "cloud-community-toolkit",
@@ -334,7 +495,15 @@ export const projectDetails: ProjectDetail[] = [
       "Better documentation quality across sessions."
     ],
     tags: ["Cloud", "Community", "Workshop"],
-    sourceHref: "https://aws.amazon.com"
+    image: netImages.techCloud,
+    sourceHref: "https://aws.amazon.com",
+    gallery: [
+      "https://images.unsplash.com/photo-1518770660439-4636190af475?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1534972195531-d236584f74d8?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=960&h=640&fit=crop&auto=format&q=80",
+    ],
   },
   {
     slug: "impact-program-microsite",
@@ -351,7 +520,15 @@ export const projectDetails: ProjectDetail[] = [
       "Reduced repetitive admin inquiries."
     ],
     tags: ["Microsite", "Information Design", "Community"],
-    sourceHref: "https://www.facebook.com/allinfoundationnp/"
+    image: netImages.webDev,
+    sourceHref: "https://www.facebook.com/allinfoundationnp/",
+    gallery: [
+      "https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1504868584819-0a05a73e4dc8?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1509062522246-d23e4e59e61c?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1568992687947-868a62a9f521?w=960&h=640&fit=crop&auto=format&q=80",
+    ],
   },
   {
     slug: "digital-rights-resource-portal",
@@ -368,7 +545,15 @@ export const projectDetails: ProjectDetail[] = [
       "Scalable structure for future content additions."
     ],
     tags: ["Civic Tech", "Knowledge Portal", "Digital Rights"],
-    sourceHref: "https://netmission.asia"
+    image: netImages.digitalRights,
+    sourceHref: "https://netmission.asia",
+    gallery: [
+      "https://images.unsplash.com/photo-1555041469-db01c2d7e43c?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=960&h=640&fit=crop&auto=format&q=80",
+    ],
   },
   {
     slug: "sustainability-idea-sandbox",
@@ -385,7 +570,15 @@ export const projectDetails: ProjectDetail[] = [
       "Improved readiness for pilot execution."
     ],
     tags: ["Sustainability", "Innovation", "Prototyping"],
-    sourceHref: "https://sustainability.com.np/"
+    image: netImages.greenInnovation,
+    sourceHref: "https://sustainability.com.np/",
+    gallery: [
+      "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1442850473887-3c39d36b9e94?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1500829242034-e6a0de0c6aee?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1561070791-2526f30ee1b4?w=960&h=640&fit=crop&auto=format&q=80",
+      "https://images.unsplash.com/photo-1536329583941-14287ec6fc4e?w=960&h=640&fit=crop&auto=format&q=80",
+    ],
   }
 ];
 
