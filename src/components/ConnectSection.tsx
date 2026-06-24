@@ -19,13 +19,14 @@ const ConnectSection = () => {
               </p>
             </blockquote>
 
-            <div className="w-full flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <span className="h-px w-5 bg-[#7A3A30]" aria-hidden="true" />
-                <p className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-[#7A3A30]">Connect</p>
+            <div className="w-full flex items-center gap-6">
+              <div className="shrink-0">
+                <p className="font-rajdhani text-[1.4rem] font-bold tracking-tight text-[#231d18]">Connect</p>
               </div>
 
-              <nav className="flex items-center gap-6" role="navigation" aria-label="Social links">
+              <span className="flex-1 h-px bg-[#e9e1d6]/60" aria-hidden="true" />
+
+              <nav className="flex items-center gap-6 shrink-0" role="navigation" aria-label="Social links">
                 <a
                   href="https://linkedin.com"
                   target="_blank"
