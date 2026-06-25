@@ -80,7 +80,7 @@ const AboutSection = () => {
                 What I Work On
               </h2>
               <p className="text-[0.88rem] text-[#6f655a] leading-[1.75] max-w-[36ch] md:text-right">
-                Digital marketing, community and advocacy work, and building things — from campaigns to prototypes.
+                Digital marketing, community and advocacy work, and building things.
               </p>
             </div>
           </motion.div>
