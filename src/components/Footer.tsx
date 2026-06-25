@@ -1,48 +1,54 @@
 import { FaLinkedinIn, FaInstagram, FaGithub } from "react-icons/fa";
 
-const Footer = () => {
-  const year = new Date().getFullYear();
+const socialLinks = [
+  {
+    href:  "https://github.com/dhirendraxd",
+    label: "GitHub",
+    icon:  FaGithub,
+    color: "text-[#181717] group-hover:text-[#15120d]",
+  },
+  {
+    href:  "https://instagram.com/dhirendraxd",
+    label: "Instagram",
+    icon:  FaInstagram,
+    color: "text-[#E4405F] group-hover:text-[#b63156]",
+  },
+  {
+    href:  "https://linkedin.com/in/dhirendraxd",
+    label: "LinkedIn",
+    icon:  FaLinkedinIn,
+    color: "text-[#0A66C2] group-hover:text-[#08539d]",
+  },
+];
 
+const Footer = () => {
   return (
     <footer
       id="contact"
-      className="scroll-mt-24 bg-card border-t border-[#e9e1d6] px-8 md:px-12 py-8 font-rajdhani"
+      className="scroll-mt-24 bg-[#f5f1eb] px-6 pt-4 pb-8 font-rajdhani"
       role="contentinfo"
     >
-      <div className="max-w-[84rem] mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-        <p className="text-[0.72rem] text-[#a89f96] tracking-wide">
-          © {year} Dhirendra Singh Dhami
-        </p>
-
-        <nav className="flex items-center gap-6" aria-label="Social links">
-          <a
-            href="https://linkedin.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="LinkedIn"
-            className="text-[#a89f96] hover:text-[#7A3A30] transition-colors duration-200"
-          >
-            <FaLinkedinIn size={16} />
-          </a>
-          <a
-            href="https://instagram.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Instagram"
-            className="text-[#a89f96] hover:text-[#7A3A30] transition-colors duration-200"
-          >
-            <FaInstagram size={16} />
-          </a>
-          <a
-            href="https://github.com/dhirendraxd"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="GitHub"
-            className="text-[#a89f96] hover:text-[#7A3A30] transition-colors duration-200"
-          >
-            <FaGithub size={16} />
-          </a>
-        </nav>
+      <div className="mx-auto max-w-[50rem]">
+        <div className="h-px w-full bg-[#8b8377]/80" />
+        <div className="mt-3 flex flex-col items-center gap-3">
+          <div className="flex items-center gap-6">
+            {socialLinks.map(({ href, label, icon: Icon, color }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                className="group inline-flex items-center gap-2 text-sm text-[#3f3932]"
+              >
+                <span className={`${color} transition-colors duration-200`}>
+                  <Icon size={20} />
+                </span>
+                <span className="hidden sm:inline">{label}</span>
+              </a>
+            ))}
+          </div>
+        </div>
       </div>
     </footer>
   );

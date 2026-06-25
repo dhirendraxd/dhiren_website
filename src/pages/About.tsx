@@ -15,16 +15,16 @@ const profileImage = assetPath("untitled-design.webp");
 function ExpertiseCard({ label, icon, delay = 0 }: { label: string; icon: string; delay?: number }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.38, delay }}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ duration: 0.5, delay }}
       viewport={{ once: true }}
       className="flex flex-col items-center gap-3"
     >
       <div className="w-20 h-20 flex items-center justify-center">
-        <img src={icon} alt="" aria-hidden="true" className="w-12 h-12 object-contain" />
+        <img src={icon} alt="" aria-hidden="true" className="w-14 h-14 object-contain" />
       </div>
-      <p className="text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-[#6f655a] text-center leading-snug max-w-[5.5rem]">
+      <p className="font-rajdhani text-[0.82rem] font-semibold uppercase tracking-[0.14em] text-[#6f655a] text-center leading-snug max-w-[6rem]">
         {label}
       </p>
     </motion.div>
@@ -35,11 +35,11 @@ function ExpertiseCard({ label, icon, delay = 0 }: { label: string; icon: string
 function SectionHeading({ children }: { children: React.ReactNode }) {
   return (
     <motion.h2
-      initial={{ opacity: 0, y: -10 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.45 }}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ duration: 0.55 }}
       viewport={{ once: true }}
-      className="text-center font-cormorant font-normal text-[clamp(1.7rem,3.2vw,2.6rem)] tracking-wide text-[#3a3a3a] mb-14 leading-tight"
+      className="text-center font-cormorant font-normal text-[clamp(2rem,3.8vw,3rem)] tracking-wide text-[#3a3a3a] mb-14 leading-tight"
     >
       {children}
     </motion.h2>
@@ -48,7 +48,6 @@ function SectionHeading({ children }: { children: React.ReactNode }) {
 
 // ── Data ──────────────────────────────────────────────────────────────────
 const stats = [
-  { value: "1+",   label: "Years in Marketing" },
   { value: "100%", label: "Client Satisfaction" },
   { value: "+10",  label: "Projects Shipped"    },
   { value: "500+", label: "Community Reach"     },
@@ -68,7 +67,6 @@ const orgs = [
   "ALL In Foundation",
   "Sustainability Solutions",
   "Lovelac Talk",
-  "KIST Tech Fair",
 ];
 
 const projects = [
@@ -137,125 +135,130 @@ const About = () => {
       <ScrollProgressBar />
       <Navbar />
 
-      <main className="pt-24 pb-20">
+      <main className="pb-20">
         <div className="max-w-[68rem] mx-auto px-6 md:px-10">
 
-          {/* ── NAME HEADER ─────────────────────────────────────────── */}
-          <motion.div
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-            className="text-center pt-6 pb-10"
-          >
-            <h1 className="font-cormorant font-medium text-[clamp(2.2rem,4.8vw,3.8rem)] tracking-wide text-[#3a3a3a] leading-[1.15]">
-              Dhirendra Singh Dhami
-            </h1>
-            <p className="mt-2 font-rajdhani text-[clamp(0.85rem,1.6vw,1.1rem)] font-normal tracking-[0.12em] text-[#6f655a] uppercase">
-              Digital Marketer &amp; Youth Advocate
-            </p>
-            <p className="font-rajdhani text-[clamp(0.85rem,1.6vw,1.1rem)] font-normal tracking-[0.12em] text-[#6f655a] uppercase">
-              Based in Nepal
-            </p>
-          </motion.div>
+          {/* ── FIRST VIEWPORT: name + hero + orgs ──────────────────── */}
+          <div className="min-h-screen flex flex-col pt-24">
 
-          {/* ── 3-COL HERO ──────────────────────────────────────────── */}
-          <section className="grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_260px_minmax(0,1fr)] lg:grid-cols-[minmax(0,1fr)_300px_minmax(0,1fr)] gap-10 md:gap-8 items-start pb-14 border-b border-[#e9e1d6]">
-
-            {/* Left: FOUNDED / CONTACT / PORTFOLIO */}
+            {/* NAME HEADER */}
             <motion.div
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-              className="space-y-7"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.7, ease: "easeOut" }}
+              className="text-center pt-4 pb-10"
             >
-              <div>
-                <p className="text-[0.58rem] font-semibold uppercase tracking-[0.28em] text-[#3a3a3a]/30 mb-2.5">
-                  Founded
-                </p>
-                <p className="text-[0.83rem] leading-[1.9] text-[#5f574d] font-rajdhani">
-                  Marketing and community work, done with purpose! I'm Dhiren, a digital marketer and youth advocate working out of Nepal — building campaigns, communities, and civic-tech tools.
-                </p>
-              </div>
-
-              <div>
-                <p className="text-[0.58rem] font-semibold uppercase tracking-[0.28em] text-[#3a3a3a]/30 mb-2.5">
-                  Contact
-                </p>
-                <p className="text-[0.83rem] text-[#5f574d] leading-[1.9] font-rajdhani">
-                  Kathmandu, Nepal<br />
-                  ctrlbits85@gmail.com
-                </p>
-              </div>
-
-              <div>
-                <p className="text-[0.58rem] font-semibold uppercase tracking-[0.28em] text-[#3a3a3a]/30 mb-2.5">
-                  Portfolio
-                </p>
-                <p className="text-[0.83rem] text-[#5f574d] leading-[1.9] font-rajdhani">
-                  Digital Marketing<br />
-                  Community &amp; Advocacy<br />
-                  Prototype Builds
-                </p>
-              </div>
+              <h1 className="font-cormorant font-medium text-[clamp(2.6rem,5.5vw,4.8rem)] tracking-wide text-[#3a3a3a] leading-[1.1]">
+                Dhirendra Singh Dhami
+              </h1>
+              <p className="mt-3 font-rajdhani text-[clamp(0.95rem,1.9vw,1.3rem)] font-normal tracking-[0.14em] text-[#6f655a] uppercase">
+                Digital Marketer &amp; Youth Advocate
+              </p>
+              <p className="font-rajdhani text-[clamp(0.95rem,1.9vw,1.3rem)] font-normal tracking-[0.14em] text-[#6f655a] uppercase">
+                Based in Nepal
+              </p>
             </motion.div>
 
-            {/* Center: oval portrait */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.94 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.65, delay: 0.07, ease: [0.22, 1, 0.36, 1] }}
-              className="flex justify-center"
-            >
-              <div
-                className="overflow-hidden border-[3px] border-[#e4dbcf]"
-                style={{ width: "260px", height: "320px", borderRadius: "50%" }}
+            {/* 3-COL HERO — grows to fill remaining space */}
+            <section className="flex-1 grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_290px_minmax(0,1fr)] lg:grid-cols-[minmax(0,1fr)_340px_minmax(0,1fr)] gap-10 md:gap-8 items-center pb-10">
+
+              {/* Left: FOUNDED / CONTACT / PORTFOLIO */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
+                className="space-y-8"
               >
-                <img
-                  src={profileImage}
-                  alt="Portrait of Dhirendra Singh Dhami"
-                  loading="eager"
-                  decoding="async"
-                  className="w-full h-full object-cover object-top scale-[1.07]"
-                />
-              </div>
-            </motion.div>
-
-            {/* Right: stats — large numbers */}
-            <motion.div
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.14, ease: [0.22, 1, 0.36, 1] }}
-              className="flex flex-col"
-            >
-              {stats.map((s, i) => (
-                <div
-                  key={s.label}
-                  className={`py-4 ${i < stats.length - 1 ? "border-b border-[#e9e1d6]" : ""}`}
-                >
-                  <p className="font-nekst text-[clamp(3.2rem,6vw,5rem)] font-bold text-[#3a3a3a] leading-none tabular-nums">
-                    {s.value}
+                <div>
+                  <p className="text-[0.75rem] font-semibold uppercase tracking-[0.28em] text-[#3a3a3a]/30 mb-3">
+                    Founded
                   </p>
-                  <p className="mt-1.5 text-[0.56rem] font-semibold uppercase tracking-[0.24em] text-[#6f655a]">
-                    {s.label}
+                  <p className="text-[1.15rem] leading-[1.9] text-[#5f574d] font-rajdhani">
+                    I'm Dhiren — a digital marketer and youth advocate based in Nepal. I run campaigns, grow online presence, and build community programs that create real-world impact.
                   </p>
                 </div>
-              ))}
-            </motion.div>
-          </section>
 
-          {/* ── ORG LOGOS STRIP ─────────────────────────────────────── */}
-          <section className="py-9 border-b border-[#e9e1d6]">
-            <div className="flex flex-wrap items-center justify-between gap-y-4">
-              {orgs.map((org) => (
-                <span
-                  key={org}
-                  className="text-[0.65rem] font-semibold uppercase tracking-[0.28em] text-[#3a3a3a]/25 hover:text-[#3a3a3a]/50 transition-colors duration-200 select-none"
+                <div>
+                  <p className="text-[0.75rem] font-semibold uppercase tracking-[0.28em] text-[#3a3a3a]/30 mb-3">
+                    Contact
+                  </p>
+                  <p className="text-[1.15rem] text-[#5f574d] leading-[1.9] font-rajdhani">
+                    Kathmandu, Nepal<br />
+                    ctrlbits85@gmail.com
+                  </p>
+                </div>
+
+                <div>
+                  <p className="text-[0.75rem] font-semibold uppercase tracking-[0.28em] text-[#3a3a3a]/30 mb-3">
+                    Portfolio
+                  </p>
+                  <p className="text-[1.15rem] text-[#5f574d] leading-[1.9] font-rajdhani">
+                    Digital Marketing<br />
+                    Community &amp; Advocacy<br />
+                    Prototype Builds
+                  </p>
+                </div>
+              </motion.div>
+
+              {/* Center: oval portrait */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.7, delay: 0.07, ease: "easeOut" }}
+                className="flex justify-center"
+              >
+                <div
+                  className="overflow-hidden border-[3px] border-[#e4dbcf]"
+                  style={{ width: "300px", height: "370px", borderRadius: "50%" }}
                 >
-                  {org}
-                </span>
-              ))}
-            </div>
-          </section>
+                  <img
+                    src={profileImage}
+                    alt="Portrait of Dhirendra Singh Dhami"
+                    loading="eager"
+                    decoding="async"
+                    className="w-full h-full object-cover object-top scale-[1.07]"
+                  />
+                </div>
+              </motion.div>
+
+              {/* Right: stats */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.7, delay: 0.14, ease: "easeOut" }}
+                className="flex flex-col pl-6 md:pl-10"
+              >
+                {stats.map((s, i) => (
+                  <div
+                    key={s.label}
+                    className={`py-5 ${i < stats.length - 1 ? "border-b border-[#e9e1d6]" : ""}`}
+                  >
+                    <p className="font-rajdhani text-[clamp(4.2rem,8vw,7.5rem)] font-bold text-[#3a3a3a] leading-none tabular-nums">
+                      {s.value}
+                    </p>
+                    <p className="mt-2 text-[0.74rem] font-semibold uppercase tracking-[0.26em] text-[#6f655a]">
+                      {s.label}
+                    </p>
+                  </div>
+                ))}
+              </motion.div>
+            </section>
+
+            {/* ORG LOGOS STRIP — pinned to bottom of first viewport */}
+            <section className="py-8 border-t border-b border-[#e9e1d6]">
+              <div className="flex flex-wrap items-center justify-between gap-y-4">
+                {orgs.map((org) => (
+                  <span
+                    key={org}
+                    className="text-[0.72rem] font-semibold uppercase tracking-[0.28em] text-[#3a3a3a]/25 hover:text-[#3a3a3a]/50 transition-colors duration-200 select-none"
+                  >
+                    {org}
+                  </span>
+                ))}
+              </div>
+            </section>
+
+          </div>{/* end first viewport */}
 
           {/* ── MY EXPERTISE ────────────────────────────────────────── */}
           <section className="py-16 border-b border-[#e9e1d6]">
@@ -275,7 +278,7 @@ const About = () => {
 
               {/* Education */}
               <div>
-                <p className="text-[0.56rem] font-semibold uppercase tracking-[0.3em] text-[#3a3a3a]/28 mb-6">
+                <p className="font-rajdhani text-[0.68rem] font-semibold uppercase tracking-[0.3em] text-[#3a3a3a]/28 mb-6">
                   Education
                 </p>
                 <div className="space-y-8">
@@ -285,18 +288,18 @@ const About = () => {
                   ].map((item) => (
                     <motion.div
                       key={item.title}
-                      initial={{ opacity: 0, y: 10 }}
-                      whileInView={{ opacity: 1, y: 0 }}
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
                       transition={{ duration: 0.35 }}
                       viewport={{ once: true }}
                     >
-                      <p className="text-[0.56rem] text-[#7A3A30]/60 uppercase tracking-[0.16em] mb-1">
+                      <p className="font-rajdhani text-[0.68rem] text-[#7A3A30]/70 uppercase tracking-[0.16em] mb-1">
                         {item.date}
                       </p>
-                      <h4 className="font-cormorant font-medium text-[1.05rem] text-[#3a3a3a] leading-snug">
+                      <h4 className="font-cormorant font-medium text-[1.25rem] text-[#3a3a3a] leading-snug">
                         {item.title}
                       </h4>
-                      <p className="text-[0.78rem] text-[#6f655a] mt-0.5">{item.org}</p>
+                      <p className="font-rajdhani text-[0.95rem] text-[#6f655a] mt-0.5">{item.org}</p>
                     </motion.div>
                   ))}
                 </div>
@@ -304,29 +307,29 @@ const About = () => {
 
               {/* Experience col 1 */}
               <div>
-                <p className="text-[0.56rem] font-semibold uppercase tracking-[0.3em] text-[#3a3a3a]/28 mb-6">
+                <p className="font-rajdhani text-[0.68rem] font-semibold uppercase tracking-[0.3em] text-[#3a3a3a]/28 mb-6">
                   Experience
                 </p>
                 <div className="space-y-8">
                   {expCols[0].map((exp, i) => (
                     <motion.div
                       key={exp.title}
-                      initial={{ opacity: 0, y: 10 }}
-                      whileInView={{ opacity: 1, y: 0 }}
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
                       transition={{ duration: 0.35, delay: i * 0.07 }}
                       viewport={{ once: true }}
                     >
-                      <p className="text-[0.56rem] text-[#7A3A30]/60 uppercase tracking-[0.16em] mb-1">
+                      <p className="font-rajdhani text-[0.68rem] text-[#7A3A30]/70 uppercase tracking-[0.16em] mb-1">
                         {exp.dateRange}
                       </p>
-                      <h4 className="font-cormorant font-medium text-[1.05rem] text-[#3a3a3a] leading-snug">
+                      <h4 className="font-cormorant font-medium text-[1.25rem] text-[#3a3a3a] leading-snug">
                         {exp.title}
                       </h4>
                       <a
                         href={exp.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-[0.78rem] text-[#6f655a] hover:text-[#7A3A30] transition-colors mt-0.5 inline-block"
+                        className="font-rajdhani text-[0.95rem] text-[#6f655a] hover:text-[#7A3A30] transition-colors mt-0.5 inline-block"
                       >
                         {exp.company}
                       </a>
@@ -337,29 +340,29 @@ const About = () => {
 
               {/* Experience col 2 */}
               <div>
-                <p className="text-[0.56rem] font-semibold uppercase tracking-[0.3em] text-transparent mb-6 select-none" aria-hidden="true">
+                <p className="font-rajdhani text-[0.68rem] font-semibold uppercase tracking-[0.3em] text-transparent mb-6 select-none" aria-hidden="true">
                   Experience
                 </p>
                 <div className="space-y-8">
                   {expCols[1].map((exp, i) => (
                     <motion.div
                       key={exp.title}
-                      initial={{ opacity: 0, y: 10 }}
-                      whileInView={{ opacity: 1, y: 0 }}
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
                       transition={{ duration: 0.35, delay: i * 0.07 }}
                       viewport={{ once: true }}
                     >
-                      <p className="text-[0.56rem] text-[#7A3A30]/60 uppercase tracking-[0.16em] mb-1">
+                      <p className="font-rajdhani text-[0.68rem] text-[#7A3A30]/70 uppercase tracking-[0.16em] mb-1">
                         {exp.dateRange}
                       </p>
-                      <h4 className="font-cormorant font-medium text-[1.05rem] text-[#3a3a3a] leading-snug">
+                      <h4 className="font-cormorant font-medium text-[1.25rem] text-[#3a3a3a] leading-snug">
                         {exp.title}
                       </h4>
                       <a
                         href={exp.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-[0.78rem] text-[#6f655a] hover:text-[#7A3A30] transition-colors mt-0.5 inline-block"
+                        className="font-rajdhani text-[0.95rem] text-[#6f655a] hover:text-[#7A3A30] transition-colors mt-0.5 inline-block"
                       >
                         {exp.company}
                       </a>
@@ -378,8 +381,8 @@ const About = () => {
               {projects.map((p, i) => (
                 <motion.div
                   key={p.href}
-                  initial={{ opacity: 0, y: 14 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
                   transition={{ duration: 0.4, delay: i * 0.09 }}
                   viewport={{ once: true }}
                 >
@@ -394,14 +397,14 @@ const About = () => {
                       />
                     </div>
                     <div className="mt-3.5">
-                      <p className="text-[0.56rem] font-semibold uppercase tracking-[0.24em] text-[#6f655a]/60">
+                      <p className="font-rajdhani text-[0.68rem] font-semibold uppercase tracking-[0.22em] text-[#6f655a]/60">
                         {p.type}
                       </p>
-                      <h4 className="mt-1 font-cormorant font-medium text-[1.05rem] text-[#3a3a3a] leading-snug">
+                      <h4 className="mt-1 font-cormorant font-medium text-[1.25rem] text-[#3a3a3a] leading-snug">
                         {p.title}
                       </h4>
-                      <span className="inline-flex items-center gap-1 mt-1.5 text-[0.63rem] font-semibold uppercase tracking-[0.16em] text-[#6f655a] group-hover:text-[#7A3A30] transition-colors duration-200">
-                        View Project <ArrowUpRight size={10} strokeWidth={2} />
+                      <span className="inline-flex items-center gap-1 mt-1.5 font-rajdhani text-[0.75rem] font-semibold uppercase tracking-[0.16em] text-[#6f655a] group-hover:text-[#7A3A30] transition-colors duration-200">
+                        View Project <ArrowUpRight size={11} strokeWidth={2} />
                       </span>
                     </div>
                   </Link>
@@ -435,19 +438,19 @@ const About = () => {
 
               <motion.div
                 key={quoteIdx}
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
                 transition={{ duration: 0.35 }}
                 className="text-center flex-1"
               >
-                <p className="font-cormorant font-normal italic text-[clamp(1.05rem,2vw,1.3rem)] leading-[1.85] text-[#3a3a3a]">
+                <p className="font-cormorant font-normal italic text-[clamp(1.25rem,2.4vw,1.65rem)] leading-[1.85] text-[#3a3a3a]">
                   &ldquo;{testimonials[quoteIdx].quote}&rdquo;
                 </p>
                 <div className="mt-7">
-                  <p className="font-rajdhani font-semibold text-[0.82rem] uppercase tracking-[0.18em] text-[#3a3a3a]">
+                  <p className="font-rajdhani font-semibold text-[0.95rem] uppercase tracking-[0.18em] text-[#3a3a3a]">
                     {testimonials[quoteIdx].name}
                   </p>
-                  <p className="text-[0.72rem] text-[#7A3A30] mt-1 tracking-wide">
+                  <p className="font-rajdhani text-[0.85rem] text-[#7A3A30] mt-1 tracking-wide">
                     {testimonials[quoteIdx].role}
                   </p>
                 </div>
@@ -465,7 +468,7 @@ const About = () => {
 
           {/* ── PHOTO GRID (@dhirendraxd) ───────────────────────────── */}
           <section className="py-16">
-            <p className="text-center font-rajdhani text-[0.65rem] font-semibold uppercase tracking-[0.35em] text-[#3a3a3a]/35 mb-8">
+            <p className="text-center font-rajdhani text-[0.8rem] font-semibold uppercase tracking-[0.35em] text-[#3a3a3a]/35 mb-8">
               @dhirendraxd
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
