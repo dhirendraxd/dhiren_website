@@ -68,12 +68,13 @@ const AboutSection = () => {
         {/* — What I Work On — */}
         <div>
           <motion.div
-            className="border-t border-[#e9e1d6] pt-8 mb-10"
+            className="mb-10"
             initial={{ opacity: 0, y: -16 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.45 }}
             viewport={{ once: true }}
           >
+            <div className="h-px w-full bg-gradient-to-r from-transparent via-[#e9e1d6] to-transparent mb-8" />
             <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
               <h2 className="font-rajdhani text-[clamp(2rem,3.8vw,3.2rem)] font-bold leading-[1.05] tracking-tight text-[#3a3a3a]">
                 What I Work On
@@ -139,12 +140,13 @@ const AboutSection = () => {
         {/* — Relevant Experience — */}
         <div>
           <motion.div
-            className="border-t border-[#e9e1d6] pt-8 mb-8"
+            className="mb-8"
             initial={{ opacity: 0, y: -16 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.45 }}
             viewport={{ once: true }}
           >
+            <div className="h-px w-full bg-gradient-to-r from-transparent via-[#e9e1d6] to-transparent mb-8" />
             <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
               <h2 className="font-rajdhani text-[clamp(1.8rem,3vw,2.6rem)] font-bold tracking-tight text-[#3a3a3a]">
                 Relevant Experience
@@ -222,19 +224,20 @@ const AboutSection = () => {
         {/* — Selected Projects — */}
         <div id="projects">
           <motion.div
-            className="border-t border-[#e9e1d6] pt-8 mb-12"
+            className="mb-12"
             initial={{ opacity: 0, y: -16 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.45 }}
             viewport={{ once: true }}
           >
+            <div className="h-px w-full bg-gradient-to-r from-transparent via-[#e9e1d6] to-transparent mb-8" />
             <div className="flex items-center gap-3 mb-3">
               <span className="h-px w-5 bg-[#7A3A30]" aria-hidden="true" />
               <p className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-[#7A3A30]">Selected Projects</p>
             </div>
             <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-              <h3 className="font-rajdhani text-[clamp(1.8rem,3.2vw,2.8rem)] font-bold tracking-tight text-[#3a3a3a]">
-                A few things I've built.
+              <h3 className="font-rajdhani text-[clamp(1.8rem,3.2vw,2.8rem)] font-bold tracking-tight text-[#3a3a3a] leading-tight">
+                Things I've Made
               </h3>
               <p className="text-[0.88rem] text-[#6f655a] leading-[1.72] max-w-[36ch] md:text-right">
                 Community programs, platform concepts, and a campus tool that won an award.
@@ -247,9 +250,10 @@ const AboutSection = () => {
               const isReverse = index % 2 === 1;
 
               return (
+                <div key={project.id}>
+                  <div className="h-px w-full bg-gradient-to-r from-transparent via-[#e9e1d6] to-transparent" />
                 <motion.article
-                  key={project.id}
-                  className="group/proj grid lg:grid-cols-2 gap-10 lg:gap-14 items-center border-t border-[#e9e1d6] py-10 last:border-b last:border-[#e9e1d6]"
+                  className="group/proj grid lg:grid-cols-2 gap-10 lg:gap-14 items-center py-10"
                   initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: index * 0.07 }}
@@ -304,6 +308,10 @@ const AboutSection = () => {
                     </Link>
                   </div>
                 </motion.article>
+                {index === projects.length - 1 && (
+                  <div className="h-px w-full bg-gradient-to-r from-transparent via-[#e9e1d6] to-transparent" />
+                )}
+                </div>
               );
             })}
           </div>

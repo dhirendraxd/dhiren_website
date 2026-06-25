@@ -2,8 +2,9 @@
 import fs from 'fs';
 import path from 'path';
 
-// Simple sitemap generator: extracts slugs from src/data/projectDetails.ts
-// and writes public/sitemap.xml. Safe, non-invasive and run at dev time.
+// Generates public/sitemap.xml from routes and project slugs.
+// Digital-marketing project detail pages are excluded — they are not
+// surfaced in the /projects listing and should not be indexed.
 
 const ROOT = path.resolve(process.cwd());
 const dataFile = path.join(ROOT, 'src', 'data', 'projectDetails.ts');
@@ -16,25 +17,32 @@ if (!fs.existsSync(dataFile)) {
 
 const content = fs.readFileSync(dataFile, 'utf8');
 
-// match slug: "..."
-const slugRegex = /slug:\s*"([^"]+)"/g;
-const slugs = new Set();
+// Extract (slug, serviceSlug) pairs — serviceSlug follows slug within each entry block.
+const pairRegex = /slug:\s*"([^"]+)"[\s\S]*?serviceSlug:\s*"([^"]+)"/g;
+const slugs = [];
 let m;
-while ((m = slugRegex.exec(content)) !== null) {
-  slugs.add(m[1]);
+while ((m = pairRegex.exec(content)) !== null) {
+  if (m[2] !== 'digital-marketing') {
+    slugs.push(m[1]);
+  }
 }
 
 const base = 'https://dhirendrasinghdhami.com.np';
-const staticRoutes = ['/', '/digital-marketing', '/advocacy-community', '/tech-projects'];
+const staticRoutes = [
+  { path: '/',                    priority: '1.0' },
+  { path: '/projects',            priority: '0.9' },
+  { path: '/digital-marketing',   priority: '0.8' },
+  { path: '/advocacy-community',  priority: '0.8' },
+  { path: '/tech-projects',       priority: '0.8' },
+];
 
 const today = new Date().toISOString().slice(0, 10);
 
 const urls = [];
 for (const r of staticRoutes) {
-  urls.push({ loc: `${base}${r}`, lastmod: today, priority: '0.9' });
+  urls.push({ loc: `${base}${r.path}`, lastmod: today, priority: r.priority });
 }
-
-for (const slug of Array.from(slugs)) {
+for (const slug of slugs) {
   urls.push({ loc: `${base}/projects/${slug}`, lastmod: today, priority: '0.7' });
 }
 

@@ -131,7 +131,7 @@ const ProjectsPage = () => {
 						<p className="text-[0.68rem] font-semibold uppercase tracking-[0.34em] text-[#7A3A30]">Selected Work</p>
 						<div className="mt-3 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
 							<h1 className="text-[clamp(2.6rem,5vw,5rem)] font-bold leading-[0.92] tracking-[-0.03em] text-[#3a3a3a] max-w-xl">
-								A few things<br />I've built.
+								Things I've Made
 							</h1>
 							<p className="max-w-[30ch] text-[0.93rem] leading-[1.75] text-[#6f655a] md:text-right">
 								Community programs, platform concepts, and a campus tool that won an award — each with a case study.
