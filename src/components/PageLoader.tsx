@@ -1,20 +1,27 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
-let hasLoaded = false;
+const SESSION_KEY = "dhiren_session_loaded";
 
-// Threshold: if the page took longer than this to mount, the connection is slow.
+function hasSeenLoaderThisSession(): boolean {
+  try { return sessionStorage.getItem(SESSION_KEY) === "1"; } catch { return false; }
+}
+
+function markSessionLoaded(): void {
+  try { sessionStorage.setItem(SESSION_KEY, "1"); } catch { /* ignore */ }
+}
+
+// Module-level flag covers SPA navigations within the same JS context.
+// sessionStorage covers page refreshes within the same browser session.
+let hasLoaded = hasSeenLoaderThisSession();
+
 const SLOW_MOUNT_THRESHOLD_MS = 700;
 
 function isSlowLoad(): boolean {
-  // Network Information API (Chrome/Android)
   const conn = (navigator as { connection?: { effectiveType?: string; saveData?: boolean } }).connection;
   if (conn?.saveData) return true;
   if (conn?.effectiveType && ["slow-2g", "2g", "3g"].includes(conn.effectiveType)) return true;
-
-  // Fallback: how long since the browser started loading this page
   if (performance.now() > SLOW_MOUNT_THRESHOLD_MS) return true;
-
   return false;
 }
 
@@ -30,6 +37,7 @@ const PageLoader = () => {
     }
 
     hasLoaded = true;
+    markSessionLoaded();
     document.body.style.overflow = "hidden";
 
     const duration = 900;
@@ -53,6 +61,7 @@ const PageLoader = () => {
     return () => {
       clearTimeout(hideTimer);
       clearTimeout(unlockTimer);
+      document.body.style.overflow = "";
     };
   }, [visible]);
 

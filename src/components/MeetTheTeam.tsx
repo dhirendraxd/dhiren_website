@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { assetPath } from '@/lib/assetPath';
 const untitledDesignImage = assetPath('untitled-design.webp');
 
@@ -11,7 +11,6 @@ type Member = {
 
 const MeetTheTeam: React.FC<{ members: Member[]; href?: string }> = ({ members }) => {
   const m = members || [];
-  const [hovered, setHovered] = useState<number | null>(null);
 
   return (
     <section className="mt-10 mb-8">
@@ -35,55 +34,33 @@ const MeetTheTeam: React.FC<{ members: Member[]; href?: string }> = ({ members }
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
           {[0, 1, 2, 3].map((i) => {
             const member = m[i];
-            const isOtherHovered = hovered !== null && hovered !== i;
-            const isHovered = hovered === i;
 
             return (
               <div
                 key={i}
-                onMouseEnter={() => setHovered(i)}
-                onMouseLeave={() => setHovered(null)}
-                onFocus={() => setHovered(i)}
-                onBlur={() => setHovered(null)}
-                tabIndex={0}
-                className={`relative aspect-[3/4] w-full overflow-hidden bg-[#ede8e1] transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7A3A30] ${
-                  isOtherHovered ? 'opacity-35 scale-[0.97]' : isHovered ? 'z-10' : ''
-                }`}
+                className="group relative aspect-[3/4] w-full overflow-hidden bg-[#ede8e1]"
               >
+                {/* Top accent line */}
+                <span className="pointer-events-none absolute inset-x-0 top-0 h-[2px] origin-left scale-x-0 bg-[#7A3A30] transition-transform duration-500 group-hover:scale-x-100 z-10" aria-hidden="true" />
+
                 {/* Image */}
                 <img
                   src={member?.img || untitledDesignImage}
                   alt={member?.name || 'Team member'}
                   loading="lazy"
                   decoding="async"
-                  className={`h-full w-full object-cover object-top grayscale transition-transform duration-500 ${
-                    isHovered ? 'scale-[1.06]' : 'scale-100'
-                  }`}
+                  className="h-full w-full object-cover object-top grayscale transition-transform duration-700 group-hover:scale-[1.03]"
                 />
 
-                {/* Always-visible bottom gradient with name */}
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#3a3a3a]/85 via-[#3a3a3a]/30 to-transparent px-4 pb-4 pt-12 pointer-events-none">
+                {/* Bottom gradient with name + role */}
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#3a3a3a]/80 via-[#3a3a3a]/25 to-transparent px-4 pb-4 pt-12 pointer-events-none">
                   <p className="font-rajdhani text-[0.88rem] font-semibold leading-tight text-[#f5f1eb]">
                     {member?.name || 'Team member'}
                   </p>
-
-                  {/* Role slides in on hover */}
-                  <p
-                    className={`font-rajdhani text-[0.75rem] text-[#c8bdb4] mt-0.5 transition-all duration-300 ${
-                      isHovered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-1.5'
-                    }`}
-                  >
+                  <p className="font-rajdhani text-[0.75rem] text-[#c8bdb4] mt-0.5 translate-y-1.5 opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
                     {member?.role || ''}
                   </p>
                 </div>
-
-                {/* Maroon bottom accent line */}
-                <div
-                  className={`absolute inset-x-0 bottom-0 h-[2px] bg-[#7A3A30] transition-all duration-300 ${
-                    isHovered ? 'opacity-100' : 'opacity-0'
-                  }`}
-                  aria-hidden="true"
-                />
               </div>
             );
           })}

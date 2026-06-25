@@ -87,8 +87,6 @@ const ProjectDetail = () => {
   const [isPaused, setIsPaused] = useState(false);
   const activeThumbIndex = displayThumbs.findIndex((s) => s === currentImage);
   const selectedThumbIndex = activeThumbIndex >= 0 ? activeThumbIndex : 0;
-  const dotsRef = useRef<HTMLDivElement | null>(null);
-  const [indicatorStyle, setIndicatorStyle] = useState<{ left: number; width: number }>({ left: 0, width: 8 });
 
   const goToImage = useCallback((nextImage: string, direction: 1 | -1 = 1) => {
     if (!nextImage || nextImage === currentImage) return;
@@ -103,26 +101,6 @@ const ProjectDetail = () => {
     });
   }, [displayThumbs]);
 
-  useEffect(() => {
-    const update = () => {
-      const container = dotsRef.current;
-      if (!container) return;
-      const btns = Array.from(container.querySelectorAll<HTMLButtonElement>('button'));
-      const btn = btns[selectedThumbIndex];
-      if (btn) {
-        const cRect = container.getBoundingClientRect();
-        const bRect = btn.getBoundingClientRect();
-        const left = Math.round(bRect.left - cRect.left + (bRect.width - 8) / 2);
-        setIndicatorStyle({ left, width: 8 });
-      } else {
-        setIndicatorStyle({ left: 0, width: 8 });
-      }
-    };
-
-    update();
-    window.addEventListener('resize', update);
-    return () => window.removeEventListener('resize', update);
-  }, [selectedThumbIndex, displayThumbs]);
 
   useEffect(() => {
     if (!displayThumbs || displayThumbs.length <= 1) return;
@@ -297,10 +275,10 @@ const ProjectDetail = () => {
   ];
 
   return (
-    <div className="min-h-screen overflow-auto bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.55),_transparent_30%),linear-gradient(180deg,#f7f3ec_0%,#e6ddcf_100%)] text-[#2d261f]">
+    <div className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.55),_transparent_30%),linear-gradient(180deg,#f7f3ec_0%,#e6ddcf_100%)] text-[#2d261f]">
       <ScrollProgressBar />
-      <main className="mx-auto flex h-full max-w-[96rem] flex-col overflow-visible px-6 py-6 font-rajdhani sm:px-8 sm:py-6 lg:px-12 lg:py-8">
-        <section className="flex h-full min-h-0 flex-col overflow-visible">
+      <main className="mx-auto max-w-[96rem] flex flex-col px-6 py-6 font-rajdhani sm:px-8 sm:py-6 lg:px-12 lg:py-8">
+        <section className="flex flex-col">
           <button
             onClick={() => navigate(-1)}
             className="group mt-4 mb-4 inline-flex items-center gap-1 text-sm font-semibold uppercase tracking-[0.24em] text-[#3f3932] transition-colors hover:text-[#7A3A30] sm:mt-4"
@@ -309,7 +287,7 @@ const ProjectDetail = () => {
             <span className="border-b border-transparent leading-none transition-colors group-hover:border-[#7A3A30]">Back</span>
           </button>
 
-          <section className="mt-10 grid flex-1 min-h-0 gap-10 lg:grid-cols-[1fr_1fr] lg:items-start">
+          <section className="mt-10 grid gap-10 lg:grid-cols-[1fr_1fr] lg:items-start">
             {/* Left: large gallery / hero image */}
             <div className="relative overflow-visible">
               <div
@@ -353,20 +331,20 @@ const ProjectDetail = () => {
                 style={{ touchAction: 'pan-y' }}
               >
                   <div className="relative h-full w-full overflow-hidden">
-                    <AnimatePresence initial={false} custom={slideDirection} mode="wait">
+                    <AnimatePresence initial={false} custom={slideDirection}>
                       {currentImage && (
                         <motion.img
                           key={currentImage}
                           custom={slideDirection}
                           variants={{
-                            enter: (direction: 1 | -1) => ({ x: direction > 0 ? '100%' : '-100%' }),
-                            center: { x: 0 },
-                            exit: (direction: 1 | -1) => ({ x: direction > 0 ? '-100%' : '100%' }),
+                            enter: (direction: 1 | -1) => ({ x: direction > 0 ? '100%' : '-100%', opacity: 0 }),
+                            center: { x: 0, opacity: 1 },
+                            exit: (direction: 1 | -1) => ({ x: direction > 0 ? '-100%' : '100%', opacity: 0 }),
                           }}
                           initial="enter"
                           animate="center"
                           exit="exit"
-                          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                          transition={{ duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94] }}
                           src={currentImage}
                           alt={`${project.title} project preview image`}
                           loading="eager"
@@ -422,44 +400,29 @@ const ProjectDetail = () => {
               {/* subtle separator between main image and thumbnails */}
               <div className="mt-4 h-px w-full bg-[#e9e1d6]/50" aria-hidden="true" />
 
-              {/* Dots: small indicators above thumbnails (match thumbnail count) */}
-              <div className="mt-3 flex justify-center" role="tablist" aria-label="Thumbnail pages">
-                <div className="flex items-center gap-2">
-                      {displayThumbs.length > 1 && (
-                        <div className="relative">
-                          <div ref={dotsRef} className="flex items-center gap-2 px-1">
-                            {displayThumbs.map((s, d) => {
-                              const isSelected = s === currentImage;
-                              return (
-                                <button
-                                  key={d}
-                                  className={
-                                    "h-2 w-2 rounded-full transition-colors duration-200 shrink-0 " +
-                                    (isSelected ? "bg-[#7A3A30]" : "bg-neutral-300 dark:bg-neutral-700")
-                                  }
-                                  aria-label={`Go to image ${d + 1}`}
-                                  onClick={() => {
-                                    if (isDraggingRef.current) return;
-                                    const nextImage = s;
-                                    const direction: 1 | -1 = d >= selectedThumbIndex ? 1 : -1;
-                                    goToImage(nextImage, direction);
-                                  }}
-                                />
-                              );
-                            })}
-                          </div>
-                          <span
-                            aria-hidden
-                            style={{
-                              left: indicatorStyle.left,
-                              width: indicatorStyle.width,
-                            }}
-                            className="pointer-events-none absolute top-0 h-2 rounded-full bg-[#7A3A30] transition-left duration-300 ease-in-out"
-                          />
-                        </div>
-                      )}
+              {/* Dots: small indicators above thumbnails */}
+              {displayThumbs.length > 1 && (
+                <div className="mt-3 flex justify-center gap-1.5" role="tablist" aria-label="Thumbnail pages">
+                  {displayThumbs.map((s, d) => {
+                    const isSelected = s === currentImage;
+                    return (
+                      <button
+                        key={d}
+                        aria-label={`Go to image ${d + 1}`}
+                        aria-selected={isSelected}
+                        onClick={() => {
+                          if (isDraggingRef.current) return;
+                          const direction: 1 | -1 = d >= selectedThumbIndex ? 1 : -1;
+                          goToImage(s, direction);
+                        }}
+                        className={`h-1.5 rounded-full transition-all duration-300 ease-out shrink-0 ${
+                          isSelected ? "w-5 bg-[#7A3A30]" : "w-1.5 bg-[#c8bdb4] hover:bg-[#a89f96]"
+                        }`}
+                      />
+                    );
+                  })}
                 </div>
-              </div>
+              )}
 
               {/* Thumbnails row (show up to 4 small images) */}
               <div
@@ -613,38 +576,57 @@ const ProjectDetail = () => {
               </div>
 
               {/* Accordion */}
-              <div className="mx-auto max-w-3xl grid grid-cols-1 sm:grid-cols-2 sm:divide-x sm:divide-[#e9e1d6]">
-                {[
-                  {
-                    q: "What types of projects have you completed in the past?",
-                    a: "I’ve worked across digital marketing, community programs, and tech projects—ranging from campaign execution and SEO to community labs and campus innovation platforms.",
-                  },
-                  {
-                    q: "Do you provide a guarantee for your work?",
-                    a: "I offer clear deliverables and a revision plan; ongoing support and performance-based guarantees are scoped into retainers or special agreements as needed.",
-                  },
-                  {
-                    q: "How do we collaborate and communicate?",
-                    a: "I adapt to your workflow—Slack, email, or regular calls. Weekly check-ins are recommended during active sprints and concise updates between milestones.",
-                  },
-                  {
-                    q: "What are typical timelines and costs?",
-                    a: "Most projects fall between 4–12 weeks; costs depend on scope. I share a clear proposal with milestones and pricing during discovery.",
-                  },
-                ].map(({ q, a }, idx) => (
-                  <details key={q} className={`group border-[#e9e1d6] sm:odd:pr-6 sm:even:pl-6 ${idx < 2 ? 'border-b' : idx === 2 ? 'border-b sm:border-b-0' : ''}`}>
-                    <summary className="flex cursor-pointer items-center justify-between gap-3 py-3.5 list-none [&::-webkit-details-marker]:hidden">
-                      <span className="text-[0.88rem] font-semibold text-[#3a3a3a] transition-colors duration-200 group-hover:text-[#7A3A30]">
-                        {q}
-                      </span>
-                      <span className="shrink-0 text-base font-light text-[#7A3A30] transition-transform duration-300 group-open:rotate-45 select-none leading-none">
-                        +
-                      </span>
-                    </summary>
-                    <p className="pb-3.5 text-[0.84rem] leading-[1.72] text-[#5f574d]">{a}</p>
-                  </details>
-                ))}
-              </div>
+              {(() => {
+                const faqs = [
+                  { q: "What types of projects have you completed in the past?", a: "I’ve worked across digital marketing, community programs, and tech projects—ranging from campaign execution and SEO to community labs and campus innovation platforms.", idx: 0 },
+                  { q: "Do you provide a guarantee for your work?", a: "I offer clear deliverables and a revision plan; ongoing support and performance-based guarantees are scoped into retainers or special agreements as needed.", idx: 1 },
+                  { q: "How do we collaborate and communicate?", a: "I adapt to your workflow—Slack, email, or regular calls. Weekly check-ins are recommended during active sprints and concise updates between milestones.", idx: 2 },
+                  { q: "What are typical timelines and costs?", a: "Most projects fall between 4–12 weeks; costs depend on scope. I share a clear proposal with milestones and pricing during discovery.", idx: 3 },
+                ];
+                const [openIdx, setOpenIdx] = React.useState<number | null>(null);
+                const cols = [[faqs[0], faqs[2]], [faqs[1], faqs[3]]];
+                return (
+                  <div className="mx-auto max-w-3xl flex items-start divide-x divide-[#e9e1d6]">
+                    {cols.map((col, colIdx) => (
+                      <div key={colIdx} className={`flex-1 min-w-0 ${colIdx === 0 ? "pr-6" : "pl-6"}`}>
+                        {col.map(({ q, a, idx }) => (
+                          <div key={q} className="border-t border-[#e9e1d6]">
+                            <button
+                              type="button"
+                              onClick={() => setOpenIdx(openIdx === idx ? null : idx)}
+                              className="flex w-full items-center justify-between gap-4 py-4 text-left"
+                            >
+                              <span className="text-[0.88rem] font-semibold text-[#3a3a3a] transition-colors duration-200 hover:text-[#7A3A30]">
+                                {q}
+                              </span>
+                              <span
+                                className="shrink-0 text-base font-light text-[#7A3A30] select-none leading-none transition-transform duration-300"
+                                style={{ transform: openIdx === idx ? "rotate(45deg)" : "rotate(0deg)" }}
+                              >
+                                +
+                              </span>
+                            </button>
+                            <AnimatePresence initial={false}>
+                              {openIdx === idx && (
+                                <motion.div
+                                  key="answer"
+                                  initial={{ height: 0, opacity: 0 }}
+                                  animate={{ height: "auto", opacity: 1 }}
+                                  exit={{ height: 0, opacity: 0 }}
+                                  transition={{ duration: 0.28, ease: [0.4, 0, 0.2, 1] }}
+                                  className="overflow-hidden"
+                                >
+                                  <p className="pb-4 text-[0.84rem] leading-[1.72] text-[#5f574d]">{a}</p>
+                                </motion.div>
+                              )}
+                            </AnimatePresence>
+                          </div>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                );
+              })()}
 
             </div>
           </div>

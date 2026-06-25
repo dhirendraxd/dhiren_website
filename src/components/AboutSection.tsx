@@ -253,7 +253,7 @@ const AboutSection = () => {
                 <div key={project.id}>
                   <div className="h-px w-full bg-gradient-to-r from-transparent via-[#e9e1d6] to-transparent" />
                 <motion.article
-                  className="group/proj grid lg:grid-cols-2 gap-10 lg:gap-14 items-center py-10"
+                  className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center py-10"
                   initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: index * 0.07 }}
@@ -303,7 +303,7 @@ const AboutSection = () => {
                         width={544}
                         height={340}
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 544px"
-                        className="aspect-[16/10] w-full object-cover transition-transform duration-500 group-hover/proj:scale-[1.03]"
+                        className="aspect-[16/10] w-full object-cover"
                       />
                     </Link>
                   </div>
