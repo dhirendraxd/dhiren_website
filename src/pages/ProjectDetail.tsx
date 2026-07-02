@@ -224,28 +224,6 @@ const ProjectDetail = () => {
 
   const tagPills = project.tags.slice(0, 5);
   const outcomes = project.outcomes.slice(0, 3);
-  const impactSnapshot = [
-    {
-      label: "Documented outcomes",
-      value: String(project.outcomes.length).padStart(2, "0"),
-      note: "Captured from the project record",
-    },
-    {
-      label: "Focus areas",
-      value: String(project.tags.length).padStart(2, "0"),
-      note: "Strategy, delivery, and reporting lenses",
-    },
-    {
-      label: "Delivery scope",
-      value: project.category,
-      note: project.serviceSlug === "digital-marketing" ? "Marketing and performance work" : "Community and program work",
-    },
-    {
-      label: "Reference",
-      value: project.sourceHref ? "Public" : "Internal",
-      note: project.sourceHref ? "Live source link available" : "No public link provided",
-    },
-  ];
 
   return (
     <div className="min-h-screen bg-[#f5f1eb] text-[#2d261f]">
@@ -648,70 +626,6 @@ const ProjectDetail = () => {
           </div>
         )}
 
-        {/* ── Advocacy & Community: impact-focused narrative ── */}
-        {project.serviceSlug === "advocacy-community" && (
-          <div className="mt-16 space-y-14">
-
-            {/* Program story — challenge + approach */}
-            <div>
-              <div className="h-px w-full bg-gradient-to-r from-transparent via-[#e9e1d6] to-transparent mb-8" />
-              <div className="flex items-center gap-3 mb-8">
-                <span className="h-px w-5 bg-[#7A3A30]" aria-hidden="true" />
-                <p className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-[#7A3A30]">Program Story</p>
-              </div>
-              <div className="grid md:grid-cols-2 gap-8">
-                {[
-                  { label: "The Challenge", body: project.challenge },
-                  { label: "The Approach", body: project.approach },
-                ].map((item, i) => (
-                  <motion.div
-                    key={item.label}
-                    className={`p-8 flex flex-col gap-4 ${i === 0 ? "bg-[#3a3a3a]" : "border border-[#e4dbcf]"}`}
-                    initial={{ opacity: 0, y: 12 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.38, delay: i * 0.08 }}
-                    viewport={{ once: true }}
-                  >
-                    <span className={`font-mono text-[0.58rem] tabular-nums ${i === 0 ? "text-[#c8bfb5]" : "text-[#7A3A30]"}`}>{String(i + 1).padStart(2, "0")}</span>
-                    <h4 className={`font-rajdhani text-[1rem] font-bold tracking-tight ${i === 0 ? "text-white" : "text-[#3a3a3a]"}`}>{item.label}</h4>
-                    <p className={`text-[0.88rem] leading-[1.75] ${i === 0 ? "text-[#c8bfb5]" : "text-[#6f655a]"}`}>{item.body}</p>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-
-            {/* Impact snapshot — 4 metric tiles */}
-            <div>
-              <div className="h-px w-full bg-gradient-to-r from-transparent via-[#e9e1d6] to-transparent mb-8" />
-              <div className="flex items-center gap-3 mb-8">
-                <span className="h-px w-5 bg-[#7A3A30]" aria-hidden="true" />
-                <p className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-[#7A3A30]">Impact Snapshot</p>
-              </div>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-0 border border-[#e4dbcf]">
-                {impactSnapshot.map((item, i) => {
-                  const isDark = i === 1;
-                  return (
-                    <motion.div
-                      key={item.label}
-                      className={`border-b sm:border-b-0 sm:border-r border-[#e4dbcf] last:border-0 py-10 px-7 flex flex-col justify-between gap-6 ${isDark ? "bg-[#3a3a3a]" : ""}`}
-                      initial={{ opacity: 0, y: 10 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.35, delay: i * 0.06 }}
-                      viewport={{ once: true }}
-                    >
-                      <p className={`font-rajdhani text-[2.2rem] font-bold leading-none tracking-tight ${isDark ? "text-[#f5f1eb]" : "text-[#3a3a3a]"}`}>{item.value}</p>
-                      <div>
-                        <p className={`text-[0.7rem] font-semibold uppercase tracking-[0.16em] ${isDark ? "text-[#a89f96]" : "text-[#a89f96]"}`}>{item.label}</p>
-                        <p className={`mt-1 text-[0.78rem] leading-[1.6] ${isDark ? "text-[#6f655a]" : "text-[#6f655a]"}`}>{item.note}</p>
-                      </div>
-                    </motion.div>
-                  );
-                })}
-              </div>
-            </div>
-
-          </div>
-        )}
 
         {/* ── Tech Projects: technical depth ── */}
         {project.serviceSlug === "tech-projects" && (
