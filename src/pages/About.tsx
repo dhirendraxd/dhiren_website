@@ -30,22 +30,25 @@ const orgs = ["Ctrl Bits", "ALL In Foundation", "Sustainability Solutions", "Lov
 
 const projects = [
   {
-    title: "Fellowship Community Labs",
-    type:  "Community",
-    image: assetPath("civic-tech.webp"),
-    href:  "/projects/fellowship-community-labs",
+    title:   "Fellowship Community Labs",
+    type:    "Community",
+    summary: "Fellowship initiatives for collaborative social impact across communities.",
+    image:   assetPath("civic-tech.webp"),
+    href:    "/projects/fellowship-community-labs",
   },
   {
-    title: "NGO Volunteer Management",
-    type:  "Tech",
-    image: assetPath("2nd-new.webp"),
-    href:  "/projects/ngo-volunteer-management",
+    title:   "NGO Volunteer Management",
+    type:    "Tech",
+    summary: "Volunteer platform design for NGOs and youth programs.",
+    image:   assetPath("2nd-new.webp"),
+    href:    "/projects/ngo-volunteer-management",
   },
   {
-    title: "Issue Hive — 3rd Prize KIST Fair",
-    type:  "Tech",
-    image: assetPath("issue-hive-thumb.webp"),
-    href:  "/projects/issue-hive-awarded-3rd-prize-at-kist-fair-2082",
+    title:   "Issue Hive — 3rd Prize KIST Fair",
+    type:    "Tech",
+    summary: "Civic issue tracker that won 3rd prize at KIST Science Fair 2082.",
+    image:   assetPath("issue-hive-thumb.webp"),
+    href:    "/projects/issue-hive-awarded-3rd-prize-at-kist-fair-2082",
   },
 ];
 
@@ -315,48 +318,71 @@ const About = () => {
             <Divider />
             <div className="pt-12">
               <SectionLabel label="Selected Projects" />
-              <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
+              <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
                 <h2 className="font-rajdhani text-[clamp(2rem,3.8vw,3.2rem)] font-bold leading-[1.05] tracking-tight text-[#3a3a3a]">
                   Things I've Made
                 </h2>
-                <Link
-                  to="/projects"
-                  className="group inline-flex items-center gap-1.5 text-[0.75rem] font-semibold uppercase tracking-[0.16em] text-[#6f655a] transition-colors hover:text-[#7A3A30] self-start md:self-auto"
-                >
-                  <span className="relative after:absolute after:left-0 after:-bottom-px after:h-px after:w-0 after:bg-[#7A3A30] after:transition-all after:duration-200 group-hover:after:w-full">
-                    View All Projects
-                  </span>
-                  <ArrowRight size={11} className="transition-transform duration-200 group-hover:translate-x-0.5" />
-                </Link>
+                <p className="text-[0.88rem] text-[#6f655a] leading-[1.75] max-w-[38ch] md:text-right">
+                  A mix of community programs, civic tools, and prototypes — each with a full case study.
+                </p>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-[#e4dbcf]">
                 {projects.map((p, i) => (
                   <motion.article
                     key={p.href}
-                    className="group border border-[#e8e0d6] hover:border-[#c5bbb2] transition-colors duration-300 overflow-hidden relative"
+                    className="group bg-[#f5f1eb] flex flex-col"
                     initial={{ opacity: 0, y: 14 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.38, delay: i * 0.07 }}
                     viewport={{ once: true }}
                   >
-                    <span className="pointer-events-none absolute inset-x-0 top-0 h-[2px] origin-left scale-x-0 bg-[#7A3A30] transition-transform duration-500 group-hover:scale-x-100" aria-hidden="true" />
-                    <Link to={p.href} className="block">
+                    <Link to={p.href} className="flex flex-col flex-1">
+                      {/* Image */}
                       <div className="overflow-hidden aspect-[4/3] bg-[#e4dbcf]">
                         <img src={p.image} alt={p.title} loading="lazy" decoding="async"
-                          className="w-full h-full object-cover transition-transform duration-600 group-hover:scale-[1.04]" />
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.05]" />
                       </div>
-                      <div className="px-4 py-4">
-                        <p className="text-[0.58rem] font-semibold uppercase tracking-[0.2em] text-[#7A3A30]">{p.type}</p>
-                        <h3 className="mt-1 font-rajdhani text-[1rem] font-bold tracking-tight text-[#3a3a3a] leading-snug group-hover:text-[#7A3A30] transition-colors duration-200">{p.title}</h3>
-                        <span className="inline-flex items-center gap-1 mt-2 text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-[#a89f96] group-hover:text-[#7A3A30] transition-colors duration-200">
-                          View Project <ArrowUpRight size={10} strokeWidth={2} />
+
+                      {/* Body */}
+                      <div className="flex flex-col flex-1 px-5 pt-5 pb-6 gap-3">
+                        <div className="flex items-center gap-2">
+                          <span className="h-px w-4 bg-[#7A3A30]" aria-hidden="true" />
+                          <p className="text-[0.6rem] font-semibold uppercase tracking-[0.22em] text-[#7A3A30]">{p.type}</p>
+                        </div>
+
+                        <h3 className="font-rajdhani text-[1.15rem] font-bold tracking-tight text-[#3a3a3a] leading-snug group-hover:text-[#7A3A30] transition-colors duration-200">
+                          {p.title}
+                        </h3>
+
+                        <p className="text-[0.82rem] leading-[1.7] text-[#6f655a] flex-1">
+                          {p.summary}
+                        </p>
+
+                        {/* CTA — inline link style matching rest of site */}
+                        <span className="mt-1 inline-flex items-center gap-1.5 self-start font-rajdhani text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-[#3a3a3a]/50 group-hover:text-[#7A3A30] transition-colors duration-200">
+                          <span className="relative after:absolute after:left-0 after:-bottom-px after:h-px after:w-0 after:bg-[#7A3A30] after:transition-all after:duration-300 group-hover:after:w-full">
+                            Explore Work
+                          </span>
+                          <ArrowUpRight size={11} strokeWidth={2} className="group-hover:translate-x-px group-hover:-translate-y-px transition-transform duration-200" />
                         </span>
                       </div>
                     </Link>
                   </motion.article>
                 ))}
               </div>
+
+              {/* View all CTA — matches Send button style from ConnectSection */}
+              <div className="mt-10 flex justify-center">
+                <Link
+                  to="/projects"
+                  className="group inline-flex items-center gap-2.5 bg-[#f5f1eb] hover:bg-[#3a3a3a] text-[#3a3a3a] hover:text-[#f5f1eb] border border-[#d4cbc0] hover:border-[#3a3a3a] font-rajdhani font-normal text-[0.85rem] tracking-[0.14em] px-7 py-3.5 transition-colors duration-300"
+                >
+                  <span>View All Projects</span>
+                  <ArrowRight size={13} className="transition-transform duration-300 group-hover:translate-x-1" />
+                </Link>
+              </div>
+
             </div>
           </section>
 
