@@ -1,3 +1,4 @@
+import { useLocation } from "react-router-dom";
 import { FaLinkedinIn, FaInstagram, FaGithub } from "react-icons/fa";
 
 const socialLinks = [
@@ -22,33 +23,37 @@ const socialLinks = [
 ];
 
 const Footer = () => {
+  const { pathname } = useLocation();
+  const isHome = pathname === "/";
+
   return (
     <footer
-      id="contact"
-      className="scroll-mt-24 bg-[#f5f1eb] px-6 pt-4 pb-8 font-rajdhani"
+      className="bg-[#f5f1eb] px-6 pt-4 pb-8 font-rajdhani"
       role="contentinfo"
     >
       <div className="mx-auto max-w-[50rem]">
-        <div className="h-px w-full bg-[#8b8377]/80" />
-        <div className="mt-3 flex flex-col items-center gap-3">
-          <div className="flex items-center gap-6">
-            {socialLinks.map(({ href, label, icon: Icon, color }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={label}
-                className="group inline-flex items-center gap-2 text-sm text-[#3f3932]"
-              >
-                <span className={`${color} transition-colors duration-200`}>
-                  <Icon size={20} />
-                </span>
-                <span className="hidden sm:inline">{label}</span>
-              </a>
-            ))}
+        {!isHome && <div className="h-px w-full bg-[#8b8377]/80" />}
+        {!isHome && (
+          <div className="mt-3 flex flex-col items-center gap-3">
+            <div className="flex items-center gap-6">
+              {socialLinks.map(({ href, label, icon: Icon, color }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="group inline-flex items-center gap-2 text-sm text-[#3f3932]"
+                >
+                  <span className={`${color} transition-colors duration-200`}>
+                    <Icon size={20} />
+                  </span>
+                  <span className="hidden sm:inline">{label}</span>
+                </a>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </footer>
   );

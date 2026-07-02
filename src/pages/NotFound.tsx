@@ -4,7 +4,7 @@ import Seo from "@/components/Seo";
 
 const NotFound = () => {
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center pt-20">
+    <div className="min-h-screen bg-[#f5f1eb] flex items-center justify-center pt-20">
       <Seo
         title="Page Not Found | Dhirendra Singh Dhami"
         description="This page does not exist on Dhirendra Singh Dhami's portfolio website."

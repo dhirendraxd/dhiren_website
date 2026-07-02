@@ -1,11 +1,19 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
-import { ArrowUpRight, ChevronLeft } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowUpRight, ArrowRight } from "lucide-react";
+import Navbar from "@/components/Navbar";
 import Seo from "@/components/Seo";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
+import Footer from "@/components/Footer";
 import { issueHiveThumbnail, projectDetails } from "@/data/projectDetails";
 
 const sections = [
+	{
+		slug: "digital-marketing" as const,
+		label: "Digital Marketing",
+		description: "SEO, paid media, and brand identity work.",
+	},
 	{
 		slug: "advocacy-community" as const,
 		label: "Advocacy & Community",
@@ -18,6 +26,7 @@ const sections = [
 	},
 ];
 
+const INITIAL_SHOW = 3;
 
 const projectsSchema = {
 	"@context": "https://schema.org",
@@ -35,17 +44,22 @@ const projectsSchema = {
 const ProjectCard = ({
 	project,
 	index,
-	sectionLabel,
+	featured = false,
 }: {
 	project: (typeof projectDetails)[number];
 	index: number;
-	sectionLabel: string;
+	featured?: boolean;
 }) => {
 	const hasImage = Boolean(project.image);
 
 	return (
-		<article className="group relative overflow-hidden border border-[#e8e0d6] transition-colors duration-300 hover:border-[#c5bbb2]">
-			{/* Top accent line on hover */}
+		<motion.article
+			className="group relative overflow-hidden border border-[#e8e0d6] transition-colors duration-300 hover:border-[#c5bbb2]"
+			initial={{ opacity: 0, y: 14 }}
+			whileInView={{ opacity: 1, y: 0 }}
+			transition={{ duration: 0.38, delay: index * 0.06 }}
+			viewport={{ once: true }}
+		>
 			<span className="pointer-events-none absolute inset-x-0 top-0 h-[2px] origin-left scale-x-0 bg-[#7A3A30] transition-transform duration-500 group-hover:scale-x-100" aria-hidden="true" />
 
 			<Link to={`/projects/${project.slug}`} className="block">
@@ -58,48 +72,54 @@ const ProjectCard = ({
 							loading="lazy"
 							decoding="async"
 							width={960}
-							height={640}
-							className="aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+							height={featured ? 480 : 360}
+							className={`w-full object-cover transition-transform duration-700 group-hover:scale-[1.04] ${featured ? "aspect-[16/9]" : "aspect-[4/3]"}`}
 						/>
 					) : (
-						<div className="flex aspect-[4/3] w-full items-end p-5 bg-[linear-gradient(135deg,#f0e8de_0%,#e0d0be_100%)]">
-							<div className="text-xl font-semibold leading-tight text-[#3a3a3a]">{project.title}</div>
+						<div className={`flex w-full items-end p-6 bg-[linear-gradient(135deg,#f0e8de_0%,#e0d0be_100%)] ${featured ? "aspect-[16/9]" : "aspect-[4/3]"}`}>
+							<div className="text-xl font-bold leading-tight tracking-tight text-[#3a3a3a]">{project.title}</div>
 						</div>
 					)}
-
-					{/* Index — top right */}
-					<span className="absolute right-3 top-3 font-mono text-[0.58rem] tabular-nums text-white/45 select-none">
+					<span className="absolute right-3 top-3 font-mono text-[0.55rem] tabular-nums text-white/50 select-none">
 						{String(index + 1).padStart(2, "0")}
 					</span>
 				</div>
 
 				{/* Content */}
-				<div className="px-3.5 py-3 flex items-center justify-between gap-2">
-					<div className="min-w-0">
-						<h3 className="truncate text-[0.95rem] font-bold tracking-tight text-[#3a3a3a] transition-colors duration-200 group-hover:text-[#7A3A30]">
-							{project.title}
-						</h3>
-						<div className="mt-0.5 flex items-center gap-1.5">
-							{project.tags.slice(0, 2).map((tag, i) => (
+				<div className="px-4 py-4 flex flex-col gap-2">
+					<p className="text-[0.58rem] font-semibold uppercase tracking-[0.2em] text-[#7A3A30]">{project.category}</p>
+					<h3 className={`font-bold tracking-tight text-[#3a3a3a] leading-snug transition-colors duration-200 group-hover:text-[#7A3A30] ${featured ? "text-[1.15rem]" : "text-[0.95rem]"}`}>
+						{project.title}
+					</h3>
+					{featured && (
+						<p className="text-[0.82rem] leading-[1.65] text-[#6f655a] line-clamp-2">{project.summary}</p>
+					)}
+					<div className="flex items-center justify-between mt-1">
+						<div className="flex flex-wrap items-center gap-x-2 gap-y-0.5">
+							{project.tags.slice(0, featured ? 3 : 2).map((tag, i) => (
 								<span key={tag} className="inline-flex items-center gap-1.5">
-									<span className="text-[0.53rem] font-semibold uppercase tracking-[0.1em] text-[#a89f96]">{tag}</span>
-									{i === 0 && project.tags.length > 1 && <span className="text-[#d0c9c0]" aria-hidden="true">·</span>}
+									<span className="text-[0.52rem] font-semibold uppercase tracking-[0.1em] text-[#a89f96]">{tag}</span>
+									{i < Math.min(project.tags.length, featured ? 3 : 2) - 1 && (
+										<span className="text-[#d0c9c0]" aria-hidden="true">·</span>
+									)}
 								</span>
 							))}
 						</div>
+						<ArrowUpRight size={13} className="shrink-0 text-[#c4bab2] transition-colors duration-300 group-hover:text-[#7A3A30]" />
 					</div>
-					<ArrowUpRight size={13} className="shrink-0 text-[#c4bab2] transition-colors duration-300 group-hover:text-[#7A3A30]" />
 				</div>
 			</Link>
-		</article>
+		</motion.article>
 	);
 };
 
 const ProjectsPage = () => {
 	const featuredImage = projectDetails.find((p) => p.image)?.image ?? issueHiveThumbnail;
+	const [expanded, setExpanded] = useState<Record<string, boolean>>({});
+	const totalProjects = projectDetails.length;
 
 	return (
-		<div className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(255,250,244,0.9),_transparent_32%),linear-gradient(180deg,#f7f3ec_0%,#efe6d8_100%)] text-[#3a3a3a]">
+		<div className="min-h-screen bg-[#f5f1eb] text-[#3a3a3a]">
 			<Seo
 				title="Projects | Dhirendra Singh Dhami"
 				description="A focused collection of Dhiren's featured projects with direct links to the case studies."
@@ -109,73 +129,110 @@ const ProjectsPage = () => {
 				schema={projectsSchema}
 			/>
 			<ScrollProgressBar />
+			<Navbar />
 
-			<main className="mx-auto max-w-[84rem] px-6 py-6 font-rajdhani sm:px-8 lg:px-12 lg:py-8">
+			<main className="mx-auto max-w-[84rem] px-6 pt-28 pb-20 font-rajdhani sm:px-8 lg:px-12">
 				<motion.div
-					className="pt-6 sm:pt-10"
 					initial={{ opacity: 0, y: 18 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.45, ease: "easeOut" }}
 				>
-					{/* Nav */}
-					<Link
-						to="/"
-						className="group inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.24em] text-[#4c4238] transition-colors hover:text-[#7A3A30]"
-					>
-						<ChevronLeft size={14} className="transition-transform duration-300 group-hover:-translate-x-1" />
-						<span className="border-b border-transparent transition-colors group-hover:border-[#7A3A30]">Home</span>
-					</Link>
-
 					{/* Hero */}
-					<div className="mt-10 border-b border-[#ddd3c7] pb-10">
-						<p className="text-[0.68rem] font-semibold uppercase tracking-[0.34em] text-[#7A3A30]">Selected Work</p>
-						<div className="mt-3 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-							<h1 className="text-[clamp(2.6rem,5vw,5rem)] font-bold leading-[0.92] tracking-[-0.03em] text-[#3a3a3a] max-w-xl">
-								Things I've Made
+					<div className="mb-16">
+						<div className="flex items-center gap-3 mb-5">
+							<span className="h-px w-5 bg-[#7A3A30]" aria-hidden="true" />
+							<p className="text-[0.68rem] font-semibold uppercase tracking-[0.34em] text-[#7A3A30]">Selected Work</p>
+						</div>
+						<div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+							<h1 className="font-rajdhani text-[clamp(2.8rem,5.5vw,5.5rem)] font-bold leading-[0.9] tracking-[-0.02em] text-[#3a3a3a] max-w-2xl">
+								Things I've<br />Made
 							</h1>
-							<p className="max-w-[30ch] text-[0.93rem] leading-[1.75] text-[#6f655a] md:text-right">
-								Community programs, platform concepts, and a campus tool that won an award — each with a case study.
-							</p>
+							<div className="flex flex-col gap-3 md:items-end">
+								<p className="max-w-[32ch] text-[0.93rem] leading-[1.75] text-[#6f655a] md:text-right">
+									Community programs, platform concepts, and a campus tool that won an award — each with a case study.
+								</p>
+								<span className="inline-flex items-center gap-1.5 self-start md:self-auto">
+									<span className="font-mono text-[0.62rem] tabular-nums text-[#7A3A30] font-semibold">{String(totalProjects).padStart(2, "0")}</span>
+									<span className="text-[0.62rem] uppercase tracking-[0.16em] text-[#a89f96]">projects total</span>
+								</span>
+							</div>
 						</div>
 					</div>
 
+					<div className="h-px w-full bg-gradient-to-r from-transparent via-[#e9e1d6] to-transparent mb-16" />
+
 					{/* Sections */}
-					<div className="grid gap-10 py-12 pb-14 lg:grid-cols-2 lg:items-start">
+					<div className="flex flex-col gap-20">
 						{sections.map((section, sectionIdx) => {
-							const allInSection = projectDetails.filter((p) => p.serviceSlug === section.slug).slice(0, 2);
+							const all = projectDetails.filter((p) => p.serviceSlug === section.slug);
+							const isExpanded = expanded[section.slug];
+							const visible = isExpanded ? all : all.slice(0, INITIAL_SHOW);
+							const hasMore = all.length > INITIAL_SHOW;
+							const featured = visible[0];
+							const rest = visible.slice(1);
 
 							return (
 								<motion.section
 									key={section.slug}
-									initial={{ opacity: 0, y: 14 }}
+									initial={{ opacity: 0, y: 16 }}
 									whileInView={{ opacity: 1, y: 0 }}
-									transition={{ duration: 0.4, delay: sectionIdx * 0.06 }}
+									transition={{ duration: 0.42, delay: sectionIdx * 0.05 }}
 									viewport={{ once: true }}
 								>
 									{/* Section header */}
-									<div className="flex items-center gap-4 mb-6">
-										<span className="shrink-0 font-mono text-[0.65rem] tabular-nums text-[#7A3A30]">
+									<div className="flex items-center gap-4 mb-8">
+										<span className="shrink-0 font-mono text-[0.62rem] tabular-nums text-[#7A3A30] font-semibold">
 											{String(sectionIdx + 1).padStart(2, "0")}
 										</span>
 										<div className="flex flex-1 items-baseline justify-between gap-4 border-b border-[#e0d8cf] pb-3">
-											<div className="flex items-baseline gap-3">
-												<h2 className="text-[1.05rem] font-bold tracking-tight text-[#3a3a3a]">{section.label}</h2>
-												<span className="hidden text-[0.78rem] text-[#9a9089] sm:inline">{section.description}</span>
+											<div className="flex items-baseline gap-3 flex-wrap">
+												<h2 className="font-rajdhani text-[1.25rem] font-bold tracking-tight text-[#3a3a3a]">{section.label}</h2>
+												<span className="text-[0.78rem] text-[#9a9089] hidden sm:inline">{section.description}</span>
 											</div>
-											<span className="shrink-0 font-mono text-[0.65rem] text-[#a89f96]">
-												{allInSection.length} {allInSection.length === 1 ? "project" : "projects"}
+											<span className="shrink-0 font-mono text-[0.62rem] text-[#a89f96]">
+												{all.length} {all.length === 1 ? "project" : "projects"}
 											</span>
 										</div>
 									</div>
 
-									{allInSection.length > 0 ? (
-										<div className="grid gap-5">
-											{allInSection.map((project, i) => (
-												<ProjectCard key={project.slug} project={project} index={i} sectionLabel={section.label} />
-											))}
-										</div>
-									) : (
+									{all.length === 0 ? (
 										<p className="text-[0.82rem] text-[#a89f96] italic">Case studies coming soon.</p>
+									) : (
+										<>
+											{/* Featured first card — full width */}
+											{featured && (
+												<div className="mb-5">
+													<ProjectCard project={featured} index={0} featured />
+												</div>
+											)}
+
+											{/* Rest — 3 col grid */}
+											{rest.length > 0 && (
+												<AnimatePresence>
+													<div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+														{rest.map((project, i) => (
+															<ProjectCard key={project.slug} project={project} index={i + 1} />
+														))}
+													</div>
+												</AnimatePresence>
+											)}
+
+											{/* Show more / less */}
+											{hasMore && (
+												<div className="mt-8 flex justify-center">
+													<button
+														onClick={() => setExpanded((prev) => ({ ...prev, [section.slug]: !isExpanded }))}
+														className="group inline-flex items-center gap-2 text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-[#6f655a] transition-colors hover:text-[#7A3A30]"
+													>
+														<span>{isExpanded ? "Show less" : `View all ${all.length}`}</span>
+														<ArrowRight
+															size={11}
+															className={`transition-transform duration-300 ${isExpanded ? "rotate-90 group-hover:translate-y-0.5" : "group-hover:translate-x-0.5"}`}
+														/>
+													</button>
+												</div>
+											)}
+										</>
 									)}
 								</motion.section>
 							);
@@ -183,6 +240,8 @@ const ProjectsPage = () => {
 					</div>
 				</motion.div>
 			</main>
+
+			<Footer />
 		</div>
 	);
 };

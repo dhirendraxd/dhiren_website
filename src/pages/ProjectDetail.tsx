@@ -1,10 +1,9 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import ProjectClient from '@/components/ProjectClient';
 import { FaGithub, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
-import MeetTheTeam from "@/components/MeetTheTeam";
 import { getProjectBySlug } from "@/data/projectDetails";
 
 const BASE_URL = "https://dhirendrasinghdhami.com.np";
@@ -247,35 +246,9 @@ const ProjectDetail = () => {
       note: project.sourceHref ? "Live source link available" : "No public link provided",
     },
   ];
-  const teamMembers = [
-    {
-      name: "Michael Brown",
-      role: "Product Lead",
-      projectWork: "Led product strategy, stakeholder interviews and roadmap definition.",
-      img: "https://picsum.photos/seed/michael/440/640",
-    },
-    {
-      name: "Rahul Mehta",
-      role: "Design Lead",
-      projectWork: "Designed UX flows and visual system; ran usability tests and iterations.",
-      img: "https://picsum.photos/seed/rahul/440/640",
-    },
-    {
-      name: "Sophia Lee",
-      role: "Community Manager",
-      projectWork: "Led community outreach and onboarding; managed volunteer coordination.",
-      img: "https://picsum.photos/seed/sophia/440/640",
-    },
-    {
-      name: "Daniel Carter",
-      role: "Developer",
-      projectWork: "Implemented frontend components, performance optimizations and CI.",
-      img: "https://picsum.photos/seed/daniel/720/480",
-    },
-  ];
 
   return (
-    <div className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.55),_transparent_30%),linear-gradient(180deg,#f7f3ec_0%,#e6ddcf_100%)] text-[#2d261f]">
+    <div className="min-h-screen bg-[#f5f1eb] text-[#2d261f]">
       <ScrollProgressBar />
       <main className="mx-auto max-w-[96rem] flex flex-col px-6 py-6 font-rajdhani sm:px-8 sm:py-6 lg:px-12 lg:py-8">
         <section className="flex flex-col">
@@ -505,46 +478,101 @@ const ProjectDetail = () => {
             {/* Right: project info */}
             <aside className="lg:sticky lg:top-20 flex flex-col gap-5 self-start pr-0 lg:pr-8 max-w-[56rem]">
 
-              {/* Title block */}
-              <div>
-                <p className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-[#7A3A30]">Selected Project</p>
-                <h1 className="mt-1.5 font-rajdhani text-[2.4rem] font-bold leading-[1.05] text-[#3a3a3a] sm:text-[3rem]">{project.title}</h1>
-                <p className="mt-3 text-[0.93rem] leading-[1.7] text-[#5f574d]">{project.summary}</p>
-              </div>
-
-              {/* Tags + meta in one compact row */}
-              <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
-                {tagPills.map((tag) => (
-                  <span key={tag} className="border border-[#e4dbcf] px-2 py-0.5 text-[0.68rem] font-semibold uppercase tracking-[0.1em] text-[#6b6259]">
-                    {tag}
-                  </span>
-                ))}
-                <span className="h-3 w-px bg-[#d4ccc4]" aria-hidden="true" />
-                <span className="text-[0.78rem] text-[#6b6259]">
-                  {project.serviceSlug === 'advocacy-community' ? 'Nepal' : 'Remote'} · {(project.date.match(/\d{4}$/) || [project.date])[0]}
-                </span>
-              </div>
-
-              {/* Explore links */}
-              <ProjectClient
-                sourceHref={project.sourceHref}
-                title={project.title}
-                showGithub={project.serviceSlug === 'tech-projects' || project.serviceSlug === 'digital-marketing'}
-              />
-
-              {/* Key Outcomes */}
-              {outcomes.length > 0 && (
-                <div className="border-t border-[#e9e1d6] pt-5">
-                  <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-[#6b6259] mb-4">Key Outcomes</p>
+              {project.serviceSlug === "digital-marketing" ? (
+                <>
+                  {/* Campaign label + title */}
                   <div>
-                    {outcomes.map((o, i) => (
-                      <div key={o} className="flex items-start gap-4 border-b border-[#e9e1d6] py-4 last:border-b-0">
-                        <span className="shrink-0 font-mono text-[0.68rem] tabular-nums text-[#7A3A30] mt-0.5">{String(i + 1).padStart(2, "0")}</span>
-                        <p className="text-[0.95rem] leading-[1.65] text-[#3a332c]">{o}</p>
-                      </div>
-                    ))}
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="h-px w-5 bg-[#7A3A30]" aria-hidden="true" />
+                      <p className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-[#7A3A30]">Campaign Case Study</p>
+                    </div>
+                    <h1 className="font-rajdhani text-[2.4rem] font-bold leading-[1.05] text-[#3a3a3a] sm:text-[3rem]">{project.title}</h1>
+                    <p className="mt-3 text-[0.93rem] leading-[1.7] text-[#5f574d]">{project.summary}</p>
                   </div>
-                </div>
+
+                  {/* Channels & Tools */}
+                  <div className="border-t border-[#e9e1d6] pt-5">
+                    <p className="text-[0.62rem] font-semibold uppercase tracking-[0.2em] text-[#a89f96] mb-3">Channels & Tools</p>
+                    <div className="flex flex-wrap gap-2">
+                      {project.tags.map((tag) => (
+                        <span key={tag} className="bg-[#3a3a3a] text-[#f5f1eb] px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.1em]">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                    <p className="mt-3 text-[0.75rem] text-[#a89f96]">
+                      Remote · {(project.date.match(/\d{4}$/) || [project.date])[0]}
+                    </p>
+                  </div>
+
+                  {/* Client link */}
+                  <ProjectClient
+                    sourceHref={project.sourceHref}
+                    title={project.title}
+                    showGithub={false}
+                  />
+
+                  {/* Campaign Results */}
+                  {outcomes.length > 0 && (
+                    <div className="border-t border-[#e9e1d6] pt-5">
+                      <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-[#6b6259] mb-4">Campaign Results</p>
+                      <div>
+                        {outcomes.map((o, i) => (
+                          <div key={o} className="flex items-start gap-4 border-b border-[#e9e1d6] py-4 last:border-b-0">
+                            <span className="shrink-0 font-mono text-[0.68rem] tabular-nums text-[#7A3A30] mt-0.5">{String(i + 1).padStart(2, "0")}</span>
+                            <p className="text-[0.95rem] leading-[1.65] text-[#3a332c]">{o}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </>
+              ) : (
+                <>
+                  {/* Standard label + title */}
+                  <div>
+                    <p className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-[#7A3A30]">
+                      {project.serviceSlug === "tech-projects" ? "Build Case Study" : "Selected Project"}
+                    </p>
+                    <h1 className="mt-1.5 font-rajdhani text-[2.4rem] font-bold leading-[1.05] text-[#3a3a3a] sm:text-[3rem]">{project.title}</h1>
+                    <p className="mt-3 text-[0.93rem] leading-[1.7] text-[#5f574d]">{project.summary}</p>
+                  </div>
+
+                  {/* Tags + meta */}
+                  <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+                    {tagPills.map((tag) => (
+                      <span key={tag} className="border border-[#e4dbcf] px-2 py-0.5 text-[0.68rem] font-semibold uppercase tracking-[0.1em] text-[#6b6259]">
+                        {tag}
+                      </span>
+                    ))}
+                    <span className="h-3 w-px bg-[#d4ccc4]" aria-hidden="true" />
+                    <span className="text-[0.78rem] text-[#6b6259]">
+                      {project.serviceSlug === "advocacy-community" ? "Nepal" : "Remote"} · {(project.date.match(/\d{4}$/) || [project.date])[0]}
+                    </span>
+                  </div>
+
+                  {/* Explore links */}
+                  <ProjectClient
+                    sourceHref={project.sourceHref}
+                    title={project.title}
+                    showGithub={project.serviceSlug === "tech-projects"}
+                  />
+
+                  {/* Key Outcomes */}
+                  {outcomes.length > 0 && (
+                    <div className="border-t border-[#e9e1d6] pt-5">
+                      <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-[#6b6259] mb-4">Key Outcomes</p>
+                      <div>
+                        {outcomes.map((o, i) => (
+                          <div key={o} className="flex items-start gap-4 border-b border-[#e9e1d6] py-4 last:border-b-0">
+                            <span className="shrink-0 font-mono text-[0.68rem] tabular-nums text-[#7A3A30] mt-0.5">{String(i + 1).padStart(2, "0")}</span>
+                            <p className="text-[0.95rem] leading-[1.65] text-[#3a332c]">{o}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </>
               )}
             </aside>
           </section>
@@ -552,85 +580,205 @@ const ProjectDetail = () => {
 
         {/* Footer-only: nothing should render after social icons per design */}
 
-        <MeetTheTeam members={teamMembers} />
 
-        
+        {/* ── Digital Marketing: visual-first creative showcase ── */}
+        {project.serviceSlug === "digital-marketing" && (
+          <div className="mt-16 space-y-14">
 
-        {/* CTA: Have a project in mind? */}
-        
-
-        {/* FAQ */}
-        <section className="mt-12 py-10">
-          <div className="mx-auto max-w-[88rem] px-6">
-            <div className="border-t border-[#e4dbcf] pt-10">
-
-              {/* Header */}
-              <div className="mb-6 flex flex-col items-center gap-1.5">
-                <p className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-[#7A3A30]">FAQ</p>
-                <h3 className="font-rajdhani text-[1.9rem] font-bold text-[#3a3a3a] text-center leading-tight tracking-tight">
-                  Your questions, clearly answered here
-                </h3>
-                <p className="max-w-[44ch] text-center text-[0.83rem] text-[#6b6259]">
-                  Quick answers about working together, timelines, and pricing.
-                </p>
+            {/* Creative gallery grid */}
+            <div>
+              <div className="h-px w-full bg-gradient-to-r from-transparent via-[#e9e1d6] to-transparent mb-8" />
+              <div className="flex items-center gap-3 mb-6">
+                <span className="h-px w-5 bg-[#7A3A30]" aria-hidden="true" />
+                <p className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-[#7A3A30]">Creative Showcase</p>
               </div>
-
-              {/* Accordion */}
-              {(() => {
-                const faqs = [
-                  { q: "What types of projects have you completed in the past?", a: "I’ve worked across digital marketing, community programs, and tech projects—ranging from campaign execution and SEO to community labs and campus innovation platforms.", idx: 0 },
-                  { q: "Do you provide a guarantee for your work?", a: "I offer clear deliverables and a revision plan; ongoing support and performance-based guarantees are scoped into retainers or special agreements as needed.", idx: 1 },
-                  { q: "How do we collaborate and communicate?", a: "I adapt to your workflow—Slack, email, or regular calls. Weekly check-ins are recommended during active sprints and concise updates between milestones.", idx: 2 },
-                  { q: "What are typical timelines and costs?", a: "Most projects fall between 4–12 weeks; costs depend on scope. I share a clear proposal with milestones and pricing during discovery.", idx: 3 },
-                ];
-                const [openIdx, setOpenIdx] = React.useState<number | null>(null);
-                const cols = [[faqs[0], faqs[2]], [faqs[1], faqs[3]]];
-                return (
-                  <div className="mx-auto max-w-3xl flex items-start divide-x divide-[#e9e1d6]">
-                    {cols.map((col, colIdx) => (
-                      <div key={colIdx} className={`flex-1 min-w-0 ${colIdx === 0 ? "pr-6" : "pl-6"}`}>
-                        {col.map(({ q, a, idx }) => (
-                          <div key={q} className="border-t border-[#e9e1d6]">
-                            <button
-                              type="button"
-                              onClick={() => setOpenIdx(openIdx === idx ? null : idx)}
-                              className="flex w-full items-center justify-between gap-4 py-4 text-left"
-                            >
-                              <span className="text-[0.88rem] font-semibold text-[#3a3a3a] transition-colors duration-200 hover:text-[#7A3A30]">
-                                {q}
-                              </span>
-                              <span
-                                className="shrink-0 text-base font-light text-[#7A3A30] select-none leading-none transition-transform duration-300"
-                                style={{ transform: openIdx === idx ? "rotate(45deg)" : "rotate(0deg)" }}
-                              >
-                                +
-                              </span>
-                            </button>
-                            <AnimatePresence initial={false}>
-                              {openIdx === idx && (
-                                <motion.div
-                                  key="answer"
-                                  initial={{ height: 0, opacity: 0 }}
-                                  animate={{ height: "auto", opacity: 1 }}
-                                  exit={{ height: 0, opacity: 0 }}
-                                  transition={{ duration: 0.28, ease: [0.4, 0, 0.2, 1] }}
-                                  className="overflow-hidden"
-                                >
-                                  <p className="pb-4 text-[0.84rem] leading-[1.72] text-[#5f574d]">{a}</p>
-                                </motion.div>
-                              )}
-                            </AnimatePresence>
-                          </div>
-                        ))}
-                      </div>
-                    ))}
-                  </div>
-                );
-              })()}
-
+              {displayThumbs.length > 1 && (
+                <div className="grid grid-cols-2 lg:grid-cols-3 gap-3">
+                  {displayThumbs.map((img, i) => (
+                    <motion.div
+                      key={img}
+                      className={`overflow-hidden ${i === 0 ? "col-span-2 lg:col-span-2" : ""}`}
+                      initial={{ opacity: 0, y: 12 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.38, delay: i * 0.05 }}
+                      viewport={{ once: true }}
+                    >
+                      <img
+                        src={img}
+                        alt={`${project.title} creative asset ${i + 1}`}
+                        loading="lazy"
+                        decoding="async"
+                        className={`w-full object-cover transition-transform duration-700 hover:scale-[1.03] ${i === 0 ? "aspect-[16/7]" : "aspect-[4/3]"}`}
+                      />
+                    </motion.div>
+                  ))}
+                </div>
+              )}
             </div>
+
+            {/* Campaign breakdown — 3 cols */}
+            <div>
+              <div className="h-px w-full bg-gradient-to-r from-transparent via-[#e9e1d6] to-transparent mb-8" />
+              <div className="flex items-center gap-3 mb-8">
+                <span className="h-px w-5 bg-[#7A3A30]" aria-hidden="true" />
+                <p className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-[#7A3A30]">Campaign Breakdown</p>
+              </div>
+              <div className="grid md:grid-cols-3 gap-0 border border-[#e4dbcf]">
+                {[
+                  { label: "The Problem", body: project.challenge },
+                  { label: "The Approach", body: project.approach },
+                  { label: "Channels & Tools", body: project.tags.join(" · ") },
+                ].map((panel, i) => (
+                  <motion.div
+                    key={panel.label}
+                    className="border-b md:border-b-0 md:border-r border-[#e4dbcf] last:border-0 p-8 flex flex-col gap-4"
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.35, delay: i * 0.07 }}
+                    viewport={{ once: true }}
+                  >
+                    <span className="font-mono text-[0.58rem] tabular-nums text-[#7A3A30]">{String(i + 1).padStart(2, "0")}</span>
+                    <h4 className="font-rajdhani text-[1rem] font-bold tracking-tight text-[#3a3a3a]">{panel.label}</h4>
+                    <p className="text-[0.86rem] leading-[1.72] text-[#6f655a]">{panel.body}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+
           </div>
-        </section>
+        )}
+
+        {/* ── Advocacy & Community: impact-focused narrative ── */}
+        {project.serviceSlug === "advocacy-community" && (
+          <div className="mt-16 space-y-14">
+
+            {/* Program story — challenge + approach */}
+            <div>
+              <div className="h-px w-full bg-gradient-to-r from-transparent via-[#e9e1d6] to-transparent mb-8" />
+              <div className="flex items-center gap-3 mb-8">
+                <span className="h-px w-5 bg-[#7A3A30]" aria-hidden="true" />
+                <p className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-[#7A3A30]">Program Story</p>
+              </div>
+              <div className="grid md:grid-cols-2 gap-8">
+                {[
+                  { label: "The Challenge", body: project.challenge },
+                  { label: "The Approach", body: project.approach },
+                ].map((item, i) => (
+                  <motion.div
+                    key={item.label}
+                    className={`p-8 flex flex-col gap-4 ${i === 0 ? "bg-[#3a3a3a]" : "border border-[#e4dbcf]"}`}
+                    initial={{ opacity: 0, y: 12 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.38, delay: i * 0.08 }}
+                    viewport={{ once: true }}
+                  >
+                    <span className={`font-mono text-[0.58rem] tabular-nums ${i === 0 ? "text-[#c8bfb5]" : "text-[#7A3A30]"}`}>{String(i + 1).padStart(2, "0")}</span>
+                    <h4 className={`font-rajdhani text-[1rem] font-bold tracking-tight ${i === 0 ? "text-white" : "text-[#3a3a3a]"}`}>{item.label}</h4>
+                    <p className={`text-[0.88rem] leading-[1.75] ${i === 0 ? "text-[#c8bfb5]" : "text-[#6f655a]"}`}>{item.body}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+
+            {/* Impact snapshot — 4 metric tiles */}
+            <div>
+              <div className="h-px w-full bg-gradient-to-r from-transparent via-[#e9e1d6] to-transparent mb-8" />
+              <div className="flex items-center gap-3 mb-8">
+                <span className="h-px w-5 bg-[#7A3A30]" aria-hidden="true" />
+                <p className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-[#7A3A30]">Impact Snapshot</p>
+              </div>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-0 border border-[#e4dbcf]">
+                {impactSnapshot.map((item, i) => {
+                  const isDark = i === 1;
+                  return (
+                    <motion.div
+                      key={item.label}
+                      className={`border-b sm:border-b-0 sm:border-r border-[#e4dbcf] last:border-0 py-10 px-7 flex flex-col justify-between gap-6 ${isDark ? "bg-[#3a3a3a]" : ""}`}
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.35, delay: i * 0.06 }}
+                      viewport={{ once: true }}
+                    >
+                      <p className={`font-rajdhani text-[2.2rem] font-bold leading-none tracking-tight ${isDark ? "text-[#f5f1eb]" : "text-[#3a3a3a]"}`}>{item.value}</p>
+                      <div>
+                        <p className={`text-[0.7rem] font-semibold uppercase tracking-[0.16em] ${isDark ? "text-[#a89f96]" : "text-[#a89f96]"}`}>{item.label}</p>
+                        <p className={`mt-1 text-[0.78rem] leading-[1.6] ${isDark ? "text-[#6f655a]" : "text-[#6f655a]"}`}>{item.note}</p>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </div>
+
+          </div>
+        )}
+
+        {/* ── Tech Projects: technical depth ── */}
+        {project.serviceSlug === "tech-projects" && (
+          <div className="mt-16 space-y-14">
+
+            {/* Technical overview */}
+            <div>
+              <div className="h-px w-full bg-gradient-to-r from-transparent via-[#e9e1d6] to-transparent mb-8" />
+              <div className="flex items-center gap-3 mb-8">
+                <span className="h-px w-5 bg-[#7A3A30]" aria-hidden="true" />
+                <p className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-[#7A3A30]">Technical Overview</p>
+              </div>
+              <div className="grid lg:grid-cols-[1fr_1fr_1px] gap-0 items-stretch border border-[#e4dbcf]">
+                <motion.div
+                  className="p-8 flex flex-col gap-4"
+                  initial={{ opacity: 0, x: -10 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.38 }}
+                  viewport={{ once: true }}
+                >
+                  <span className="font-mono text-[0.58rem] tabular-nums text-[#7A3A30]">01</span>
+                  <h4 className="font-rajdhani text-[1rem] font-bold tracking-tight text-[#3a3a3a]">Problem Statement</h4>
+                  <p className="text-[0.88rem] leading-[1.75] text-[#6f655a]">{project.challenge}</p>
+                </motion.div>
+                <div className="w-px bg-[#e4dbcf] hidden lg:block" aria-hidden="true" />
+                <motion.div
+                  className="p-8 flex flex-col gap-4 border-t lg:border-t-0 border-[#e4dbcf]"
+                  initial={{ opacity: 0, x: 10 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.38, delay: 0.07 }}
+                  viewport={{ once: true }}
+                >
+                  <span className="font-mono text-[0.58rem] tabular-nums text-[#7A3A30]">02</span>
+                  <h4 className="font-rajdhani text-[1rem] font-bold tracking-tight text-[#3a3a3a]">How It Was Built</h4>
+                  <p className="text-[0.88rem] leading-[1.75] text-[#6f655a]">{project.approach}</p>
+                </motion.div>
+              </div>
+            </div>
+
+            {/* Stack & scope */}
+            <div>
+              <div className="h-px w-full bg-gradient-to-r from-transparent via-[#e9e1d6] to-transparent mb-8" />
+              <div className="flex items-center justify-between mb-8 flex-wrap gap-4">
+                <div className="flex items-center gap-3">
+                  <span className="h-px w-5 bg-[#7A3A30]" aria-hidden="true" />
+                  <p className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-[#7A3A30]">Stack & Scope</p>
+                </div>
+                <span className="text-[0.78rem] text-[#a89f96] tracking-wide">{project.category} · {project.date}</span>
+              </div>
+              <div className="flex flex-wrap gap-3">
+                {project.tags.map((tag, i) => (
+                  <motion.span
+                    key={tag}
+                    className="border border-[#e4dbcf] px-4 py-2 font-rajdhani text-[0.82rem] font-semibold uppercase tracking-[0.12em] text-[#3a3a3a]"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.28, delay: i * 0.04 }}
+                    viewport={{ once: true }}
+                  >
+                    {tag}
+                  </motion.span>
+                ))}
+              </div>
+            </div>
+
+          </div>
+        )}
 
           <section className="mt-auto pt-4 sm:pt-5">
             <div className="mx-auto max-w-[50rem]">

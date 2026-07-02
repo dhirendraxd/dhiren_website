@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowUpRight, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
@@ -11,42 +11,6 @@ import { getRelevantExperiences } from "@/data/affiliations";
 
 const profileImage = assetPath("untitled-design.webp");
 
-// ── Expertise icon card ────────────────────────────────────────────────────
-function ExpertiseCard({ label, icon, delay = 0 }: { label: string; icon: string; delay?: number }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      transition={{ duration: 0.5, delay }}
-      viewport={{ once: true }}
-      className="flex flex-col items-center gap-3"
-    >
-      <div className="w-20 h-20 flex items-center justify-center">
-        <img src={icon} alt="" aria-hidden="true" className="w-14 h-14 object-contain" />
-      </div>
-      <p className="font-rajdhani text-[0.82rem] font-semibold uppercase tracking-[0.14em] text-[#6f655a] text-center leading-snug max-w-[6rem]">
-        {label}
-      </p>
-    </motion.div>
-  );
-}
-
-// ── Section heading shared style ──────────────────────────────────────────
-function SectionHeading({ children }: { children: React.ReactNode }) {
-  return (
-    <motion.h2
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      transition={{ duration: 0.55 }}
-      viewport={{ once: true }}
-      className="text-center font-cormorant font-normal text-[clamp(2rem,3.8vw,3rem)] tracking-wide text-[#3a3a3a] mb-14 leading-tight"
-    >
-      {children}
-    </motion.h2>
-  );
-}
-
-// ── Data ──────────────────────────────────────────────────────────────────
 const stats = [
   { value: "100%", label: "Client Satisfaction" },
   { value: "+10",  label: "Projects Shipped"    },
@@ -62,12 +26,7 @@ const expertise = [
   { label: "Community Building", icon: "/optimized_images/digital-marketing-icons/community.webp"             },
 ];
 
-const orgs = [
-  "Ctrl Bits",
-  "ALL In Foundation",
-  "Sustainability Solutions",
-  "Lovelac Talk",
-];
+const orgs = ["Ctrl Bits", "ALL In Foundation", "Sustainability Solutions", "Lovelac Talk"];
 
 const projects = [
   {
@@ -92,14 +51,12 @@ const projects = [
 
 const testimonials = [
   {
-    quote:
-      "Dhiren was a real pleasure to work with. He doesn't just execute — he genuinely cares about the impact and pushes the work to be better. Definitely the kind of person you can trust with a project from start to finish. Great services & Recommended!",
+    quote: "Dhiren was a real pleasure to work with. He doesn't just execute — he genuinely cares about the impact and pushes the work to be better. Definitely the kind of person you can trust with a project from start to finish. Great services & Recommended!",
     name:  "Team Lead",
     role:  "ALL In Foundation",
   },
   {
-    quote:
-      "Working with Dhiren was smooth from start to finish. His ability to connect community goals with digital strategy made a real difference. Great collaborator and highly reliable.",
+    quote: "Working with Dhiren was smooth from start to finish. His ability to connect community goals with digital strategy made a real difference. Great collaborator and highly reliable.",
     name:  "Program Manager",
     role:  "Sustainability Solutions",
   },
@@ -112,12 +69,21 @@ const gridImages = [
   assetPath("reference-image.webp"),
 ];
 
-// ── Page ──────────────────────────────────────────────────────────────────
+const Divider = () => (
+  <div className="h-px w-full bg-gradient-to-r from-transparent via-[#e9e1d6] to-transparent" />
+);
+
+const SectionLabel = ({ label }: { label: string }) => (
+  <div className="flex items-center gap-3 mb-8">
+    <span className="h-px w-5 bg-[#7A3A30]" aria-hidden="true" />
+    <p className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-[#7A3A30]">{label}</p>
+  </div>
+);
+
 const About = () => {
   const experiences = getRelevantExperiences();
   const mid     = Math.ceil(experiences.length / 2);
   const expCols = [experiences.slice(0, mid), experiences.slice(mid)];
-
   const [quoteIdx, setQuoteIdx] = useState(0);
   const prev = () => setQuoteIdx((i) => (i - 1 + testimonials.length) % testimonials.length);
   const next = () => setQuoteIdx((i) => (i + 1) % testimonials.length);
@@ -136,354 +102,437 @@ const About = () => {
       <Navbar />
 
       <main className="pb-20">
-        <div className="max-w-[68rem] mx-auto px-6 md:px-10">
+        <div className="max-w-[84rem] mx-auto px-6 md:px-10 lg:px-12">
 
-          {/* ── FIRST VIEWPORT: name + hero + orgs ──────────────────── */}
-          <div className="min-h-screen flex flex-col pt-24">
-
-            {/* NAME HEADER */}
+          {/* ── HERO ──────────────────────────────────────────────────── */}
+          <section className="pt-32 pb-16">
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.7, ease: "easeOut" }}
-              className="text-center pt-4 pb-10"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
             >
-              <h1 className="font-cormorant font-medium text-[clamp(2.6rem,5.5vw,4.8rem)] tracking-wide text-[#3a3a3a] leading-[1.1]">
-                Dhirendra Singh Dhami
-              </h1>
-              <p className="mt-3 font-rajdhani text-[clamp(0.95rem,1.9vw,1.3rem)] font-normal tracking-[0.14em] text-[#6f655a] uppercase">
-                Digital Marketer &amp; Youth Advocate
-              </p>
-              <p className="font-rajdhani text-[clamp(0.95rem,1.9vw,1.3rem)] font-normal tracking-[0.14em] text-[#6f655a] uppercase">
-                Based in Nepal
-              </p>
+              {/* Label */}
+              <div className="flex items-center gap-3 mb-6">
+                <span className="h-px w-5 bg-[#7A3A30]" aria-hidden="true" />
+                <p className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-[#7A3A30]">About</p>
+              </div>
+
+              {/* Name + role */}
+              <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between mb-14">
+                <h1 className="font-rajdhani text-[clamp(2.8rem,6vw,6rem)] font-bold leading-[0.92] tracking-[-0.02em] text-[#3a3a3a]">
+                  Dhirendra<br />Singh Dhami
+                </h1>
+                <p className="text-[0.9rem] leading-[1.8] text-[#6f655a] max-w-[32ch] md:text-right">
+                  Digital Marketer &amp; Youth Advocate<br />
+                  Based in Kathmandu, Nepal
+                </p>
+              </div>
+
+              {/* 3-col: bio | portrait | stats */}
+              <div className="grid grid-cols-1 md:grid-cols-[1fr_300px_1fr] lg:grid-cols-[1fr_340px_1fr] gap-10 lg:gap-14 items-stretch">
+
+                {/* Left — bio details */}
+                <div className="flex flex-col justify-between py-1 space-y-8">
+                  {[
+                    {
+                      heading: "Who I Am",
+                      body: "I'm Dhiren — a digital marketer and youth advocate based in Nepal. I run campaigns, grow online presence, and build community programs that create real-world impact.",
+                    },
+                    {
+                      heading: "Contact",
+                      body: "Kathmandu, Nepal\nctrlbits85@gmail.com",
+                    },
+                    {
+                      heading: "Focus Areas",
+                      body: "Digital Marketing\nCommunity & Advocacy\nPrototype Builds",
+                    },
+                  ].map((item) => (
+                    <div key={item.heading}>
+                      <p className="text-[0.62rem] font-semibold uppercase tracking-[0.28em] text-[#3a3a3a]/30 mb-2">{item.heading}</p>
+                      <p className="text-[1.05rem] leading-[1.9] text-[#5f574d] whitespace-pre-line">{item.body}</p>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Center — portrait */}
+                <div className="relative">
+                  {/* thin corner marks */}
+                  <span className="absolute -top-2 -left-2 w-5 h-5 border-t border-l border-[#c8bdb4] pointer-events-none" aria-hidden="true" />
+                  <span className="absolute -top-2 -right-2 w-5 h-5 border-t border-r border-[#c8bdb4] pointer-events-none" aria-hidden="true" />
+                  <span className="absolute -bottom-2 -left-2 w-5 h-5 border-b border-l border-[#c8bdb4] pointer-events-none" aria-hidden="true" />
+                  <span className="absolute -bottom-2 -right-2 w-5 h-5 border-b border-r border-[#c8bdb4] pointer-events-none" aria-hidden="true" />
+
+                  <div className="overflow-hidden aspect-[3/4] w-full border border-[#e4dbcf]">
+                    <img
+                      src={profileImage}
+                      alt="Portrait of Dhirendra Singh Dhami"
+                      loading="eager"
+                      decoding="async"
+                      className="w-full h-full object-cover object-top"
+                    />
+                  </div>
+
+                  {/* caption tag */}
+                  <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-[#f5f1eb] px-3 py-0.5 border border-[#e4dbcf]">
+                    <p className="text-[0.55rem] font-semibold uppercase tracking-[0.22em] text-[#a89f96] whitespace-nowrap">Kathmandu, Nepal</p>
+                  </div>
+                </div>
+
+                {/* Right — stats */}
+                <div className="flex flex-col border border-[#e4dbcf]">
+                  {stats.map((s, i) => (
+                    <motion.div
+                      key={s.label}
+                      className={`flex-1 py-8 px-8 flex flex-col justify-center ${i === 1 ? "bg-[#3a3a3a]" : ""} ${i < stats.length - 1 ? "border-b border-[#e4dbcf]" : ""}`}
+                      initial={{ opacity: 0, x: 12 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.5, delay: 0.15 + i * 0.08 }}
+                    >
+                      <p className={`font-rajdhani text-[clamp(2.8rem,5vw,5rem)] font-bold leading-none tabular-nums tracking-tight ${i === 1 ? "text-[#f5f1eb]" : "text-[#3a3a3a]"}`}>
+                        {s.value}
+                      </p>
+                      <p className={`mt-2 text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-[#a89f96]`}>
+                        {s.label}
+                      </p>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
             </motion.div>
+          </section>
 
-            {/* 3-COL HERO — grows to fill remaining space */}
-            <section className="flex-1 grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_290px_minmax(0,1fr)] lg:grid-cols-[minmax(0,1fr)_340px_minmax(0,1fr)] gap-10 md:gap-8 items-center pb-10">
+          {/* ── ORG STRIP ─────────────────────────────────────────────── */}
+          <div className="py-7 border-y border-[#e9e1d6] mb-20">
+            <div className="flex flex-wrap items-center justify-between gap-y-4">
+              {orgs.map((org) => (
+                <span key={org} className="text-[0.72rem] font-semibold uppercase tracking-[0.28em] text-[#3a3a3a]/25 hover:text-[#3a3a3a]/50 transition-colors duration-200 select-none">
+                  {org}
+                </span>
+              ))}
+            </div>
+          </div>
 
-              {/* Left: FOUNDED / CONTACT / PORTFOLIO */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
-                className="space-y-8"
-              >
-                <div>
-                  <p className="text-[0.75rem] font-semibold uppercase tracking-[0.28em] text-[#3a3a3a]/30 mb-3">
-                    Founded
-                  </p>
-                  <p className="text-[1.15rem] leading-[1.9] text-[#5f574d] font-rajdhani">
-                    I'm Dhiren — a digital marketer and youth advocate based in Nepal. I run campaigns, grow online presence, and build community programs that create real-world impact.
-                  </p>
-                </div>
-
-                <div>
-                  <p className="text-[0.75rem] font-semibold uppercase tracking-[0.28em] text-[#3a3a3a]/30 mb-3">
-                    Contact
-                  </p>
-                  <p className="text-[1.15rem] text-[#5f574d] leading-[1.9] font-rajdhani">
-                    Kathmandu, Nepal<br />
-                    ctrlbits85@gmail.com
-                  </p>
-                </div>
-
-                <div>
-                  <p className="text-[0.75rem] font-semibold uppercase tracking-[0.28em] text-[#3a3a3a]/30 mb-3">
-                    Portfolio
-                  </p>
-                  <p className="text-[1.15rem] text-[#5f574d] leading-[1.9] font-rajdhani">
-                    Digital Marketing<br />
-                    Community &amp; Advocacy<br />
-                    Prototype Builds
-                  </p>
-                </div>
-              </motion.div>
-
-              {/* Center: oval portrait */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.7, delay: 0.07, ease: "easeOut" }}
-                className="flex justify-center"
-              >
-                <div
-                  className="overflow-hidden border-[3px] border-[#e4dbcf]"
-                  style={{ width: "300px", height: "370px", borderRadius: "50%" }}
-                >
-                  <img
-                    src={profileImage}
-                    alt="Portrait of Dhirendra Singh Dhami"
-                    loading="eager"
-                    decoding="async"
-                    className="w-full h-full object-cover object-top scale-[1.07]"
-                  />
-                </div>
-              </motion.div>
-
-              {/* Right: stats */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.7, delay: 0.14, ease: "easeOut" }}
-                className="flex flex-col pl-6 md:pl-10"
-              >
-                {stats.map((s, i) => (
-                  <div
+          {/* ── EXPERTISE ─────────────────────────────────────────────── */}
+          <section className="mb-20">
+            <Divider />
+            <div className="pt-12">
+              <SectionLabel label="Expertise" />
+              <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
+                <h2 className="font-rajdhani text-[clamp(2rem,3.8vw,3.2rem)] font-bold leading-[1.05] tracking-tight text-[#3a3a3a]">
+                  What I Bring
+                </h2>
+                <p className="text-[0.88rem] text-[#6f655a] leading-[1.75] max-w-[36ch] md:text-right">
+                  A mix of digital marketing skills and community-driven execution.
+                </p>
+              </div>
+              <div className="grid grid-cols-3 sm:grid-cols-6 border border-[#e4dbcf]">
+                {expertise.map((s, i) => (
+                  <motion.div
                     key={s.label}
-                    className={`py-5 ${i < stats.length - 1 ? "border-b border-[#e9e1d6]" : ""}`}
+                    className={`flex flex-col items-center gap-4 py-10 px-4 border-r border-[#e4dbcf] last:border-r-0 ${i >= 3 ? "border-t border-[#e4dbcf] sm:border-t-0" : ""}`}
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    transition={{ duration: 0.4, delay: i * 0.06 }}
+                    viewport={{ once: true }}
                   >
-                    <p className="font-rajdhani text-[clamp(4.2rem,8vw,7.5rem)] font-bold text-[#3a3a3a] leading-none tabular-nums">
-                      {s.value}
-                    </p>
-                    <p className="mt-2 text-[0.74rem] font-semibold uppercase tracking-[0.26em] text-[#6f655a]">
+                    <img src={s.icon} alt="" aria-hidden="true" className="w-10 h-10 object-contain" />
+                    <p className="font-rajdhani text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-[#6f655a] text-center leading-snug">
                       {s.label}
                     </p>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* ── EDUCATION & EXPERIENCE ────────────────────────────────── */}
+          <section className="mb-20">
+            <Divider />
+            <div className="pt-12">
+              <SectionLabel label="Background" />
+              <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
+                <h2 className="font-rajdhani text-[clamp(2rem,3.8vw,3.2rem)] font-bold leading-[1.05] tracking-tight text-[#3a3a3a]">
+                  Education &amp; Experience
+                </h2>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border border-[#e4dbcf]">
+
+                {/* Education */}
+                <div className="border-b md:border-b-0 md:border-r border-[#e4dbcf] p-8">
+                  <p className="text-[0.62rem] font-semibold uppercase tracking-[0.28em] text-[#3a3a3a]/30 mb-8">Education</p>
+                  <div className="space-y-10">
+                    {[
+                      { date: "2022 – Present", title: "BSc. CSIT", org: "KIST College" },
+                      { date: "2082 BS",         title: "3rd Prize — Tech Fair", org: "KIST College" },
+                    ].map((item) => (
+                      <motion.div key={item.title} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 0.35 }} viewport={{ once: true }}>
+                        <p className="text-[0.65rem] text-[#7A3A30] uppercase tracking-[0.16em] mb-1.5">{item.date}</p>
+                        <h4 className="font-rajdhani text-[1.1rem] font-bold tracking-tight text-[#3a3a3a] leading-snug">{item.title}</h4>
+                        <p className="text-[0.88rem] text-[#6f655a] mt-0.5">{item.org}</p>
+                      </motion.div>
+                    ))}
                   </div>
-                ))}
-              </motion.div>
-            </section>
+                </div>
 
-            {/* ORG LOGOS STRIP — pinned to bottom of first viewport */}
-            <section className="py-8 border-t border-b border-[#e9e1d6]">
-              <div className="flex flex-wrap items-center justify-between gap-y-4">
-                {orgs.map((org) => (
-                  <span
-                    key={org}
-                    className="text-[0.72rem] font-semibold uppercase tracking-[0.28em] text-[#3a3a3a]/25 hover:text-[#3a3a3a]/50 transition-colors duration-200 select-none"
-                  >
-                    {org}
+                {/* Experience col 1 */}
+                <div className="border-b md:border-b-0 md:border-r border-[#e4dbcf] p-8">
+                  <p className="text-[0.62rem] font-semibold uppercase tracking-[0.28em] text-[#3a3a3a]/30 mb-8">Experience</p>
+                  <div className="space-y-10">
+                    {expCols[0].map((exp, i) => (
+                      <motion.div key={exp.title} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 0.35, delay: i * 0.07 }} viewport={{ once: true }}>
+                        <p className="text-[0.65rem] text-[#7A3A30] uppercase tracking-[0.16em] mb-1.5">{exp.dateRange}</p>
+                        <h4 className="font-rajdhani text-[1.1rem] font-bold tracking-tight text-[#3a3a3a] leading-snug">{exp.title}</h4>
+                        <a href={exp.link} target="_blank" rel="noopener noreferrer" className="text-[0.88rem] text-[#6f655a] hover:text-[#7A3A30] transition-colors mt-0.5 inline-block">
+                          {exp.company}
+                        </a>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Experience col 2 */}
+                <div className="p-8">
+                  <p className="text-[0.62rem] font-semibold uppercase tracking-[0.28em] text-transparent mb-8 select-none" aria-hidden="true">Experience</p>
+                  <div className="space-y-10">
+                    {expCols[1].map((exp, i) => (
+                      <motion.div key={exp.title} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 0.35, delay: i * 0.07 }} viewport={{ once: true }}>
+                        <p className="text-[0.65rem] text-[#7A3A30] uppercase tracking-[0.16em] mb-1.5">{exp.dateRange}</p>
+                        <h4 className="font-rajdhani text-[1.1rem] font-bold tracking-tight text-[#3a3a3a] leading-snug">{exp.title}</h4>
+                        <a href={exp.link} target="_blank" rel="noopener noreferrer" className="text-[0.88rem] text-[#6f655a] hover:text-[#7A3A30] transition-colors mt-0.5 inline-block">
+                          {exp.company}
+                        </a>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* ── SELECTED PROJECTS ─────────────────────────────────────── */}
+          <section className="mb-20">
+            <Divider />
+            <div className="pt-12">
+              <SectionLabel label="Selected Projects" />
+              <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
+                <h2 className="font-rajdhani text-[clamp(2rem,3.8vw,3.2rem)] font-bold leading-[1.05] tracking-tight text-[#3a3a3a]">
+                  Things I've Made
+                </h2>
+                <Link
+                  to="/projects"
+                  className="group inline-flex items-center gap-1.5 text-[0.75rem] font-semibold uppercase tracking-[0.16em] text-[#6f655a] transition-colors hover:text-[#7A3A30] self-start md:self-auto"
+                >
+                  <span className="relative after:absolute after:left-0 after:-bottom-px after:h-px after:w-0 after:bg-[#7A3A30] after:transition-all after:duration-200 group-hover:after:w-full">
+                    View All Projects
                   </span>
+                  <ArrowRight size={11} className="transition-transform duration-200 group-hover:translate-x-0.5" />
+                </Link>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+                {projects.map((p, i) => (
+                  <motion.article
+                    key={p.href}
+                    className="group border border-[#e8e0d6] hover:border-[#c5bbb2] transition-colors duration-300 overflow-hidden relative"
+                    initial={{ opacity: 0, y: 14 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.38, delay: i * 0.07 }}
+                    viewport={{ once: true }}
+                  >
+                    <span className="pointer-events-none absolute inset-x-0 top-0 h-[2px] origin-left scale-x-0 bg-[#7A3A30] transition-transform duration-500 group-hover:scale-x-100" aria-hidden="true" />
+                    <Link to={p.href} className="block">
+                      <div className="overflow-hidden aspect-[4/3] bg-[#e4dbcf]">
+                        <img src={p.image} alt={p.title} loading="lazy" decoding="async"
+                          className="w-full h-full object-cover transition-transform duration-600 group-hover:scale-[1.04]" />
+                      </div>
+                      <div className="px-4 py-4">
+                        <p className="text-[0.58rem] font-semibold uppercase tracking-[0.2em] text-[#7A3A30]">{p.type}</p>
+                        <h3 className="mt-1 font-rajdhani text-[1rem] font-bold tracking-tight text-[#3a3a3a] leading-snug group-hover:text-[#7A3A30] transition-colors duration-200">{p.title}</h3>
+                        <span className="inline-flex items-center gap-1 mt-2 text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-[#a89f96] group-hover:text-[#7A3A30] transition-colors duration-200">
+                          View Project <ArrowUpRight size={10} strokeWidth={2} />
+                        </span>
+                      </div>
+                    </Link>
+                  </motion.article>
                 ))}
               </div>
-            </section>
-
-          </div>{/* end first viewport */}
-
-          {/* ── MY EXPERTISE ────────────────────────────────────────── */}
-          <section className="py-16 border-b border-[#e9e1d6]">
-            <SectionHeading>My Expertise</SectionHeading>
-            <div className="grid grid-cols-3 sm:grid-cols-6 gap-6 sm:gap-10 max-w-3xl mx-auto justify-items-center">
-              {expertise.map((s, i) => (
-                <ExpertiseCard key={s.label} label={s.label} icon={s.icon} delay={i * 0.07} />
-              ))}
             </div>
           </section>
 
-          {/* ── EDUCATION & EXPERIENCE ──────────────────────────────── */}
-          <section className="py-16 border-b border-[#e9e1d6]">
-            <SectionHeading>Education &amp; Experience</SectionHeading>
+          {/* ── TESTIMONIALS ──────────────────────────────────────────── */}
+          <section className="mb-20">
+            <Divider />
+            <div className="pt-12">
+              <SectionLabel label="Testimonials" />
+              <div className="flex items-center gap-8 max-w-[52rem] mx-auto">
+                <button onClick={prev} className="shrink-0 text-[#3a3a3a]/20 hover:text-[#3a3a3a]/55 transition-colors" aria-label="Previous testimonial">
+                  <ChevronLeft size={28} strokeWidth={1.2} />
+                </button>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-6">
-
-              {/* Education */}
-              <div>
-                <p className="font-rajdhani text-[0.68rem] font-semibold uppercase tracking-[0.3em] text-[#3a3a3a]/28 mb-6">
-                  Education
-                </p>
-                <div className="space-y-8">
-                  {[
-                    { date: "2022 – Present", title: "BSc. CSIT", org: "KIST College" },
-                    { date: "2082 BS",         title: "3rd Prize — Tech Fair", org: "KIST College" },
-                  ].map((item) => (
-                    <motion.div
-                      key={item.title}
-                      initial={{ opacity: 0 }}
-                      whileInView={{ opacity: 1 }}
-                      transition={{ duration: 0.35 }}
-                      viewport={{ once: true }}
-                    >
-                      <p className="font-rajdhani text-[0.68rem] text-[#7A3A30]/70 uppercase tracking-[0.16em] mb-1">
-                        {item.date}
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={quoteIdx}
+                    initial={{ opacity: 0, y: 6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -6 }}
+                    transition={{ duration: 0.3 }}
+                    className="text-center flex-1"
+                  >
+                    <span className="font-rajdhani text-[2.4rem] leading-none text-[#e4dbcf] select-none" aria-hidden="true">"</span>
+                    <p className="font-rajdhani text-[clamp(1rem,2vw,1.3rem)] leading-[1.85] text-[#3a3a3a] -mt-3">
+                      {testimonials[quoteIdx].quote}
+                    </p>
+                    <div className="mt-6 border-t border-[#e9e1d6] pt-5">
+                      <p className="font-rajdhani font-bold text-[0.85rem] uppercase tracking-[0.18em] text-[#3a3a3a]">
+                        {testimonials[quoteIdx].name}
                       </p>
-                      <h4 className="font-cormorant font-medium text-[1.25rem] text-[#3a3a3a] leading-snug">
-                        {item.title}
-                      </h4>
-                      <p className="font-rajdhani text-[0.95rem] text-[#6f655a] mt-0.5">{item.org}</p>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Experience col 1 */}
-              <div>
-                <p className="font-rajdhani text-[0.68rem] font-semibold uppercase tracking-[0.3em] text-[#3a3a3a]/28 mb-6">
-                  Experience
-                </p>
-                <div className="space-y-8">
-                  {expCols[0].map((exp, i) => (
-                    <motion.div
-                      key={exp.title}
-                      initial={{ opacity: 0 }}
-                      whileInView={{ opacity: 1 }}
-                      transition={{ duration: 0.35, delay: i * 0.07 }}
-                      viewport={{ once: true }}
-                    >
-                      <p className="font-rajdhani text-[0.68rem] text-[#7A3A30]/70 uppercase tracking-[0.16em] mb-1">
-                        {exp.dateRange}
+                      <p className="font-rajdhani text-[0.78rem] text-[#7A3A30] mt-1 tracking-wide">
+                        {testimonials[quoteIdx].role}
                       </p>
-                      <h4 className="font-cormorant font-medium text-[1.25rem] text-[#3a3a3a] leading-snug">
-                        {exp.title}
-                      </h4>
-                      <a
-                        href={exp.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="font-rajdhani text-[0.95rem] text-[#6f655a] hover:text-[#7A3A30] transition-colors mt-0.5 inline-block"
-                      >
-                        {exp.company}
-                      </a>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
+                    </div>
 
-              {/* Experience col 2 */}
-              <div>
-                <p className="font-rajdhani text-[0.68rem] font-semibold uppercase tracking-[0.3em] text-transparent mb-6 select-none" aria-hidden="true">
-                  Experience
-                </p>
-                <div className="space-y-8">
-                  {expCols[1].map((exp, i) => (
-                    <motion.div
-                      key={exp.title}
-                      initial={{ opacity: 0 }}
-                      whileInView={{ opacity: 1 }}
-                      transition={{ duration: 0.35, delay: i * 0.07 }}
-                      viewport={{ once: true }}
-                    >
-                      <p className="font-rajdhani text-[0.68rem] text-[#7A3A30]/70 uppercase tracking-[0.16em] mb-1">
-                        {exp.dateRange}
-                      </p>
-                      <h4 className="font-cormorant font-medium text-[1.25rem] text-[#3a3a3a] leading-snug">
-                        {exp.title}
-                      </h4>
-                      <a
-                        href={exp.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="font-rajdhani text-[0.95rem] text-[#6f655a] hover:text-[#7A3A30] transition-colors mt-0.5 inline-block"
-                      >
-                        {exp.company}
-                      </a>
-                    </motion.div>
-                  ))}
-                </div>
+                    {/* Dots */}
+                    <div className="flex items-center justify-center gap-2 mt-5">
+                      {testimonials.map((_, i) => (
+                        <button key={i} onClick={() => setQuoteIdx(i)} aria-label={`Go to testimonial ${i + 1}`}
+                          className={`rounded-full transition-all duration-300 ${i === quoteIdx ? "w-5 h-1.5 bg-[#7A3A30]" : "w-1.5 h-1.5 bg-[#c8bdb4] hover:bg-[#a89f96]"}`}
+                        />
+                      ))}
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+
+                <button onClick={next} className="shrink-0 text-[#3a3a3a]/20 hover:text-[#3a3a3a]/55 transition-colors" aria-label="Next testimonial">
+                  <ChevronRight size={28} strokeWidth={1.2} />
+                </button>
               </div>
             </div>
           </section>
 
-          {/* ── MY LATEST PROJECTS ──────────────────────────────────── */}
-          <section className="py-16 border-b border-[#e9e1d6]">
-            <SectionHeading>My Latest Projects</SectionHeading>
+          {/* ── GRAPHIC DESIGN ────────────────────────────────────────── */}
+          <section className="mb-4">
+            <Divider />
+            <div className="pt-12">
+              <SectionLabel label="Creative Work" />
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-              {projects.map((p, i) => (
+              <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10">
+                <h2 className="font-rajdhani text-[clamp(2rem,3.8vw,3.2rem)] font-bold leading-[1.05] tracking-tight text-[#3a3a3a]">
+                  Graphic Design
+                </h2>
+                <a
+                  href="https://instagram.com/dhirendraxd"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center gap-2 self-start sm:self-auto"
+                >
+                  <span className="text-[0.72rem] font-semibold uppercase tracking-[0.2em] text-[#a89f96] group-hover:text-[#7A3A30] transition-colors duration-200">
+                    @dhirendraxd
+                  </span>
+                  <ArrowUpRight
+                    size={12}
+                    className="text-[#c8bdb4] group-hover:text-[#7A3A30] transition-colors duration-200 group-hover:translate-x-px group-hover:-translate-y-px"
+                  />
+                </a>
+              </div>
+
+              {/* Editorial grid: tall hero on left, 3 tiles on right */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 grid-rows-2 gap-3 sm:h-[560px]">
+
+                {/* Hero tile — spans full height */}
                 <motion.div
-                  key={p.href}
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  transition={{ duration: 0.4, delay: i * 0.09 }}
+                  className="group relative overflow-hidden bg-[#e4dbcf] sm:row-span-2 aspect-[4/5] sm:aspect-auto"
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.45 }}
                   viewport={{ once: true }}
                 >
-                  <Link to={p.href} className="group block">
-                    <div className="overflow-hidden aspect-[4/3] bg-[#e4dbcf]">
-                      <img
-                        src={p.image}
-                        alt={p.title}
-                        loading="lazy"
-                        decoding="async"
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
-                      />
-                    </div>
-                    <div className="mt-3.5">
-                      <p className="font-rajdhani text-[0.68rem] font-semibold uppercase tracking-[0.22em] text-[#6f655a]/60">
-                        {p.type}
-                      </p>
-                      <h4 className="mt-1 font-cormorant font-medium text-[1.25rem] text-[#3a3a3a] leading-snug">
-                        {p.title}
-                      </h4>
-                      <span className="inline-flex items-center gap-1 mt-1.5 font-rajdhani text-[0.75rem] font-semibold uppercase tracking-[0.16em] text-[#6f655a] group-hover:text-[#7A3A30] transition-colors duration-200">
-                        View Project <ArrowUpRight size={11} strokeWidth={2} />
-                      </span>
-                    </div>
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
-
-            {/* Dot indicators */}
-            <div className="flex items-center justify-center gap-2 mt-10">
-              {projects.map((_, i) => (
-                <span
-                  key={i}
-                  className={`rounded-full block transition-all duration-300 ${
-                    i === 0 ? "w-5 h-1.5 bg-[#7A3A30]" : "w-1.5 h-1.5 bg-[#c8bdb4]"
-                  }`}
-                />
-              ))}
-            </div>
-          </section>
-
-          {/* ── TESTIMONIAL ─────────────────────────────────────────── */}
-          <section className="py-16 border-b border-[#e9e1d6]">
-            <div className="flex items-center gap-6 max-w-[48rem] mx-auto">
-              <button
-                onClick={prev}
-                className="shrink-0 text-[#3a3a3a]/20 hover:text-[#3a3a3a]/55 transition-colors"
-                aria-label="Previous testimonial"
-              >
-                <ChevronLeft size={32} strokeWidth={1.2} />
-              </button>
-
-              <motion.div
-                key={quoteIdx}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.35 }}
-                className="text-center flex-1"
-              >
-                <p className="font-cormorant font-normal italic text-[clamp(1.25rem,2.4vw,1.65rem)] leading-[1.85] text-[#3a3a3a]">
-                  &ldquo;{testimonials[quoteIdx].quote}&rdquo;
-                </p>
-                <div className="mt-7">
-                  <p className="font-rajdhani font-semibold text-[0.95rem] uppercase tracking-[0.18em] text-[#3a3a3a]">
-                    {testimonials[quoteIdx].name}
-                  </p>
-                  <p className="font-rajdhani text-[0.85rem] text-[#7A3A30] mt-1 tracking-wide">
-                    {testimonials[quoteIdx].role}
-                  </p>
-                </div>
-              </motion.div>
-
-              <button
-                onClick={next}
-                className="shrink-0 text-[#3a3a3a]/20 hover:text-[#3a3a3a]/55 transition-colors"
-                aria-label="Next testimonial"
-              >
-                <ChevronRight size={32} strokeWidth={1.2} />
-              </button>
-            </div>
-          </section>
-
-          {/* ── PHOTO GRID (@dhirendraxd) ───────────────────────────── */}
-          <section className="py-16">
-            <p className="text-center font-rajdhani text-[0.8rem] font-semibold uppercase tracking-[0.35em] text-[#3a3a3a]/35 mb-8">
-              @dhirendraxd
-            </p>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-              {gridImages.map((img, i) => (
-                <div key={i} className="aspect-square overflow-hidden bg-[#e4dbcf]">
                   <img
-                    src={img}
-                    alt=""
-                    aria-hidden="true"
+                    src={gridImages[0]}
+                    alt="Graphic design work"
                     loading="lazy"
                     decoding="async"
-                    className="w-full h-full object-cover hover:scale-[1.05] transition-transform duration-500"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                   />
-                </div>
-              ))}
+                  <div className="absolute inset-0 bg-[#3a3a3a]/0 group-hover:bg-[#3a3a3a]/20 transition-colors duration-400 pointer-events-none" />
+                </motion.div>
+
+                {/* Top-right — wide landscape */}
+                <motion.div
+                  className="group relative overflow-hidden bg-[#e4dbcf] sm:col-span-2 aspect-video sm:aspect-auto"
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.45, delay: 0.07 }}
+                  viewport={{ once: true }}
+                >
+                  <img
+                    src={gridImages[1]}
+                    alt="Graphic design work"
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                  />
+                  <div className="absolute inset-0 bg-[#3a3a3a]/0 group-hover:bg-[#3a3a3a]/20 transition-colors duration-400 pointer-events-none" />
+                </motion.div>
+
+                {/* Bottom-right col 1 */}
+                <motion.div
+                  className="group relative overflow-hidden bg-[#e4dbcf] aspect-square sm:aspect-auto"
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.45, delay: 0.14 }}
+                  viewport={{ once: true }}
+                >
+                  <img
+                    src={gridImages[2]}
+                    alt="Graphic design work"
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                  />
+                  <div className="absolute inset-0 bg-[#3a3a3a]/0 group-hover:bg-[#3a3a3a]/20 transition-colors duration-400 pointer-events-none" />
+                </motion.div>
+
+                {/* Bottom-right col 2 — dark accent tile */}
+                <motion.div
+                  className="group relative overflow-hidden bg-[#3a3a3a] aspect-square sm:aspect-auto"
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.45, delay: 0.21 }}
+                  viewport={{ once: true }}
+                >
+                  <img
+                    src={gridImages[3]}
+                    alt="Graphic design work"
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-full object-cover opacity-80 transition-all duration-700 group-hover:scale-[1.04] group-hover:opacity-100"
+                  />
+                  {/* Instagram CTA overlay */}
+                  <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#3a3a3a]/60">
+                    <ArrowUpRight size={18} className="text-[#f5f1eb] mb-1" />
+                    <p className="text-[0.6rem] font-semibold uppercase tracking-[0.22em] text-[#f5f1eb]/80">View more</p>
+                  </div>
+                </motion.div>
+
+              </div>
+
+              {/* Bottom strip */}
+              <div className="mt-4 flex items-center justify-between border-t border-[#e9e1d6] pt-4">
+                <p className="text-[0.65rem] text-[#a89f96] tracking-wide">Design & visual work — social, brand, campaigns</p>
+                <a
+                  href="https://instagram.com/dhirendraxd"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center gap-1.5 text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-[#6f655a] hover:text-[#7A3A30] transition-colors duration-200"
+                >
+                  <span className="relative after:absolute after:left-0 after:-bottom-px after:h-px after:w-0 after:bg-[#7A3A30] after:transition-all after:duration-200 group-hover:after:w-full">
+                    Follow on Instagram
+                  </span>
+                  <ArrowUpRight size={10} className="group-hover:translate-x-px group-hover:-translate-y-px transition-transform duration-200" />
+                </a>
+              </div>
+
             </div>
           </section>
 
