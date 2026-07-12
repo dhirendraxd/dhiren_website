@@ -92,7 +92,7 @@ const images = {
 };
 
 const unsplash = (id: string) =>
-  `https://images.unsplash.com/photo-${id}?w=960&h=640&fit=crop&auto=format&q=80`;
+  `https://images.unsplash.com/photo-${id}?w=960&h=640&fit=crop&auto=format&fm=webp&q=80`;
 
 const netImages = {
   communityWorkshop: unsplash('1522202176988-66273c2fd55f'),  // people collaborating around table

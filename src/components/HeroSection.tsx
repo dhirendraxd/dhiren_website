@@ -63,9 +63,10 @@ const HeroSection = () => {
                 alt="Portrait illustration of Dhiren on the homepage"
                 loading="eager"
                 decoding="async"
-                  fetchPriority="high"
+                fetchPriority="high"
                 width={800}
                 height={800}
+                sizes="(min-width: 1280px) 46rem, (min-width: 1024px) 40rem, (min-width: 768px) 36rem, 32rem"
                 className="w-[clamp(18rem,32vw,32rem)] md:w-[clamp(22rem,36vw,40rem)] lg:w-[clamp(26rem,40vw,46rem)] xl:w-[clamp(30rem,42vw,52rem)] h-auto"
               />
               <p

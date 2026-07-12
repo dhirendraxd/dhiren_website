@@ -22,7 +22,10 @@ async function processFile(srcPath, relPath) {
   const destWebp = path.join(destDir, path.basename(relPath).replace(/\.[^.]+$/, '.webp'));
 
   try {
-    await sharp(srcFull).resize({ width: 1600 }).webp({ quality: 80 }).toFile(destWebp);
+    await sharp(srcFull)
+      .resize({ width: 1600, withoutEnlargement: true })
+      .webp({ quality: 80, effort: 6 })
+      .toFile(destWebp);
     console.log(`Optimized: ${relPath} -> ${path.relative(ROOT, destWebp)}`);
   } catch (err) {
     console.error('Failed to process', relPath, err.message || err);
