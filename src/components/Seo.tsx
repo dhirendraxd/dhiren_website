@@ -8,6 +8,7 @@ type SeoProps = {
   imageAlt?: string;
   type?: "website" | "article" | "profile";
   noIndex?: boolean;
+  keywords?: string[] | string;
   schema?: Record<string, unknown> | Array<Record<string, unknown>>;
 };
 
@@ -62,16 +63,27 @@ const removeTag = (selector: string) => {
   }
 };
 
-const Seo = ({ title, description, canonicalPath, image, imageAlt, type = "website", noIndex = false, schema }: SeoProps) => {
+const Seo = ({ title, description, canonicalPath, image, imageAlt, type = "website", noIndex = false, keywords, schema }: SeoProps) => {
   useEffect(() => {
     const canonicalUrl = normalizeUrl(canonicalPath);
     const imageType = image ? inferImageType(image) : null;
     const schemaId = "seo-jsonld";
+    const keywordValue = Array.isArray(keywords)
+      ? keywords.join(", ")
+      : typeof keywords === "string"
+        ? keywords
+        : "Dhirendra Singh Dhami, digital marketing, SEO, youth advocacy, Nepal";
 
     document.title = title;
     setTag('meta[name="description"]', { name: "description", content: description });
+    setTag('meta[name="keywords"]', { name: "keywords", content: keywordValue });
+    setTag('meta[name="author"]', { name: "author", content: "Dhirendra Singh Dhami" });
     setTag('meta[name="robots"]', {
       name: "robots",
+      content: noIndex ? "noindex, nofollow" : "index, follow, max-image-preview:large",
+    });
+    setTag('meta[name="googlebot"]', {
+      name: "googlebot",
       content: noIndex ? "noindex, nofollow" : "index, follow, max-image-preview:large",
     });
     setTag('meta[property="og:type"]', { property: "og:type", content: type });
@@ -126,7 +138,7 @@ const Seo = ({ title, description, canonicalPath, image, imageAlt, type = "websi
     return () => {
       document.getElementById(schemaId)?.remove();
     };
-  }, [canonicalPath, description, image, imageAlt, noIndex, schema, title, type]);
+  }, [canonicalPath, description, image, imageAlt, keywords, noIndex, schema, title, type]);
 
   return null;
 };

@@ -121,11 +121,12 @@ const ProjectsPage = () => {
 	return (
 		<div className="min-h-screen bg-[#f5f1eb] text-[#3a3a3a]">
 			<Seo
-				title="Projects | Dhirendra Singh Dhami"
-				description="A focused collection of Dhiren's featured projects with direct links to the case studies."
+				title="Projects | SEO, Digital Marketing & Civic-Tech Case Studies"
+				description="Browse featured SEO, digital marketing, and civic-tech case studies by Dhirendra Singh Dhami, with insights into campaign strategy and execution."
 				canonicalPath="/projects"
 				image={featuredImage}
 				imageAlt="Featured project preview for Dhirendra Singh Dhami"
+				keywords={["Dhirendra Singh Dhami projects", "SEO case studies", "digital marketing portfolio", "civic tech projects", "Nepal"]}
 				schema={projectsSchema}
 			/>
 			<ScrollProgressBar />

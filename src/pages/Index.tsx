@@ -58,12 +58,13 @@ const Index = () => {
     <div id="home" className="min-h-screen bg-card scroll-mt-24">
       <PageLoader />
       <Seo
-        title="Dhirendra Singh Dhami | Digital Marketing, SEO, and Youth Advocacy"
-        description="Portfolio of Dhirendra Singh Dhami, focused on digital marketing, SEO, content strategy, youth advocacy, and practical civic-tech projects."
+        title="Dhirendra Singh Dhami | SEO, Digital Marketing & Youth Advocacy"
+        description="Explore Dhirendra Singh Dhami’s portfolio for SEO strategy, digital marketing, content planning, campaign growth, and youth-led civic-tech work in Nepal."
         canonicalPath="/"
         image={heroImage}
         imageAlt="Portrait illustration of Dhiren on the homepage"
         type="website"
+        keywords={["Dhirendra Singh Dhami", "digital marketing", "SEO specialist", "content strategy", "youth advocacy", "Nepal", "civic tech"]}
         schema={homeSchema}
       />
       <ScrollProgressBar />

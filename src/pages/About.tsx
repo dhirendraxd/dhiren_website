@@ -94,12 +94,38 @@ const About = () => {
   return (
     <div className="min-h-screen bg-[#f5f1eb] font-rajdhani">
       <Seo
-        title="About Dhiren | Dhirendra Singh Dhami"
-        description="Digital marketer, youth advocate, and builder based in Nepal. Explore Dhiren's background, skills, and work."
+        title="About Dhirendra Singh Dhami | SEO & Digital Marketing Expert in Nepal"
+        description="Learn about Dhirendra Singh Dhami’s background in SEO, digital marketing, community advocacy, and civic-tech projects rooted in Nepal."
         canonicalPath="/about"
         image={profileImage}
         imageAlt="Portrait of Dhirendra Singh Dhami"
         type="profile"
+        keywords={["about Dhirendra Singh Dhami", "SEO expert Nepal", "digital marketer Nepal", "youth advocate", "civic tech", "portfolio"]}
+        schema={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Person",
+            "name": "Dhirendra Singh Dhami",
+            "alternateName": "Dhiren",
+            "jobTitle": "Digital Marketing Specialist and Youth Advocate",
+            "description": "Digital marketer and youth advocate focused on SEO, growth strategy, and community-led impact projects.",
+            "url": "https://dhirendrasinghdhami.com.np/about",
+            "image": profileImage,
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Kathmandu",
+              "addressCountry": "NP"
+            },
+            "sameAs": ["https://github.com/dhirendraxd"]
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "name": "About Dhirendra Singh Dhami",
+            "description": "Learn about Dhirendra Singh Dhami’s background in SEO, digital marketing, advocacy, and civic-tech work.",
+            "url": "https://dhirendrasinghdhami.com.np/about"
+          }
+        ]}
       />
       <ScrollProgressBar />
       <Navbar />

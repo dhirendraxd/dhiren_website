@@ -154,6 +154,8 @@ const ProjectDetail = () => {
     const previousTwitterDescription = getMetaTag('meta[name="twitter:description"]')?.getAttribute("content") || "";
     const previousTwitterImage = getMetaTag('meta[name="twitter:image"]')?.getAttribute("content") || "";
     const previousTwitterImageAlt = getMetaTag('meta[name="twitter:image:alt"]')?.getAttribute("content") || "";
+    const previousKeywords = getMetaTag('meta[name="keywords"]')?.getAttribute("content") || "";
+    const previousAuthor = getMetaTag('meta[name="author"]')?.getAttribute("content") || "";
     const previousCanonical = getCanonical()?.getAttribute("href") || "";
 
     const pageTitle = `${project.title} | Project Case Study | Dhirendra Singh Dhami`;
@@ -167,6 +169,8 @@ const ProjectDetail = () => {
     upsertMetaTag('meta[property="og:url"]', { property: "og:url", content: projectUrl });
     upsertMetaTag('meta[property="og:image"]', { property: "og:image", content: project.image });
     upsertMetaTag('meta[property="og:image:alt"]', { property: "og:image:alt", content: `${project.title} project preview image` });
+    upsertMetaTag('meta[name="keywords"]', { name: "keywords", content: [...project.tags, "Dhirendra Singh Dhami", project.category, "case study", "portfolio"].join(", ") });
+    upsertMetaTag('meta[name="author"]', { name: "author", content: "Dhirendra Singh Dhami" });
     upsertMetaTag('meta[name="twitter:title"]', { name: "twitter:title", content: pageTitle });
     upsertMetaTag('meta[name="twitter:description"]', { name: "twitter:description", content: project.summary });
     upsertMetaTag('meta[name="twitter:card"]', { name: "twitter:card", content: "summary_large_image" });
@@ -180,21 +184,32 @@ const ProjectDetail = () => {
     script.id = jsonLdId;
     script.type = "application/ld+json";
     script.text = JSON.stringify(
-      {
-        "@context": "https://schema.org",
-        "@type": "CreativeWork",
-        headline: project.title,
-        description: project.summary,
-        datePublished: project.date,
-        image: project.image,
-        url: projectUrl,
-        keywords: project.tags,
-        author: {
-          "@type": "Person",
-          name: "Dhirendra Singh Dhami",
-          url: BASE_URL,
+      [
+        {
+          "@context": "https://schema.org",
+          "@type": "CreativeWork",
+          headline: project.title,
+          description: project.summary,
+          datePublished: project.date,
+          image: project.image,
+          url: projectUrl,
+          keywords: project.tags,
+          author: {
+            "@type": "Person",
+            name: "Dhirendra Singh Dhami",
+            url: BASE_URL,
+          },
         },
-      },
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: BASE_URL },
+            { "@type": "ListItem", position: 2, name: "Projects", item: `${BASE_URL}/projects` },
+            { "@type": "ListItem", position: 3, name: project.title, item: projectUrl },
+          ],
+        },
+      ],
       null,
       2,
     );
@@ -213,6 +228,8 @@ const ProjectDetail = () => {
       upsertMetaTag('meta[name="twitter:description"]', { name: "twitter:description", content: previousTwitterDescription });
       upsertMetaTag('meta[name="twitter:image"]', { name: "twitter:image", content: previousTwitterImage });
       upsertMetaTag('meta[name="twitter:image:alt"]', { name: "twitter:image:alt", content: previousTwitterImageAlt });
+      upsertMetaTag('meta[name="keywords"]', { name: "keywords", content: previousKeywords });
+      upsertMetaTag('meta[name="author"]', { name: "author", content: previousAuthor });
       upsertCanonical(previousCanonical || BASE_URL);
       document.getElementById(jsonLdId)?.remove();
     };
