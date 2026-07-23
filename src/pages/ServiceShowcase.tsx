@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, BarChart3, Briefcase, LineChart, Megaphone, Search, Share2, Users } from "lucide-react";
-import { Navigate, useParams, useNavigate } from "react-router-dom";
+import { ArrowLeft, ArrowRight, ArrowUpRight, BarChart3, Briefcase, LineChart, Megaphone, Search, Share2, Users } from "lucide-react";
+import { Link, Navigate, useParams, useNavigate } from "react-router-dom";
 import Seo from "@/components/Seo";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
 import { getRelevantExperiences } from "@/data/affiliations";
-import { issueHiveThumbnail } from "@/data/projectDetails";
+import { issueHiveThumbnail, projectDetails } from "@/data/projectDetails";
 import digitalMarketingAnalyticsIcon from "@/assets/digital-marketing-icons/analytics.webp";
 import digitalMarketingBriefcaseIcon from "@/assets/digital-marketing-icons/briefcase.webp";
 import digitalMarketingClimateChangeIcon from "@/assets/digital-marketing-icons/climate-change.webp";
@@ -704,6 +704,7 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
   }
 
   const showcase = serviceShowcases[resolvedSlug];
+  const relatedProjects = projectDetails.filter((p) => p.serviceSlug === resolvedSlug).slice(0, 3);
   const pageTitle = `${showcase.heroTitle} | Dhirendra Singh Dhami`;
   const pageDescription = showcase.heroSummary;
   const advocacyCommunityIconMap = {
@@ -977,6 +978,71 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
             )}
           </div>
         </section>
+
+        {relatedProjects.length > 0 && (
+          <section className="bg-[#f5f1eb] px-5 pb-8 pt-14 text-[#3a3a3a] sm:px-8 sm:pb-10 sm:pt-16 md:px-12">
+            <div className="mx-auto max-w-[74rem]">
+              <div className="mx-auto max-w-[38rem] text-center">
+                <p className="text-[0.72rem] font-semibold uppercase tracking-[0.28em] text-[#7A3A30]">Selected Work</p>
+                <h2 className="mt-4 font-rajdhani text-[2.25rem] font-normal leading-tight sm:text-[3rem] lg:text-[3.4rem]">
+                  Featured <span className="font-semibold text-[#7A3A30]">Projects</span>
+                </h2>
+              </div>
+
+              <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-3 lg:mt-14">
+                {relatedProjects.map((project, index) => (
+                  <Link
+                    key={project.slug}
+                    to={`/projects/${project.slug}`}
+                    className="group block overflow-hidden border border-[#dfd6ca] bg-white transition-colors duration-300 hover:border-[#7A3A30]/40"
+                  >
+                    <div className="relative overflow-hidden">
+                      {project.image ? (
+                        <img
+                          src={project.image}
+                          alt={`${project.title} preview`}
+                          loading="lazy"
+                          decoding="async"
+                          width={640}
+                          height={480}
+                          className="aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                        />
+                      ) : (
+                        <div className="flex aspect-[4/3] w-full items-end p-6 bg-[linear-gradient(135deg,#f0e8de_0%,#e0d0be_100%)]">
+                          <div className="text-lg font-bold leading-tight tracking-tight text-[#3a3a3a]">{project.title}</div>
+                        </div>
+                      )}
+                      <span className="absolute right-3 top-3 font-mono text-[0.55rem] tabular-nums text-white/50 select-none">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                    </div>
+                    <div className="p-5 flex flex-col gap-2">
+                      <p className="text-[0.62rem] font-semibold uppercase tracking-[0.2em] text-[#7A3A30]">{project.category}</p>
+                      <h3 className="font-rajdhani text-[1.05rem] font-bold tracking-tight text-[#3a3a3a] leading-snug transition-colors duration-200 group-hover:text-[#7A3A30]">
+                        {project.title}
+                      </h3>
+                      <p className="text-[0.82rem] leading-[1.6] text-[#6f655a] line-clamp-2">{project.summary}</p>
+                      <span className="mt-1 inline-flex items-center gap-1.5 text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-[#6f655a] transition-colors group-hover:text-[#7A3A30]">
+                        Explore Work
+                        <ArrowUpRight size={12} className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                      </span>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+
+              <div className="mt-10 flex justify-center">
+                <Link
+                  to="/projects"
+                  className="group inline-flex items-center gap-1.5 text-[0.75rem] font-semibold uppercase tracking-[0.16em] text-[#6f655a] transition-colors hover:text-[#7A3A30]"
+                >
+                  View All Projects
+                  <ArrowRight size={12} className="transition-transform duration-200 group-hover:translate-x-0.5" />
+                </Link>
+              </div>
+            </div>
+          </section>
+        )}
 
         <section className="bg-[#f5f1eb] px-5 pb-8 pt-0 text-[#3a3a3a] sm:px-8 sm:pb-10 sm:pt-0 md:px-12">
           <div className="mx-auto max-w-[74rem]">
