@@ -685,7 +685,7 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
   const routeSlug = forcedSlug ?? slug;
   const resolvedSlug = !routeSlug ? defaultServiceSlug : isServiceSlug(routeSlug) ? routeSlug : null;
   const experienceSection = serviceExperienceSections[resolvedSlug];
-  const visibleWorkItems = experienceSection.steps;
+  const visibleWorkItems = experienceSection.steps.slice(0, 3);
   const activeProject = visibleWorkItems[activeWorkIndex] ?? visibleWorkItems[0];
   const relevantExperienceLookup = new Map(
     getRelevantExperiences().map((experience) => [normalizeCompanyName(experience.company), experience]),
