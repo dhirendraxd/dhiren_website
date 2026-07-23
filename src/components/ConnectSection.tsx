@@ -1,11 +1,13 @@
 import { useState } from "react";
+import emailjs from "@emailjs/browser";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight, Check, Loader2 } from "lucide-react";
 import { FaLinkedinIn, FaInstagram, FaGithub } from "react-icons/fa";
 
 type Fields = { name: string; subject: string; email: string };
 type Errors = Partial<Fields>;
 type Touched = Partial<Record<keyof Fields, boolean>>;
+type Status = "idle" | "sending" | "error";
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -23,6 +25,9 @@ const ConnectSection = () => {
   const [errors, setErrors] = useState<Errors>({});
   const [touched, setTouched] = useState<Touched>({});
   const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<Status>("idle");
+  // Honeypot: real users never see or fill this field; bots that auto-fill every input do.
+  const [company, setCompany] = useState("");
 
   const isReady =
     formData.name.trim().length > 0 &&
@@ -35,20 +40,52 @@ const ConnectSection = () => {
     if (touched[e.target.name as keyof Fields]) {
       setErrors(validate(updated));
     }
+    if (status === "error") {
+      setStatus("idle");
+    }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setTouched({ name: true, email: true, subject: true });
     const errs = validate(formData);
     setErrors(errs);
     if (Object.keys(errs).length > 0) return;
-    console.log("Contact form submitted:", {
-      name: formData.name.trim().slice(0, 100),
-      subject: formData.subject.trim().slice(0, 200),
-      email: formData.email.trim().toLowerCase().slice(0, 254),
-    });
-    setSubmitted(true);
+
+    // Bot filled the honeypot field — silently pretend success without sending.
+    if (company.trim()) {
+      setSubmitted(true);
+      return;
+    }
+
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+    if (!serviceId || !templateId || !publicKey) {
+      console.error("EmailJS is not configured: missing VITE_EMAILJS_* environment variables.");
+      setStatus("error");
+      return;
+    }
+
+    setStatus("sending");
+    try {
+      await emailjs.send(
+        serviceId,
+        templateId,
+        {
+          name: formData.name.trim().slice(0, 100),
+          subject: formData.subject.trim().slice(0, 200),
+          email: formData.email.trim().toLowerCase().slice(0, 254),
+        },
+        { publicKey },
+      );
+      setStatus("idle");
+      setSubmitted(true);
+    } catch (err) {
+      console.error("Failed to send contact message:", err);
+      setStatus("error");
+    }
   };
 
   const fieldClass = (key: keyof Fields) =>
@@ -113,7 +150,7 @@ const ConnectSection = () => {
                   </div>
                   <p className="font-rajdhani text-[1.4rem] tracking-tight text-[#3a3a3a]">Message sent — I'll get back to you soon.</p>
                   <button
-                    onClick={() => { setSubmitted(false); setFormData({ name: "", subject: "", email: "" }); setTouched({}); setErrors({}); }}
+                    onClick={() => { setSubmitted(false); setFormData({ name: "", subject: "", email: "" }); setTouched({}); setErrors({}); setStatus("idle"); setCompany(""); }}
                     className="text-[0.7rem] font-rajdhani tracking-[0.14em] text-[#a89f96] hover:text-[#3a3a3a] transition-colors duration-200 underline underline-offset-4"
                   >
                     Send another
@@ -127,9 +164,23 @@ const ConnectSection = () => {
                   exit={{ opacity: 0 }}
                   onSubmit={handleSubmit}
                   noValidate
-                  className="w-full max-w-4xl flex flex-col gap-10 text-left"
+                  className="relative w-full max-w-4xl flex flex-col gap-10 text-left"
                   aria-label="Contact form"
                 >
+                  {/* Honeypot field: hidden from sighted users and screen readers, catches bots that auto-fill every field */}
+                  <div className="absolute left-[-9999px] w-px h-px overflow-hidden" aria-hidden="true">
+                    <label htmlFor="company">Company</label>
+                    <input
+                      id="company"
+                      name="company"
+                      type="text"
+                      tabIndex={-1}
+                      autoComplete="off"
+                      value={company}
+                      onChange={(e) => setCompany(e.target.value)}
+                    />
+                  </div>
+
                   <div className="grid grid-cols-2 gap-12">
                     {/* Name */}
                     <div className="flex flex-col gap-3">
@@ -204,22 +255,39 @@ const ConnectSection = () => {
                     </AnimatePresence>
                   </div>
 
+                  <AnimatePresence>
+                    {status === "error" && (
+                      <motion.p role="alert"
+                        initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -4 }}
+                        className="text-[0.72rem] text-[#7A3A30] tracking-wide -mt-4"
+                      >
+                        Something went wrong sending your message. Please try again, or email me directly at{" "}
+                        <a href="mailto:dhirendraxd@gmail.com" className="underline underline-offset-2">dhirendraxd@gmail.com</a>.
+                      </motion.p>
+                    )}
+                  </AnimatePresence>
+
                   <div className="flex items-center justify-between">
                     <p className="text-[0.62rem] text-[#c8bfb8] tracking-wide">
                       <span className="text-[#7A3A30]">*</span> required fields
                     </p>
                     <button
                       type="submit"
-                      className="group flex items-center gap-2.5 bg-[#f5f1eb] hover:bg-[#3a3a3a] hover:text-[#f5f1eb] text-[#3a3a3a] border border-[#d4cbc0] hover:border-[#3a3a3a] font-rajdhani font-normal text-[0.85rem] tracking-[0.14em] px-7 py-3.5 transition-colors duration-300"
+                      disabled={status === "sending"}
+                      className="group flex items-center gap-2.5 bg-[#f5f1eb] hover:bg-[#3a3a3a] hover:text-[#f5f1eb] text-[#3a3a3a] border border-[#d4cbc0] hover:border-[#3a3a3a] font-rajdhani font-normal text-[0.85rem] tracking-[0.14em] px-7 py-3.5 transition-colors duration-300 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:bg-[#f5f1eb] disabled:hover:text-[#3a3a3a]"
                     >
-                      <span>Send</span>
+                      <span>{status === "sending" ? "Sending" : "Send"}</span>
                       <motion.span
-                        animate={isReady ? { x: [0, 4, 0] } : { x: 0 }}
-                        transition={isReady ? { repeat: Infinity, duration: 1.1, ease: "easeInOut" } : {}}
+                        animate={status !== "sending" && isReady ? { x: [0, 4, 0] } : { x: 0 }}
+                        transition={status !== "sending" && isReady ? { repeat: Infinity, duration: 1.1, ease: "easeInOut" } : {}}
                         className="flex items-center"
                         aria-hidden="true"
                       >
-                        <ArrowRight size={13} className="transition-transform duration-300 group-hover:translate-x-1" />
+                        {status === "sending" ? (
+                          <Loader2 size={13} className="animate-spin" />
+                        ) : (
+                          <ArrowRight size={13} className="transition-transform duration-300 group-hover:translate-x-1" />
+                        )}
                       </motion.span>
                     </button>
                   </div>
