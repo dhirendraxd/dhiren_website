@@ -123,15 +123,15 @@ const ProjectDetail = () => {
 
     return [
       {
-        label: "Professionalism",
+        label: "Overview",
         caption: project.summary,
       },
       {
-        label: "Problem Solving",
+        label: "The Challenge",
         caption: project.challenge,
       },
       {
-        label: "Execution",
+        label: "The Approach",
         caption: project.approach,
       },
     ];
@@ -482,12 +482,12 @@ const ProjectDetail = () => {
                       <p className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-[#7A3A30]">Campaign Case Study</p>
                     </div>
                     <h1 className="font-rajdhani text-[2.4rem] font-bold leading-[1.05] text-[#3a3a3a] sm:text-[3rem]">{project.title}</h1>
-                    <p className="mt-3 text-[0.93rem] leading-[1.7] text-[#5f574d]">{project.summary}</p>
+                    <p className="mt-3 max-w-[38rem] text-[0.93rem] leading-[1.7] text-[#5f574d]">{project.summary}</p>
                   </div>
 
                   {/* Channels & Tools */}
                   <div className="border-t border-[#e9e1d6] pt-5">
-                    <p className="text-[0.62rem] font-semibold uppercase tracking-[0.2em] text-[#a89f96] mb-3">Channels & Tools</p>
+                    <h2 className="text-[0.62rem] font-semibold uppercase tracking-[0.2em] text-[#a89f96] mb-3">Channels & Tools</h2>
                     <div className="flex flex-wrap gap-2">
                       {project.tags.map((tag) => (
                         <span key={tag} className="bg-[#3a3a3a] text-[#f5f1eb] px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.1em]">
@@ -510,12 +510,12 @@ const ProjectDetail = () => {
                   {/* Campaign Results */}
                   {outcomes.length > 0 && (
                     <div className="border-t border-[#e9e1d6] pt-5">
-                      <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-[#6b6259] mb-4">Campaign Results</p>
+                      <h2 className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-[#6b6259] mb-4">Campaign Results</h2>
                       <div>
                         {outcomes.map((o, i) => (
                           <div key={o} className="flex items-start gap-4 border-b border-[#e9e1d6] py-4 last:border-b-0">
                             <span className="shrink-0 font-mono text-[0.68rem] tabular-nums text-[#7A3A30] mt-0.5">{String(i + 1).padStart(2, "0")}</span>
-                            <p className="text-[0.95rem] leading-[1.65] text-[#3a332c]">{o}</p>
+                            <p className="max-w-[36rem] min-w-0 flex-1 text-[0.95rem] leading-[1.65] text-[#3a332c]">{o}</p>
                           </div>
                         ))}
                       </div>
@@ -530,7 +530,7 @@ const ProjectDetail = () => {
                       {project.serviceSlug === "tech-projects" ? "Build Case Study" : "Selected Project"}
                     </p>
                     <h1 className="mt-1.5 font-rajdhani text-[2.4rem] font-bold leading-[1.05] text-[#3a3a3a] sm:text-[3rem]">{project.title}</h1>
-                    <p className="mt-3 text-[0.93rem] leading-[1.7] text-[#5f574d]">{project.summary}</p>
+                    <p className="mt-3 max-w-[38rem] text-[0.93rem] leading-[1.7] text-[#5f574d]">{project.summary}</p>
                   </div>
 
                   {/* Tags + meta */}
@@ -556,12 +556,12 @@ const ProjectDetail = () => {
                   {/* Key Outcomes */}
                   {outcomes.length > 0 && (
                     <div className="border-t border-[#e9e1d6] pt-5">
-                      <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-[#6b6259] mb-4">Key Outcomes</p>
+                      <h2 className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-[#6b6259] mb-4">Key Outcomes</h2>
                       <div>
                         {outcomes.map((o, i) => (
                           <div key={o} className="flex items-start gap-4 border-b border-[#e9e1d6] py-4 last:border-b-0">
                             <span className="shrink-0 font-mono text-[0.68rem] tabular-nums text-[#7A3A30] mt-0.5">{String(i + 1).padStart(2, "0")}</span>
-                            <p className="text-[0.95rem] leading-[1.65] text-[#3a332c]">{o}</p>
+                            <p className="max-w-[36rem] min-w-0 flex-1 text-[0.95rem] leading-[1.65] text-[#3a332c]">{o}</p>
                           </div>
                         ))}
                       </div>
@@ -585,7 +585,7 @@ const ProjectDetail = () => {
               <div className="h-px w-full bg-gradient-to-r from-transparent via-[#e9e1d6] to-transparent mb-8" />
               <div className="flex items-center gap-3 mb-6">
                 <span className="h-px w-5 bg-[#7A3A30]" aria-hidden="true" />
-                <p className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-[#7A3A30]">Creative Showcase</p>
+                <h2 className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-[#7A3A30]">Creative Showcase</h2>
               </div>
               {displayThumbs.length > 1 && (
                 <div className="grid grid-cols-2 lg:grid-cols-3 gap-3">
@@ -616,7 +616,7 @@ const ProjectDetail = () => {
               <div className="h-px w-full bg-gradient-to-r from-transparent via-[#e9e1d6] to-transparent mb-8" />
               <div className="flex items-center gap-3 mb-8">
                 <span className="h-px w-5 bg-[#7A3A30]" aria-hidden="true" />
-                <p className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-[#7A3A30]">Campaign Breakdown</p>
+                <h2 className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-[#7A3A30]">Campaign Breakdown</h2>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border border-[#e4dbcf]">
                 {[
@@ -633,7 +633,7 @@ const ProjectDetail = () => {
                     viewport={{ once: true }}
                   >
                     <span className="font-mono text-[0.58rem] tabular-nums text-[#7A3A30]">{String(i + 1).padStart(2, "0")}</span>
-                    <h4 className="font-rajdhani text-[1rem] font-bold tracking-tight text-[#3a3a3a]">{panel.label}</h4>
+                    <h3 className="font-rajdhani text-[1rem] font-bold tracking-tight text-[#3a3a3a]">{panel.label}</h3>
                     <p className="text-[0.86rem] leading-[1.72] text-[#6f655a]">{panel.body}</p>
                   </motion.div>
                 ))}
@@ -643,6 +643,34 @@ const ProjectDetail = () => {
           </div>
         )}
 
+        {/* ── Advocacy & Community: program breakdown ── */}
+        {project.serviceSlug === "advocacy-community" && (
+          <div className="mt-16 space-y-14">
+            <div>
+              <div className="h-px w-full bg-gradient-to-r from-transparent via-[#e9e1d6] to-transparent mb-8" />
+              <div className="flex items-center gap-3 mb-8">
+                <span className="h-px w-5 bg-[#7A3A30]" aria-hidden="true" />
+                <h2 className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-[#7A3A30]">Program Breakdown</h2>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border border-[#e4dbcf]">
+                {focusPanels.map((panel, i) => (
+                  <motion.div
+                    key={panel.label}
+                    className="border-b md:border-b-0 md:border-r border-[#e4dbcf] last:border-0 p-8 flex flex-col gap-4"
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.35, delay: i * 0.07 }}
+                    viewport={{ once: true }}
+                  >
+                    <span className="font-mono text-[0.58rem] tabular-nums text-[#7A3A30]">{String(i + 1).padStart(2, "0")}</span>
+                    <h3 className="font-rajdhani text-[1rem] font-bold tracking-tight text-[#3a3a3a]">{panel.label}</h3>
+                    <p className="text-[0.86rem] leading-[1.72] text-[#6f655a]">{panel.caption}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* ── Tech Projects: technical depth ── */}
         {project.serviceSlug === "tech-projects" && (
@@ -653,7 +681,7 @@ const ProjectDetail = () => {
               <div className="h-px w-full bg-gradient-to-r from-transparent via-[#e9e1d6] to-transparent mb-8" />
               <div className="flex items-center gap-3 mb-8">
                 <span className="h-px w-5 bg-[#7A3A30]" aria-hidden="true" />
-                <p className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-[#7A3A30]">Technical Overview</p>
+                <h2 className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-[#7A3A30]">Technical Overview</h2>
               </div>
               <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr_1px] gap-0 items-stretch border border-[#e4dbcf]">
                 <motion.div
@@ -664,7 +692,7 @@ const ProjectDetail = () => {
                   viewport={{ once: true }}
                 >
                   <span className="font-mono text-[0.58rem] tabular-nums text-[#7A3A30]">01</span>
-                  <h4 className="font-rajdhani text-[1rem] font-bold tracking-tight text-[#3a3a3a]">Problem Statement</h4>
+                  <h3 className="font-rajdhani text-[1rem] font-bold tracking-tight text-[#3a3a3a]">Problem Statement</h3>
                   <p className="text-[0.88rem] leading-[1.75] text-[#6f655a]">{project.challenge}</p>
                 </motion.div>
                 <div className="w-px bg-[#e4dbcf] hidden lg:block" aria-hidden="true" />
@@ -676,7 +704,7 @@ const ProjectDetail = () => {
                   viewport={{ once: true }}
                 >
                   <span className="font-mono text-[0.58rem] tabular-nums text-[#7A3A30]">02</span>
-                  <h4 className="font-rajdhani text-[1rem] font-bold tracking-tight text-[#3a3a3a]">How It Was Built</h4>
+                  <h3 className="font-rajdhani text-[1rem] font-bold tracking-tight text-[#3a3a3a]">How It Was Built</h3>
                   <p className="text-[0.88rem] leading-[1.75] text-[#6f655a]">{project.approach}</p>
                 </motion.div>
               </div>
@@ -688,7 +716,7 @@ const ProjectDetail = () => {
               <div className="flex items-center justify-between mb-8 flex-wrap gap-4">
                 <div className="flex items-center gap-3">
                   <span className="h-px w-5 bg-[#7A3A30]" aria-hidden="true" />
-                  <p className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-[#7A3A30]">Stack & Scope</p>
+                  <h2 className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-[#7A3A30]">Stack & Scope</h2>
                 </div>
                 <span className="text-[0.78rem] text-[#a89f96] tracking-wide">{project.category} · {project.date}</span>
               </div>
