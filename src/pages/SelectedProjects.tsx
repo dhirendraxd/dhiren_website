@@ -210,7 +210,7 @@ const ProjectsPage = () => {
 											{/* Rest — 3 col grid */}
 											{rest.length > 0 && (
 												<AnimatePresence>
-													<div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+													<div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
 														{rest.map((project, i) => (
 															<ProjectCard key={project.slug} project={project} index={i + 1} />
 														))}

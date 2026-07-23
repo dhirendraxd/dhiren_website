@@ -181,7 +181,7 @@ const ConnectSection = () => {
                     />
                   </div>
 
-                  <div className="grid grid-cols-2 gap-12">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-12">
                     {/* Name */}
                     <div className="flex flex-col gap-3">
                       <label htmlFor="name" className="font-rajdhani text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-[#a89f96] flex items-center gap-1">

@@ -255,7 +255,7 @@ const ProjectDetail = () => {
             <span className="border-b border-transparent leading-none transition-colors group-hover:border-[#7A3A30]">Back</span>
           </button>
 
-          <section className="mt-10 grid gap-10 lg:grid-cols-[1fr_1fr] lg:items-start">
+          <section className="mt-10 grid grid-cols-1 gap-10 lg:grid-cols-[1fr_1fr] lg:items-start">
             {/* Left: large gallery / hero image */}
             <div className="relative overflow-visible">
               <div
@@ -618,7 +618,7 @@ const ProjectDetail = () => {
                 <span className="h-px w-5 bg-[#7A3A30]" aria-hidden="true" />
                 <p className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-[#7A3A30]">Campaign Breakdown</p>
               </div>
-              <div className="grid md:grid-cols-3 gap-0 border border-[#e4dbcf]">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border border-[#e4dbcf]">
                 {[
                   { label: "The Problem", body: project.challenge },
                   { label: "The Approach", body: project.approach },
@@ -655,7 +655,7 @@ const ProjectDetail = () => {
                 <span className="h-px w-5 bg-[#7A3A30]" aria-hidden="true" />
                 <p className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-[#7A3A30]">Technical Overview</p>
               </div>
-              <div className="grid lg:grid-cols-[1fr_1fr_1px] gap-0 items-stretch border border-[#e4dbcf]">
+              <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr_1px] gap-0 items-stretch border border-[#e4dbcf]">
                 <motion.div
                   className="p-8 flex flex-col gap-4"
                   initial={{ opacity: 0, x: -10 }}

@@ -811,7 +811,7 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
             </div>
           </div>
 
-          <div className="grid gap-8 lg:grid-cols-[minmax(0,1.08fr)_minmax(24rem,0.92fr)] lg:items-start lg:justify-center">
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1.08fr)_minmax(24rem,0.92fr)] lg:items-start lg:justify-center">
             <div className="space-y-0">
               {visibleWorkItems.map((project, index) => {
                 const isActive = index === activeWorkIndex;
