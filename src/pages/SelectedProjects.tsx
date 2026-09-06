@@ -87,7 +87,9 @@ const ProjectCard = ({
 
 				{/* Content */}
 				<div className="px-4 py-4 flex flex-col gap-2">
-					<p className="text-[0.58rem] font-semibold uppercase tracking-[0.2em] text-[#7A3A30]">{project.category}</p>
+					<p className="inline-flex w-fit items-center rounded-none bg-[#2d2a28] px-2.5 py-1 text-[0.52rem] font-semibold uppercase tracking-[0.18em] text-[#f5f1eb]">
+						{project.category}
+					</p>
 					<h3 className={`font-bold tracking-tight text-[#3a3a3a] leading-snug transition-colors duration-200 group-hover:text-[#7A3A30] ${featured ? "text-[1.15rem]" : "text-[0.95rem]"}`}>
 						{project.title}
 					</h3>
