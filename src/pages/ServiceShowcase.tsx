@@ -535,14 +535,14 @@ const serviceExperienceSections: Record<ServiceSlug, ExperienceSection> = {
         company: "CtrlBits",
         title: "Digital Marketer",
         description: "I optimized pages, keywords, and structure so the right audience could find the brand and its services.",
-        dateLabel: "Apr 2025 - Present",
+        dateLabel: "Jan 2026 - Present",
         icon: Search,
       },
       {
         company: "Paramendo Nepal",
         title: "Business Operations Intern",
         description: "I support business operations, coordination, and day-to-day execution across a hybrid team.",
-        dateLabel: "Jun 2026 - Present",
+        dateLabel: "Aug 2026 - Present",
         icon: Briefcase,
       },
       {

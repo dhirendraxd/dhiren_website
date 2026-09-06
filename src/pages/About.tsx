@@ -26,7 +26,7 @@ const expertise = [
   { label: "Community Building", icon: "/optimized_images/digital-marketing-icons/community.webp"             },
 ];
 
-const orgs = ["Ctrl Bits", "ALL In Foundation", "Sustainability Solutions", "Lovelac Talk"];
+const orgs = ["Ctrl Bits", "Paramendo Nepal", "ALL In Foundation", "Sustainability Solutions"];
 
 const projects = [
   {

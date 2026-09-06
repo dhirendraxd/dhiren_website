@@ -276,8 +276,8 @@ export const serviceExperienceSections: Record<ServiceSlug, ExperienceSection> =
     titleLineTwo: "that powers digital growth",
     summary: "CtrlBits, Paramendo Nepal, AIF, AWS Cloud Club, and NetMission - SEO, operations, content, paid media, and reporting.",
     steps: [
-      { company: "CtrlBits", title: "Digital Marketer", description: "I optimized pages, keywords, and structure so the right audience could find the brand and its services.", dateLabel: "Apr 2025 - Present", icon: Search },
-      { company: "Paramendo Nepal", title: "Business Operations Intern", description: "I support business operations, coordination, and day-to-day execution across a hybrid team.", dateLabel: "Jun 2026 - Present", icon: Briefcase },
+      { company: "CtrlBits", title: "Digital Marketer", description: "I optimized pages, keywords, and structure so the right audience could find the brand and its services.", dateLabel: "Jan 2026 - Present", icon: Search },
+      { company: "Paramendo Nepal", title: "Business Operations Intern", description: "I support business operations, coordination, and day-to-day execution across a hybrid team.", dateLabel: "Aug 2026 - Present", icon: Briefcase },
       { company: "ALL In Foundation", title: "Content Strategist", description: "I planned copy and campaign content that supported clarity, relevance, and consistent output.", dateLabel: "Feb 2026 - Present", icon: Megaphone },
       { company: "AWS Cloud Club", title: "Paid Media Specialist", description: "I tuned campaign budgets, targeting, and creatives to improve reach, clicks, and conversions.", dateLabel: "Mar 2025 - Present", icon: BarChart3 },
       { company: "NetMission", title: "Social Media Manager", description: "I managed posts, visual updates, and timing so campaign activity stayed active and aligned.", dateLabel: "Dec 2025 - Present", icon: Share2 },

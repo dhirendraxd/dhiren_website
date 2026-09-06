@@ -34,21 +34,11 @@ const experiences: ExperienceConfig[] = [
     company: "Paramendo Nepal",
     link: "https://www.linkedin.com/in/dhirendrasinghdhami/edit/forms/position/2952537919/",
     dateConfig: {
-      start: "2026-06",
+      start: "2026-08",
     },
   },
   {
     order: 3,
-    title: "Co-host",
-    company: "Lovelac Talk",
-    link: "https://linktr.ee/lovelacetalk",
-    dateConfig: {
-      start: "2026-02",
-    },
-    suffix: "",
-  },
-  {
-    order: 4,
     title: "Fellow",
     company: "ALL In Foundation (AIF)",
     link: "https://www.facebook.com/allinfoundationnp/",
@@ -58,7 +48,7 @@ const experiences: ExperienceConfig[] = [
     },
   },
   {
-    order: 5,
+    order: 4,
     title: "Sustainability Mentee",
     company: "Sustainability Solutions",
     link: "https://sustainability.com.np/",
