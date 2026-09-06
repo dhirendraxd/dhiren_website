@@ -73,7 +73,7 @@ const HeroSection = () => {
                 className="text-base md:text-lg text-muted-foreground italic font-light mt-4"
                 style={{ fontFamily: "cursive" }}
               >
-                This is me!
+                Thats me!
               </p>
             </div>
           </motion.div>
