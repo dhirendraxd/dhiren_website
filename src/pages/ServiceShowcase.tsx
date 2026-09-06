@@ -560,6 +560,20 @@ const serviceExperienceSections: Record<ServiceSlug, ExperienceSection> = {
         icon: Share2,
       },
       {
+        company: "Rotaract Club",
+        title: "Community Outreach Lead",
+        description: "I supported campaign storytelling and participation planning to help community initiatives reach the right audience.",
+        dateLabel: "2025 - 2026",
+        icon: Megaphone,
+      },
+      {
+        company: "KIST Fair",
+        title: "Event Campaign Contributor",
+        description: "I contributed to event visibility, promotion planning, and campaign design support for outreach and engagement.",
+        dateLabel: "2025 - 2026",
+        icon: BarChart3,
+      },
+      {
         company: "Cross-Project Work",
         title: "Reporting Analyst",
         description: "I read performance data from work across these projects and turned it into practical next steps for the next round.",
@@ -685,7 +699,7 @@ const ServiceShowcase = ({ forcedSlug }: ServiceShowcaseProps) => {
   const routeSlug = forcedSlug ?? slug;
   const resolvedSlug = !routeSlug ? defaultServiceSlug : isServiceSlug(routeSlug) ? routeSlug : null;
   const experienceSection = serviceExperienceSections[resolvedSlug];
-  const visibleWorkItems = experienceSection.steps.slice(0, 3);
+  const visibleWorkItems = experienceSection.steps.slice(0, 5);
   const activeProject = visibleWorkItems[activeWorkIndex] ?? visibleWorkItems[0];
   const relevantExperienceLookup = new Map(
     getRelevantExperiences().map((experience) => [normalizeCompanyName(experience.company), experience]),
