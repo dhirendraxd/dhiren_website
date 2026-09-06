@@ -87,20 +87,25 @@ const ProjectCard = ({
 
 				{/* Content */}
 				<div className="px-4 py-4 flex flex-col gap-2">
-					<p className="inline-flex w-fit items-center rounded-none bg-[#2d2a28] px-2.5 py-1 text-[0.52rem] font-semibold uppercase tracking-[0.18em] text-[#f5f1eb]">
+						<p className="inline-flex w-fit items-center rounded-none bg-[#2d2a28] px-2.5 py-1 text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-[#f5f1eb]">
 						{project.category}
 					</p>
 					<h3 className={`font-bold tracking-tight text-[#3a3a3a] leading-snug transition-colors duration-200 group-hover:text-[#7A3A30] ${featured ? "text-[1.15rem]" : "text-[0.95rem]"}`}>
 						{project.title}
 					</h3>
 					{featured && (
-						<p className="text-[0.82rem] leading-[1.65] text-[#6f655a] line-clamp-2">{project.summary}</p>
+						<p className="text-[0.9rem] leading-[1.65] text-[#6f655a] line-clamp-2">{project.summary}</p>
 					)}
 					<div className="flex items-center justify-between mt-1">
 						<div className="flex flex-wrap items-center gap-x-2 gap-y-0.5">
 							{project.tags.slice(0, featured ? 3 : 2).map((tag, i) => (
 								<span key={tag} className="inline-flex items-center gap-1.5">
-									<span className="text-[0.52rem] font-semibold uppercase tracking-[0.1em] text-[#a89f96]">{tag}</span>
+									<span className={tag === "Community"
+										? "bg-[#2d2a28] px-2 py-1 text-[0.6rem] font-semibold uppercase tracking-[0.1em] text-[#f5f1eb]"
+										: "text-[0.6rem] font-semibold uppercase tracking-[0.1em] text-[#a89f96]"}
+									>
+										{tag}
+									</span>
 									{i < Math.min(project.tags.length, featured ? 3 : 2) - 1 && (
 										<span className="text-[#d0c9c0]" aria-hidden="true">·</span>
 									)}
