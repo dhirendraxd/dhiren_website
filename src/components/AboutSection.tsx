@@ -231,10 +231,6 @@ const AboutSection = () => {
             viewport={{ once: true }}
           >
             <div className="h-px w-full bg-gradient-to-r from-transparent via-[#e9e1d6] to-transparent mb-8" />
-            <div className="flex items-center gap-3 mb-3">
-              <span className="h-px w-5 bg-[#7A3A30]" aria-hidden="true" />
-              <p className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-[#7A3A30]">Selected Projects</p>
-            </div>
             <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
               <h3 className="font-rajdhani text-[clamp(1.8rem,3.2vw,2.8rem)] font-bold tracking-tight text-[#3a3a3a] leading-tight">
                 Things I've Made
@@ -260,7 +256,7 @@ const AboutSection = () => {
                   viewport={{ once: true }}
                 >
                   <div className={isReverse ? "order-2 lg:order-1" : "order-2 lg:order-2"}>
-                    <p className="text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-[#7A3A30]">
+                    <p className="inline-flex w-fit bg-[#2d2a28] px-2.5 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-[#f5f1eb]">
                       {project.type}
                     </p>
 
@@ -274,22 +270,11 @@ const AboutSection = () => {
                         className="group inline-flex items-center gap-1.5 text-[0.75rem] font-semibold uppercase tracking-[0.16em] text-[#3a3a3a] transition-colors hover:text-[#7A3A30]"
                       >
                         <span className="relative after:absolute after:left-0 after:-bottom-px after:h-px after:w-0 after:bg-[#7A3A30] after:transition-all after:duration-200 group-hover:after:w-full">
-                          Explore Work
+                          Explore 
                         </span>
                         <ArrowUpRight size={12} className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                       </Link>
 
-                      {index === projects.length - 1 && (
-                        <Link
-                          to="/projects"
-                          className="group inline-flex items-center gap-1.5 text-[0.75rem] font-semibold uppercase tracking-[0.16em] text-[#6f655a] transition-colors hover:text-[#7A3A30]"
-                        >
-                          <span className="relative after:absolute after:left-0 after:-bottom-px after:h-px after:w-0 after:bg-[#7A3A30] after:transition-all after:duration-200 group-hover:after:w-full">
-                            View All Projects
-                          </span>
-                          <ArrowRight size={12} className="transition-transform duration-200 group-hover:translate-x-0.5" />
-                        </Link>
-                      )}
                     </div>
                   </div>
 

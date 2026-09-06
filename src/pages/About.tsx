@@ -374,7 +374,9 @@ const About = () => {
                       <div className="flex flex-col flex-1 px-5 pt-5 pb-6 gap-3">
                         <div className="flex items-center gap-2">
                           <span className="h-px w-4 bg-[#7A3A30]" aria-hidden="true" />
-                          <p className="text-[0.6rem] font-semibold uppercase tracking-[0.22em] text-[#7A3A30]">{p.type}</p>
+                          <p className="inline-flex bg-[#2d2a28] px-2.5 py-1 text-[0.6rem] font-semibold uppercase tracking-[0.22em] text-[#f5f1eb]">
+                            {p.type}
+                          </p>
                         </div>
 
                         <h3 className="font-rajdhani text-[1.15rem] font-bold tracking-tight text-[#3a3a3a] leading-snug group-hover:text-[#7A3A30] transition-colors duration-200">
@@ -396,17 +398,6 @@ const About = () => {
                     </Link>
                   </motion.article>
                 ))}
-              </div>
-
-              {/* View all CTA — matches Send button style from ConnectSection */}
-              <div className="mt-10 flex justify-center">
-                <Link
-                  to="/projects"
-                  className="group inline-flex items-center gap-2.5 bg-[#f5f1eb] hover:bg-[#3a3a3a] text-[#3a3a3a] hover:text-[#f5f1eb] border border-[#d4cbc0] hover:border-[#3a3a3a] font-rajdhani font-normal text-[0.85rem] tracking-[0.14em] px-7 py-3.5 transition-colors duration-300"
-                >
-                  <span>View All Projects</span>
-                  <ArrowRight size={13} className="transition-transform duration-300 group-hover:translate-x-1" />
-                </Link>
               </div>
 
             </div>
