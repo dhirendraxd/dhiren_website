@@ -140,10 +140,6 @@ const ProjectsPage = () => {
 				>
 					{/* Hero */}
 					<div className="mb-16">
-						<div className="flex items-center gap-3 mb-5">
-							<span className="h-px w-5 bg-[#7A3A30]" aria-hidden="true" />
-							<p className="text-[0.68rem] font-semibold uppercase tracking-[0.34em] text-[#7A3A30]">Selected Work</p>
-						</div>
 						<div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
 							<h1 className="font-rajdhani text-[clamp(2.8rem,5.5vw,5.5rem)] font-bold leading-[0.9] tracking-[-0.02em] text-[#3a3a3a] max-w-2xl">
 								Things I've<br />Made
