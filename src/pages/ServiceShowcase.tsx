@@ -529,7 +529,7 @@ const serviceExperienceSections: Record<ServiceSlug, ExperienceSection> = {
     titleLineOne: "Work experience",
     titleLineTwo: "that powers digital growth",
     summary:
-      "CtrlBits, AIF, AWS Cloud Club, and NetMission - SEO, content, paid media, and reporting.",
+      "CtrlBits, Paramendo Nepal, AIF, AWS Cloud Club, and NetMission - SEO, operations, content, paid media, and reporting.",
     steps: [
       {
         company: "CtrlBits",
@@ -537,6 +537,13 @@ const serviceExperienceSections: Record<ServiceSlug, ExperienceSection> = {
         description: "I optimized pages, keywords, and structure so the right audience could find the brand and its services.",
         dateLabel: "Apr 2025 - Present",
         icon: Search,
+      },
+      {
+        company: "Paramendo Nepal",
+        title: "Business Operations Intern",
+        description: "I support business operations, coordination, and day-to-day execution across a hybrid team.",
+        dateLabel: "Jun 2026 - Present",
+        icon: Briefcase,
       },
       {
         company: "ALL In Foundation",

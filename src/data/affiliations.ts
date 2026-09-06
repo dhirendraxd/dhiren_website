@@ -30,6 +30,15 @@ const experiences: ExperienceConfig[] = [
   },
   {
     order: 2,
+    title: "Business Operations Intern",
+    company: "Paramendo Nepal",
+    link: "https://www.linkedin.com/in/dhirendrasinghdhami/edit/forms/position/2952537919/",
+    dateConfig: {
+      start: "2026-06",
+    },
+  },
+  {
+    order: 3,
     title: "Co-host",
     company: "Lovelac Talk",
     link: "https://linktr.ee/lovelacetalk",
@@ -39,7 +48,7 @@ const experiences: ExperienceConfig[] = [
     suffix: "",
   },
   {
-    order: 3,
+    order: 4,
     title: "Fellow",
     company: "ALL In Foundation (AIF)",
     link: "https://www.facebook.com/allinfoundationnp/",
@@ -49,7 +58,7 @@ const experiences: ExperienceConfig[] = [
     },
   },
   {
-    order: 4,
+    order: 5,
     title: "Sustainability Mentee",
     company: "Sustainability Solutions",
     link: "https://sustainability.com.np/",

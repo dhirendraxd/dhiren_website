@@ -113,7 +113,7 @@ const ConnectSection = () => {
               </p>
             </blockquote>
 
-            <div className="w-full flex items-center gap-6 mb-4">
+            <div className="w-full flex items-center gap-6 mt-4 mb-4">
               <p className="shrink-0 font-rajdhani text-[1.5rem] font-bold tracking-tight text-[#3a3a3a]">Connect</p>
               <span className="flex-1 h-px bg-[#e9e1d6]/60" aria-hidden="true" />
               <nav className="flex items-center gap-6 shrink-0" role="navigation" aria-label="Social links">
@@ -185,7 +185,7 @@ const ConnectSection = () => {
                     {/* Name */}
                     <div className="flex flex-col gap-3">
                       <label htmlFor="name" className="font-rajdhani text-[0.76rem] font-semibold uppercase tracking-[0.22em] text-[#7c7167] flex items-center gap-1">
-                        Name <span className="text-[#7A3A30]" aria-hidden="true">*</span>
+                        Name <span className="text-[#b42318]" aria-hidden="true">*</span>
                       </label>
                       <input
                         id="name" name="name" type="text" autoComplete="name"
@@ -209,7 +209,7 @@ const ConnectSection = () => {
                     {/* Email */}
                     <div className="flex flex-col gap-3">
                       <label htmlFor="email" className="font-rajdhani text-[0.76rem] font-semibold uppercase tracking-[0.22em] text-[#7c7167] flex items-center gap-1">
-                        Email <span className="text-[#7A3A30]" aria-hidden="true">*</span>
+                        Email <span className="text-[#b42318]" aria-hidden="true">*</span>
                       </label>
                       <input
                         id="email" name="email" type="email" autoComplete="email"
@@ -234,7 +234,7 @@ const ConnectSection = () => {
                   {/* Subject */}
                   <div className="flex flex-col gap-3">
                     <label htmlFor="subject" className="font-rajdhani text-[0.76rem] font-semibold uppercase tracking-[0.22em] text-[#7c7167] flex items-center gap-1">
-                      Subject <span className="text-[#7A3A30]" aria-hidden="true">*</span>
+                      Subject <span className="text-[#b42318]" aria-hidden="true">*</span>
                     </label>
                     <input
                       id="subject" name="subject" type="text"
@@ -269,7 +269,7 @@ const ConnectSection = () => {
 
                   <div className="flex items-center justify-between">
                     <p className="text-[0.68rem] text-[#92877b] tracking-wide">
-                      <span className="text-[#7A3A30]">*</span> required fields
+                      <span className="text-[#b42318]">*</span> required fields
                     </p>
                     <button
                       type="submit"
