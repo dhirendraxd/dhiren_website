@@ -25,7 +25,7 @@ const experiences: ExperienceConfig[] = [
     company: "Ctrl Bits",
     link: "https://www.ctrlbits.com/",
     dateConfig: {
-      start: "2025-04",
+      start: "2026-01",
     },
   },
   {

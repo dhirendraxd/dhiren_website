@@ -173,7 +173,7 @@ export const serviceShowcases: Record<ServiceSlug, ShowcasePageConfig> = {
       "Content Creation & Strategy",
     ],
     featured: [
-      { title: "CtrlBits Organic Growth Sprint", description: "SEO-led blog strategy and technical optimization to lift discoverability for product and service pages.", date: "Apr 2025", href: "https://www.ctrlbits.com/", category: "SEO & Technical Optimization", external: true },
+      { title: "CtrlBits Organic Growth Sprint", description: "SEO-led blog strategy and technical optimization to lift discoverability for product and service pages.", date: "Jan 2026", href: "https://www.ctrlbits.com/", category: "SEO & Technical Optimization", external: true },
       { title: "AIF Awareness Content Series", description: "Story-driven social content that improved campaign clarity for fellowship and community initiatives.", date: "Feb 2026", href: "/affiliations/1", category: "Content Storytelling" },
       { title: "AWS Event Promotion Funnel", description: "Community event promotion framework combining outreach posts, sign-up tracking, and follow-up loops.", date: "Mar 2025", href: "/affiliations/2", category: "Campaign Strategy" },
       { title: "NetMission Advocacy Media Plan", description: "Content calendar and publishing cadence designed to increase participation around digital rights topics.", date: "Dec 2025", href: "/affiliations/3", category: "Content Planning" },
@@ -190,7 +190,7 @@ export const serviceShowcases: Record<ServiceSlug, ShowcasePageConfig> = {
     ],
     filters: ["Digital Marketing"],
     projects: [
-      { title: "CtrlBits : Digital Marketing", description: "Led integrated digital marketing at CtrlBits covering SEO, SMM, SEM, and PPC, including on-page optimization, social media execution, ad campaign tuning, and performance tracking.", date: "16 Apr 2025", href: "https://www.ctrlbits.com/", category: "Digital Marketing", external: true },
+      { title: "CtrlBits : Digital Marketing", description: "Led integrated digital marketing at CtrlBits covering SEO, SMM, SEM, and PPC, including on-page optimization, social media execution, ad campaign tuning, and performance tracking.", date: "16 Jan 2026", href: "https://www.ctrlbits.com/", category: "Digital Marketing", external: true },
     ],
   },
   "advocacy-community": {

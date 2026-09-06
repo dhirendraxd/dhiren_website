@@ -117,7 +117,7 @@ export const projectDetails: ProjectDetail[] = [
     title: "SEO & SMM Strategy",
     serviceSlug: "digital-marketing",
     category: "SEO / SMM",
-    date: "16 Apr 2025",
+    date: "16 Jan 2026",
     summary: "Integrated SEO and social media strategy for CtrlBits — keyword targeting, content themes, and platform-specific publishing to build compounding organic reach.",
     challenge: "The channels were active, but they were not yet working as one connected funnel, which limited compounding growth and made performance harder to interpret.",
     approach: "I built a unified monthly framework that connected keyword planning, social publishing, and performance reporting into one consistent rhythm, with weekly optimization loops.",

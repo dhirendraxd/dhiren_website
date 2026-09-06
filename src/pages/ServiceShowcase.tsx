@@ -206,7 +206,7 @@ const serviceShowcases: Record<ServiceSlug, ShowcasePageConfig> = {
       {
         title: "CtrlBits Organic Growth Sprint",
         description: "SEO-led blog strategy and technical optimization to lift discoverability for product and service pages.",
-        date: "Apr 2025",
+        date: "Jan 2026",
         href: "https://www.ctrlbits.com/",
         category: "SEO & Technical Optimization",
         external: true,
@@ -248,7 +248,7 @@ const serviceShowcases: Record<ServiceSlug, ShowcasePageConfig> = {
       {
         title: "CtrlBits : Digital Marketing",
         description: "Led integrated digital marketing at CtrlBits covering SEO, SMM, SEM, and PPC, including on-page optimization, social media execution, ad campaign tuning, and performance tracking.",
-        date: "16 Apr 2025",
+        date: "16 Jan 2026",
         href: "https://www.ctrlbits.com/",
         category: "Digital Marketing",
         external: true,
