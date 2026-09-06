@@ -89,14 +89,14 @@ const ConnectSection = () => {
   };
 
   const fieldClass = (key: keyof Fields) =>
-    `w-full bg-transparent border-0 border-b pb-4 text-[1.4rem] font-rajdhani tracking-tight placeholder:font-light placeholder:tracking-normal focus:outline-none transition-colors duration-200 ${
+    `w-full bg-transparent border-0 border-b pb-4 text-[1.4rem] font-rajdhani tracking-tight placeholder:font-light placeholder:tracking-normal placeholder:text-[#92877b] focus:outline-none transition-colors duration-200 ${
       touched[key] && errors[key]
         ? "border-[#7A3A30] text-[#3a3a3a] placeholder:text-[#c8bfb8] focus:border-[#7A3A30]"
         : "border-[#d4cbc0] text-[#3a3a3a] placeholder:text-[#c8bfb8] focus:border-[#3a3a3a]"
     }`;
 
   return (
-    <section id="contact" className="pt-4 pb-0 px-8 md:px-12 bg-card font-rajdhani">
+    <section id="contact" className="pt-10 pb-8 px-8 md:px-12 bg-card font-rajdhani">
       <div className="max-w-[84rem] mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -108,12 +108,12 @@ const ConnectSection = () => {
 
             <blockquote className="flex flex-col items-center gap-3">
               <span className="font-rajdhani text-[3.2rem] leading-none text-[#e4dbcf] select-none" aria-hidden="true">"</span>
-              <p className="font-rajdhani text-[clamp(1.8rem,3.2vw,2.8rem)] tracking-tight text-[#3a3a3a] leading-snug max-w-[28ch] -mt-5">
-                Half curiosity, half <span className="text-[#7A3A30]">"why not"</span> —<br /> that's most of what I do.
+              <p className="whitespace-nowrap font-rajdhani text-[clamp(1.8rem,3.2vw,2.8rem)] tracking-tight text-[#3a3a3a] leading-snug -mt-5">
+                Half curiosity, half <span className="text-[#7A3A30]">"why not"</span> — that's most of what I do.
               </p>
             </blockquote>
 
-            <div className="w-full flex items-center gap-6">
+            <div className="w-full flex items-center gap-6 mb-4">
               <p className="shrink-0 font-rajdhani text-[1.5rem] font-bold tracking-tight text-[#3a3a3a]">Connect</p>
               <span className="flex-1 h-px bg-[#e9e1d6]/60" aria-hidden="true" />
               <nav className="flex items-center gap-6 shrink-0" role="navigation" aria-label="Social links">
@@ -184,7 +184,7 @@ const ConnectSection = () => {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-12">
                     {/* Name */}
                     <div className="flex flex-col gap-3">
-                      <label htmlFor="name" className="font-rajdhani text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-[#a89f96] flex items-center gap-1">
+                      <label htmlFor="name" className="font-rajdhani text-[0.76rem] font-semibold uppercase tracking-[0.22em] text-[#7c7167] flex items-center gap-1">
                         Name <span className="text-[#7A3A30]" aria-hidden="true">*</span>
                       </label>
                       <input
@@ -208,7 +208,7 @@ const ConnectSection = () => {
 
                     {/* Email */}
                     <div className="flex flex-col gap-3">
-                      <label htmlFor="email" className="font-rajdhani text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-[#a89f96] flex items-center gap-1">
+                      <label htmlFor="email" className="font-rajdhani text-[0.76rem] font-semibold uppercase tracking-[0.22em] text-[#7c7167] flex items-center gap-1">
                         Email <span className="text-[#7A3A30]" aria-hidden="true">*</span>
                       </label>
                       <input
@@ -233,7 +233,7 @@ const ConnectSection = () => {
 
                   {/* Subject */}
                   <div className="flex flex-col gap-3">
-                    <label htmlFor="subject" className="font-rajdhani text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-[#a89f96] flex items-center gap-1">
+                    <label htmlFor="subject" className="font-rajdhani text-[0.76rem] font-semibold uppercase tracking-[0.22em] text-[#7c7167] flex items-center gap-1">
                       Subject <span className="text-[#7A3A30]" aria-hidden="true">*</span>
                     </label>
                     <input
@@ -268,7 +268,7 @@ const ConnectSection = () => {
                   </AnimatePresence>
 
                   <div className="flex items-center justify-between">
-                    <p className="text-[0.62rem] text-[#c8bfb8] tracking-wide">
+                    <p className="text-[0.68rem] text-[#92877b] tracking-wide">
                       <span className="text-[#7A3A30]">*</span> required fields
                     </p>
                     <button
