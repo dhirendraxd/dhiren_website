@@ -9,9 +9,6 @@ import { AnimatePresence, motion, type Transition } from "framer-motion";
 const Index = lazy(() => import("./pages/Index"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const ServiceShowcase = lazy(() => import("./pages/ServiceShowcase"));
-const ProjectDetail = lazy(() => import("./pages/ProjectDetail"));
-const Projects = lazy(() => import("./pages/SelectedProjects"));
-const About = lazy(() => import("./pages/About"));
 
 const queryClient = new QueryClient();
 
@@ -53,9 +50,6 @@ const AnimatedRoutes = () => {
             <Route path="/digital-marketing" element={<ServiceShowcase forcedSlug="digital-marketing" />} />
             <Route path="/advocacy-community" element={<ServiceShowcase forcedSlug="advocacy-community" />} />
             <Route path="/tech-projects" element={<ServiceShowcase forcedSlug="tech-projects" />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/projects" element={<Projects />} />
-            <Route path="/projects/:slug" element={<ProjectDetail />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </motion.main>
