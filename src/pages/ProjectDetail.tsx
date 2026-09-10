@@ -44,7 +44,6 @@ const ProjectDetail = () => {
 	}
 
 	const location = project.serviceSlug === "advocacy-community" ? "Nepal" : "Remote";
-	const year = project.date.match(/\d{4}/)?.[0] ?? project.date;
 	const detailRows = [
 		{ label: "Service", value: project.category },
 		{ label: "Timeline", value: project.date },
@@ -54,26 +53,26 @@ const ProjectDetail = () => {
 	return (
 		<div className="min-h-screen bg-[#f5f1eb] text-[#3a3a3a] font-rajdhani">
 			<main className="mx-auto max-w-[84rem] px-6 pb-10 pt-5 sm:px-8 lg:px-12">
-				<header className="flex items-center justify-between">
-					<button type="button" onClick={() => navigate(-1)} className="inline-flex items-center gap-2 border border-[#d4cbc0] bg-transparent px-4 py-2 text-[0.78rem] font-medium text-[#3f3932] transition-colors hover:border-[#7A3A30] hover:text-[#7A3A30]">
+				<header className="flex flex-wrap items-center justify-between gap-3">
+					<button type="button" onClick={() => navigate(-1)} className="group inline-flex items-center gap-2 border-b border-transparent py-2 text-[0.78rem] font-medium text-[#3f3932] transition-colors hover:border-[#7A3A30] hover:text-[#7A3A30]">
 						<ArrowLeft size={14} />
 						Back
 					</button>
-					<div className="inline-flex items-center gap-2 border border-[#d4cbc0] bg-transparent px-3.5 py-2 text-[0.72rem] text-[#6f655a]">
+					<div className="inline-flex items-center gap-2 py-2 text-right text-[0.72rem] text-[#6f655a]">
 						<span className="h-2 w-2 bg-[#7A3A30]" aria-hidden="true" />
 						Available for New Project
 					</div>
 				</header>
 
-				<section className="grid gap-12 pb-16 pt-20 lg:grid-cols-[minmax(0,1fr)_18rem] lg:gap-16 lg:pt-24">
+				<section className="grid gap-12 pb-16 pt-20 md:grid-cols-[minmax(0,1fr)_14rem] md:gap-12 lg:grid-cols-[minmax(0,1fr)_18rem] lg:gap-16 lg:pt-24">
 					<div>
 						<div className="mb-6 flex flex-wrap gap-2">
 							<span className="bg-[#2d2a28] px-3.5 py-1.5 text-[0.7rem] font-semibold uppercase tracking-[0.12em] text-[#f5f1eb]">{project.category}</span>
 							<span className="border border-[#d4cbc0] px-3.5 py-1.5 text-[0.7rem] font-medium uppercase tracking-[0.12em] text-[#6f655a]">Real Project</span>
 						</div>
-						<h1 className="max-w-[52rem] text-[clamp(2.8rem,5.5vw,5.5rem)] font-medium leading-[0.92] tracking-[-0.04em] text-[#3a3a3a]">
+						<h1 className="max-w-[52rem] break-words text-[clamp(2.8rem,5.5vw,5.5rem)] font-medium leading-[0.92] tracking-[-0.04em] text-[#3a3a3a]">
 							{project.title}
-							<span className="ml-3 text-[0.34em] font-normal tracking-[-0.02em] text-[#7A3A30]">/Real Project</span>
+							<span className="mt-3 block text-[0.34em] font-normal tracking-[-0.02em] text-[#7A3A30] sm:ml-3 sm:mt-0 sm:inline">/Real Project</span>
 						</h1>
 						<p className="mt-8 max-w-[37rem] text-[1rem] leading-[1.6] text-[#6f655a] sm:text-[1.1rem]">{project.summary}</p>
 						<div className="mt-8 flex flex-wrap gap-3">
@@ -88,38 +87,14 @@ const ProjectDetail = () => {
 						</div>
 					</div>
 
-					<aside className="flex flex-row gap-8 lg:flex-col lg:gap-9 lg:pt-1">
+					<aside className="flex flex-wrap gap-x-10 gap-y-8 md:flex-nowrap md:flex-col md:items-end md:justify-end md:gap-8 lg:gap-10 lg:pb-1">
 						{detailRows.map((row) => (
-							<div key={row.label}>
+							<div key={row.label} className="text-left md:text-right">
 								<p className="text-[0.72rem] uppercase tracking-[0.16em] text-[#a89f96]">{row.label}</p>
-								<p className="mt-2 max-w-[12rem] text-[1rem] font-medium leading-tight text-[#3a3a3a]">{row.value}</p>
+								<p className="mt-3 max-w-[12rem] text-[1rem] font-medium leading-tight text-[#3a3a3a]">{row.value}</p>
 							</div>
 						))}
 					</aside>
-				</section>
-
-				<section className="grid gap-10 py-20 lg:grid-cols-[1fr_2fr] lg:gap-20">
-					<div>
-						<p className="text-[0.7rem] uppercase tracking-[0.2em] text-[#7A3A30]">Project Notes</p>
-						<h2 className="mt-4 max-w-[18rem] text-[2.2rem] font-medium leading-[0.95] tracking-[-0.04em] text-[#3a3a3a]">Built with intent, shaped by context.</h2>
-					</div>
-					<div className="grid gap-10 sm:grid-cols-2">
-						<div>
-							<p className="text-[0.72rem] uppercase tracking-[0.18em] text-[#7A3A30]">The Challenge</p>
-							<p className="mt-4 text-[1rem] leading-[1.7] text-[#6f655a]">{project.challenge}</p>
-						</div>
-						<div>
-							<p className="text-[0.72rem] uppercase tracking-[0.18em] text-[#7A3A30]">The Approach</p>
-							<p className="mt-4 text-[1rem] leading-[1.7] text-[#6f655a]">{project.approach}</p>
-						</div>
-					</div>
-				</section>
-
-				<section className="flex flex-wrap items-center justify-between gap-6 border-t border-[#bdbdb8] pt-5">
-					<div className="flex flex-wrap gap-2">
-						{project.tags.map((tag) => <span key={tag} className="border border-[#d4cbc0] px-3 py-1.5 text-[0.72rem] uppercase tracking-[0.1em] text-[#6f655a]">{tag}</span>)}
-					</div>
-					<span className="text-[0.78rem] text-[#a89f96]">{year} · Case study</span>
 				</section>
 
 				<footer className="mt-20 border-t border-[#8b8377]/80 pt-4 pb-2">
