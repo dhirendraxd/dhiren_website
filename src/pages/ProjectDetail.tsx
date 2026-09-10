@@ -53,7 +53,7 @@ const ProjectDetail = () => {
 	return (
 		<div className="min-h-screen bg-[#f5f1eb] text-[#3a3a3a] font-rajdhani">
 			<main className="mx-auto max-w-[84rem] px-6 pb-10 pt-5 sm:px-8 lg:px-12">
-				<header className="flex flex-wrap items-center justify-between gap-3">
+				<header className="relative top-4 flex flex-wrap items-center justify-between gap-3">
 					<button type="button" onClick={() => navigate(-1)} className="group inline-flex items-center gap-2 border-b border-transparent py-2 text-[0.78rem] font-medium text-[#3f3932] transition-colors hover:border-[#7A3A30] hover:text-[#7A3A30]">
 						<ArrowLeft size={14} />
 						Back

@@ -218,7 +218,7 @@ export const projectDetails: ProjectDetail[] = [
     serviceSlug: "advocacy-community",
     category: "Community",
     date: "14 Mar 2026",
-    summary: "Lab-style sessions where fellows framed real social problems and tested early-stage intervention ideas together.",
+    summary: "Lab-style sessions where fellows framed real social problems, explored the people and systems behind them, and tested early-stage intervention ideas together through guided discussion, rapid validation, and collaborative feedback.",
     challenge: "Participants had strong motivation but lacked a shared structure for ideation and validation.",
     approach: "Used guided facilitation with problem statements, quick field validation, and feedback rounds to sharpen project direction.",
     outcomes: [
