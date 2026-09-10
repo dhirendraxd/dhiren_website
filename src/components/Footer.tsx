@@ -32,10 +32,10 @@ const Footer = () => {
       role="contentinfo"
     >
       <div className="mx-auto max-w-[50rem]">
-        {!isHome && <div className="h-px w-full bg-[#8b8377]/80" />}
+        {!isHome && <div className="h-px w-full bg-gradient-to-r from-transparent via-[#8b8377]/40 to-transparent" aria-hidden="true" />}
         {!isHome && (
-          <div className="mt-3 flex flex-col items-center gap-3">
-            <div className="flex items-center gap-6">
+          <div className="mt-2 flex flex-col items-center">
+            <div className="flex items-center gap-5">
               {socialLinks.map(({ href, label, icon: Icon, color }) => (
                 <a
                   key={label}
@@ -43,12 +43,11 @@ const Footer = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="group inline-flex items-center gap-2 text-sm text-[#3f3932]"
+                  className="group inline-flex h-6 w-6 items-center justify-center text-sm text-[#3f3932] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7A3A30] focus-visible:ring-offset-2"
                 >
                   <span className={`${color} transition-colors duration-200`}>
-                    <Icon size={20} />
+                    <Icon size={17} />
                   </span>
-                  <span className="hidden sm:inline">{label}</span>
                 </a>
               ))}
             </div>

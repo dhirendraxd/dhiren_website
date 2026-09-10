@@ -50,6 +50,9 @@ const ProjectDetail = () => {
 	const isTechProject = project.serviceSlug === "tech-projects";
 	const isCommunityProject = project.serviceSlug === "advocacy-community";
 	const livePreviewHref = project.sourceHref ?? `/projects/${project.slug}`;
+	const titleWords = project.title.split(" ");
+	const titleFirstLine = titleWords.slice(0, 4).join(" ");
+	const titleSecondLine = titleWords.slice(4).join(" ");
 	const detailRows = [
 		{ label: "Service", value: project.category },
 		{ label: "Timeline", value: project.date },
@@ -76,9 +79,13 @@ const ProjectDetail = () => {
 							<span className="bg-[#2d2a28] px-3.5 py-1.5 text-[0.7rem] font-semibold uppercase tracking-[0.12em] text-[#f5f1eb]">{project.category}</span>
 							<span className="border border-[#d4cbc0] px-3.5 py-1.5 text-[0.7rem] font-medium uppercase tracking-[0.12em] text-[#6f655a]">Real Project</span>
 						</div>
-						<h1 className="max-w-[52rem] break-words text-[clamp(2.8rem,5.5vw,5.5rem)] font-medium leading-[0.92] tracking-[-0.04em] text-[#3a3a3a]">
-							{project.title}
-							<span className="mt-3 block text-[0.34em] font-normal tracking-[-0.02em] text-[#7A3A30] sm:ml-3 sm:mt-0 sm:inline">/Real Project</span>
+						<h1 className="max-w-[52rem] break-words text-[clamp(2.4rem,4.5vw,4.5rem)] font-medium leading-[0.94] tracking-[-0.04em] text-[#3a3a3a]">
+							<span className="block font-semibold">{titleFirstLine}</span>
+							<span className="mt-3 block text-[0.78em] font-normal">
+								{titleSecondLine}
+								{titleSecondLine && " "}
+								<span className="text-[0.34em] font-normal tracking-[-0.02em] text-[#7A3A30]">/Real Project</span>
+							</span>
 						</h1>
 						<p className="mt-8 max-w-[37rem] text-[1rem] leading-[1.6] text-[#6f655a] sm:text-[1.1rem]">{project.summary}</p>
 						<div className="mt-8 flex flex-wrap gap-3">

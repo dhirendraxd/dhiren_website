@@ -23,8 +23,8 @@ const AboutSection = () => {
       href: "/advocacy-community",
     },
     {
-      title: "Hackathons & Builds",
-      description: "Shipping working prototypes — core features, API integrations, and deployment under tight timelines.",
+      title: "Projects & Builds",
+      description: "Building practical projects — useful features, thoughtful integrations, and delivery from idea to launch.",
       icon: Code2,
       href: "/tech-projects",
     },

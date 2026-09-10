@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import emailjs from "@emailjs/browser";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Check, Loader2 } from "lucide-react";
@@ -10,6 +10,13 @@ type Touched = Partial<Record<keyof Fields, boolean>>;
 type Status = "idle" | "sending" | "error";
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+const subjectPrompts = [
+  "Tell me what broke (politely).",
+  "One tiny idea, allegedly.",
+  "Let's pretend this is a plan.",
+  "Compliments, chaos, or collaboration?",
+];
 
 function validate(data: Fields): Errors {
   const errs: Errors = {};
@@ -26,8 +33,44 @@ const ConnectSection = () => {
   const [touched, setTouched] = useState<Touched>({});
   const [submitted, setSubmitted] = useState(false);
   const [status, setStatus] = useState<Status>("idle");
+  const [subjectPromptIndex, setSubjectPromptIndex] = useState(0);
+  const [subjectPlaceholder, setSubjectPlaceholder] = useState("");
   // Honeypot: real users never see or fill this field; bots that auto-fill every input do.
   const [company, setCompany] = useState("");
+
+  useEffect(() => {
+    if (formData.subject.trim()) return;
+
+    const prompt = subjectPrompts[subjectPromptIndex];
+    let characterIndex = 0;
+    let deleting = false;
+    let timeoutId: number;
+
+    const typeNextCharacter = () => {
+      if (!deleting) {
+        characterIndex += 1;
+        setSubjectPlaceholder(prompt.slice(0, characterIndex));
+        if (characterIndex === prompt.length) {
+          deleting = true;
+          timeoutId = window.setTimeout(typeNextCharacter, 1700);
+          return;
+        }
+        timeoutId = window.setTimeout(typeNextCharacter, 62);
+        return;
+      }
+
+      characterIndex -= 1;
+      setSubjectPlaceholder(prompt.slice(0, characterIndex));
+      if (characterIndex === 0) {
+        setSubjectPromptIndex((currentIndex) => (currentIndex + 1) % subjectPrompts.length);
+        return;
+      }
+      timeoutId = window.setTimeout(typeNextCharacter, 32);
+    };
+
+    typeNextCharacter();
+    return () => window.clearTimeout(timeoutId);
+  }, [formData.subject, subjectPromptIndex]);
 
   const isReady =
     formData.name.trim().length > 0 &&
@@ -89,10 +132,10 @@ const ConnectSection = () => {
   };
 
   const fieldClass = (key: keyof Fields) =>
-    `w-full bg-transparent border-0 border-b pb-4 text-[1.4rem] font-rajdhani tracking-tight placeholder:font-light placeholder:tracking-normal placeholder:text-[#92877b] focus:outline-none transition-colors duration-200 ${
+    `w-full bg-transparent border-0 border-b pb-4 text-[1.45rem] font-rajdhani tracking-tight placeholder:font-light placeholder:tracking-normal placeholder:text-[#7c7167] focus:outline-none transition-colors duration-200 ${
       touched[key] && errors[key]
-        ? "border-[#7A3A30] text-[#3a3a3a] placeholder:text-[#c8bfb8] focus:border-[#7A3A30]"
-        : "border-[#d4cbc0] text-[#3a3a3a] placeholder:text-[#c8bfb8] focus:border-[#3a3a3a]"
+        ? "border-[#7A3A30] text-[#3a3a3a] placeholder:text-[#7c7167] focus:border-[#7A3A30]"
+        : "border-[#d4cbc0] text-[#3a3a3a] placeholder:text-[#7c7167] focus:border-[#3a3a3a]"
     }`;
 
   return (
@@ -113,7 +156,7 @@ const ConnectSection = () => {
               </p>
             </blockquote>
 
-            <div className="w-full flex items-center gap-6 mt-4 mb-4">
+            <div className="w-full flex items-center gap-6 mt-12 mb-4">
               <p className="shrink-0 font-rajdhani text-[1.5rem] font-bold tracking-tight text-[#3a3a3a]">Connect</p>
               <span className="flex-1 h-px bg-[#e9e1d6]/60" aria-hidden="true" />
               <nav className="flex items-center gap-6 shrink-0" role="navigation" aria-label="Social links">
@@ -184,7 +227,7 @@ const ConnectSection = () => {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-12">
                     {/* Name */}
                     <div className="flex flex-col gap-3">
-                      <label htmlFor="name" className="font-rajdhani text-[0.76rem] font-semibold uppercase tracking-[0.22em] text-[#7c7167] flex items-center gap-1">
+                      <label htmlFor="name" className="font-rajdhani text-[0.82rem] font-semibold uppercase tracking-[0.22em] text-[#5f574d] flex items-center gap-1">
                         Name <span className="text-[#b42318]" aria-hidden="true">*</span>
                       </label>
                       <input
@@ -208,7 +251,7 @@ const ConnectSection = () => {
 
                     {/* Email */}
                     <div className="flex flex-col gap-3">
-                      <label htmlFor="email" className="font-rajdhani text-[0.76rem] font-semibold uppercase tracking-[0.22em] text-[#7c7167] flex items-center gap-1">
+                      <label htmlFor="email" className="font-rajdhani text-[0.82rem] font-semibold uppercase tracking-[0.22em] text-[#5f574d] flex items-center gap-1">
                         Email <span className="text-[#b42318]" aria-hidden="true">*</span>
                       </label>
                       <input
@@ -233,13 +276,13 @@ const ConnectSection = () => {
 
                   {/* Subject */}
                   <div className="flex flex-col gap-3">
-                    <label htmlFor="subject" className="font-rajdhani text-[0.76rem] font-semibold uppercase tracking-[0.22em] text-[#7c7167] flex items-center gap-1">
+                    <label htmlFor="subject" className="font-rajdhani text-[0.82rem] font-semibold uppercase tracking-[0.22em] text-[#5f574d] flex items-center gap-1">
                       Subject <span className="text-[#b42318]" aria-hidden="true">*</span>
                     </label>
                     <input
                       id="subject" name="subject" type="text"
                       value={formData.subject} onChange={handleChange}
-                      placeholder="What's on your mind?"
+                      placeholder={subjectPlaceholder || subjectPrompts[0]}
                       aria-required="true"
                       aria-invalid={!!(touched.subject && errors.subject)}
                       aria-describedby={touched.subject && errors.subject ? "subject-error" : undefined}
@@ -268,7 +311,7 @@ const ConnectSection = () => {
                   </AnimatePresence>
 
                   <div className="flex items-center justify-between">
-                    <p className="text-[0.68rem] text-[#92877b] tracking-wide">
+                    <p className="text-[0.72rem] text-[#7c7167] tracking-wide">
                       <span className="text-[#b42318]">*</span> required fields
                     </p>
                     <button
