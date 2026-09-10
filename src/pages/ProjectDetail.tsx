@@ -44,6 +44,9 @@ const ProjectDetail = () => {
 	}
 
 	const location = project.serviceSlug === "advocacy-community" ? "Nepal" : "Remote";
+	const isTechProject = project.serviceSlug === "tech-projects";
+	const isCommunityProject = project.serviceSlug === "advocacy-community";
+	const livePreviewHref = project.sourceHref ?? `/projects/${project.slug}`;
 	const detailRows = [
 		{ label: "Service", value: project.category },
 		{ label: "Timeline", value: project.date },
@@ -76,8 +79,8 @@ const ProjectDetail = () => {
 						</h1>
 						<p className="mt-8 max-w-[37rem] text-[1rem] leading-[1.6] text-[#6f655a] sm:text-[1.1rem]">{project.summary}</p>
 						<div className="mt-8 flex flex-wrap gap-3">
-							{project.sourceHref && (
-								<a href={project.sourceHref} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-[#3a3a3a] px-5 py-3 text-[0.8rem] font-medium text-[#f5f1eb] transition-colors hover:bg-[#7A3A30]">
+							{(isTechProject || (project.sourceHref && !isCommunityProject)) && (
+								<a href={livePreviewHref} target={project.sourceHref ? "_blank" : undefined} rel={project.sourceHref ? "noopener noreferrer" : undefined} className="inline-flex items-center gap-2 bg-[#3a3a3a] px-5 py-3 text-[0.8rem] font-medium text-[#f5f1eb] transition-colors hover:bg-[#7A3A30]">
 									Live Preview <ArrowUpRight size={14} />
 								</a>
 							)}
