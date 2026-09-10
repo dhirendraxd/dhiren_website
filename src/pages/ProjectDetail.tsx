@@ -60,7 +60,7 @@ const ProjectDetail = () => {
 		<div className="min-h-screen bg-[#f5f1eb] text-[#3a3a3a] font-rajdhani">
 			<main className="mx-auto max-w-[84rem] px-6 pb-10 pt-5 sm:px-8 lg:px-12">
 				<header className="relative top-4 flex flex-wrap items-center justify-between gap-3">
-					<button type="button" onClick={() => navigate(-1)} className="group inline-flex items-center gap-2 border-b border-transparent py-2 text-[0.78rem] font-medium text-[#3f3932] transition-colors hover:border-[#7A3A30] hover:text-[#7A3A30]">
+					<button type="button" onClick={() => navigate(-1)} className="group inline-flex items-center gap-2 border-b border-transparent py-2 text-[0.78rem] font-medium text-[#3f3932] transition-colors hover:border-[#7A3A30] hover:text-[#7A3A30] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7A3A30] focus-visible:ring-offset-2">
 						<ArrowLeft size={14} />
 						Back
 					</button>
@@ -83,11 +83,11 @@ const ProjectDetail = () => {
 						<p className="mt-8 max-w-[37rem] text-[1rem] leading-[1.6] text-[#6f655a] sm:text-[1.1rem]">{project.summary}</p>
 						<div className="mt-8 flex flex-wrap gap-3">
 							{(isTechProject || (project.sourceHref && !isCommunityProject)) && (
-								<a href={livePreviewHref} target={project.sourceHref ? "_blank" : undefined} rel={project.sourceHref ? "noopener noreferrer" : undefined} className="inline-flex items-center gap-2 bg-[#3a3a3a] px-5 py-3 text-[0.8rem] font-medium text-[#f5f1eb] transition-colors hover:bg-[#7A3A30]">
+								<a href={livePreviewHref} target={project.sourceHref ? "_blank" : undefined} rel={project.sourceHref ? "noopener noreferrer" : undefined} className="inline-flex items-center gap-2 bg-[#3a3a3a] px-5 py-3 text-[0.8rem] font-medium text-[#f5f1eb] transition-colors hover:bg-[#7A3A30] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7A3A30] focus-visible:ring-offset-2">
 									Live Preview <ArrowUpRight size={14} />
 								</a>
 							)}
-							<a href="/#contact" className="inline-flex items-center gap-2 border border-[#d4cbc0] bg-transparent px-5 py-3 text-[0.8rem] font-medium text-[#3a3a3a] transition-colors hover:border-[#7A3A30] hover:text-[#7A3A30]">
+							<a href="/#contact" className="inline-flex items-center gap-2 border border-[#d4cbc0] bg-transparent px-5 py-3 text-[0.8rem] font-medium text-[#3a3a3a] transition-colors hover:border-[#7A3A30] hover:text-[#7A3A30] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7A3A30] focus-visible:ring-offset-2">
 								Contact Me <ExternalLink size={13} />
 							</a>
 						</div>
@@ -133,11 +133,12 @@ const ProjectDetail = () => {
 					</aside>
 				</section>
 
-				<footer className="mt-20 border-t border-[#8b8377]/80 pt-4 pb-2">
-					<div className="flex items-center justify-center gap-6">
+				<footer className="mt-12 pt-3 pb-1">
+					<div className="h-px w-full bg-gradient-to-r from-transparent via-[#8b8377]/40 to-transparent" aria-hidden="true" />
+					<div className="mt-2 flex items-center justify-center gap-5">
 						{socialLinks.map(({ href, label, icon: Icon, color }) => (
-							<a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className={`transition-opacity hover:opacity-60 ${color}`}>
-								<Icon size={20} />
+							<a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className={`inline-flex h-6 w-6 items-center justify-center transition-opacity hover:opacity-60 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7A3A30] focus-visible:ring-offset-2 ${color}`}>
+								<Icon size={17} />
 							</a>
 						))}
 					</div>
