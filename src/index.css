@@ -71,6 +71,16 @@
 @tailwind components;
 @tailwind utilities;
 
+::selection {
+  background: #7A3A30;
+  color: #f5f1eb;
+}
+
+::-moz-selection {
+  background: #7A3A30;
+  color: #f5f1eb;
+}
+
 /* Subtle paper grain texture overlay */
 body::before {
   content: '';

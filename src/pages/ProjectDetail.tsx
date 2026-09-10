@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { ArrowLeft, ArrowUpRight, ExternalLink } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, Code2, Database, ExternalLink, Globe2, Megaphone, Users } from "lucide-react";
 import { FaGithub, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { getProjectBySlug } from "@/data/projectDetails";
@@ -11,6 +11,9 @@ const socialLinks = [
 	{ href: "https://instagram.com/dhirendraxd", label: "Instagram", icon: FaInstagram, color: "text-[#E4405F]" },
 	{ href: "https://linkedin.com/in/dhirendraxd", label: "LinkedIn", icon: FaLinkedinIn, color: "text-[#0A66C2]" },
 ];
+
+const technologyIcons = [Code2, Globe2, Database];
+const communityIcons = [Users, Megaphone, Globe2];
 
 const ProjectDetail = () => {
 	const { slug } = useParams<{ slug: string }>();
@@ -91,10 +94,40 @@ const ProjectDetail = () => {
 					</div>
 
 					<aside className="flex flex-wrap gap-x-10 gap-y-8 md:flex-nowrap md:flex-col md:items-end md:justify-end md:gap-8 lg:gap-10 lg:pb-1">
+						{isTechProject && (
+							<div className="flex flex-col gap-3 text-left md:items-end md:text-right">
+								<p className="text-[0.8rem] font-semibold uppercase tracking-[0.16em] text-[#7A3A30]">Technologies</p>
+								<div className="flex items-center gap-3">
+									{project.tags.slice(0, 3).map((tag, index) => {
+										const TechnologyIcon = technologyIcons[index];
+										return (
+											<span key={tag} title={tag} aria-label={tag} className="flex h-10 w-10 items-center justify-center border border-[#d4cbc0] text-[#7A3A30]">
+												<TechnologyIcon size={18} strokeWidth={1.7} aria-hidden="true" />
+											</span>
+										);
+									})}
+								</div>
+							</div>
+						)}
+						{isCommunityProject && (
+							<div className="flex flex-col gap-3 text-left md:items-end md:text-right">
+								<p className="text-[0.8rem] font-semibold uppercase tracking-[0.16em] text-[#7c7167]">Focus Areas</p>
+								<div className="flex items-center gap-3">
+									{project.tags.slice(0, 3).map((tag, index) => {
+										const FocusIcon = communityIcons[index];
+										return (
+											<span key={tag} title={tag} aria-label={tag} className="flex h-10 w-10 items-center justify-center border border-[#d4cbc0] text-[#7A3A30]">
+												<FocusIcon size={18} strokeWidth={1.7} aria-hidden="true" />
+											</span>
+										);
+									})}
+								</div>
+							</div>
+						)}
 						{detailRows.map((row) => (
 							<div key={row.label} className="text-left md:text-right">
-								<p className="text-[0.72rem] uppercase tracking-[0.16em] text-[#a89f96]">{row.label}</p>
-								<p className="mt-3 max-w-[12rem] text-[1rem] font-medium leading-tight text-[#3a3a3a]">{row.value}</p>
+								<p className="text-[0.8rem] font-semibold uppercase tracking-[0.16em] text-[#7c7167]">{row.label}</p>
+								<p className="mt-3 max-w-[12rem] text-[1.1rem] font-medium leading-tight text-[#3a3a3a]">{row.value}</p>
 							</div>
 						))}
 					</aside>
