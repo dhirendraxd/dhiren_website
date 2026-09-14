@@ -10,6 +10,7 @@ const socialLinks = [
 	{ href: "https://github.com/dhirendraxd", label: "GitHub", color: "text-[#181717]" },
 	{ href: "https://instagram.com/dhirendraxd", label: "Instagram", color: "text-[#E4405F]" },
 	{ href: "https://linkedin.com/in/dhirendraxd", label: "LinkedIn", color: "text-[#0A66C2]" },
+	{ href: "https://www.behance.net/dhirendraxd", label: "Behance", color: "text-[#1769ff]" },
 ];
 
 const technologyIcons = [Code2, Globe2, Database];
@@ -19,12 +20,14 @@ const svglTechnologyNames: Record<string, string> = {
 	TypeScript: "TypeScript",
 	JavaScript: "JavaScript",
 	Firebase: "Firebase",
+	Vercel: "Vercel",
 	Supabase: "Supabase",
 	"Node.js": "Node.js",
 	Vite: "Vite",
 	"Next.js": "Next.js",
 	GitHub: "GitHub",
 	Analytics: "Google Analytics",
+	"Tailwind CSS": "Tailwind CSS",
 };
 
 const ProjectDetail = () => {
@@ -117,11 +120,11 @@ const ProjectDetail = () => {
 							<div className="flex flex-col gap-3 text-left md:items-end md:text-right">
 								<p className="text-[0.8rem] font-semibold uppercase tracking-[0.16em] text-[#7A3A30]">Technologies</p>
 								<div className="flex items-center gap-3">
-									{project.tags.slice(0, 3).map((tag, index) => {
-										const TechnologyIcon = technologyIcons[index];
+									{project.tags.slice(0, 4).map((tag, index) => {
+										const TechnologyIcon = technologyIcons[index] ?? Code2;
 										const svglName = svglTechnologyNames[tag];
 										return (
-											<span key={tag} title={tag} aria-label={tag} className="flex h-10 w-10 items-center justify-center border border-[#d4cbc0] text-[#7A3A30]">
+											<span key={tag} title={tag} aria-label={tag} className="flex h-10 w-10 items-center justify-center border border-[#8d8378]/60 bg-transparent text-[#3a3a3a]">
 												{svglName ? (
 													<SvglIcon name={svglName} alt="" className="h-[18px] w-[18px]" fallback={<TechnologyIcon size={18} strokeWidth={1.7} aria-hidden="true" />} />
 												) : (
@@ -138,7 +141,7 @@ const ProjectDetail = () => {
 								<p className="text-[0.8rem] font-semibold uppercase tracking-[0.16em] text-[#7c7167]">Focus Areas</p>
 								<div className="flex items-center gap-3">
 									{project.tags.slice(0, 3).map((tag, index) => {
-										const FocusIcon = communityIcons[index];
+										const FocusIcon = communityIcons[index] ?? Users;
 										const svglName = svglTechnologyNames[tag];
 										return (
 											<span key={tag} title={tag} aria-label={tag} className="flex h-10 w-10 items-center justify-center border border-[#d4cbc0] text-[#7A3A30]">

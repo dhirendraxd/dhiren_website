@@ -20,6 +20,12 @@ const socialLinks = [
     svglName: "LinkedIn",
     color: "text-[#0A66C2] group-hover:text-[#08539d]",
   },
+  {
+    href:  "https://www.behance.net/dhirendraxd",
+    label: "Behance",
+    svglName: "Behance",
+    color: "text-[#1769ff] group-hover:text-[#1254cc]",
+  },
 ];
 
 const Footer = () => {

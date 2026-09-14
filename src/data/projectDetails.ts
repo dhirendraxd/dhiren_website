@@ -398,7 +398,7 @@ export const projectDetails: ProjectDetail[] = [
       "Created a clearer path for students to raise and follow campus issues.",
       "Established a lightweight model for transparent community moderation."
     ],
-    tags: ["Campus Innovation", "Community", "Student Platform"],
+    tags: ["Firebase", "Vercel", "React", "Tailwind CSS"],
     image: issueHiveHeroImage,
     gallery: [
       "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=960&h=640&fit=crop&auto=format&q=80",
@@ -422,7 +422,7 @@ export const projectDetails: ProjectDetail[] = [
       "More structured decision-making experience.",
       "Prototype-ready matching framework."
     ],
-    tags: ["AI", "Recommendation", "Education Tech"],
+    tags: ["React", "Tailwind CSS", "AI", "Recommendation", "Education Tech"],
     image: images.eduConnect,
     gallery: [
       "https://images.unsplash.com/photo-1580582932707-520aef1e7625?w=960&h=640&fit=crop&auto=format&q=80",
@@ -446,7 +446,7 @@ export const projectDetails: ProjectDetail[] = [
       "Improved screening consistency across reviewers.",
       "Reusable model for role-specific hiring tracks."
     ],
-    tags: ["AI", "HR Tech", "Assessment"],
+    tags: ["React", "Tailwind CSS", "AI", "HR Tech", "Assessment"],
     image: images.devBus,
     gallery: [
       "https://images.unsplash.com/photo-1534972195531-d236584f74d8?w=960&h=640&fit=crop&auto=format&q=80",
@@ -470,7 +470,7 @@ export const projectDetails: ProjectDetail[] = [
       "Reduced coordination overhead for organizers.",
       "Clear path for phased product expansion."
     ],
-    tags: ["Web Platform", "NGO", "Volunteer Ops"],
+    tags: ["React", "Tailwind CSS", "Web Platform", "NGO", "Volunteer Ops"],
     image: images.volunteerPlatform,
     gallery: [
       "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=960&h=640&fit=crop&auto=format&q=80",
@@ -494,7 +494,7 @@ export const projectDetails: ProjectDetail[] = [
       "Improved consistency of participant experience.",
       "Better documentation quality across sessions."
     ],
-    tags: ["Cloud", "Community", "Workshop"],
+    tags: ["React", "Tailwind CSS", "Cloud", "Community", "Workshop"],
     image: netImages.techCloud,
     sourceHref: "https://aws.amazon.com",
     gallery: [
@@ -519,7 +519,7 @@ export const projectDetails: ProjectDetail[] = [
       "Better onboarding clarity for new participants.",
       "Reduced repetitive admin inquiries."
     ],
-    tags: ["Microsite", "Information Design", "Community"],
+    tags: ["React", "Tailwind CSS", "Microsite", "Information Design", "Community"],
     image: netImages.webDev,
     sourceHref: "https://www.facebook.com/allinfoundationnp/",
     gallery: [
@@ -544,7 +544,7 @@ export const projectDetails: ProjectDetail[] = [
       "Higher clarity for first-time learners.",
       "Scalable structure for future content additions."
     ],
-    tags: ["Civic Tech", "Knowledge Portal", "Digital Rights"],
+    tags: ["React", "Tailwind CSS", "Civic Tech", "Knowledge Portal", "Digital Rights"],
     image: netImages.digitalRights,
     sourceHref: "https://netmission.asia",
     gallery: [
@@ -569,7 +569,7 @@ export const projectDetails: ProjectDetail[] = [
       "Better documentation of assumptions and learnings.",
       "Improved readiness for pilot execution."
     ],
-    tags: ["Sustainability", "Innovation", "Prototyping"],
+    tags: ["React", "Tailwind CSS", "Sustainability", "Innovation", "Prototyping"],
     image: netImages.greenInnovation,
     sourceHref: "https://sustainability.com.np/",
     gallery: [

@@ -175,6 +175,11 @@ const ConnectSection = () => {
                   <SvglIcon name="LinkedIn" alt="" className="h-[22px] w-[22px]" />
                   <span className="h-px w-0 bg-[#0A66C2] transition-all duration-300 group-hover:w-full" aria-hidden="true" />
                 </a>
+                <a href="https://www.behance.net/dhirendraxd" target="_blank" rel="noopener noreferrer" aria-label="Behance"
+                  className="group inline-flex flex-col items-center gap-1 text-[#1769ff] transition-opacity duration-200 hover:opacity-60">
+                  <SvglIcon name="Behance" alt="" className="h-[22px] w-[22px]" />
+                  <span className="h-px w-0 bg-[#1769ff] transition-all duration-300 group-hover:w-full" aria-hidden="true" />
+                </a>
               </nav>
             </div>
 
