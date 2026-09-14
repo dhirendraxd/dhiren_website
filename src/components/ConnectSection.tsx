@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import emailjs from "@emailjs/browser";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Check, Loader2 } from "lucide-react";
-import { FaLinkedinIn, FaInstagram, FaGithub } from "react-icons/fa";
+import SvglIcon from "@/components/SvglIcon";
 
 type Fields = { name: string; subject: string; email: string };
 type Errors = Partial<Fields>;
@@ -162,17 +162,17 @@ const ConnectSection = () => {
               <nav className="flex items-center gap-6 shrink-0" role="navigation" aria-label="Social links">
                 <a href="https://github.com/dhirendraxd" target="_blank" rel="noopener noreferrer" aria-label="GitHub"
                   className="group inline-flex flex-col items-center gap-1 text-[#231d18] transition-opacity duration-200 hover:opacity-60">
-                  <FaGithub size={22} />
+                  <SvglIcon name="GitHub" alt="" className="h-[22px] w-[22px]" />
                   <span className="h-px w-0 bg-[#231d18] transition-all duration-300 group-hover:w-full" aria-hidden="true" />
                 </a>
                 <a href="https://instagram.com/dhirendraxd" target="_blank" rel="noopener noreferrer" aria-label="Instagram"
                   className="group inline-flex flex-col items-center gap-1 text-[#E4405F] transition-opacity duration-200 hover:opacity-60">
-                  <FaInstagram size={22} />
+                  <SvglIcon name="Instagram" alt="" className="h-[22px] w-[22px]" />
                   <span className="h-px w-0 bg-[#E4405F] transition-all duration-300 group-hover:w-full" aria-hidden="true" />
                 </a>
                 <a href="https://linkedin.com/in/dhirendraxd" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"
                   className="group inline-flex flex-col items-center gap-1 text-[#0A66C2] transition-opacity duration-200 hover:opacity-60">
-                  <FaLinkedinIn size={22} />
+                  <SvglIcon name="LinkedIn" alt="" className="h-[22px] w-[22px]" />
                   <span className="h-px w-0 bg-[#0A66C2] transition-all duration-300 group-hover:w-full" aria-hidden="true" />
                 </a>
               </nav>

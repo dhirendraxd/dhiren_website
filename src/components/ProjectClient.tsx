@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaLinkedinIn, FaGithub } from 'react-icons/fa';
+import SvglIcon from '@/components/SvglIcon';
 
 type Props = {
   sourceHref?: string;
@@ -41,7 +41,7 @@ const ProjectClient: React.FC<Props> = ({ sourceHref, title, showGithub = false 
         aria-label="Open LinkedIn profile"
         title="LinkedIn"
       >
-        <FaLinkedinIn size={13} aria-hidden />
+        <SvglIcon name="LinkedIn" alt="" className="h-[13px] w-[13px]" fallback={<span aria-hidden="true">in</span>} />
         <span>LinkedIn</span>
       </a>
 
@@ -56,7 +56,7 @@ const ProjectClient: React.FC<Props> = ({ sourceHref, title, showGithub = false 
             aria-label="Open GitHub"
             title="GitHub"
           >
-            <FaGithub size={13} aria-hidden />
+            <SvglIcon name="GitHub" alt="" className="h-[13px] w-[13px]" fallback={<span aria-hidden="true">GH</span>} />
             <span>GitHub</span>
           </a>
         </>

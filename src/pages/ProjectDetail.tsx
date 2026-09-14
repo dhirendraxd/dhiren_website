@@ -1,19 +1,31 @@
 import { useEffect } from "react";
 import { ArrowLeft, ArrowUpRight, Code2, Database, ExternalLink, Globe2, Megaphone, Users } from "lucide-react";
-import { FaGithub, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { getProjectBySlug } from "@/data/projectDetails";
+import SvglIcon from "@/components/SvglIcon";
 
 const BASE_URL = "https://dhirendrasinghdhami.com.np";
 
 const socialLinks = [
-	{ href: "https://github.com/dhirendraxd", label: "GitHub", icon: FaGithub, color: "text-[#181717]" },
-	{ href: "https://instagram.com/dhirendraxd", label: "Instagram", icon: FaInstagram, color: "text-[#E4405F]" },
-	{ href: "https://linkedin.com/in/dhirendraxd", label: "LinkedIn", icon: FaLinkedinIn, color: "text-[#0A66C2]" },
+	{ href: "https://github.com/dhirendraxd", label: "GitHub", color: "text-[#181717]" },
+	{ href: "https://instagram.com/dhirendraxd", label: "Instagram", color: "text-[#E4405F]" },
+	{ href: "https://linkedin.com/in/dhirendraxd", label: "LinkedIn", color: "text-[#0A66C2]" },
 ];
 
 const technologyIcons = [Code2, Globe2, Database];
 const communityIcons = [Users, Megaphone, Globe2];
+const svglTechnologyNames: Record<string, string> = {
+	React: "React",
+	TypeScript: "TypeScript",
+	JavaScript: "JavaScript",
+	Firebase: "Firebase",
+	Supabase: "Supabase",
+	"Node.js": "Node.js",
+	Vite: "Vite",
+	"Next.js": "Next.js",
+	GitHub: "GitHub",
+	Analytics: "Google Analytics",
+};
 
 const ProjectDetail = () => {
 	const { slug } = useParams<{ slug: string }>();
@@ -107,9 +119,14 @@ const ProjectDetail = () => {
 								<div className="flex items-center gap-3">
 									{project.tags.slice(0, 3).map((tag, index) => {
 										const TechnologyIcon = technologyIcons[index];
+										const svglName = svglTechnologyNames[tag];
 										return (
 											<span key={tag} title={tag} aria-label={tag} className="flex h-10 w-10 items-center justify-center border border-[#d4cbc0] text-[#7A3A30]">
-												<TechnologyIcon size={18} strokeWidth={1.7} aria-hidden="true" />
+												{svglName ? (
+													<SvglIcon name={svglName} alt="" className="h-[18px] w-[18px]" fallback={<TechnologyIcon size={18} strokeWidth={1.7} aria-hidden="true" />} />
+												) : (
+													<TechnologyIcon size={18} strokeWidth={1.7} aria-hidden="true" />
+												)}
 											</span>
 										);
 									})}
@@ -122,9 +139,14 @@ const ProjectDetail = () => {
 								<div className="flex items-center gap-3">
 									{project.tags.slice(0, 3).map((tag, index) => {
 										const FocusIcon = communityIcons[index];
+										const svglName = svglTechnologyNames[tag];
 										return (
 											<span key={tag} title={tag} aria-label={tag} className="flex h-10 w-10 items-center justify-center border border-[#d4cbc0] text-[#7A3A30]">
-												<FocusIcon size={18} strokeWidth={1.7} aria-hidden="true" />
+												{svglName ? (
+													<SvglIcon name={svglName} alt="" className="h-[18px] w-[18px]" fallback={<FocusIcon size={18} strokeWidth={1.7} aria-hidden="true" />} />
+												) : (
+													<FocusIcon size={18} strokeWidth={1.7} aria-hidden="true" />
+												)}
 											</span>
 										);
 									})}
@@ -143,9 +165,9 @@ const ProjectDetail = () => {
 				<footer className="mt-12 pt-3 pb-1">
 					<div className="h-px w-full bg-gradient-to-r from-transparent via-[#8b8377]/40 to-transparent" aria-hidden="true" />
 					<div className="mt-2 flex items-center justify-center gap-5">
-						{socialLinks.map(({ href, label, icon: Icon, color }) => (
+										{socialLinks.map(({ href, label, color }) => (
 							<a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className={`inline-flex h-6 w-6 items-center justify-center transition-opacity hover:opacity-60 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7A3A30] focus-visible:ring-offset-2 ${color}`}>
-								<Icon size={17} />
+												<SvglIcon name={label} alt="" className="h-[17px] w-[17px]" fallback={<span className="text-[9px] font-bold" aria-hidden="true">{label.slice(0, 1)}</span>} />
 							</a>
 						))}
 					</div>

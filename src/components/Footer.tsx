@@ -1,23 +1,23 @@
 import { useLocation } from "react-router-dom";
-import { FaLinkedinIn, FaInstagram, FaGithub } from "react-icons/fa";
+import SvglIcon from "@/components/SvglIcon";
 
 const socialLinks = [
   {
     href:  "https://github.com/dhirendraxd",
     label: "GitHub",
-    icon:  FaGithub,
+    svglName: "GitHub",
     color: "text-[#181717] group-hover:text-[#15120d]",
   },
   {
     href:  "https://instagram.com/dhirendraxd",
     label: "Instagram",
-    icon:  FaInstagram,
+    svglName: "Instagram",
     color: "text-[#E4405F] group-hover:text-[#b63156]",
   },
   {
     href:  "https://linkedin.com/in/dhirendraxd",
     label: "LinkedIn",
-    icon:  FaLinkedinIn,
+    svglName: "LinkedIn",
     color: "text-[#0A66C2] group-hover:text-[#08539d]",
   },
 ];
@@ -36,7 +36,7 @@ const Footer = () => {
         {!isHome && (
           <div className="mt-2 flex flex-col items-center">
             <div className="flex items-center gap-5">
-              {socialLinks.map(({ href, label, icon: Icon, color }) => (
+              {socialLinks.map(({ href, label, svglName, color }) => (
                 <a
                   key={label}
                   href={href}
@@ -46,7 +46,7 @@ const Footer = () => {
                   className="group inline-flex h-6 w-6 items-center justify-center text-sm text-[#3f3932] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7A3A30] focus-visible:ring-offset-2"
                 >
                   <span className={`${color} transition-colors duration-200`}>
-                    <Icon size={17} />
+                    <SvglIcon name={svglName} alt="" className="h-[17px] w-[17px]" fallback={<span className="text-[10px] font-bold">{label.slice(0, 1)}</span>} />
                   </span>
                 </a>
               ))}
