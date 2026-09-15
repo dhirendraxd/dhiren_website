@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-route
 import { AnimatePresence, motion, type Transition } from "framer-motion";
 
 const Index = lazy(() => import("./pages/Index"));
+const About = lazy(() => import("./pages/About"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const ServiceShowcase = lazy(() => import("./pages/ServiceShowcase"));
 const Projects = lazy(() => import("./pages/SelectedProjects"));
@@ -43,6 +44,7 @@ const AnimatedRoutes = () => {
         >
           <Routes location={location}>
             <Route path="/" element={<Index />} />
+            <Route path="/about" element={<About />} />
             <Route path="/services" element={<Navigate to="/digital-marketing" replace />} />
             <Route path="/services/:slug" element={<ServiceShowcase />} />
             <Route path="/digital-marketing" element={<ServiceShowcase forcedSlug="digital-marketing" />} />

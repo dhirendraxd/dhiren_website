@@ -1,51 +1,41 @@
 import { Link } from "react-router-dom";
-import Navbar from "@/components/Navbar";
 import Seo from "@/components/Seo";
+import SvglIcon from "@/components/SvglIcon";
 
 const NotFound = () => {
   return (
-    <div className="min-h-screen bg-[#f5f1eb] flex items-center justify-center pt-20">
+    <main className="min-h-screen bg-[#f5f1eb] px-6 py-10 text-[#3a3a3a] sm:px-10 lg:px-16">
       <Seo
         title="Page Not Found | Dhirendra Singh Dhami"
         description="This page does not exist on Dhirendra Singh Dhami's portfolio website."
         canonicalPath="/404"
         noIndex
       />
-      <Navbar />
-      <div className="flex items-center justify-center px-6 pb-12 pt-28 sm:pt-32">
-        <div className="w-full max-w-2xl text-center font-rajdhani">
-          <p className="text-xs uppercase tracking-[0.28em] text-[#7A3A30] mb-6">404 — Page Missing</p>
+      <div className="mx-auto flex min-h-[calc(100vh-5rem)] w-full max-w-5xl items-center justify-center border-y border-[#ddd3c7] py-16 sm:py-20">
+        <div className="w-full max-w-3xl text-center font-rajdhani">
+          <div className="mb-10 flex items-end justify-center gap-4 border-b border-[#ddd3c7] pb-8 sm:gap-7">
+            <span className="text-[clamp(5rem,16vw,10rem)] font-semibold leading-[0.75] tracking-[-0.08em] text-[#7A3A30]">4</span>
+            <span className="text-[clamp(5rem,16vw,10rem)] font-semibold leading-[0.75] tracking-[-0.08em] text-[#3a3a3a]">0</span>
+            <span className="text-[clamp(5rem,16vw,10rem)] font-semibold leading-[0.75] tracking-[-0.08em] text-[#7A3A30]">4</span>
+          </div>
 
-          <div className="mx-auto mb-6 flex items-center justify-center gap-6">
-            {/* Tech node */}
-            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-[#7A3A30]/10 to-transparent">
-              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-                <path d="M12 3v3" stroke="#7A3A30" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M12 18v3" stroke="#7A3A30" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M4.5 7.5l2.12 2.12" stroke="#7A3A30" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M19.38 16.38l-2.12-2.12" stroke="#7A3A30" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                <circle cx="12" cy="12" r="2.2" stroke="#7A3A30" strokeWidth="1.5"/>
-              </svg>
+          <p className="mb-5 text-xs uppercase tracking-[0.28em] text-[#7A3A30]">Page not found</p>
+
+          <div className="mx-auto mb-8 flex items-center justify-center gap-6" aria-hidden="true">
+            <div className="flex h-16 w-16 items-center justify-center">
+              <SvglIcon name="Instagram" alt="" className="h-7 w-7" fallback={<span className="h-7 w-7" aria-hidden="true" />} />
             </div>
 
-            {/* Megaphone / Marketing */}
-            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-[#1DA1F2]/8 to-transparent">
-              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-                <path d="M3 11h2l7-4v10L5 13H3v-2z" stroke="#1DA1F2" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M18 8a3 3 0 010 8" stroke="#1DA1F2" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
+            <div className="flex h-16 w-16 items-center justify-center">
+              <SvglIcon name="LinkedIn" alt="" className="h-7 w-7" fallback={<span className="h-7 w-7" aria-hidden="true" />} />
             </div>
 
-            {/* Analytics sparkline */}
-            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-[#7A3A30]/6 to-transparent">
-              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-                <path d="M3 17h3l4-6 3 4 5-8 2 6" stroke="#7A3A30" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                <rect x="2" y="2" width="20" height="20" rx="4" stroke="#e9e1d6" strokeWidth="0.8"/>
-              </svg>
+            <div className="flex h-16 w-16 items-center justify-center">
+              <SvglIcon name="Behance" alt="" className="h-7 w-7" fallback={<span className="h-7 w-7" aria-hidden="true" />} />
             </div>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-rajdhani font-semibold tracking-tight text-[#3a3a3a] mb-4">
+          <h1 className="mb-4 text-3xl font-semibold tracking-tight text-[#3a3a3a] sm:text-4xl md:text-5xl">
             We couldn't find that page.
           </h1>
 
@@ -53,25 +43,29 @@ const NotFound = () => {
             A minimal detour: the page you requested has no impressions here. Try the projects hub or return home.
           </p>
 
-          <div className="flex items-center justify-center gap-4">
+          <nav
+            className="mx-auto grid w-full max-w-md grid-cols-2 border border-[#d8cfc3] bg-white/45 p-1 shadow-[0_12px_30px_rgba(35,29,24,0.05)]"
+            aria-label="404 recovery links"
+          >
             <Link
-              to="/projects"
-              className="group inline-flex items-center gap-2 rounded-none bg-[#7A3A30] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#7A3A30]/90"
+              to="/"
+              className="group inline-flex items-center justify-center gap-2 px-4 py-3 text-sm font-semibold text-[#7A3A30] transition-colors duration-200 hover:bg-[#7A3A30] hover:text-white"
             >
-              <span>View Projects</span>
-              <span className="ml-2 inline-block opacity-0 -translate-x-2 transition-all duration-200 group-hover:opacity-100 group-hover:translate-x-0">→</span>
+              <span>Back to Home</span>
+              <span aria-hidden className="transition-transform duration-200 group-hover:-translate-x-1">←</span>
             </Link>
 
             <Link
-              to="/"
-              className="inline-flex items-center gap-2 text-sm font-medium text-[#3f3932] underline underline-offset-4 decoration-transparent transition-colors hover:text-[#7A3A30]"
+              to="/projects"
+              className="group inline-flex items-center justify-center gap-2 border-l border-[#d8cfc3] px-4 py-3 text-sm font-medium text-[#3f3932] transition-colors duration-200 hover:bg-[#3a3a3a] hover:text-white"
             >
-              Back to Home
+              <span>Browse Projects</span>
+              <span aria-hidden className="transition-transform duration-200 group-hover:translate-x-1">→</span>
             </Link>
-          </div>
+          </nav>
         </div>
       </div>
-    </div>
+    </main>
   );
 };
 

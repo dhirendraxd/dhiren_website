@@ -30,6 +30,7 @@ while ((m = pairRegex.exec(content)) !== null) {
 const base = 'https://dhirendrasinghdhami.com.np';
 const staticRoutes = [
   { path: '/',                    priority: '1.0' },
+  { path: '/about',               priority: '0.8' },
   { path: '/projects',            priority: '0.9' },
   { path: '/digital-marketing',   priority: '0.8' },
   { path: '/advocacy-community',  priority: '0.8' },

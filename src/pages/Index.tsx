@@ -10,7 +10,6 @@ import ConnectSection from "@/components/ConnectSection";
 import Footer from "@/components/Footer";
 import Seo from "@/components/Seo";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
-import PageLoader from "@/components/PageLoader";
 
 const homeSchema = [
   {
@@ -56,7 +55,6 @@ const Index = () => {
 
   return (
     <div id="home" className="min-h-screen bg-card scroll-mt-24">
-      <PageLoader />
       <Seo
         title="Dhirendra Singh Dhami | SEO, Digital Marketing & Youth Advocacy"
         description="Explore Dhirendra Singh Dhami’s portfolio for SEO strategy, digital marketing, content planning, campaign growth, and youth-led civic-tech work in Nepal."

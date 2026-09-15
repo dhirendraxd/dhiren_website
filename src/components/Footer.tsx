@@ -34,7 +34,7 @@ const Footer = () => {
 
   return (
     <footer
-      className="bg-[#f5f1eb] px-6 pt-4 pb-8 font-rajdhani"
+      className="bg-[#f5f1eb] px-6 pb-8 pt-4 font-rajdhani"
       role="contentinfo"
     >
       <div className="mx-auto max-w-[50rem]">

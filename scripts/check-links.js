@@ -14,6 +14,7 @@ while ((m = slugRegex.exec(content)) !== null) slugs.add(m[1]);
 
 const allowedStatic = new Set([
   '/',
+  '/about',
   '/services',
   '/digital-marketing',
   '/advocacy-community',
