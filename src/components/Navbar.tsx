@@ -87,7 +87,7 @@ const Navbar = () => {
           )}
 
           {/* Desktop Nav */}
-          <nav className="hidden md:mr-14 md:flex items-center gap-10" role="navigation" aria-label="Main navigation">
+          <nav className="hidden md:mr-24 md:flex items-center gap-10" role="navigation" aria-label="Main navigation">
             {navLinks.map((link) => {
               if (link.name === "About" && isAboutPage) return null;
               if (isHomePage && ["Home", "Services", "Projects"].includes(link.name)) return null;

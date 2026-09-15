@@ -7,10 +7,10 @@ import SvglIcon from "@/components/SvglIcon";
 const BASE_URL = "https://dhirendrasinghdhami.com.np";
 
 const socialLinks = [
-	{ href: "https://github.com/dhirendraxd", label: "GitHub", color: "text-[#181717]" },
-	{ href: "https://instagram.com/dhirendraxd", label: "Instagram", color: "text-[#E4405F]" },
-	{ href: "https://linkedin.com/in/dhirendraxd", label: "LinkedIn", color: "text-[#0A66C2]" },
-	{ href: "https://www.behance.net/dhirendraxd", label: "Behance", color: "text-[#1769ff]" },
+	{ href: "https://github.com/dhirendraxd", label: "GitHub", color: "text-[#181717]", glow: "group-hover:drop-shadow-[0_0_4px_rgba(24,23,23,0.28)]", underline: "bg-[#181717]" },
+	{ href: "https://instagram.com/dhirendraxd", label: "Instagram", color: "text-[#E4405F]", glow: "group-hover:drop-shadow-[0_0_4px_rgba(228,64,95,0.32)]", underline: "bg-[#E4405F]" },
+	{ href: "https://linkedin.com/in/dhirendraxd", label: "LinkedIn", color: "text-[#0A66C2]", glow: "group-hover:drop-shadow-[0_0_4px_rgba(10,102,194,0.32)]", underline: "bg-[#0A66C2]" },
+	{ href: "https://www.behance.net/dhirendraxd", label: "Behance", color: "text-[#1769ff]", glow: "group-hover:drop-shadow-[0_0_4px_rgba(24,23,23,0.28)]", underline: "bg-[#1769ff]" },
 ];
 
 const technologyIcons = [Code2, Globe2, Database];
@@ -168,9 +168,10 @@ const ProjectDetail = () => {
 				<footer className="mt-12 pt-3 pb-1">
 					<div className="h-px w-full bg-gradient-to-r from-transparent via-[#8b8377]/40 to-transparent" aria-hidden="true" />
 					<div className="mt-2 flex items-center justify-center gap-5">
-										{socialLinks.map(({ href, label, color }) => (
-							<a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className={`inline-flex h-6 w-6 items-center justify-center transition-opacity hover:opacity-60 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7A3A30] focus-visible:ring-offset-2 ${color}`}>
-												<SvglIcon name={label} alt="" className="h-[17px] w-[17px]" fallback={<span className="text-[9px] font-bold" aria-hidden="true">{label.slice(0, 1)}</span>} />
+										{socialLinks.map(({ href, label, color, glow, underline }) => (
+											<a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className={`group relative inline-flex h-6 w-6 items-center justify-center transition-all hover:opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7A3A30] focus-visible:ring-offset-2 ${color}`}>
+												<SvglIcon name={label} alt="" className={`h-[17px] w-[17px] transition-all duration-200 ${glow}`} fallback={<span className="text-[9px] font-bold" aria-hidden="true">{label.slice(0, 1)}</span>} />
+												<span className={`absolute -bottom-1 left-0 h-px w-0 ${underline} transition-all duration-200 group-hover:w-full`} aria-hidden="true" />
 							</a>
 						))}
 					</div>

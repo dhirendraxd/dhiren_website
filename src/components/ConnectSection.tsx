@@ -161,23 +161,23 @@ const ConnectSection = () => {
               <span className="flex-1 h-px bg-[#e9e1d6]/60" aria-hidden="true" />
               <nav className="flex items-center gap-6 shrink-0" role="navigation" aria-label="Social links">
                 <a href="https://github.com/dhirendraxd" target="_blank" rel="noopener noreferrer" aria-label="GitHub"
-                  className="group inline-flex flex-col items-center gap-1 text-[#231d18] transition-opacity duration-200 hover:opacity-60">
-                  <SvglIcon name="GitHub" alt="" className="h-[22px] w-[22px]" />
+                  className="group inline-flex flex-col items-center gap-1 text-[#231d18] transition-all duration-200 hover:opacity-100">
+                  <SvglIcon name="GitHub" alt="" className="h-[22px] w-[22px] transition-all duration-200 group-hover:drop-shadow-[0_0_4px_rgba(24,23,23,0.28)]" />
                   <span className="h-px w-0 bg-[#231d18] transition-all duration-300 group-hover:w-full" aria-hidden="true" />
                 </a>
                 <a href="https://instagram.com/dhirendraxd" target="_blank" rel="noopener noreferrer" aria-label="Instagram"
-                  className="group inline-flex flex-col items-center gap-1 text-[#E4405F] transition-opacity duration-200 hover:opacity-60">
-                  <SvglIcon name="Instagram" alt="" className="h-[22px] w-[22px]" />
+                  className="group inline-flex flex-col items-center gap-1 text-[#E4405F] transition-all duration-200 hover:opacity-100">
+                  <SvglIcon name="Instagram" alt="" className="h-[22px] w-[22px] transition-all duration-200 group-hover:drop-shadow-[0_0_4px_rgba(228,64,95,0.32)]" />
                   <span className="h-px w-0 bg-[#E4405F] transition-all duration-300 group-hover:w-full" aria-hidden="true" />
                 </a>
                 <a href="https://linkedin.com/in/dhirendraxd" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"
-                  className="group inline-flex flex-col items-center gap-1 text-[#0A66C2] transition-opacity duration-200 hover:opacity-60">
-                  <SvglIcon name="LinkedIn" alt="" className="h-[22px] w-[22px]" />
+                  className="group inline-flex flex-col items-center gap-1 text-[#0A66C2] transition-all duration-200 hover:opacity-100">
+                  <SvglIcon name="LinkedIn" alt="" className="h-[22px] w-[22px] transition-all duration-200 group-hover:drop-shadow-[0_0_4px_rgba(10,102,194,0.32)]" />
                   <span className="h-px w-0 bg-[#0A66C2] transition-all duration-300 group-hover:w-full" aria-hidden="true" />
                 </a>
                 <a href="https://www.behance.net/dhirendraxd" target="_blank" rel="noopener noreferrer" aria-label="Behance"
-                  className="group inline-flex flex-col items-center gap-1 text-[#1769ff] transition-opacity duration-200 hover:opacity-60">
-                  <SvglIcon name="Behance" alt="" className="h-[22px] w-[22px]" />
+                  className="group inline-flex flex-col items-center gap-1 text-[#1769ff] transition-all duration-200 hover:opacity-100">
+                  <SvglIcon name="Behance" alt="" className="h-[22px] w-[22px] transition-all duration-200 group-hover:drop-shadow-[0_0_4px_rgba(24,23,23,0.28)]" />
                   <span className="h-px w-0 bg-[#1769ff] transition-all duration-300 group-hover:w-full" aria-hidden="true" />
                 </a>
               </nav>
