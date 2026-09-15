@@ -4,9 +4,9 @@ import Seo from "@/components/Seo";
 import Footer from "@/components/Footer";
 import { assetPath } from "@/lib/assetPath";
 
-const introImage = assetPath("reference-image.webp");
-const portraitImage = assetPath("untitled-design.webp");
-const closingImage = assetPath("2nd-new.webp");
+const introImage = "/optimized_images/front%20viewabout%20me%20images.webp";
+const portraitImage = "/optimized_images/about%20me.webp";
+const closingImage = "/optimized_images/WhatsApp%20Image%202026-09-15%20at%209.55.40%20PM.webp";
 
 const About = () => (
   <main className="min-h-screen bg-[#f5f1eb] text-[#3a3a3a]">
@@ -68,7 +68,7 @@ const About = () => (
       </section>
 
       <section className="border-b border-[#cfc5b9] pt-5" aria-label="Closing image">
-        <img src={closingImage} alt="A visual from Dhiren&apos;s digital work" width={1600} height={1200} loading="lazy" decoding="async" className="h-[22rem] w-full object-cover sm:h-[32rem] lg:h-[40rem]" />
+        <img src={closingImage} alt="A visual from Dhiren&apos;s digital work" loading="lazy" decoding="async" className="h-auto w-full object-contain" />
       </section>
 
     </div>

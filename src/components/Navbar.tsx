@@ -89,7 +89,7 @@ const Navbar = () => {
           {/* Desktop Nav */}
           <nav className="hidden md:mr-24 md:flex items-center gap-10" role="navigation" aria-label="Main navigation">
             {navLinks.map((link) => {
-              if (link.name === "About" && isAboutPage) return null;
+              if (isAboutPage && ["About", "Contact"].includes(link.name)) return null;
               if (isHomePage && ["Home", "Services", "Projects"].includes(link.name)) return null;
               return link.name === "Contact" && isHomePage ? (
                 <button
@@ -161,7 +161,7 @@ const Navbar = () => {
           >
             <div className="px-8 py-4 flex flex-col gap-1">
               {navLinks.map((link) => {
-                if (link.name === "About" && isAboutPage) return null;
+                if (isAboutPage && ["About", "Contact"].includes(link.name)) return null;
                 if (isHomePage && ["Home", "Services", "Projects"].includes(link.name)) return null;
                 return link.name === "Contact" && isHomePage ? (
                   <button
