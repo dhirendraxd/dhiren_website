@@ -14,6 +14,7 @@ const navLinks = [
 const Navbar = () => {
   const location = useLocation();
   const isHomePage = location.pathname === "/";
+  const isAboutPage = location.pathname === "/about";
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isBarVisible, setIsBarVisible] = useState(false);
   const lastScrollYRef = useRef(0);
@@ -66,24 +67,30 @@ const Navbar = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 bg-transparent border-b border-transparent transition-all duration-500 ease-out ${
+      className={`fixed top-3 left-0 right-0 z-50 bg-transparent border-b border-transparent transition-all duration-500 ease-out ${
         isBarVisible || mobileOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
       }`}
     >
       <div className="max-w-[84rem] mx-auto px-8 md:px-12">
         <div className="flex items-center justify-between h-16">
           {/* Logo / Name */}
-          <Link
-            to="/"
-            onClick={handleNavClick}
-            className="font-nekst text-lg font-semibold text-foreground tracking-tight hover:opacity-75 transition-opacity"
-          >
-            Dhiren
-          </Link>
+          {isHomePage ? (
+            <div className="w-[4.5rem]" aria-hidden="true" />
+          ) : (
+            <Link
+              to="/"
+              onClick={handleNavClick}
+              className="font-nekst text-lg font-semibold text-foreground tracking-tight hover:opacity-75 transition-opacity"
+            >
+              Dhiren
+            </Link>
+          )}
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-8" role="navigation" aria-label="Main navigation">
+          <nav className="hidden md:mr-14 md:flex items-center gap-10" role="navigation" aria-label="Main navigation">
             {navLinks.map((link) => {
+              if (link.name === "About" && isAboutPage) return null;
+              if (isHomePage && ["Home", "Services", "Projects"].includes(link.name)) return null;
               return link.name === "Contact" && isHomePage ? (
                 <button
                   key={link.name}
@@ -154,6 +161,8 @@ const Navbar = () => {
           >
             <div className="px-8 py-4 flex flex-col gap-1">
               {navLinks.map((link) => {
+                if (link.name === "About" && isAboutPage) return null;
+                if (isHomePage && ["Home", "Services", "Projects"].includes(link.name)) return null;
                 return link.name === "Contact" && isHomePage ? (
                   <button
                     key={link.name}

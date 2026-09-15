@@ -40,8 +40,12 @@ const About = () => (
         <div className="flex items-center p-7 sm:p-10 lg:p-12">
           <div className="max-w-[37rem] font-rajdhani text-[1.12rem] leading-[1.65] text-[#5f574d] sm:text-[1.28rem]">
             <h2 id="about-intro" className="sr-only">About Dhiren</h2>
-            <p>I&apos;m Dhiren, a digital marketer and community builder who likes turning ideas into work that people can feel, use, and remember.</p>
-            <p className="mt-5">I work across SEO, content, advocacy, and practical digital projects. My goal is to make useful things clearer, more human, and easier to move forward.</p>
+            <p>
+              I&apos;m Dhiren, a digital <span className="font-semibold text-[#7A3A30]">marketer</span> and <span className="font-semibold text-[#7A3A30]">designer</span> who likes turning ideas into work that people can feel, use, and remember.
+            </p>
+            <p className="mt-5">
+              I work across SEO, content, advocacy, and practical digital projects. My goal is to make useful things clearer, more human, and easier to move forward.
+            </p>
           </div>
         </div>
       </section>
@@ -50,8 +54,12 @@ const About = () => (
         <div className="order-2 flex items-center border-t border-[#cfc5b9] p-7 sm:p-10 lg:order-1 lg:border-r lg:border-t-0 lg:p-12">
           <div className="max-w-[37rem] font-rajdhani text-[1.12rem] leading-[1.65] text-[#5f574d] sm:text-[1.28rem]">
             <h2 id="about-story" className="sr-only">Dhiren&apos;s story</h2>
-            <p>When I&apos;m not working on a campaign or building something, I&apos;m usually thinking about the next idea, learning from good people, or trying to understand how a small action can create a bigger change.</p>
-            <p className="mt-5">I want to leave useful things behind: better questions, clearer systems, and work that gives someone else the confidence to begin.</p>
+            <p>
+              When I&apos;m not working on a campaign or building something, I&apos;m usually thinking about the next idea, learning from good people, or trying to understand how a small action can create a bigger change.
+            </p>
+            <p className="mt-5">
+              I want to leave useful things behind: better questions, clearer systems, and work that gives someone else the confidence to begin.
+            </p>
           </div>
         </div>
         <div className="order-1 lg:order-2">
