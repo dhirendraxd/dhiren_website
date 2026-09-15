@@ -4,7 +4,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
-  { name: "Contact", href: null },
+  { name: "Home", href: "/" },
+  { name: "Services", href: "/digital-marketing" },
+  { name: "Projects", href: "/projects" },
+  { name: "Contact", href: "/#contact" },
 ];
 
 const Navbar = () => {
@@ -80,8 +83,7 @@ const Navbar = () => {
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-8" role="navigation" aria-label="Main navigation">
             {navLinks.map((link) => {
-              if (link.name === "Contact" && !isHomePage) return null;
-              return link.name === "Contact" ? (
+              return link.name === "Contact" && isHomePage ? (
                 <button
                   key={link.name}
                   onClick={scrollToContact}
@@ -151,8 +153,7 @@ const Navbar = () => {
           >
             <div className="px-8 py-4 flex flex-col gap-1">
               {navLinks.map((link) => {
-                if (link.name === "Contact" && !isHomePage) return null;
-                return link.name === "Contact" ? (
+                return link.name === "Contact" && isHomePage ? (
                   <button
                     key={link.name}
                     onClick={scrollToContact}

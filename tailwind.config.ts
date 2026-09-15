@@ -17,9 +17,7 @@ export default {
       fontFamily: {
         sans: ["Manrope", "sans-serif"],
         nekst: ["Nekst", "sans-serif"],
-        chillax: ["Chillax", "sans-serif"],
         rajdhani: ["Rajdhani", "sans-serif"],
-        cormorant: ["Cormorant Garamond", "serif"],
       },
       colors: {
         border: "hsl(var(--border))",

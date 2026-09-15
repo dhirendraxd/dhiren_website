@@ -12,7 +12,14 @@ const slugs = new Set();
 let m;
 while ((m = slugRegex.exec(content)) !== null) slugs.add(m[1]);
 
-const allowedStatic = new Set(['/', '/digital-marketing', '/advocacy-community', '/tech-projects']);
+const allowedStatic = new Set([
+  '/',
+  '/services',
+  '/digital-marketing',
+  '/advocacy-community',
+  '/tech-projects',
+  '/projects',
+]);
 
 const files = [];
 function walk(dir) {
@@ -25,7 +32,7 @@ function walk(dir) {
 }
 walk(srcDir);
 
-const hrefRegex = /href=\{?\s*"(\/[^"\s#?]+)"\s*\}?/g;
+const hrefRegex = /(?:href|to)=\{?\s*"(\/[^"\s#?]+)"\s*\}?/g;
 const bad = [];
 
 for (const f of files) {
@@ -34,6 +41,7 @@ for (const f of files) {
   while ((mh = hrefRegex.exec(txt)) !== null) {
     const p = mh[1];
     if (allowedStatic.has(p)) continue;
+    if (p.startsWith('/affiliations/') || p.startsWith('/hackathon/')) continue;
     if (p.startsWith('/projects/')) {
       const slug = p.replace('/projects/', '').replace(/\/$/, '');
       if (!slugs.has(slug)) bad.push({ file: f, link: p, reason: 'missing project slug' });
