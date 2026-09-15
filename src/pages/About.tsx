@@ -27,14 +27,14 @@ const About = () => (
     <Navbar />
 
     <div className="mx-auto max-w-[82rem] px-6 pb-0 pt-24 sm:px-10 sm:pt-28 lg:px-12">
-      <header className="border-b border-[#cfc5b9] pb-8 pt-8 sm:pb-10 sm:pt-10">
+      <header className="border-b border-[#8b8377]/20 pb-8 pt-8 sm:pb-10 sm:pt-10">
         <h1 className="font-nekst text-[clamp(3rem,9vw,6rem)] font-bold uppercase leading-[0.82] tracking-tight text-[#3a3a3a]">
           About Me
         </h1>
       </header>
 
-      <section className="grid border-b border-[#cfc5b9] lg:grid-cols-[0.82fr_1.18fr]" aria-labelledby="about-intro">
-        <div className="border-b border-[#cfc5b9] lg:border-b-0 lg:border-r">
+      <section className="grid border-b border-[#8b8377]/20 lg:grid-cols-[0.82fr_1.18fr]" aria-labelledby="about-intro">
+        <div className="border-b border-[#8b8377]/20 p-3 sm:p-4 lg:border-b-0 lg:border-r">
           <img src={introImage} alt="A community gathering" width={1600} height={1200} fetchPriority="high" decoding="async" className="h-full min-h-[18rem] w-full object-cover sm:min-h-[23rem] lg:min-h-[20rem]" />
         </div>
         <div className="flex items-center p-7 sm:p-10 lg:p-12">
@@ -50,8 +50,8 @@ const About = () => (
         </div>
       </section>
 
-      <section className="grid border-b border-[#cfc5b9] lg:grid-cols-[1.18fr_0.82fr]" aria-labelledby="about-story">
-        <div className="order-2 flex items-center border-t border-[#cfc5b9] p-7 sm:p-10 lg:order-1 lg:border-r lg:border-t-0 lg:p-12">
+      <section className="grid border-b border-[#8b8377]/20 lg:grid-cols-[1.18fr_0.82fr]" aria-labelledby="about-story">
+        <div className="order-2 flex items-center border-t border-[#8b8377]/20 p-7 sm:p-10 lg:order-1 lg:border-r lg:border-t-0 lg:p-12">
           <div className="max-w-[37rem] font-rajdhani text-[1.12rem] leading-[1.65] text-[#5f574d] sm:text-[1.28rem]">
             <h2 id="about-story" className="sr-only">Dhiren&apos;s story</h2>
             <p>
@@ -62,12 +62,12 @@ const About = () => (
             </p>
           </div>
         </div>
-        <div className="order-1 lg:order-2">
+        <div className="order-1 p-3 sm:p-4 lg:order-2">
           <img src={portraitImage} alt="Illustrated portrait of Dhiren thinking" width={1024} height={1024} loading="lazy" decoding="async" className="h-full min-h-[22rem] w-full object-contain lg:min-h-[25rem]" />
         </div>
       </section>
 
-      <section className="border-b border-[#cfc5b9] pt-5" aria-label="Closing image">
+      <section className="border-b border-[#8b8377]/20 pt-5" aria-label="Closing image">
         <img src={closingImage} alt="A visual from Dhiren&apos;s digital work" loading="lazy" decoding="async" className="h-auto w-full object-contain" />
       </section>
 
