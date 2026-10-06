@@ -86,10 +86,10 @@ No pretentious design patterns. No unnecessary frameworks. Just React, some part
 ✅ Meta titles & descriptions  
 ✅ Open Graph tags (Facebook, LinkedIn, Twitter)  
 ✅ JSON-LD structured data (Person + CreativeWork schemas)  
-✅ robots.txt with sitemap & LLM metadata  
+✅ Crawlable robots.txt, generated sitemap, and detailed `llms.txt` profile
 ✅ Canonical URLs to prevent duplicates  
 ✅ Responsive images with alt text  
-✅ Keyword optimization: *dhirendra singh dhami, digital marketer, youth advocate, seo, growth strategy, storytelling, civic tech, marketing analytics, ethical ai*
+✅ Positioning across digital marketing, SEO, communication training, youth leadership, climate justice, digital rights, and civic engagement
 
 ---
 
@@ -128,7 +128,7 @@ src/
 
 public/
 ├── resume.md       # Markdown resume (for AI crawlers & text readers)
-├── llm.txt         # AI crawler metadata profile
+├── llms.txt        # Canonical AI-readable profile and project guide
 ├── robots.txt      # Bot instructions
 ├── sitemap.xml     # All pages for search engines
 └── ld/             # JSON-LD schema files (home.json, resume.json)
@@ -221,7 +221,7 @@ Organic and human-first. The site uses best practices instead of stuffing phrase
 | Structured Data | JSON-LD Person schema |
 | Open Graph / Twitter | Social share optimization |
 | Sitemap | Minimal + valid |
-| robots.txt | Index allowed, scanners discouraged |
+| robots.txt | Public pages are crawlable; private/admin paths are excluded |
 | Performance | Reduced JS, font optimization |
 | Security | Headers improve trust & crawl stability |
 
@@ -255,7 +255,7 @@ Implemented defense-in-depth:
 - Client-side rate limiting & fingerprinting
 - Honeypot + timing-based bot detection
 - Server signature removal & sensitive file shielding
-- robots.txt discourages automated scanners
+- robots.txt excludes private/admin paths while allowing public search and answer-engine crawlers
 
 ---
 

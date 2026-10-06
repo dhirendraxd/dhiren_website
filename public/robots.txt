@@ -8,4 +8,4 @@ Disallow: /temp/
 Disallow: /api/
 
 Sitemap: https://dhirendrasinghdhami.com.np/sitemap.xml
-LLMs: https://dhirendrasinghdhami.com.np/llms.txt
+# AI-readable site guide: https://dhirendrasinghdhami.com.np/llms.txt

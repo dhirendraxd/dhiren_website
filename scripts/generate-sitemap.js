@@ -3,8 +3,6 @@ import fs from 'fs';
 import path from 'path';
 
 // Generates public/sitemap.xml from routes and project slugs.
-// Digital-marketing project detail pages are excluded — they are not
-// surfaced in the /projects listing and should not be indexed.
 
 const ROOT = path.resolve(process.cwd());
 const dataFile = path.join(ROOT, 'src', 'data', 'projectDetails.ts');
@@ -17,14 +15,12 @@ if (!fs.existsSync(dataFile)) {
 
 const content = fs.readFileSync(dataFile, 'utf8');
 
-// Extract (slug, serviceSlug) pairs — serviceSlug follows slug within each entry block.
-const pairRegex = /slug:\s*"([^"]+)"[\s\S]*?serviceSlug:\s*"([^"]+)"/g;
+// Extract project slugs.
+const slugRegex = /slug:\s*"([^"]+)"/g;
 const slugs = [];
 let m;
-while ((m = pairRegex.exec(content)) !== null) {
-  if (m[2] !== 'digital-marketing') {
-    slugs.push(m[1]);
-  }
+while ((m = slugRegex.exec(content)) !== null) {
+  slugs.push(m[1]);
 }
 
 const base = 'https://dhirendrasinghdhami.com.np';
@@ -38,6 +34,7 @@ const staticRoutes = [
 ];
 
 const urls = [];
+// Omit lastmod: build time is not necessarily the date a page's content changed.
 for (const r of staticRoutes) {
   urls.push({ loc: `${base}${r.path}`, priority: r.priority });
 }
