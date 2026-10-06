@@ -11,8 +11,8 @@ const closingImage = "/optimized_images/WhatsApp%20Image%202026-09-15%20at%209.5
 const About = () => (
   <main className="min-h-screen bg-[#f5f1eb] text-[#3a3a3a]">
     <Seo
-      title="About Me | Dhirendra Singh Dhami"
-      description="A personal introduction to Dhirendra Singh Dhami, a digital marketer, community builder, and curious maker from Kathmandu, Nepal."
+      title="About Dhiren | Digital Marketer & Communication Trainer in Nepal"
+      description="Meet Dhirendra Singh Dhami (Dhiren), a Kathmandu-based digital marketer, SEO practitioner, communication trainer, and youth advocate for climate justice, digital rights, and civic engagement."
       canonicalPath="/about"
       image={portraitImage}
       imageAlt="Illustrated portrait of Dhiren"
@@ -41,10 +41,13 @@ const About = () => (
           <div className="max-w-[37rem] font-rajdhani text-[1.12rem] leading-[1.65] text-[#5f574d] sm:text-[1.28rem]">
             <h2 id="about-intro" className="sr-only">About Dhiren</h2>
             <p>
-              I&apos;m Dhiren, a digital <span className="font-semibold text-[#7A3A30]">marketer</span> and <span className="font-semibold text-[#7A3A30]">designer</span> who likes turning ideas into work that people can feel, use, and remember.
+              I&apos;m Dhiren, a <span className="font-semibold text-[#7A3A30]">digital marketer</span> from Kathmandu, Nepal. My primary work is building clearer, more useful digital experiences through SEO, content strategy, campaigns, analytics, and creative execution.
             </p>
             <p className="mt-5">
-              I work across SEO, content, advocacy, and practical digital projects. My goal is to make useful things clearer, more human, and easier to move forward.
+              I also work as a <span className="font-semibold text-[#7A3A30]">communication trainer</span> and facilitator. I enjoy helping people make complex ideas accessible, communicate with confidence, and turn shared conversations into practical next steps.
+            </p>
+            <p className="mt-5">
+              My community and advocacy interests include climate change and climate justice, digital rights and internet governance, youth leadership, civic engagement, and sustainability. Across marketing, technology, and community work, I bring a curious, collaborative, people-first approach.
             </p>
           </div>
         </div>
@@ -55,10 +58,10 @@ const About = () => (
           <div className="max-w-[37rem] font-rajdhani text-[1.12rem] leading-[1.65] text-[#5f574d] sm:text-[1.28rem]">
             <h2 id="about-story" className="sr-only">Dhiren&apos;s story</h2>
             <p>
-              When I&apos;m not working on a campaign or building something, I&apos;m usually thinking about the next idea, learning from good people, or trying to understand how a small action can create a bigger change.
+              I&apos;ve contributed to SEO and social-media strategy, digital-rights awareness sessions, youth civic programs, sustainability initiatives, and community learning. My projects range from campaign systems to practical civic-tech concepts, including Issue Hive, which received 3rd Prize at KIST Fair 2082.
             </p>
             <p className="mt-5">
-              I want to leave useful things behind: better questions, clearer systems, and work that gives someone else the confidence to begin.
+              I&apos;m energized by people and the connections between disciplines. Whether I&apos;m planning a campaign, facilitating a session, supporting an advocacy initiative, or building a tool, I aim to listen carefully, communicate clearly, and leave people with something useful they can carry forward.
             </p>
           </div>
         </div>

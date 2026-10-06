@@ -1,10 +1,8 @@
-import { useEffect } from "react";
 import { ArrowLeft, ArrowUpRight, Code2, Database, ExternalLink, Globe2, Megaphone, Users } from "lucide-react";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { getProjectBySlug } from "@/data/projectDetails";
 import SvglIcon from "@/components/SvglIcon";
-
-const BASE_URL = "https://dhirendrasinghdhami.com.np";
+import Seo from "@/components/Seo";
 
 const socialLinks = [
 	{ href: "https://github.com/dhirendraxd", label: "GitHub", color: "text-[#181717]", glow: "group-hover:drop-shadow-[0_0_4px_rgba(24,23,23,0.28)]", underline: "bg-[#181717]" },
@@ -35,32 +33,13 @@ const ProjectDetail = () => {
 	const project = slug ? getProjectBySlug(slug) : undefined;
 	const navigate = useNavigate();
 
-	useEffect(() => {
-		if (!project) return;
-
-		const projectUrl = `${BASE_URL}/projects/${project.slug}`;
-		const pageTitle = `${project.title} | Project Case Study | Dhirendra Singh Dhami`;
-		const previousTitle = document.title;
-		const descriptionTag = document.head.querySelector('meta[name="description"]');
-		const previousDescription = descriptionTag?.getAttribute("content") ?? "";
-		const canonical = document.head.querySelector('link[rel="canonical"]');
-		const previousCanonical = canonical?.getAttribute("href") ?? "";
-
-		document.title = pageTitle;
-		if (descriptionTag) descriptionTag.setAttribute("content", project.summary);
-		if (canonical) canonical.setAttribute("href", projectUrl);
-
-		return () => {
-			document.title = previousTitle;
-			if (descriptionTag) descriptionTag.setAttribute("content", previousDescription);
-			if (canonical) canonical.setAttribute("href", previousCanonical || BASE_URL);
-		};
-	}, [project]);
-
 	if (!project) {
 		return <Navigate to="/projects" replace />;
 	}
 
+	const projectUrl = `https://dhirendrasinghdhami.com.np/projects/${project.slug}`;
+	const pageTitle = `${project.title} | Project Case Study | Dhirendra Singh Dhami`;
+	const projectImage = project.image ? new URL(project.image, "https://dhirendrasinghdhami.com.np").href : undefined;
 	const location = project.serviceSlug === "advocacy-community" ? "Nepal" : "Remote";
 	const isTechProject = project.serviceSlug === "tech-projects";
 	const isCommunityProject = project.serviceSlug === "advocacy-community";
@@ -76,6 +55,30 @@ const ProjectDetail = () => {
 
 	return (
 		<div className="min-h-screen bg-[#f5f1eb] text-[#3a3a3a] font-rajdhani">
+			<Seo
+				title={pageTitle}
+				description={project.summary}
+				canonicalPath={projectUrl}
+				image={projectImage}
+				imageAlt={`${project.title} project`}
+				type="article"
+				keywords={project.tags}
+				schema={{
+					"@context": "https://schema.org",
+					"@type": "CreativeWork",
+					name: project.title,
+					description: project.summary,
+					url: projectUrl,
+					image: projectImage,
+					creator: {
+						"@type": "Person",
+						name: "Dhirendra Singh Dhami",
+						url: "https://dhirendrasinghdhami.com.np/",
+					},
+					about: project.tags,
+					inLanguage: "en",
+				}}
+			/>
 			<main className="mx-auto max-w-[84rem] px-6 pb-10 pt-5 sm:px-8 lg:px-12">
 				<header className="relative top-4 flex flex-wrap items-center justify-between gap-3">
 					<button type="button" onClick={() => navigate(-1)} className="group inline-flex items-center gap-2 border-b border-transparent py-2 text-[0.78rem] font-medium text-[#3f3932] transition-colors hover:border-[#7A3A30] hover:text-[#7A3A30] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7A3A30] focus-visible:ring-offset-2">

@@ -1,29 +1,11 @@
 User-agent: *
-# Allow crawling of public assets and generated files needed for rendering
-Allow: /assets/
-Allow: /fonts/
-Allow: /favicon.webp
-Allow: /site.webmanifest
+# Public portfolio pages and assets are available to search and answer engines.
+Allow: /
 Disallow: /admin/
 Disallow: /private/
 Disallow: /backup/
 Disallow: /temp/
 Disallow: /api/
-# Avoid crawling URL parameter combinations that may create many duplicates
-# but do not block query strings entirely if you rely on them for public content
-# Disallow: /*?*
-
-User-agent: GPTBot
-Disallow: /
-
-User-agent: CCBot
-Disallow: /
-
-User-agent: Bytespider
-Disallow: /
-
-User-agent: ClaudeBot
-Disallow: /
 
 Sitemap: https://dhirendrasinghdhami.com.np/sitemap.xml
-LLM: https://dhirendrasinghdhami.com.np/llm.txt
+LLMs: https://dhirendrasinghdhami.com.np/llms.txt

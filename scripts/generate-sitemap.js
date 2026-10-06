@@ -37,19 +37,17 @@ const staticRoutes = [
   { path: '/tech-projects',       priority: '0.8' },
 ];
 
-const today = new Date().toISOString().slice(0, 10);
-
 const urls = [];
 for (const r of staticRoutes) {
-  urls.push({ loc: `${base}${r.path}`, lastmod: today, priority: r.priority });
+  urls.push({ loc: `${base}${r.path}`, priority: r.priority });
 }
 for (const slug of slugs) {
-  urls.push({ loc: `${base}/projects/${slug}`, lastmod: today, priority: '0.7' });
+  urls.push({ loc: `${base}/projects/${slug}`, priority: '0.7' });
 }
 
 const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls
   .map(
-    (u) => `  <url>\n    <loc>${u.loc}</loc>\n    <lastmod>${u.lastmod}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>${u.priority}</priority>\n  </url>`,
+    (u) => `  <url>\n    <loc>${u.loc}</loc>\n    <priority>${u.priority}</priority>\n  </url>`,
   )
   .join('\n')}\n</urlset>\n`;
 

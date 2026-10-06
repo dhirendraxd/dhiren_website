@@ -12,13 +12,13 @@ const AboutSection = () => {
   const workAreas = [
     {
       title: "Digital Marketing",
-      description: "SEO, PPC, content marketing, and visual design to scale reach and drive measurable growth.",
+      description: "My primary focus: SEO, content strategy, PPC, social media, analytics, and creative campaigns that connect audience needs with measurable growth.",
       icon: Megaphone,
       href: "/digital-marketing",
     },
     {
       title: "Advocacy & Community",
-      description: "Awareness campaigns, fellowship programs, and civic initiatives focused on collaboration and social impact.",
+      description: "Youth leadership and civic engagement across climate action and justice, digital rights, internet governance, sustainability, and community initiatives.",
       icon: Users,
       href: "/advocacy-community",
     },

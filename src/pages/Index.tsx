@@ -17,18 +17,40 @@ const homeSchema = [
     "@type": "Person",
     name: "Dhirendra Singh Dhami",
     alternateName: ["Dhiren"],
-    jobTitle: "Digital Marketing Specialist",
-    description: "Digital marketer and youth advocate focused on SEO, campaign growth, and civic-tech initiatives.",
+    jobTitle: "Digital Marketer, SEO Specialist, Youth Advocate, and Communication Trainer",
+    description:
+      "Kathmandu-based digital marketer focused on SEO, content, campaigns, and analytics. Also a communication trainer and youth advocate working across climate action and justice, digital rights, internet governance, civic engagement, and community initiatives.",
     url: "https://dhirendrasinghdhami.com.np/",
-    image: heroImage,
-    sameAs: ["https://github.com/dhirendraxd"],
+    image: "https://dhirendrasinghdhami.com.np/optimized_images/untitled-design.webp",
+    sameAs: [
+      "https://www.linkedin.com/in/dhirendraxd/",
+      "https://github.com/dhirendraxd",
+      "https://www.instagram.com/dhirendraxd/",
+      "https://www.behance.net/dhirendraxd",
+    ],
+    knowsAbout: [
+      "Digital Marketing",
+      "Search Engine Optimization",
+      "Content Strategy",
+      "Campaign Analytics",
+      "Communication Training",
+      "Climate Action",
+      "Climate Justice",
+      "Digital Rights",
+      "Internet Governance",
+      "Youth Leadership",
+      "Civic Engagement",
+      "Civic Technology",
+      "Sustainability",
+    ],
   },
   {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: "Dhirendra Singh Dhami Portfolio",
     url: "https://dhirendrasinghdhami.com.np/",
-    description: "Portfolio of Dhirendra Singh Dhami: digital marketing, SEO, and youth advocacy.",
+    description:
+      "Portfolio of Dhirendra Singh Dhami (Dhiren), a digital marketer, communication trainer, and youth advocate in Kathmandu, Nepal.",
   },
 ];
 
@@ -56,13 +78,13 @@ const Index = () => {
   return (
     <div id="home" className="min-h-screen bg-card scroll-mt-24">
       <Seo
-        title="Dhirendra Singh Dhami | SEO, Digital Marketing & Youth Advocacy"
-        description="Explore Dhirendra Singh Dhami’s portfolio for SEO strategy, digital marketing, content planning, campaign growth, and youth-led civic-tech work in Nepal."
+        title="Dhirendra Singh Dhami (Dhiren) | Digital Marketer & SEO Specialist"
+        description="Dhirendra Singh Dhami (Dhiren) is a Kathmandu-based digital marketer specializing in SEO, content and campaigns, and a communication trainer and youth advocate."
         canonicalPath="/"
         image={heroImage}
         imageAlt="Portrait illustration of Dhiren on the homepage"
         type="website"
-        keywords={["Dhirendra Singh Dhami", "digital marketing", "SEO specialist", "content strategy", "youth advocacy", "Nepal", "civic tech"]}
+        keywords={["Dhirendra Singh Dhami", "Dhiren", "digital marketer Nepal", "SEO specialist", "communication trainer", "content strategy", "youth advocacy", "climate justice", "digital rights", "internet governance"]}
         schema={homeSchema}
       />
       <ScrollProgressBar />

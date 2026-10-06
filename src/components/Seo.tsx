@@ -67,6 +67,7 @@ const Seo = ({ title, description, canonicalPath, image, imageAlt, type = "websi
   useEffect(() => {
     const canonicalUrl = normalizeUrl(canonicalPath);
     const imageType = image ? inferImageType(image) : null;
+    const imageUrl = image && !image.startsWith("data:") ? normalizeUrl(image) : image;
     const schemaId = "seo-jsonld";
     const keywordValue = Array.isArray(keywords)
       ? keywords.join(", ")
@@ -98,12 +99,12 @@ const Seo = ({ title, description, canonicalPath, image, imageAlt, type = "websi
     setTag('meta[property="og:locale"]', { property: "og:locale", content: "en_US" });
 
     if (image) {
-      setTag('meta[property="og:image"]', { property: "og:image", content: image });
+      setTag('meta[property="og:image"]', { property: "og:image", content: imageUrl ?? image });
       setTag('meta[property="og:image:alt"]', { property: "og:image:alt", content: imageAlt ?? title });
       if (imageType) {
         setTag('meta[property="og:image:type"]', { property: "og:image:type", content: imageType });
       }
-      setTag('meta[name="twitter:image"]', { name: "twitter:image", content: image });
+      setTag('meta[name="twitter:image"]', { name: "twitter:image", content: imageUrl ?? image });
       setTag('meta[name="twitter:image:alt"]', { name: "twitter:image:alt", content: imageAlt ?? title });
 
       if (!image.startsWith("data:")) {

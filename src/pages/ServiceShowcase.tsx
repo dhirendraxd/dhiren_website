@@ -259,12 +259,15 @@ const serviceShowcases: Record<ServiceSlug, ShowcasePageConfig> = {
     badge: "",
     heroTitle: "Community Programs with Real-World Social Impact",
     heroSummary:
-      "This space highlights advocacy and community initiatives where collaboration, youth leadership, and digital rights engagement drive meaningful outcomes. The focus is on people, participation, and sustained community value.",
+      "This space highlights youth advocacy and community initiatives across climate change and climate justice, digital rights and internet governance, sustainability, civic engagement, and youth leadership. Communication training, facilitation, and collaboration help make complex issues accessible and turn participation into practical community action.",
     skillHighlights: [
       "Climate Change",
+      "Climate Justice",
       "Podcast",
       "Digital Rights Advocacy",
+      "Internet Governance",
       "Youth Leadership & Mobilization",
+      "Communication Training & Facilitation",
       "Volunteer Coordination",
       "Partnership & Stakeholder Engagement",
       "Sustainability Initiative Planning",
